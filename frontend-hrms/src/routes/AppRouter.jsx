@@ -2,6 +2,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 // Temporary placeholders muna
+const Home = () => (
+    <>Homee</>
+);
+
 const InternDashboard = () => (
     <>Intern dashboard page</>
 );
@@ -25,6 +29,7 @@ export const AppRouter = () => {
     <BrowserRouter>
         <Routes>
 
+            <Route path="/*" element={<Home/>} />
             <Route path="/intern/*" element={<InternDashboard />} />
             <Route path="/supervisor/*" element={<SupervisorDashboard />} />
             <Route path="/hr-staff/*" element={<HRStaffDashboard />} />
