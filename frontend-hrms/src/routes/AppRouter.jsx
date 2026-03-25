@@ -1,6 +1,7 @@
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
+import SupervisorLayout from '../portals/supervisor/layouts/SupervisorLayout';
+import SupervisorDashboard from '../portals/supervisor/pages/SupervisorDashboard';
 // Temporary placeholders muna
 const Home = () => (
     <>Homee</>
@@ -8,10 +9,6 @@ const Home = () => (
 
 const InternDashboard = () => (
     <>Intern dashboard page</>
-);
-
-const SupervisorDashboard = () => (
-    <>Supervisor dashboardpage</>
 );
 
 const HRStaffDashboard = () => (
@@ -31,7 +28,12 @@ export const AppRouter = () => {
 
             <Route path="/*" element={<Home/>} />
             <Route path="/intern/*" element={<InternDashboard />} />
-            <Route path="/supervisor/*" element={<SupervisorDashboard />} />
+
+            {/* temp supervisor route */}
+            <Route path="/supervisor" element={<SupervisorLayout />}>
+                <Route index element={<SupervisorDashboard />} />
+            </Route>
+
             <Route path="/hr-staff/*" element={<HRStaffDashboard />} />
             <Route path="/hr-admin/*" element={<HRAdminDashboard />} />
 
