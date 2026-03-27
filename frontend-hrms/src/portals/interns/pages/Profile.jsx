@@ -1,3 +1,5 @@
+import Header from "../../../common/components/layout/Header";
+
 export default function Profile() {
-  return <h1>Profile page</h1>;
+  return <Header title="Profile" subtitle="Profile Overview" />;
 }
