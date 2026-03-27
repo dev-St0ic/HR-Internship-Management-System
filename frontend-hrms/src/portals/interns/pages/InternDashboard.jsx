@@ -1,3 +1,5 @@
+import Header from "../../../common/components/layout/Header";
+
 export default function Dashboard() {
-  return <h1>Dashboard Page</h1>;
+  return <Header title="Dashboard" subtitle="Overview & activity" />;
 }

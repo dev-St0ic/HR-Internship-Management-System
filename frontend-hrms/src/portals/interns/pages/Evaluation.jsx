@@ -1,3 +1,10 @@
+import Header from "../../../common/components/layout/Header";
+
 export default function Evaluation() {
-  return <h1>Evaluation Page</h1>;
+  return (
+    <Header
+      title="Evaluation"
+      subtitle="Review performance score and feedback"
+    />
+  );
 }

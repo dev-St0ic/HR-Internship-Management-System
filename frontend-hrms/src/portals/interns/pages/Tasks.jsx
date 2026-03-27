@@ -1,3 +1,5 @@
+import Header from "../../../common/components/layout/Header";
+
 export default function Tasks() {
-  return <h1>Tasks Page</h1>;
+  return <Header title="Task" subtitle="Task Management" />;
 }

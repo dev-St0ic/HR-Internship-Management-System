@@ -1,3 +1,5 @@
+import Header from "../../../common/components/layout/Header";
+
 export default function Attendance() {
-  return <h1>Attendance Page</h1>;
+  return <Header title="Attendance" subtitle="Attendance tracking" />;
 }
