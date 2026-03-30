@@ -1,7 +1,7 @@
 export default function SupervisorDashboard() {
   return (
     <div id="supervisor-dashboard">
-      <h1 className="font-bold">Hello [Name]</h1>
+      <h1 className="font-medium">Hello [Name]</h1>
       <p>Welcome!</p>
 
       <div className="grid grid-cols-8 grid-rows-12 gap-4 flex wrap">
