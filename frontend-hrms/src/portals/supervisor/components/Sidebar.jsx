@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, Users, CalendarCheck, ClipboardList, BriefcaseBusiness, Settings  } from 'lucide-react';
+import SidebarProfile from './SidebarProfile';
 
 
 const baseClass = "block p-3 mt-1 rounded-r-lg transition-colors duration-300";
@@ -12,12 +13,12 @@ const getNavClass = ({ isActive }) =>
 
 export default function Sidebar() {
   return (
-    <nav className="p-7 w-[300px] h-screen sticky top-5 m-5 rounded-2xl text-gray-700" style={{ background: '#fafafb' }}>
-        <div className="logo-company flex items-center text-lg font-medium text-gray-700">
-          <img src="image.png" alt="" className="size-15 rounded-full p-0 m-0" style={{background: '#7C3EFF'}} /> 
-          <h1 className="ml-2">SUPERVISOR</h1>
-        </div>
-        <div className="nav-tab mt-5">
+    <nav className="p-7 w-[300px] h-[calc(100vh-2rem)] sticky top-5 bottom-5 m-5 rounded-2xl text-gray-700 shadow-lg" style={{ background: '#fafafb' }}>
+      <div className="logo-company flex items-center text-lg font-medium text-gray-700">
+        <img src="image.png" alt="" className="size-15 rounded-full p-0 m-0" style={{background: '#7C3EFF'}} /> 
+        <h1 className="ml-2">SUPERVISOR</h1>
+      </div>
+      <div className="nav-tab mt-5">
 
         <ul className="nav">
 
@@ -69,9 +70,10 @@ export default function Sidebar() {
           </li>
 
         </ul>
-          
-        </div>
-
-      </nav>
+        {/* sidebar footer */}
+          <SidebarProfile />
+        
+      </div>
+    </nav>
   );
 }
