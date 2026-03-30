@@ -3,6 +3,7 @@ import SupervisorLayout from "../portals/supervisor/layouts/SupervisorLayout";
 import SupervisorDashboard from "../portals/supervisor/pages/SupervisorDashboard";
 import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
 import OperationsPage from "../portals/hr-staff/pages/OperationsPage";
+import RecruitmentPage from "../portals/hr-staff/pages/RecruitmentPage";
 import InternLayout from "../portals/interns/layouts/InternLayout";
 import InternDashboard from "../portals/interns/pages/InternDashboard";
 import Profile from "../portals/interns/pages/Profile";
@@ -43,6 +44,7 @@ export const AppRouter = () => {
 
         <Route path="/hr-staff" element={<SideBarLayout />}>
           <Route path="operations" element={<OperationsPage />} />
+          <Route path="recruitment" element={<RecruitmentPage />} />
           <Route index element={<HRStaffDashboard />} />
         </Route>
 
