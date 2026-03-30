@@ -1,22 +1,25 @@
-import { useState } from "react";
+import { use, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm({ onForgotPassword }) {
 
     const [showPassword, setShowPassword] = useState(false);
 
+    const navigate = useNavigate();
+
     const handleLogin = (e) => {
         e.preventDefault();
         console.log("Logging in...");
+
+        navigate("/intern");
     };
 
     return (
         <div>
             <div className="animate-fade-in">
-            {/* Titles */}
             <h2 className="text-[28px] md:text-3xl font-bold text-gray-900 mb-2">Welcome</h2>
             <p className="text-sm text-gray-400 mb-8">Please login here</p>
 
-            {/* The Form */}
             <form onSubmit={handleLogin} className="flex flex-col">
                 
                 <div className="mb-4 border border-gray-300 rounded-lg px-4 py-2 focus-within:border-black focus-within:ring-1 focus-within:ring-black transition-all bg-white">
@@ -68,6 +71,7 @@ export default function LoginForm({ onForgotPassword }) {
                 <button type="submit" className="w-full bg-[#b3b3b3] hover:bg-gray-400 text-white font-medium py-3.5 rounded-lg transition-colors">
                     Login
                 </button>
+                
             </form>
         </div>
         </div>

@@ -34,7 +34,6 @@ export default function OtpForm({ onBack, email = "companyemail@gmail.com" }) {
     return (
         <div className="animate-fade-in flex flex-col">
             
-            {/* BACK BUTTON (Stays top-left permanently) */}
             <button 
                 type="button" 
                 onClick={onBack}
@@ -46,7 +45,6 @@ export default function OtpForm({ onBack, email = "companyemail@gmail.com" }) {
                 Back
             </button>
 
-            {/* RESPONSIVE WRAPPER: Centers on mobile, aligns left on desktop (md) */}
             <div className="w-full flex flex-col items-center md:items-start text-center md:text-left">
                 
                 <h2 className="text-[28px] md:text-3xl font-bold text-gray-900 mb-2">Enter OTP</h2>
@@ -57,7 +55,6 @@ export default function OtpForm({ onBack, email = "companyemail@gmail.com" }) {
 
                 <form onSubmit={handleVerify} className="flex flex-col w-max">
                     
-                    {/* 1. Changed md:gap-4 to lg:gap-4 */}
                     <div className="flex gap-2 sm:gap-3 lg:gap-4 mb-8">
                         {otp.map((digit, index) => (
                             <input
@@ -68,7 +65,7 @@ export default function OtpForm({ onBack, email = "companyemail@gmail.com" }) {
                                 value={digit}
                                 onChange={(e) => handleChange(index, e)}
                                 onKeyDown={(e) => handleKeyDown(index, e)}
-                                // 2. Tweaked the w/h classes so they fit perfectly in half-screen mode!
+                                
                                 className="w-10 h-12 sm:w-11 sm:h-14 lg:w-14 lg:h-16 shrink-0 border border-gray-300 rounded-lg text-center text-xl font-bold text-gray-900 focus:border-black focus:ring-1 focus:ring-black outline-none transition-all bg-white"
                                 required
                             />
