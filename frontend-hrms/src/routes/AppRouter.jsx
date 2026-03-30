@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import SupervisorLayout from '../portals/supervisor/layouts/SupervisorLayout';
-import SupervisorDashboard from '../portals/supervisor/pages/SupervisorDashboard';
+import { SupervisorLayout, SupervisorDashboard, SupervisorMyInterns } from "../portals/supervisor/Index";
 import SideBarLayout from '../portals/hr-staff/components/SideBarLayout';
 import OperationsPage from '../portals/hr-staff/pages/OperationsPage';
 // Temporary placeholders muna
@@ -31,8 +30,10 @@ export const AppRouter = () => {
             <Route path="/intern/*" element={<InternDashboard />} />
 
             {/* temp supervisor route */}
-            <Route path="/supervisor" element={<SupervisorLayout />}>
+            {/* '/s' means 'supervisor' */}
+            <Route path="/s" element={<SupervisorLayout />}>
                 <Route index element={<SupervisorDashboard />} />
+                <Route path="myinterns" index element={<SupervisorMyInterns />} />
             </Route>
 
             <Route path="/hr-staff" element={<SideBarLayout />}>
