@@ -1,6 +1,7 @@
 import DashboardCard from '../components/ui/DashboardCard';
 import DashboardQuickActions from '../components/ui/DashboardQuickActions';
 import DashboardRecentActivity from '../components/ui/DashboardRecentActivity';
+import DashboardTopPerformers from '../components/ui/DashboardTopPerformers';
 
 export default function SupervisorDashboard() {
   return (
@@ -15,11 +16,7 @@ export default function SupervisorDashboard() {
       <div className="grid grid-cols-8 grid-rows-10 gap-4 flex wrap">
         <DashboardCard />
         <DashboardQuickActions />
-        
-        <div className="border border-gray-500/20 rounded shadow sm col-span-3 row-span-8 col-start-6 row-start-3">
-          6
-        </div>
-
+        <DashboardTopPerformers />
         <DashboardRecentActivity />
       </div>
     </div>
