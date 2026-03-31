@@ -3,6 +3,11 @@ import SupervisorLayout from "../portals/supervisor/layouts/SupervisorLayout";
 import SupervisorDashboard from "../portals/supervisor/pages/SupervisorDashboard";
 import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
 import OperationsPage from "../portals/hr-staff/pages/OperationsPage";
+import LandingPageHeader from "../common/components/layout/LandingPageHeader";
+import LandingPage from "../portals/Home/pages/LandingPage";
+import ApplicationFormHeader from "../portals/interns/components/layout/ApplicationFormHeader";
+import ApplicationForm from "../portals/interns/pages/ApplicationForm";
+import LoginPage from "../portals/interns/pages/LoginPage";
 import InternLayout from "../portals/interns/layouts/InternLayout";
 import InternDashboard from "../portals/interns/pages/InternDashboard";
 import Profile from "../portals/interns/pages/Profile";
@@ -23,8 +28,19 @@ const HRAdminDashboard = () => <>HR admin dashboard page</>;
 export const AppRouter = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/*" element={<Home />} />
+        <Routes>
+        {/*Landing page route*/}
+        <Route path="/" element={<LandingPageHeader />}>
+            <Route index element={<LandingPage />} />
+        </Route>
+
+        {/* Application form intern route */}
+        <Route path="/application-form" element={<ApplicationFormHeader />}>
+          <Route index element={<ApplicationForm />} />
+        </Route>
+
+        <Route path="/login" element={<LoginPage />} />
+
         <Route path="/intern" element={<InternLayout />}>
           <Route index element={<InternDashboard />} />
           <Route path="profile" element={<Profile />} />
