@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SupervisorLayout from "../portals/supervisor/layouts/SupervisorLayout";
 import SupervisorDashboard from "../portals/supervisor/pages/SupervisorDashboard";
-import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
+import HRStaffLayout from "../portals/hr-staff/components/HRStaffLayout";
 import OperationsPage from "../portals/hr-staff/pages/OperationsPage";
+import InternDetailPage from "../portals/hr-staff/pages/InternDetailPage";
 import LandingPageHeader from "../common/components/layout/LandingPageHeader";
 import LandingPage from "../portals/Home/pages/LandingPage";
 import ApplicationFormHeader from "../portals/interns/components/layout/ApplicationFormHeader";
@@ -57,8 +58,9 @@ export const AppRouter = () => {
           <Route index element={<SupervisorDashboard />} />
         </Route>
 
-        <Route path="/hr-staff" element={<SideBarLayout />}>
+        <Route path="/hr-staff" element={<HRStaffLayout />}>
           <Route path="operations" element={<OperationsPage />} />
+          <Route path="intern/:internId" element={<InternDetailPage />} />
           <Route index element={<HRStaffDashboard />} />
         </Route>
 
