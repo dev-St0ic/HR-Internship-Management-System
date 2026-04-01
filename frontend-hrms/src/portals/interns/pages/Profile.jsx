@@ -1,4 +1,5 @@
 import Header from "../../../common/components/layout/Header";
+import DragDropUpload from "../components/DragDropUpload";
 import { useState } from "react";
 import {
   User2,
@@ -30,7 +31,7 @@ export default function Profile() {
         {/* Card */}
         <div className="bg-white rounded-xl shadow p-6">
           {/* Profile Top Part */}
-          <div className="flex justify-between gap-3 items-center pb-5 border-b">
+          <div className="flex justify-between gap-3 items-center pb-5 border-b border-gray-100">
             <div className="flex items-center gap-3 ">
               <div className="w-20 h-20 bg-gray-500 rounded-md"></div>
               <div>
@@ -53,7 +54,7 @@ export default function Profile() {
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-6 mt-4 border-b">
+          <div className="flex gap-6 mt-4 border-b border-gray-100">
             <Tab
               icon={<User2 size={16} />}
               label="Personal Information"
@@ -108,9 +109,23 @@ function PersonalInformation() {
   {
     /* Temporary Personal Information Data */
   }
-  const data = {
-    firstName: "First Name",
-    lastName: "Last Name",
+  const fields = [
+    { key: "firstName", label: "First Name" },
+    { key: "lastName", label: "Last Name" },
+    { key: "phone", label: "Phone" },
+    { key: "email", label: "Email Address" },
+    { key: "birth", label: "Date of Birth" },
+    { key: "status", label: "Marital Status" },
+    { key: "gender", label: "Gender" },
+    { key: "nationality", label: "Nationality" },
+    { key: "address", label: "Address" },
+    { key: "city", label: "City" },
+    { key: "zip", label: "Zip Code" },
+  ];
+
+  const userData = {
+    firstName: "John",
+    lastName: "Doe",
     phone: "0912345678",
     email: "companyemail@gmail.com",
     birth: "01/01/2000",
@@ -123,11 +138,13 @@ function PersonalInformation() {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-6 text-sm">
-      {Object.entries(data).map(([key, value]) => (
-        <div key={key}>
-          <p className="text-gray-400 capitalize">{key}</p>
-          <p>{value}</p>
+    <div className="grid grid-cols-2 gap-x-12 gap-y-6">
+      {fields.map((field) => (
+        <div key={field.key}>
+          <p className="text-gray-400 text-sm mb-1">{field.label}</p>
+          <p className="border-b border-gray-100 w-full pb-1 text-sm">
+            {userData[field.key]}
+          </p>
         </div>
       ))}
     </div>
@@ -138,7 +155,15 @@ function SchoolInformation() {
   {
     /* Temporary School Information Data */
   }
-  const data = {
+  const fields = [
+    { key: "university", label: "University" },
+    { key: "course", label: "Course" },
+    { key: "hours", label: "Required Internship Hours" },
+    { key: "duration", label: "Start & End Date" },
+    { key: "year", label: "Current Year Level" },
+    { key: "graduation", label: "Expected Graduation Date" },
+  ];
+  const userData = {
     university: "FEU",
     course: "Bachelore of Science in Computer Science",
     hours: "120 hours",
@@ -149,10 +174,12 @@ function SchoolInformation() {
 
   return (
     <div className="grid grid-cols-2 gap-6 text-sm">
-      {Object.entries(data).map(([key, value]) => (
-        <div key={key}>
-          <p className="text-gray-400 capitalize">{key}</p>
-          <p>{value}</p>
+      {fields.map((field) => (
+        <div key={field.key}>
+          <p className="text-gray-400 text-sm mb-1">{field.label}</p>
+          <p className="border-b border-gray-100 w-full pb-1">
+            {userData[field.key]}
+          </p>
         </div>
       ))}
     </div>
@@ -180,7 +207,7 @@ function Documents() {
         {files.map((file, index) => (
           <div
             key={index}
-            className="flex justify-between items-center border px-4 py-3 rounded-lg"
+            className="flex justify-between items-center border border-gray-100 px-4 py-3 rounded-lg"
           >
             <span className="text-sm">{file}</span>
             <div className="flex gap-2">
@@ -198,9 +225,7 @@ function Documents() {
       </div>
 
       {/* Upload Area */}
-      <div className="border-2 border-dashed rounded-lg p-6 text-center text-sm text-gray-400">
-        Drag and drop files here or choose file to upload
-      </div>
+      <DragDropUpload label="Upload Missing Files" />
     </div>
   );
 }
