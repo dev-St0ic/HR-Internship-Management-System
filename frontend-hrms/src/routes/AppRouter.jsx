@@ -3,6 +3,8 @@ import SupervisorLayout from "../portals/supervisor/layouts/SupervisorLayout";
 import SupervisorDashboard from "../portals/supervisor/pages/SupervisorDashboard";
 import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
 import OperationsPage from "../portals/hr-staff/pages/OperationsPage";
+import HrAdminSideBarLayout from "../portals/hr-admin/components/SideBarLayout";
+import HRAdminDashboard from "../portals/hr-admin/pages/HRAdminDashboard";
 import LandingPageHeader from "../common/components/layout/LandingPageHeader";
 import LandingPage from "../portals/Home/pages/LandingPage";
 import ApplicationFormHeader from "../portals/interns/components/layout/ApplicationFormHeader";
@@ -23,7 +25,12 @@ const Home = () => <>Homee</>;
 
 const HRStaffDashboard = () => <>HR staff dashboard page</>;
 
-const HRAdminDashboard = () => <>HR admin dashboard page</>;
+const HRAdminSectionPage = ({title}) => (
+  <div>
+    <h1 className='text-3xl font-bold text-slate-900'>{title}</h1>
+    <p className='text-sm text-slate-500'>Welcome to {title}.</p>
+  </div>
+);
 
 export const AppRouter = () => {
   return (
@@ -62,7 +69,16 @@ export const AppRouter = () => {
           <Route index element={<HRStaffDashboard />} />
         </Route>
 
-        <Route path="/hr-admin/*" element={<HRAdminDashboard />} />
+        <Route path="/hr-admin" element={<HrAdminSideBarLayout />}>
+          <Route index element={<HRAdminDashboard />} />
+          <Route path="recruitment" element={<HRAdminSectionPage title="Recruitment" />} />
+          <Route path="intern-management" element={<HRAdminSectionPage title="Intern Management" />} />
+          <Route path="staff-management" element={<HRAdminSectionPage title="Staff Management" />} />
+          <Route path="document-vault" element={<HRAdminSectionPage title="Document Vault" />} />
+          <Route path="reports" element={<HRAdminSectionPage title="Reports & Analytics" />} />
+          <Route path="system-logs" element={<HRAdminSectionPage title="System Logs" />} />
+          <Route path="settings" element={<HRAdminSectionPage title="Settings" />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
