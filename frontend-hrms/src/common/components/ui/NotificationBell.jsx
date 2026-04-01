@@ -10,7 +10,7 @@ export default function NotificationBell() {
   const hasNotifications = true;
 
   return (
-    <button onClick={() => navigate("intern/notifications")}
+    <button onClick={() => navigate("/intern/notifications")}
         className="relative p-2 rounded-full hover:bg-gray-200 transition"
     >
       <Bell size={20} />
