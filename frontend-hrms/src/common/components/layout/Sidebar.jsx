@@ -12,14 +12,16 @@ const getNavClass = ({ isActive }) =>
 
 const Sidebar = ({ links }) => {
   return (
-    <nav className="fixed top-0 left-0 h-screen w-[300px] p-7 bg-[#fafafb] overflow-y-auto ">
+    <nav className="fixed top-0 left-0 h-screen w-[300px] p-7 bg-[#FFFFFF] overflow-y-auto rounded-2xl text-gray-700 shadow-lg">
+      {/* fixed top-0 left-0 h-screen w-[300px] p-7 bg-[#fafafb] overflow-y-auto */}
       {/* LOGO */}
-      <div className="mb-6">
+      <div className="flex items-center text-4xl font-medium mb-6">
         <img
           src="/image.png"
           alt="logo"
-          className="w-12 h-12 rounded-full bg-gray-300"
+          className="w-12 h-12 rounded-full bg-violet-500"
         />
+        <h1 className="ml-2">HRIMS</h1>
       </div>
 
       {/* NAVIGATION */}
