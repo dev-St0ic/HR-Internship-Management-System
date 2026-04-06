@@ -131,26 +131,26 @@ export const navigation = {
     {
       to: "/intern",
       label: "Dashboard",
-      icon: <LayoutDashboard size={18} />,
+      icon: LayoutDashboard,
       end: true,
     },
-    { to: "/intern/profile", label: "Profile", icon: <User2 size={18} /> },
-    { to: "/intern/tasks", label: "Tasks", icon: <ClipboardList size={18} /> },
+    { to: "/intern/profile", label: "Profile", icon: User2 },
+    { to: "/intern/tasks", label: "Tasks", icon: ClipboardList },
     {
       to: "/intern/attendance",
       label: "Attendance",
-      icon: <CalendarCheck size={18} />,
+      icon: CalendarCheck,
     },
     {
       to: "/intern/documents",
       label: "Documents",
-      icon: <FileText size={18} />,
+      icon: FileText,
     },
     {
       to: "/intern/evaluation",
       label: "Evaluation",
-      icon: <NotebookPen size={18} />,
+      icon: NotebookPen,
     },
-    { to: "/intern/settings", label: "Settings", icon: <Settings size={18} /> },
+    { to: "/intern/settings", label: "Settings", icon: Settings },
   ],
 };
