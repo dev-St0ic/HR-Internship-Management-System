@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@font-face{
+    font-family: 'RobotoLocal';
+    src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@theme {
+    --font-roboto: 'RobotoLocal', sans-serif;
+    --font-lexend: 'Lexend', sans-serif;
+}
