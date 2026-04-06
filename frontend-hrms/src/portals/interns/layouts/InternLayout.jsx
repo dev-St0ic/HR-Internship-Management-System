@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 
 export default function InternLayout() {
   return (
-    <div className="flex ">
+    <div className="flex">
       {/* Sidebar should always be visible*/}
       <Sidebar />
 
