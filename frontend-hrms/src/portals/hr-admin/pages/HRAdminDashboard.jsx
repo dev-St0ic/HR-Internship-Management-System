@@ -1,47 +1,119 @@
-﻿import { Link } from 'react-router-dom';
+﻿import { useMemo } from 'react';
 
 const HRAdminDashboard = () => {
-  const menuLinks = [
-    { label: 'Recruitment', path: '/hr-admin/recruitment' },
-    { label: 'Intern Management', path: '/hr-admin/intern-management' },
-    { label: 'Staff Management', path: '/hr-admin/staff-management' },
-    { label: 'Document Vault', path: '/hr-admin/document-vault' },
-    { label: 'Reports & Analytics', path: '/hr-admin/reports' },
-    { label: 'System Logs', path: '/hr-admin/system-logs' },
-    { label: 'Settings', path: '/hr-admin/settings' },
+  const today = useMemo(() => new Date(), []);
+  const formattedDate = today.toLocaleDateString('en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+
+  const metrics = [
+    { title: 'Total Interns', value: '470', trend: '+12%', trendColor: 'text-emerald-600' },
+    { title: 'Completed Interns', value: '1050', trend: '+5%', trendColor: 'text-emerald-600' },
+    { title: 'Active Interns', value: '470', trend: '-8%', trendColor: 'text-rose-500' },
+    { title: 'Partner Universities', value: '12', trend: '+12%', trendColor: 'text-emerald-600' },
+  ];
+
+  const activities = [
+    { label: 'New application submitted', description: 'A fresh intern application arrived today.' },
+    { label: 'Supervisor evaluation completed', description: 'Rating submitted for intern performance review.' },
+    { label: 'New DTR submitted', description: 'Daily time record uploaded by intern.' },
+    { label: 'MOA uploaded', description: 'Memorandum of agreement added to records.' },
+  ];
+
+  const attendanceData = [
+    { day: 'Mon', levels: [55, 75, 95] },
+    { day: 'Tue', levels: [60, 78, 97] },
+    { day: 'Wed', levels: [45, 65, 88] },
+    { day: 'Thu', levels: [58, 76, 96] },
+    { day: 'Fri', levels: [52, 74, 94] },
+    { day: 'Sat', levels: [42, 58, 83] },
+    { day: 'Sun', levels: [48, 62, 90] },
   ];
 
   return (
-    <div>
-      <div className='mb-8'>
-        <h1 className='text-3xl font-bold text-slate-900'>Welcome to HR Admin</h1>
-        {/**<p className='text-sm text-slate-500'>Select an area to continue</p>**/}
+    <div className='space-y-6'>
+      <div className='flex flex-col gap-4 lg:flex-row lg:items-start'>
+        <div className='rounded-3xl bg-slate-950 px-6 py-8 text-white shadow-xl sm:flex-1'>
+          <div className='flex items-start justify-between gap-4'>
+            <div>
+              <p className='text-sm text-slate-400'>Dashboard</p>
+              <h1 className='mt-3 text-3xl font-semibold'>Hello, [Name]</h1>
+              <p className='mt-1 text-sm text-slate-300'>Good morning</p>
+            </div>
+            <button
+              type='button'
+              className='inline-flex items-center rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/20 hover:bg-white/15'
+            >
+              Quick Action
+              <span className='ml-2 text-xs'>▾</span>
+            </button>
+          </div>
+          <div className='mt-8 space-y-2 rounded-3xl bg-white/5 p-5'>
+            <p className='text-sm uppercase tracking-[0.24em] text-slate-400'>Today</p>
+            <p className='text-4xl font-semibold'>{formattedDate}</p>
+          </div>
+        </div>
+
+        <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-2 lg:flex-1'>
+          {metrics.map((item) => (
+            <div key={item.title} className='rounded-3xl border border-slate-200/80 bg-white p-5 shadow-sm'>
+              <p className='text-sm font-medium text-slate-500'>{item.title}</p>
+              <div className='mt-4 flex items-end justify-between gap-3'>
+                <p className='text-3xl font-semibold text-slate-900'>{item.value}</p>
+                <span className={`rounded-full px-3 py-1 text-xs font-semibold ${item.trendColor} bg-slate-100`}>{item.trend}</span>
+              </div>
+              <p className='mt-2 text-xs text-slate-400'>Update: {formattedDate}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/**<div className='mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
-        {menuLinks.map((item) => (
-          <Link
-            key={item.path}
-            to={item.path}
-            className='rounded-xl border border-indigo-200 px-4 py-3 text-indigo-700 font-semibold hover:bg-indigo-50'
-          >
-            {item.label}
-          </Link>
-        ))}
-      </div>**/}
-
-      <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-        {[
-          { title: 'Active Interns', value: '128' },
-          { title: 'Open Requisitions', value: '9' },
-          { title: 'Pending Approvals', value: '5' },
-          { title: 'Reports Generated', value: '44' },
-        ].map((item) => (
-          <div key={item.title} className='rounded-xl bg-white p-4 shadow-sm border border-slate-200'>
-            <p className='text-sm text-slate-500'>{item.title}</p>
-            <p className='text-2xl font-semibold text-indigo-700'>{item.value}</p>
+      <div className='grid gap-6 xl:grid-cols-[1.2fr_1fr]'>
+        <div className='rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm'>
+          <div className='flex items-center justify-between'>
+            <div>
+              <h2 className='text-xl font-semibold text-slate-900'>Recent Activity</h2>
+              <p className='mt-1 text-sm text-slate-500'>Latest updates from your HR operations</p>
+            </div>
           </div>
-        ))}
+          <div className='mt-6 space-y-4'>
+            {activities.map((activity) => (
+              <div key={activity.label} className='flex items-start gap-4 rounded-3xl bg-slate-50 p-4'>
+                <div className='mt-1 h-3 w-3 rounded-full bg-sky-500' />
+                <div>
+                  <p className='font-semibold text-slate-900'>{activity.label}</p>
+                  <p className='mt-1 text-sm text-slate-500'>{activity.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className='rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm'>
+          <div className='flex items-center justify-between'>
+            <div>
+              <h2 className='text-xl font-semibold text-slate-900'>Attendance Overview</h2>
+              <p className='mt-1 text-sm text-slate-500'>Today</p>
+            </div>
+            <div className='rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-700'>Today</div>
+          </div>
+          <div className='mt-6 overflow-hidden rounded-3xl bg-slate-100 p-5'>
+            <div className='flex items-end justify-between gap-3'>
+              {attendanceData.map((item) => (
+                <div key={item.day} className='flex flex-col items-center gap-2'>
+                  <div className='flex h-40 w-10 flex-col justify-end gap-1 rounded-3xl bg-slate-200 p-1'>
+                    <div className='rounded-full bg-rose-400' style={{ height: `${item.levels[2] / 1.25}%` }} />
+                    <div className='rounded-full bg-amber-400' style={{ height: `${item.levels[1] / 1.25}%` }} />
+                    <div className='rounded-full bg-violet-600' style={{ height: `${item.levels[0] / 1.25}%` }} />
+                  </div>
+                  <span className='text-xs font-semibold uppercase text-slate-500'>{item.day}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
