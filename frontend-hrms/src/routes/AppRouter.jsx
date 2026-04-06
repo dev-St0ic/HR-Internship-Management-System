@@ -1,6 +1,18 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import SupervisorLayout from "../portals/supervisor/layouts/SupervisorLayout";
-import SupervisorDashboard from "../portals/supervisor/pages/SupervisorDashboard";
+{
+  /* imports galing sa Supervisor Pages */
+}
+import {
+  SupervisorLayout,
+  SupervisorDashboard,
+  SupervisorMyInterns,
+  SupervisorAttendance,
+  SupervisorTasks,
+  SupervisorEvaluations,
+  SupervisorSettings,
+  SupervisorNotifications,
+} from "../portals/supervisor/Index";
+
 import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
 import OperationsPage from "../portals/hr-staff/pages/OperationsPage";
 import LandingPageHeader from "../common/components/layout/LandingPageHeader";
@@ -28,18 +40,16 @@ const HRAdminDashboard = () => <>HR admin dashboard page</>;
 export const AppRouter = () => {
   return (
     <BrowserRouter>
-        <Routes>
+      <Routes>
         {/*Landing page route*/}
         <Route path="/" element={<LandingPageHeader />}>
-            <Route index element={<LandingPage />} />
+          <Route index element={<LandingPage />} />
         </Route>
 
         {/* Application form intern route */}
         <Route path="/application-form" element={<ApplicationFormHeader />}>
           <Route index element={<ApplicationForm />} />
         </Route>
-
-        <Route path="/login" element={<LoginPage />} />
 
         <Route path="/intern" element={<InternLayout />}>
           <Route index element={<InternDashboard />} />
@@ -55,6 +65,12 @@ export const AppRouter = () => {
         {/* temp supervisor route */}
         <Route path="/supervisor" element={<SupervisorLayout />}>
           <Route index element={<SupervisorDashboard />} />
+          <Route path="myinterns" element={<SupervisorMyInterns />} />
+          <Route path="attendance" element={<SupervisorAttendance />} />
+          <Route path="tasks" element={<SupervisorTasks />} />
+          <Route path="evaluations" element={<SupervisorEvaluations />} />
+          <Route path="settings" element={<SupervisorSettings />} />
+          <Route path="notifications" element={<SupervisorNotifications />} />
         </Route>
 
         <Route path="/hr-staff" element={<SideBarLayout />}>
