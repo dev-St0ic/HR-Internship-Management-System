@@ -3,8 +3,14 @@ import SupervisorLayout from "../portals/supervisor/layouts/SupervisorLayout";
 import SupervisorDashboard from "../portals/supervisor/pages/SupervisorDashboard";
 import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
 import OperationsPage from "../portals/hr-staff/pages/OperationsPage";
+import InternDetailPage from "../portals/hr-staff/pages/InternDetailPage";
+import StaffManagement from "../portals/hr-staff/pages/StaffManagement";
+import DocumentVault from "../portals/hr-staff/pages/DocumentVault";
 import HrAdminSideBarLayout from "../portals/hr-admin/components/SideBarLayout";
 import HRAdminDashboard from "../portals/hr-admin/pages/HRAdminDashboard";
+import ReportsAndAnalytics from "../portals/hr-admin/pages/ReportsAndAnalytics";
+import SystemLogs from "../portals/hr-admin/pages/SystemLogs";
+import Recruitment from "../portals/hr-staff/pages/Recruitment";
 import LandingPageHeader from "../common/components/layout/LandingPageHeader";
 import LandingPage from "../portals/Home/pages/LandingPage";
 import ApplicationFormHeader from "../portals/interns/components/layout/ApplicationFormHeader";
@@ -19,6 +25,7 @@ import Documents from "../portals/interns/pages/Documents";
 import Evaluation from "../portals/interns/pages/Evaluation";
 import Settings from "../portals/interns/pages/Settings";
 import Notifications from "../portals/interns/pages/Notifications";
+import AdminSettings from "../portals/hr-admin/pages/Settings";
 
 // Temporary placeholders muna
 const Home = () => <>Homee</>;
@@ -66,18 +73,22 @@ export const AppRouter = () => {
 
         <Route path="/hr-staff" element={<SideBarLayout />}>
           <Route path="operations" element={<OperationsPage />} />
+          <Route path="intern/:internId" element={<InternDetailPage />} />
           <Route index element={<HRStaffDashboard />} />
         </Route>
 
         <Route path="/hr-admin" element={<HrAdminSideBarLayout />}>
           <Route index element={<HRAdminDashboard />} />
-          <Route path="recruitment" element={<HRAdminSectionPage title="Recruitment" />} />
-          <Route path="intern-management" element={<HRAdminSectionPage title="Intern Management" />} />
-          <Route path="staff-management" element={<HRAdminSectionPage title="Staff Management" />} />
-          <Route path="document-vault" element={<HRAdminSectionPage title="Document Vault" />} />
-          <Route path="reports" element={<HRAdminSectionPage title="Reports & Analytics" />} />
-          <Route path="system-logs" element={<HRAdminSectionPage title="System Logs" />} />
-          <Route path="settings" element={<HRAdminSectionPage title="Settings" />} />
+          <Route path="recruitment" element={<Recruitment />} />
+          <Route path="intern-management">
+            <Route index element={<OperationsPage />} />
+            <Route path="intern/:internId" element={<InternDetailPage />} />
+          </Route>
+          <Route path="staff-management" element={<StaffManagement />} />
+          <Route path="document-vault" element={<DocumentVault />} />
+          <Route path="reports" element={<ReportsAndAnalytics />} />
+          <Route path="system-logs" element={<SystemLogs />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
       </Routes>
     </BrowserRouter>
