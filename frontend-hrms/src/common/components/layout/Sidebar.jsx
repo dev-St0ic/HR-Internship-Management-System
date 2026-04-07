@@ -12,7 +12,7 @@ const getNavClass = ({ isActive }) =>
 
 const Sidebar = ({ links }) => {
   return (
-    <nav className="fixed top-0 left-0 h-screen w-[300px] p-7 bg-[#FFFFFF] overflow-y-auto rounded-2xl text-gray-700 shadow-lg">
+    <nav className="fixed top-0 left-0 h-screen w-60 p-7 bg-[#FFFFFF] overflow-y-auto rounded-2xl text-gray-700 shadow-lg">
       {/* fixed top-0 left-0 h-screen w-[300px] p-7 bg-[#fafafb] overflow-y-auto */}
       {/* LOGO */}
       <div className="flex items-center text-4xl font-medium mb-6">
