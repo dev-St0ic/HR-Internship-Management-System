@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./Header";
 import { Settings, User, ShieldAlert } from "lucide-react";
 import GeneralPreferences from "../ui/GeneralPreference";
+import ProfileSettings from "../ui/ProfileSettings";
 
 export default function SettingsPage() {
     const [activeTab, setActiveTab] = useState("general");
@@ -52,11 +53,7 @@ export default function SettingsPage() {
                     <div className="mt-6">
                         {activeTab === "general" && <GeneralPreferences />}
                         
-                        {activeTab === "profile" && (
-                            <div className="py-12 text-center text-sm text-gray-400">
-                                Profile settings content goes here.
-                            </div>
-                        )}
+                        {activeTab === "profile" && <ProfileSettings role={userRole}/>}
 
                         {activeTab === "security" && (
                             <div className="py-12 text-center text-sm text-gray-400">
@@ -76,11 +73,13 @@ export default function SettingsPage() {
         return (
             <button
                 onClick={() => setActiveTab(value)}
-                className={`flex items-center gap-2 pb-3 text-sm transition 
-                    ${isActive ? "border-b-2 border-black font-medium" : "text-gray-400 hover:text-gray-700"}`}
+                className={`flex items-center gap-2 pb-3 text-sm transition mb-[-1px]
+                    ${isActive 
+                        ? "border-b-2 border-[#7C3EFF] text-[#7C3EFF] font-semibold" 
+                        : "text-gray-400 hover:text-gray-700 border-b-2 border-transparent"}`}
             >
                 {icon}
-                <span className="text-sm">{label}</span>
+                <span>{label}</span>
             </button>
         );
     }
