@@ -7,8 +7,6 @@ import ProfileSettings from "../ui/ProfileSettings";
 export default function SettingsPage() {
     const [activeTab, setActiveTab] = useState("general");
 
-    // TODO: BACKEND / AUTH INTEGRATION
-    // Replace this with your actual Auth hook or state management
     const userRole = "supervisor"; // TEMP: change to "intern", "supervisor", "hr-admin", "hr-staff" to test role logic
     
     const tabs = [
