@@ -130,12 +130,12 @@ export default function SupervisorSettings() {
                 </div>
                 <div>
                   <label class="block text-sm text-gray-500 mb-1">Email Address</label>
-                  <input type="email" value="Supervisor@email.com"
+                  <input type="email" placeholder="Supervisor@email.com"
                     class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none" />
                 </div>
                 <div>
                   <label class="block text-sm text-gray-500 mb-1">Password</label>
-                  <input type="password" value="***************"
+                  <input type="password" placeholder="Password"
                     class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none" />
                 </div>
                 <div>
@@ -177,7 +177,7 @@ export default function SupervisorSettings() {
                   </select>
                 </div>
 
-                <div className="md:col-span-2">
+                <div className="md:col-span-1">
                   <label className="block text-sm text-gray-500 mb-1">Date of Birth</label>
                   <input type="date" className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" />
                 </div>
