@@ -16,8 +16,8 @@ export default function DragDropUpload({ label }) {
 
       {/* Drop Zone */}
       <div
-        className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition
-            ${dragActive ? "bg-gray-100 border-gray-400" : "border-gray-300"}`}
+        className={`border-2 border-dotted rounded-lg p-6 text-center cursor-pointer transition
+            ${dragActive ? "bg-gray-100 border-gray-400" : "border-violet-400"}`}
         onDragOver={(e) => {
           e.preventDefault();
           setDragActive(true);
@@ -32,7 +32,7 @@ export default function DragDropUpload({ label }) {
       >
         {/* Icon */}
         <div className="flex justify-center mb-2">
-          <div className="bg-black text-white p-2 rounded">
+          <div className="bg-violet-500 text-white p-2 rounded">
             <Upload size={18} />
           </div>
         </div>
