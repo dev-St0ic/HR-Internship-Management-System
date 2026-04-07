@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 {/* imports galing sa Supervisor Pages */}
-import { SupervisorLayout, SupervisorDashboard, SupervisorMyInterns, SupervisorAttendance, SupervisorTasks, SupervisorEvaluations, SupervisorSettings } from "../portals/supervisor/Index";
+import { SupervisorLayout, SupervisorDashboard, SupervisorMyInterns, SupervisorAttendance, SupervisorTasks, SupervisorEvaluations, SupervisorSettings, SupervisorNotifications, UserTaskInformation } from "../portals/supervisor/Index";
 
 import SideBarLayout from '../portals/hr-staff/components/SideBarLayout';
 import OperationsPage from '../portals/hr-staff/pages/OperationsPage';
@@ -35,11 +35,13 @@ export const AppRouter = () => {
             {/* '/s' means 'supervisor' */}
             <Route path="/s" element={<SupervisorLayout />}>
                 <Route index element={<SupervisorDashboard />} />
-                <Route path="myinterns" index element={<SupervisorMyInterns />} />
-                <Route path="attendance" index element={<SupervisorAttendance />} />
-                <Route path="tasks" index element={<SupervisorTasks />} />
-                <Route path="evaluations" index element={<SupervisorEvaluations />} />
-                <Route path="settings" index element={<SupervisorSettings />} />
+                <Route path="myinterns"  element={<SupervisorMyInterns />} />
+                <Route path="attendance"  element={<SupervisorAttendance />} />
+                <Route path="tasks" element={<SupervisorTasks />} />
+                <Route path="tasks/usertaskinformation" element={<UserTaskInformation />} />
+                <Route path="evaluations"  element={<SupervisorEvaluations />} />
+                <Route path="settings"  element={<SupervisorSettings />} />
+                <Route path="notifications"  element={<SupervisorNotifications />} />
             </Route>
 
             <Route path="/hr-staff" element={<SideBarLayout />}>
