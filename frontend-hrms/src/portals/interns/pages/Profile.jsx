@@ -48,8 +48,8 @@ export default function Profile() {
                 </p>
               </div>
             </div>
-            <button className="flex items-center gap-2 px-4 py-2 bg-gray-500 rounded-lg text-xs text-white hover:bg-gray-300 hover:text-black">
-              Edit Profile <PenLine size={14} />
+            <button className="flex items-center gap-2 px-4 py-2 bg-violet-500 rounded-lg text-xs text-white hover:bg-gray-300 hover:text-violet-500 transition">
+              <PenLine size={14} /> Edit Profile
             </button>
           </div>
 
@@ -96,7 +96,7 @@ export default function Profile() {
       <button
         onClick={() => setActiveTab(value)}
         className={`flex items-center gap-2 pb-3 text-sm transition 
-          ${isActive ? "border-b-2 border-black font-medium" : "text-gray-400 hover:text-gray-700"}`}
+          ${isActive ? "border-b-2 border-violet-500 text-violet-500 font-medium" : "text-gray-400 hover:text-gray-700"}`}
       >
         {icon}
         <span className="text-sm">{label}</span>
