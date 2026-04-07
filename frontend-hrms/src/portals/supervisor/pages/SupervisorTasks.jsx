@@ -1,5 +1,6 @@
 import { PencilLine, Trash2 } from "lucide-react"
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function SupervisorTasks() {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,7 +94,11 @@ export default function SupervisorTasks() {
 
             <tr className="hover:bg-gray-100">
               <td className="p-2">Data Entry Projects</td>
-              <td className="p-2">Cara Lim</td>
+              <td className="p-2">
+                <NavLink to="usertaskinformation" className="hover:text-violet-600 hover:font-medium">
+                  Cara Lim
+                </NavLink>
+              </td>
               <td className="p-2">April 01, 2026</td>
               <td className="p-2">Report.pdf</td>
               <td className="p-2">
@@ -107,194 +112,6 @@ export default function SupervisorTasks() {
                 </div>
               </td>
             </tr>
-
-            <tr>
-              <td className="p-2">Marketing or Development Tasks</td>
-              <td className="p-2">Ethan Lee</td>
-              <td className="p-2">April 15, 2026</td>
-              <td className="p-2">Presentation.pptx</td>
-              <td className="p-2">
-                <div className="bg-yellow-500 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Pending</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">HR Documentation Support</td>
-              <td className="p-2">Mia Chen</td>
-              <td className="p-2">April 30, 2026</td>
-              <td className="p-2">CampaignPlan.docx</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Completed</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr className="hover:bg-gray-100">
-              <td className="p-2">Data Entry Projects</td>
-              <td className="p-2">Cara Lim</td>
-              <td className="p-2">April 01, 2026</td>
-              <td className="p-2">Report.pdf</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Approved</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">Marketing or Development Tasks</td>
-              <td className="p-2">Ethan Lee</td>
-              <td className="p-2">April 15, 2026</td>
-              <td className="p-2">Presentation.pptx</td>
-              <td className="p-2">
-                <div className="bg-yellow-500 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Pending</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">HR Documentation Support</td>
-              <td className="p-2">Mia Chen</td>
-              <td className="p-2">April 30, 2026</td>
-              <td className="p-2">CampaignPlan.docx</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Completed</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr className="hover:bg-gray-100">
-              <td className="p-2">Data Entry Projects</td>
-              <td className="p-2">Cara Lim</td>
-              <td className="p-2">April 01, 2026</td>
-              <td className="p-2">Report.pdf</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Approved</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">Marketing or Development Tasks</td>
-              <td className="p-2">Ethan Lee</td>
-              <td className="p-2">April 15, 2026</td>
-              <td className="p-2">Presentation.pptx</td>
-              <td className="p-2">
-                <div className="bg-yellow-500 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Pending</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">HR Documentation Support</td>
-              <td className="p-2">Mia Chen</td>
-              <td className="p-2">April 30, 2026</td>
-              <td className="p-2">CampaignPlan.docx</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Completed</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr className="hover:bg-gray-100">
-              <td className="p-2">Data Entry Projects</td>
-              <td className="p-2">Cara Lim</td>
-              <td className="p-2">April 01, 2026</td>
-              <td className="p-2">Report.pdf</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Approved</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">Marketing or Development Tasks</td>
-              <td className="p-2">Ethan Lee</td>
-              <td className="p-2">April 15, 2026</td>
-              <td className="p-2">Presentation.pptx</td>
-              <td className="p-2">
-                <div className="bg-yellow-500 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Pending</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">HR Documentation Support</td>
-              <td className="p-2">Mia Chen</td>
-              <td className="p-2">April 30, 2026</td>
-              <td className="p-2">CampaignPlan.docx</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Completed</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-            
             
           </tbody>
 
