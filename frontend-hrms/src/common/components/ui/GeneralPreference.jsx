@@ -32,7 +32,6 @@ export default function GeneralPreferences() {
                 >
                     <option value="Light">Light</option>
                     <option value="Dark">Dark</option>
-                    <option value="System">System Default</option>
                 </select>
             </div>
 
