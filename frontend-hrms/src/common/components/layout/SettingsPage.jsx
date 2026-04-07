@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "./Header";
-import { Settings, User, ShieldAlert } from "lucide-react";
+import { Settings, User, ShieldAlert, Lock, Users } from "lucide-react";
 import GeneralPreferences from "../ui/GeneralPreference";
 import ProfileSettings from "../ui/ProfileSettings";
 
@@ -9,7 +9,21 @@ export default function SettingsPage() {
 
     // TODO: BACKEND / AUTH INTEGRATION
     // Replace this with your actual Auth hook or state management
-    const userRole = "intern"; // TEMP: change to "supervisor" or "admin" to test role logic
+    const userRole = "supervisor"; // TEMP: change to "intern", "supervisor", "hr-admin", "hr-staff" to test role logic
+    
+    const tabs = [
+        { id: "general", label: "General Preferences", icon: <Settings size={16} /> },
+    ];
+
+    // Inject HR Admin specific tabs
+    if (userRole === "hr-admin") {
+        tabs.push({ id: "intern-policy", label: "Intern Policy", icon: <Users size={16} /> });
+        tabs.push({ id: "rbac", label: "RBAC", icon: <Lock size={16} /> });
+    } 
+    
+
+    // Everyone gets Profile last
+    tabs.push({ id: "profile", label: "Profile", icon: <User size={16} /> });
 
     return (
         <>
@@ -19,47 +33,42 @@ export default function SettingsPage() {
             />
             
             <div className="p-6">
-                {/* Card layout matching Profile.jsx */}
                 <div className="bg-white rounded-xl shadow p-6">
                     
                     {/* Tabs Header */}
                     <div className="flex gap-6 mt-4 border-b border-gray-100">
-                        <Tab
-                            icon={<Settings size={16} />}
-                            label="General Preferences"
-                            value="general"
-                            activeTab={activeTab}
-                            setActiveTab={setActiveTab}
-                        />
-                        <Tab
-                            icon={<User size={16} />}
-                            label="Profile"
-                            value="profile"
-                            activeTab={activeTab}
-                            setActiveTab={setActiveTab}
-                        />
-                        {(userRole === "admin" || userRole === "supervisor") && (
+                        {tabs.map((tab) => (
                             <Tab
-                                icon={<ShieldAlert size={16} />}
-                                label="Security Access"
-                                value="security"
+                                key={tab.id}
+                                icon={tab.icon}
+                                label={tab.label}
+                                value={tab.id}
                                 activeTab={activeTab}
                                 setActiveTab={setActiveTab}
                             />
-                        )}
+                        ))}
                     </div>
 
                     {/* Tab Content Rendering */}
                     <div className="mt-6">
-                        {activeTab === "general" && <GeneralPreferences />}
                         
-                        {activeTab === "profile" && <ProfileSettings role={userRole}/>}
+                        {/* Common Tabs */}
+                        {activeTab === "general" && <GeneralPreferences />}
+                        {activeTab === "profile" && <ProfileSettings role={userRole} />}
 
-                        {activeTab === "security" && (
-                            <div className="py-12 text-center text-sm text-gray-400">
-                                Supervisor/Admin security settings go here.
+                        {/* HR Admin Tabs (Placeholders) */}
+                        {activeTab === "intern-policy" && (
+                            <div className="py-12 text-center text-sm text-gray-400 border-2 border-dashed border-gray-200 rounded-lg">
+                                Intern Policy settings will go here.
                             </div>
                         )}
+                        {activeTab === "rbac" && (
+                            <div className="py-12 text-center text-sm text-gray-400 border-2 border-dashed border-gray-200 rounded-lg">
+                                Role-Based Access Control (RBAC) settings will go here.
+                            </div>
+                        )}
+
+                        
                     </div>
 
                 </div>
