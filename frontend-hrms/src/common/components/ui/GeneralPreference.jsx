@@ -13,38 +13,38 @@ export default function GeneralPreferences() {
 
     const updatePreference = async (key, value) => {
         setSettings((prev) => ({ ...prev, [key]: value }));
-
     };
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col pt-4">
             
             {/* Appearance */}
-            <div className="flex justify-between items-center py-5 px-6 border-b border-gray-100">
+            <div className="flex justify-between items-center py-5 border-b border-gray-100">
                 <div>
-                    <h3 className="text-sm font-bold text-gray-900 mb-1">Appearance</h3>
-                    <p className="text-xs text-gray-400">Customize how your theme looks on your device</p>
+                    <h3 className="text-base font-bold text-gray-900 mb-1">Appearance</h3>
+                    <p className="text-sm text-gray-400">Customize how your theme looks on your device</p>
                 </div>
                 <select 
                     value={settings.appearance}
                     onChange={(e) => updatePreference('appearance', e.target.value)}
-                    className="bg-gray-50 border border-gray-200 text-sm rounded-lg px-3 py-2 outline-none focus:border-purple-500"
+                    className="bg-white border border-[#A2A1A833] text-sm rounded-lg px-4 py-2.5 outline-none focus:border-[#7C3EFF] focus:ring-1 focus:ring-[#7C3EFF] transition-colors"
                 >
                     <option value="Light">Light</option>
                     <option value="Dark">Dark</option>
+                    <option value="System">System Default</option>
                 </select>
             </div>
 
             {/* Date and Time Format */}
-            <div className="flex justify-between items-center py-5 px-6 border-b border-gray-100">
+            <div className="flex justify-between items-center py-5 border-b border-gray-100">
                 <div>
-                    <h3 className="text-sm font-bold text-gray-900 mb-1">Date and Time Format</h3>
-                    <p className="text-xs text-gray-400">Select your localization</p>
+                    <h3 className="text-base font-bold text-gray-900 mb-1">Date and Time Format</h3>
+                    <p className="text-sm text-gray-400">Select your localization</p>
                 </div>
                 <select 
                     value={settings.dateFormat}
                     onChange={(e) => updatePreference('dateFormat', e.target.value)}
-                    className="bg-gray-50 border border-gray-200 text-sm rounded-lg px-3 py-2 outline-none focus:border-purple-500"
+                    className="bg-white border border-[#A2A1A833] text-sm rounded-lg px-4 py-2.5 outline-none focus:border-[#7C3EFF] focus:ring-1 focus:ring-[#7C3EFF] transition-colors"
                 >
                     <option value="YYYY-MM-DD | HH:MM:SS">YYYY-MM-DD | HH:MM:SS</option>
                     <option value="MM/DD/YYYY | hh:mm A">MM/DD/YYYY | hh:mm A</option>
@@ -53,10 +53,10 @@ export default function GeneralPreferences() {
             </div>
 
             {/* Two-factor Authentication */}
-            <div className="flex justify-between items-center py-5 px-6 border-b border-gray-100">
+            <div className="flex justify-between items-center py-5 border-b border-gray-100">
                 <div>
-                    <h3 className="text-sm font-bold text-gray-900 mb-1">Two-factor Authentication</h3>
-                    <p className="text-xs text-gray-400">Keep your account secure by enabling 2FA via mail</p>
+                    <h3 className="text-base font-bold text-gray-900 mb-1">Two-factor Authentication</h3>
+                    <p className="text-sm text-gray-400">Keep your account secure by enabling 2FA via mail</p>
                 </div>
                 <ToggleSwitch 
                     checked={settings.twoFactorAuth} 
@@ -65,10 +65,10 @@ export default function GeneralPreferences() {
             </div>
 
             {/* Mobile Push Notifications */}
-            <div className="flex justify-between items-center py-5 px-6 border-b border-gray-100">
+            <div className="flex justify-between items-center py-5 border-b border-gray-100">
                 <div>
-                    <h3 className="text-sm font-bold text-gray-900 mb-1">Mobile Push Notifications</h3>
-                    <p className="text-xs text-gray-400">Receive push notification</p>
+                    <h3 className="text-base font-bold text-gray-900 mb-1">Mobile Push Notifications</h3>
+                    <p className="text-sm text-gray-400">Receive push notification</p>
                 </div>
                 <ToggleSwitch 
                     checked={settings.mobilePush} 
@@ -77,10 +77,10 @@ export default function GeneralPreferences() {
             </div>
 
             {/* Desktop Notification */}
-            <div className="flex justify-between items-center py-5 px-6 border-b border-gray-100">
+            <div className="flex justify-between items-center py-5 border-b border-gray-100">
                 <div>
-                    <h3 className="text-sm font-bold text-gray-900 mb-1">Desktop Notification</h3>
-                    <p className="text-xs text-gray-400">Receive push notification in desktop</p>
+                    <h3 className="text-base font-bold text-gray-900 mb-1">Desktop Notification</h3>
+                    <p className="text-sm text-gray-400">Receive push notification in desktop</p>
                 </div>
                 <ToggleSwitch 
                     checked={settings.desktopPush} 
@@ -89,10 +89,10 @@ export default function GeneralPreferences() {
             </div>
 
             {/* Email Notifications */}
-            <div className="flex justify-between items-center py-5 px-6">
+            <div className="flex justify-between items-center py-5">
                 <div>
-                    <h3 className="text-sm font-bold text-gray-900 mb-1">Email Notifications</h3>
-                    <p className="text-xs text-gray-400">Receive email notification</p>
+                    <h3 className="text-base font-bold text-gray-900 mb-1">Email Notifications</h3>
+                    <p className="text-sm text-gray-400">Receive email notification</p>
                 </div>
                 <ToggleSwitch 
                     checked={settings.emailNotifications} 
