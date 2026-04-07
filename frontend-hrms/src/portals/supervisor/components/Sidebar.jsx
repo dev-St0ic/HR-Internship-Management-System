@@ -15,12 +15,12 @@ const sidebarNavigation = [
   {
     sidebarRole : "Supervisor",
     sidebarContent : [
-      { sidebarLabel: "Dashboard", sidebarIcon: <LayoutDashboard />, navLink : "/s" },
-      { sidebarLabel: "My Interns", sidebarIcon: <Users />, navLink : "/s/myinterns"},
-      { sidebarLabel: "Attendance", sidebarIcon: <CalendarCheck />, navLink: "/s/attendance"  },
-      { sidebarLabel: "Tasks", sidebarIcon: <ClipboardList />, navLink: "/s/tasks" },
-      { sidebarLabel: "Evaluations", sidebarIcon: <BriefcaseBusiness />, navLink: "/s/evaluations" },
-      { sidebarLabel: "Settings", sidebarIcon: <Settings />, navLink: "/s/settings" },
+      { sidebarLabel: "Dashboard", sidebarIcon: <LayoutDashboard />, navLink : "/supervisor" },
+      { sidebarLabel: "My Interns", sidebarIcon: <Users />, navLink : "/supervisor/myinterns"},
+      { sidebarLabel: "Attendance", sidebarIcon: <CalendarCheck />, navLink: "/supervisor/attendance"  },
+      { sidebarLabel: "Tasks", sidebarIcon: <ClipboardList />, navLink: "/supervisor/tasks" },
+      { sidebarLabel: "Evaluations", sidebarIcon: <BriefcaseBusiness />, navLink: "/supervisor/evaluations" },
+      { sidebarLabel: "Settings", sidebarIcon: <Settings />, navLink: "/supervisor/settings" },
     ]
   }
 ]
