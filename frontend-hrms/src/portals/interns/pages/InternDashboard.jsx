@@ -2,12 +2,14 @@ import Header from "../../../common/components/layout/Header";
 import { dashboardStats } from "../../../common/config/mockData";
 import { iconMap } from "../../../common/config/iconMap";
 import StatCard from "../../../common/components/ui/StatCard";
+import GreetingHeader from "../../../common/components/ui/GreetingHeader";
 
 export default function Dashboard() {
   const stats = dashboardStats.intern;
   return (
     <>
       <Header title="Dashboard" subtitle="Overview & activity" />
+      <GreetingHeader name="Dwight Robles" />
       <div className="grid grid-cols-3 gap-6 mt-5">
         {/* Left Side */}
         <div className="col-span-2 space-y-5">
