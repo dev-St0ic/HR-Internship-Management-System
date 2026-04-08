@@ -3,6 +3,7 @@ import { dashboardStats } from "../../../common/config/mockData";
 import { iconMap } from "../../../common/config/iconMap";
 import StatCard from "../../../common/components/ui/StatCard";
 import GreetingHeader from "../../../common/components/ui/GreetingHeader";
+import CalendarPanel from "../components/ui/CalendarPanel";
 
 export default function Dashboard() {
   const stats = dashboardStats.intern;
@@ -35,9 +36,7 @@ export default function Dashboard() {
 
         {/* Right Side */}
         <div className="col-span-1">
-          <div className="bg-white p-5 rounded-2xl shadow-sm border">
-            calendar
-          </div>
+          <CalendarPanel />
         </div>
       </div>
     </>

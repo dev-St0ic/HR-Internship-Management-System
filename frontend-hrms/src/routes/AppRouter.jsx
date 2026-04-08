@@ -28,6 +28,7 @@ import Attendance from "../portals/interns/pages/Attendance";
 import Documents from "../portals/interns/pages/Documents";
 import Evaluation from "../portals/interns/pages/Evaluation";
 import NotificationsPage from "../portals/interns/pages/InternNotificationPage";
+import InternCalendarPage from "../portals/interns/pages/InternCalendarPage";
 import SettingsPage from "../common/components/layout/SettingsPage";
 
 // Temporary placeholders muna
@@ -60,6 +61,7 @@ export const AppRouter = () => {
           <Route path="evaluation" element={<Evaluation />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="notifications" element={<NotificationsPage />} />
+          <Route path="calendar" element={<InternCalendarPage />} />
         </Route>
 
         {/* temp supervisor route */}
