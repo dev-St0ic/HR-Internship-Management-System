@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import faqImg from "../../../assets/images/FaqImg.jpg";
 
 export default function FaqSection() {
     // State to track which FAQ is open. '0' means the first one is open by default!
@@ -39,8 +40,7 @@ export default function FaqSection() {
                     
                     {/* Image Container */}
                     <div className="rounded-[2.5rem] overflow-hidden bg-gray-200 aspect-[4/3] shadow-md border border-gray-100">
-                        {/* TODO: Add your "Girls on Couch" image here */}
-                        {/* <img src={FaqImage} alt="Interns working on couch" className="w-full h-full object-cover" /> */}
+                        <img src={faqImg} alt="Interns working on couch" className="w-full h-full object-cover" />
                     </div>
                 </div>
 

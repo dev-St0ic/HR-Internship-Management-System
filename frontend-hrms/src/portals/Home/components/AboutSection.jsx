@@ -1,3 +1,7 @@
+import aboutImg1 from "../../../assets/images/AboutImg1.jpg";
+import aboutImg2 from "../../../assets/images/AboutImg2.jpg";
+import aboutImg3 from "../../../assets/images/AboutImg3.jpg";
+
 export default function AboutSection() {
     return (
         <section id="about" className="py-24 px-6 bg-[#F4F4F9]">
@@ -46,20 +50,17 @@ export default function AboutSection() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                     {/* Left Image */}
                     <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gray-200 shadow-sm border border-gray-100">
-                        {/* TODO: Add "Meeting on couches" image here */}
-                        {/* <img src={Image1} alt="Team Meeting" className="w-full h-full object-cover" /> */}
+                        <img src={aboutImg1} alt="Team Meeting" className="w-full h-full object-cover" />
                     </div>
                     
                     {/* Center Image */}
                     <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gray-200 shadow-sm border border-gray-100">
-                        {/* TODO: Add "Busy office" image here */}
-                        {/* <img src={Image2} alt="Office Working" className="w-full h-full object-cover" /> */}
+                        <img src={aboutImg2} alt="Busy Office" className="w-full h-full object-cover" />
                     </div>
                     
                     {/* Right Image */}
                     <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gray-200 shadow-sm border border-gray-100">
-                        {/* TODO: Add "High five" image here */}
-                        {/* <img src={Image3} alt="High Five" className="w-full h-full object-cover" /> */}
+                        <img src={aboutImg3} alt="High Five" className="w-full h-full object-cover" />
                     </div>
                 </div>
 

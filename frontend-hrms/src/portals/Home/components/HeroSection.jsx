@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import heroBg from "../../../assets/images/HeroPageBg.png";
+import heroImg1 from "../../../assets/images/HeroImg1.jpg";
+import heroImg2 from "../../../assets/images/HeroImg2.jpg";
+import heroImg3 from "../../../assets/images/HeroImg3.jpg";
 
 export default function HeroSection() {
     return (
@@ -28,23 +31,19 @@ export default function HeroSection() {
                 <div className="flex flex-col md:flex-row justify-center items-center gap-6 w-full max-w-5xl">
                     {/* Left Image */}
                     <div className="w-full md:w-1/3 aspect-[4/5] rounded-[3rem] overflow-hidden bg-gray-200 shadow-xl">
-                        {/* TODO: Add Left Meeting Room Image here */}
-                        <img src="/path-to-your-left-image.jpg" alt="Meeting" className="w-full h-full object-cover" />
+                        <img src={heroImg1} alt="Meeting" className="w-full h-full object-cover" />
                     </div>
                     
-                    {/* Center Image (Slightly Lowered) */}
                     <div className="w-full md:w-1/3 aspect-[4/5] rounded-[3rem] overflow-hidden bg-[#120071] p-6 shadow-xl translate-y-0 md:translate-y-12">
                         <h3 className="text-white md:text-lg font-bold text-center mb-4 leading-tight">Launch Your Career with<br/>Our Internship Program</h3>
                         <div className="w-full h-[75%] rounded-[2rem] overflow-hidden bg-gray-200">
-                            {/* TODO: Add Center Desk Image here */}
-                            <img src="/path-to-your-center-image.jpg" alt="Working at desk" className="w-full h-full object-cover" />
+                            <img src={heroImg2} alt="Working at desk" className="w-full h-full object-cover" />
                         </div>
                     </div>
 
                     {/* Right Image */}
                     <div className="w-full md:w-1/3 aspect-[4/5] rounded-[3rem] overflow-hidden bg-gray-200 shadow-xl">
-                        {/* TODO: Add Right Two Women Image here */}
-                        <img src="/path-to-your-right-image.jpg" alt="Collaboration" className="w-full h-full object-cover" />
+                        <img src={heroImg3} alt="Collaboration" className="w-full h-full object-cover" />
                     </div>
                 </div>
             </div>
