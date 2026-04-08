@@ -1,0 +1,433 @@
+/* HRIMS layout wrapper for sidebar and main content */
+.hrims-layout {
+  border: 2px solid #e5e7eb;
+  border-radius: 18px 18px 0 0;
+  margin: 32px 32px 0 32px;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+/* Add border margin between sidebar and main content, but not on the bottom */
+.hrims-layout > .flex {
+  gap: 0;
+}
+.hrims-layout nav {
+  border-right: 2px solid #e5e7eb;
+  border-bottom: none;
+  border-radius: 0;
+}
+.hrims-layout .row.w-full {
+  border-radius: 0 18px 0 0;
+}
+.add-intern-btn {
+  min-width: 160px !important;
+}
+.filter-btn {
+  background: #f7f7fa !important;
+  color: #7c3aed !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  padding: 8px 18px !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  height: 40px !important;
+  transition: background 0.15s, color 0.15s !important;
+  box-sizing: border-box !important;
+}
+.filter-btn svg {
+  margin-right: 6px !important;
+  color: #7c3aed !important;
+}
+.filter-btn:hover {
+  background: #ede9fe !important;
+  color: #5b21b6 !important;
+}
+.add-intern-btn {
+  background: #7c3aed !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 8px 18px !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  height: 40px !important;
+  transition: background 0.15s !important;
+  box-sizing: border-box !important;
+}
+.add-intern-btn:hover {
+  background: #5b21b6 !important;
+}
+/* --- Improved Filter and Add Intern Button Styles --- */
+.filter-btn {
+  background: #f7f7fa;
+  color: #7c3aed;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  transition: background 0.15s, color 0.15s;
+  box-sizing: border-box;
+}
+.filter-btn svg {
+  margin-right: 6px;
+  color: #7c3aed;
+}
+.filter-btn:hover {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+.add-intern-btn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  height: 40px;
+  transition: background 0.15s;
+  box-sizing: border-box;
+}
+.add-intern-btn:hover {
+  background: #5b21b6;
+}
+/* --- Custom Filter and Add Intern Button Styles (override) --- */
+.filter-btn {
+  background: #f7f7fa;
+  color: #7c3aed;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  transition: background 0.15s, color 0.15s;
+}
+.filter-btn:hover {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+.add-intern-btn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  height: 40px;
+  transition: background 0.15s;
+}
+.add-intern-btn:hover {
+  background: #5b21b6;
+}
+/* Arrow button for employee navigation */
+.arrow-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  color: #7c3aed;
+  font-size: 20px;
+  transition: color 0.15s;
+}
+.arrow-btn:hover {
+  color: #5b21b6;
+}
+.intern-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  margin-top: 24px;
+  overflow: hidden;
+}
+.intern-table th, .intern-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+.intern-table th {
+  background: #f7f7fa;
+  color: #888;
+  font-size: 14px;
+  font-weight: 600;
+}
+.intern-table tr:last-child td {
+  border-bottom: none;
+}
+
+.add-intern-btn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: auto;
+  transition: background 0.15s;
+}
+.add-intern-btn:hover {
+  background: #5b21b6;
+}
+.filter-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.08);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.filter-modal {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  padding: 32px 36px;
+  min-width: 340px;
+  max-width: 90vw;
+}
+.filter-section {
+  margin-bottom: 18px;
+}
+.filter-section label {
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+}
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.filter-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 18px;
+}
+.filter-cancel {
+  background: #fff;
+  color: #7c3aed;
+  border: 1px solid #7c3aed;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.filter-cancel:hover {
+  background: #ede9fe;
+}
+.filter-apply {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.filter-apply:hover {
+  background: #5b21b6;
+}
+/* Layout */
+.staff-management-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #fafbfc;
+}
+.main-content {
+  flex: 1 1 0%;
+  padding: 24px 20px 24px 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+.subtitle {
+  color: #888;
+  font-size: 14px;
+}
+.search-row {
+  margin-bottom: 24px;
+}
+.departments-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* Department Card */
+.department-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  padding: 24px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+.department-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.members {
+  color: #888;
+  font-size: 13px;
+}
+.view-all-btn {
+  background: none;
+  border: none;
+  color: #7c3aed;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 15px;
+}
+.employee-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.employee-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.employee-item:last-child {
+  margin-bottom: 0;
+}
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  border: 2px solid #eee;
+}
+
+/* Employee Table */
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  margin-top: 24px;
+  overflow: hidden;
+}
+.employee-table th, .employee-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+.employee-table th {
+  background: #f7f7fa;
+  color: #888;
+  font-size: 14px;
+  font-weight: 600;
+}
+.employee-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Action Buttons */
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 8px;
+  font-size: 18px;
+  color: #7c3aed;
+  transition: color 0.15s;
+}
+.action-btn:last-child {
+  margin-right: 0;
+}
+.action-btn:hover {
+  color: #4c1d95;
+}
+
+/* Filter Button */
+.filter-btn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.filter-btn:hover {
+  background: #5b21b6;
+}
+
+/* Search Bar */
+.search-bar {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  font-size: 15px;
+  background: #f7f7fa;
+  outline: none;
+}
+
+/* Notification Icon */
+.notification-icon {
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.notification-icon svg {
+  color: #7c3aed;
+}

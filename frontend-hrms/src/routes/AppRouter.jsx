@@ -1,4 +1,8 @@
+import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import DepartmentListPage from '../portals/hr-staff/pages/staff-management/DepartmentListPage';
+import DepartmentDetailPage from '../portals/hr-staff/pages/staff-management/DepartmentDetailPage';
+import EmployeeDetailPage from '../portals/hr-staff/pages/staff-management/EmployeeDetailPage';
 import SupervisorLayout from "../portals/supervisor/layouts/SupervisorLayout";
 import SupervisorDashboard from "../portals/supervisor/pages/SupervisorDashboard";
 import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
@@ -57,9 +61,16 @@ export const AppRouter = () => {
           <Route index element={<SupervisorDashboard />} />
         </Route>
 
+
         <Route path="/hr-staff" element={<SideBarLayout />}>
           <Route path="operations" element={<OperationsPage />} />
           <Route index element={<HRStaffDashboard />} />
+          {/* Staff Management Routes */}
+          <Route path="staff-management" >
+            <Route index element={<DepartmentListPage />} />
+            <Route path="department/:departmentId" element={<DepartmentDetailPage />} />
+            <Route path="department/:departmentId/employee/:employeeId" element={<EmployeeDetailPage />} />
+          </Route>
         </Route>
 
         <Route path="/hr-admin/*" element={<HRAdminDashboard />} />
