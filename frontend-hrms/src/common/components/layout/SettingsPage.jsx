@@ -3,11 +3,13 @@ import Header from "./Header";
 import { Settings, User, ShieldAlert, Lock, Users } from "lucide-react";
 import GeneralPreferences from "../ui/GeneralPreference";
 import ProfileSettings from "../ui/ProfileSettings";
+import InternPolicySettings from "../ui/InternPolicySettings";
+import RBACSettings from "../ui/RBACSettings";
 
 export default function SettingsPage() {
     const [activeTab, setActiveTab] = useState("general");
 
-    const userRole = "supervisor"; // TEMP: change to "intern", "supervisor", "hr-admin", "hr-staff" to test role logic
+    const userRole = "hr-admin"; // TEMP: change to "intern", "supervisor", "hr-admin", "hr-staff" to test role logic
     
     const tabs = [
         { id: "general", label: "General Preferences", icon: <Settings size={16} /> },
@@ -55,16 +57,8 @@ export default function SettingsPage() {
                         {activeTab === "profile" && <ProfileSettings role={userRole} />}
 
                         {/* HR Admin Tabs (Placeholders) */}
-                        {activeTab === "intern-policy" && (
-                            <div className="py-12 text-center text-sm text-gray-400 border-2 border-dashed border-gray-200 rounded-lg">
-                                Intern Policy settings will go here.
-                            </div>
-                        )}
-                        {activeTab === "rbac" && (
-                            <div className="py-12 text-center text-sm text-gray-400 border-2 border-dashed border-gray-200 rounded-lg">
-                                Role-Based Access Control (RBAC) settings will go here.
-                            </div>
-                        )}
+                        {activeTab === "intern-policy" && <InternPolicySettings />}
+                        {activeTab === "rbac" && <RBACSettings />}
 
                         
                     </div>
