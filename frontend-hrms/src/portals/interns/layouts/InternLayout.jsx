@@ -11,7 +11,7 @@ export default function InternLayout() {
       <Sidebar links={navigation[userRole]} />
 
       {/* Main content area */}
-      <div className="ml-60 p-6 flex-1">
+      <div className="ml-60 p-5 flex-1">
         <Outlet />
       </div>
     </div>
