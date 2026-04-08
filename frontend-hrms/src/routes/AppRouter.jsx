@@ -27,8 +27,8 @@ import Tasks from "../portals/interns/pages/Tasks";
 import Attendance from "../portals/interns/pages/Attendance";
 import Documents from "../portals/interns/pages/Documents";
 import Evaluation from "../portals/interns/pages/Evaluation";
-import Settings from "../portals/interns/pages/Settings";
 import NotificationsPage from "../portals/interns/pages/InternNotificationPage";
+import SettingsPage from "../common/components/layout/SettingsPage";
 
 // Temporary placeholders muna
 const Home = () => <>Homee</>;
@@ -58,7 +58,7 @@ export const AppRouter = () => {
           <Route path="attendance" element={<Attendance />} />
           <Route path="documents" element={<Documents />} />
           <Route path="evaluation" element={<Evaluation />} />
-          <Route path="settings" element={<Settings />} />
+          <Route path="settings" element={<SettingsPage />} />
           <Route path="notifications" element={<NotificationsPage />} />
         </Route>
 
