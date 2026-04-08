@@ -4,6 +4,9 @@ import { iconMap } from "../../../common/config/iconMap";
 import StatCard from "../../../common/components/ui/StatCard";
 import GreetingHeader from "../../../common/components/ui/GreetingHeader";
 import CalendarPanel from "../components/ui/CalendarPanel";
+import TimeCard from "../components/ui/TimeCard";
+import { internTasksData } from "../components/mochDataTasks";
+import TaskListCard from "../components/ui/TaskListCard";
 
 export default function Dashboard() {
   const stats = dashboardStats.intern;
@@ -32,6 +35,8 @@ export default function Dashboard() {
           </div>
 
           {/* Other Component */}
+          <TimeCard />
+          <TaskListCard tasks={internTasksData.tasks} />
         </div>
 
         {/* Right Side */}
