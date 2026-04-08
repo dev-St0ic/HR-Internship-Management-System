@@ -46,6 +46,8 @@ export const AppRouter = () => {
         <Route path="/" element={<LandingPageHeader />}>
           <Route index element={<LandingPage />} />
         </Route>
+        {/* Login page route */}
+        <Route path="/login" element={<LoginPage />} />
 
         {/* Application form intern route */}
         <Route path="/application-form" element={<ApplicationFormHeader />}>
