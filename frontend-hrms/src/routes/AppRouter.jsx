@@ -29,6 +29,7 @@ import Documents from "../portals/interns/pages/Documents";
 import Evaluation from "../portals/interns/pages/Evaluation";
 import NotificationsPage from "../portals/interns/pages/InternNotificationPage";
 import SettingsPage from "../common/components/layout/SettingsPage";
+import LoginForm from "../portals/interns/components/auth/LoginForm";
 
 // Temporary placeholders muna
 const Home = () => <>Homee</>;
@@ -45,6 +46,8 @@ export const AppRouter = () => {
         <Route path="/" element={<LandingPageHeader />}>
           <Route index element={<LandingPage />} />
         </Route>
+        {/* Login page route */}
+        <Route path="/login" element={<LoginForm />} />
 
         {/* Application form intern route */}
         <Route path="/application-form" element={<ApplicationFormHeader />}>

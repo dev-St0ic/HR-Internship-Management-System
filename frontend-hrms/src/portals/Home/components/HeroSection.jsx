@@ -1,0 +1,53 @@
+import { Link } from "react-router-dom";
+import heroBg from "../../../assets/images/HeroPageBg.png";
+
+export default function HeroSection() {
+    return (
+        <section 
+            id="home"
+            className="relative pt-32 pb-20 px-6 overflow-hidden bg-gradient-to-b from-teal-50/50 via-purple-100/50 to-blue-100/50"
+            style={{backgroundImage: `url(${heroBg})`}}>
+            
+            <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
+                <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
+                    Your Career, <span className="text-[#7C3EFF]">Anywhere</span>.<br />
+                    Experience the Virtual Edge with <span className="text-[#7C3EFF]">Ollopa</span>
+                </h1>
+                <p className="text-base md:text-2xl text-gray-800 font-medium max-w-2xl mb-8">
+                    Join the Ollopa Virtual Internship Program—a 100% remote experience designed 
+                    for the next generation of forward-thinking professionals.
+                </p>
+                <Link 
+                    to="/application-form"
+                    className="px-8 py-3 rounded-full font-medium text-white bg-[#120071] hover:bg-[#130E49]/90 transition shadow-lg mb-16"
+                >
+                    Apply Now
+                </Link>
+
+                {/* 3 Image Layout */}
+                <div className="flex flex-col md:flex-row justify-center items-center gap-6 w-full max-w-5xl">
+                    {/* Left Image */}
+                    <div className="w-full md:w-1/3 aspect-[4/5] rounded-[3rem] overflow-hidden bg-gray-200 shadow-xl">
+                        {/* TODO: Add Left Meeting Room Image here */}
+                        <img src="/path-to-your-left-image.jpg" alt="Meeting" className="w-full h-full object-cover" />
+                    </div>
+                    
+                    {/* Center Image (Slightly Lowered) */}
+                    <div className="w-full md:w-1/3 aspect-[4/5] rounded-[3rem] overflow-hidden bg-[#120071] p-6 shadow-xl translate-y-0 md:translate-y-12">
+                        <h3 className="text-white md:text-lg font-bold text-center mb-4 leading-tight">Launch Your Career with<br/>Our Internship Program</h3>
+                        <div className="w-full h-[75%] rounded-[2rem] overflow-hidden bg-gray-200">
+                            {/* TODO: Add Center Desk Image here */}
+                            <img src="/path-to-your-center-image.jpg" alt="Working at desk" className="w-full h-full object-cover" />
+                        </div>
+                    </div>
+
+                    {/* Right Image */}
+                    <div className="w-full md:w-1/3 aspect-[4/5] rounded-[3rem] overflow-hidden bg-gray-200 shadow-xl">
+                        {/* TODO: Add Right Two Women Image here */}
+                        <img src="/path-to-your-right-image.jpg" alt="Collaboration" className="w-full h-full object-cover" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
