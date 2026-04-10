@@ -3,6 +3,7 @@ export default function TimeButton({
   onClick,
   variant = "primary",
   disabled = false,
+  icon: Icon,
 }) {
   const base =
     "flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition";
@@ -21,6 +22,7 @@ export default function TimeButton({
       disabled={disabled}
       className={`${base} ${disabled ? disabledStyle : styles[variant]}`}
     >
+      {Icon && <Icon size={16} />}
       {label}
     </button>
   );
