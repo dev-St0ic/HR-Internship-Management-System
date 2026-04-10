@@ -1,11 +1,16 @@
 import Header from '../Header';
-import Sidebar from '../Sidebar';
+import Sidebar from '../../../../common/components/layout/Sidebar';
+import {navigation} from '../../../../common/config/navigation';
 
 const SupervisorLayout = () => {
+  const userRole = "supervisor";
+
   return (
-    <div className="container mx-auto flex min-h-screen">
-      <Sidebar />
-      <Header />
+    <div className="flex min-h-screen">
+      <Sidebar links={navigation[userRole]} />
+      <div className="flex-1 ml-60">
+        <Header />  
+      </div>
     </div>
   );
 };

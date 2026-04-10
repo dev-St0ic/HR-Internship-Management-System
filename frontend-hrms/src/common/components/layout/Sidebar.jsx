@@ -26,6 +26,7 @@ const Sidebar = ({ links }) => {
 
       {/* NAVIGATION */}
       <ul>
+        {}
         {links.map((link) => {
           const Icon = link.icon;
 
