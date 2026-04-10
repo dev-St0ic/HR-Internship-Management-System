@@ -6,3 +6,4 @@ export {default as SupervisorEvaluations} from './pages/SupervisorEvaluations';
 export {default as SupervisorTasks} from './pages/SupervisorTasks';
 export {default as SupervisorSettings} from './pages/SupervisorSettings';
 export {default as SupervisorNotifications} from './pages/SupervisorNotifications';
+export {default as UserTaskInformation} from './pages/UserTaskInformation';
