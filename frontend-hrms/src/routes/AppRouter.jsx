@@ -19,7 +19,6 @@ import LandingPageHeader from "../common/components/layout/LandingPageHeader";
 import LandingPage from "../portals/Home/pages/LandingPage";
 import ApplicationFormHeader from "../portals/interns/components/layout/ApplicationFormHeader";
 import ApplicationForm from "../portals/interns/pages/ApplicationForm";
-import LoginPage from "../portals/interns/pages/LoginPage";
 import InternLayout from "../portals/interns/layouts/InternLayout";
 import InternDashboard from "../portals/interns/pages/InternDashboard";
 import Profile from "../portals/interns/pages/Profile";
@@ -30,6 +29,7 @@ import Evaluation from "../portals/interns/pages/Evaluation";
 import NotificationsPage from "../portals/interns/pages/InternNotificationPage";
 import InternCalendarPage from "../portals/interns/pages/InternCalendarPage";
 import SettingsPage from "../common/components/layout/SettingsPage";
+import LoginPage from "../portals/Home/pages/LoginPage";
 
 // Temporary placeholders muna
 const Home = () => <>Homee</>;
