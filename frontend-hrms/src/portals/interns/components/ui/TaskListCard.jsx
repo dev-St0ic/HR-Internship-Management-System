@@ -6,7 +6,7 @@ export default function TaskListCard({ tasks }) {
 
   //When a user clicks the task, this will route you to the tasks page on the actual task
   const handleClick = (taskId) => {
-    navigate(`/intern/tasks?taskIs=${taskId}`);
+    navigate("/intern/tasks", { state: { selectedTaskId: taskId } });
   };
 
   return (

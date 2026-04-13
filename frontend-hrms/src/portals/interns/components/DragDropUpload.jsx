@@ -1,12 +1,26 @@
 import { Upload } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-export default function DragDropUpload({ label }) {
-  const [files, setFiles] = useState([null]);
+export default function DragDropUpload({
+  label = "Upload File",
+  onUpload,
+  accept = "*",
+  multiple = false,
+}) {
+  const [files, setFiles] = useState([]);
   const [dragActive, setDragActive] = useState(false);
+  const inputRef = useRef(null);
 
-  const handleFile = (selectedFile) => {
-    setFiles(selectedFile);
+  const handleFile = (fileList) => {
+    if (!fileList || fileList.length === 0) return;
+
+    const selectedFiles = multiple ? Array.from(fileList) : [fileList[0]];
+
+    setFiles(selectedFiles);
+
+    if (onUpload) {
+      onUpload(multiple ? selectedFiles : selectedFiles[0]);
+    }
   };
 
   return (
@@ -26,9 +40,9 @@ export default function DragDropUpload({ label }) {
         onDrop={(e) => {
           e.preventDefault();
           setDragActive(false);
-          handleFile(e.dataTransfer.files[0]);
+          handleFile(e.dataTransfer.files);
         }}
-        onClick={() => document.getElementById(label).click()}
+        onClick={() => inputRef.current.click()}
       >
         {/* Icon */}
         <div className="flex justify-center mb-2">
@@ -41,17 +55,29 @@ export default function DragDropUpload({ label }) {
         <p className="text-sm">
           Drag & drop or <span className="underline">choose file</span>
         </p>
-        <p className="text-xs text-gray-400">Supported formats: JPG, PDF</p>
+        <p className="text-xs text-gray-400">
+          Supported formats: {accept === "*" ? "All files" : accept}
+        </p>
 
-        {/* File name */}
-        {files && <p className="mt-2 text-sm text-green-600">{files.name}</p>}
+        {/* File Preview */}
+        {files.length > 0 && (
+          <div className="mt-3 space-y-1">
+            {files.map((f, index) => (
+              <p key={index} className="text-sm text-green-600">
+                {f.name}
+              </p>
+            ))}
+          </div>
+        )}
 
         {/* Hidden File Input */}
         <input
-          id={label}
+          ref={inputRef}
           type="file"
           className="hidden"
-          onChange={(e) => handleFile(e.target.files[0])}
+          accept={accept}
+          multiple={multiple}
+          onChange={(e) => handleFile(e.target.files)}
         />
       </div>
     </div>

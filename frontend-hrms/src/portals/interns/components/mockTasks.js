@@ -1,0 +1,53 @@
+export const mockTasks = [
+  {
+    id: 1,
+    title: "QA Website report",
+    description:
+      "Create a Website QA Report that identifies errors, usability issues, and performance problems.",
+    type: "QA Website Report",
+    start: "March 1",
+    due: "April 1",
+    submitted: null,
+    progress: 12,
+    comments: [
+      {
+        id: 1,
+        author: "HR-Staff",
+        message: "Good Job!",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Daily Task 5/5",
+    description: "Complete your assigned development tasks.",
+    type: "Daily Task",
+    start: "April 5",
+    due: "April 5",
+    submitted: null,
+    progress: 60,
+    comments: [],
+  },
+  {
+    id: 3,
+    title: "Daily Task 5/6",
+    description: "Complete your assigned development tasks.",
+    type: "Daily Task",
+    start: "April 6",
+    due: "April 6",
+    submitted: null,
+    progress: 0,
+    comments: [],
+  },
+  {
+    id: 4,
+    title: "Daily Task 5/7",
+    description: "Complete your assigned development tasks.",
+    type: "Daily Task",
+    start: "April 7",
+    due: "April 7",
+    submitted: null,
+    progress: 0,
+    comments: [],
+  },
+];
