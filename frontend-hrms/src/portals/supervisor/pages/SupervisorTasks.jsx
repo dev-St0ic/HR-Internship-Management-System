@@ -1,4 +1,4 @@
-import { PencilLine, Trash2 } from "lucide-react"
+import { PencilLine, Trash2, Search } from "lucide-react"
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -8,9 +8,14 @@ export default function SupervisorTasks() {
     <>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <div className="search-bar">
-            <input type="search" name="search" id="" placeholder="Search interns..." className="border border-gray-500/20 rounded-lg py-2 px-3 w-70 focus:outline-none focus:ring-2 focus:ring-[#7C3EFF]" />
-          </div>
+         <div className="flex items-center w-full max-w-md bg-purple border border-[#A2A1A81A] rounded-lg px-3 py-2">
+          <Search className="w-4 h-4 text-gray-600  mr-2" />
+          <input
+            type="text"
+            placeholder="Search interns..."
+            className="w-full outline-none text-sm font-medium text-[#16151C33]"
+          />
+        </div>
           <div className="filter-options flex items-center space-x-4">  
             <select id="" className="border border-gray-500/20 w-23 rounded-lg ms-3 py-2 px-3 focus:outline-none hover:border-gray-500/40 cursor-pointer">
               <option disabled selected>Filter</option>
@@ -30,6 +35,7 @@ export default function SupervisorTasks() {
             <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
               <div className="bg-white rounded-lg shadow-lg w-[400px] p-6">
                 <div className="flex justify-between border-b border-gray-500/10 pb-4 items-center mb-4">
+                
                   <h2 className="text-lg font-semibold">Create New Task</h2>
                 </div>
                 <div className="space-y-3 mb-6">
@@ -102,7 +108,7 @@ export default function SupervisorTasks() {
               <td className="p-2">April 01, 2026</td>
               <td className="p-2">Report.pdf</td>
               <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
+                <div className="bg-[#3FC28A1A] px-2 py-1 rounded text-[#3FC28A] text-xs inline-block">
                   <p>Approved</p>
                 </div>
               </td>

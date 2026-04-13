@@ -1,4 +1,4 @@
-import { UserCheck, ClockAlert, UserX, Timer, SlidersHorizontal  } from "lucide-react";
+import { UserCheck, ClockAlert, UserX, Timer, SlidersHorizontal, Search } from "lucide-react";
 
 export default function SupervisorAttendance() {
   return (
@@ -8,7 +8,7 @@ export default function SupervisorAttendance() {
           <div className="p-3">
             <div className="flex items-center mb-2">
               <div className="bg-gray-500/10 rounded-lg w-10 h-10 mr-2 flex items-center justify-center">
-                <UserCheck className="text-[#7C3EFF]" size={20}/>
+                <UserCheck className="text-[#7C3EFF]" size={20} />
               </div>
               <h1 className="text-sm sm:text-base">
                 Present Today
@@ -29,7 +29,7 @@ export default function SupervisorAttendance() {
           <div className="p-3">
             <div className="flex items-center mb-2">
               <div className="bg-gray-500/10 rounded-lg w-10 h-10 mr-2 flex items-center justify-center">
-                <ClockAlert className="text-[#7C3EFF]" size={20}/>
+                <ClockAlert className="text-[#7C3EFF]" size={20} />
               </div>
               <h1 className="text-sm sm:text-base">
                 Late Today
@@ -50,7 +50,7 @@ export default function SupervisorAttendance() {
           <div className="p-3">
             <div className="flex items-center mb-2">
               <div className="bg-gray-500/10 rounded-lg w-10 h-10 mr-2 flex items-center justify-center">
-                <UserX className="text-[#7C3EFF]" size={20}/>
+                <UserX className="text-[#7C3EFF]" size={20} />
               </div>
               <h1 className="text-sm sm:text-base">
                 Absent Today
@@ -70,7 +70,7 @@ export default function SupervisorAttendance() {
           <div className="p-3">
             <div className="flex items-center mb-2">
               <div className="bg-gray-500/10 rounded-lg w-10 h-10 mr-2 flex items-center justify-center">
-                <Timer className="text-[#7C3EFF]" size={20}/>
+                <Timer className="text-[#7C3EFF]" size={20} />
               </div>
               <h1 className="text-sm sm:text-base">
                 Total Hours Today
@@ -87,12 +87,13 @@ export default function SupervisorAttendance() {
           </div>
         </div>
       </div>
-
-      <div className="flex items-center mt-6">
-        <div className="search-bar">
-          <input type="search" name="search" id="" placeholder="Search interns..." className="border border-gray-500/20 rounded-lg py-2 px-3 w-70 focus:outline-none focus:ring-2 focus:ring-[#7C3EFF]" />
+      <div className="flex items-center justify-between gap-3 mb-4">
+        <div className="flex items-center w-full max-w-md bg-purple border border-[#A2A1A81A] rounded-lg px-3 py-2">
+          <Search size={16} className="text-gray-500" />
+          <input type="text" placeholder="Search interns..." className="w-full outline-none text-sm font-medium text-[#16151C33]" />
         </div>
-        <div className="filter-options flex items-center space-x-4">  
+
+        <div className="filter-options flex items-center space-x-4">
           <select id="" className="border border-gray-500/20 w-23 rounded-lg ms-3 py-2 px-3 focus:outline-none hover:border-gray-500/40 cursor-pointer">
             <option disabled selected>Filter</option>
             <option value="2023-10-01">by Intern Name</option>
@@ -125,7 +126,7 @@ export default function SupervisorAttendance() {
               <td className="p-2">8.0</td>
               <td className="p-2">2023-10-01</td>
               <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
+                <div className="bg-[#3FC28A1A] px-2 py-1 rounded text-[#3FC28A] text-xs inline-block">
                   <p>Approved</p>
                 </div>
               </td>
@@ -138,7 +139,7 @@ export default function SupervisorAttendance() {
               <td className="p-2">7.5</td>
               <td className="p-2">2023-10-01</td>
               <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
+                <div className="bg-[#3FC28A1A] px-2 py-1 rounded text-[#3FC28A] text-xs inline-block">
                   <p>Approved</p>
                 </div>
               </td>
@@ -151,7 +152,7 @@ export default function SupervisorAttendance() {
               <td className="p-2">7.5</td>
               <td className="p-2">2023-10-01</td>
               <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
+                <div className="bg-[#3FC28A1A] px-2 py-1 rounded text-[#3FC28A] text-xs inline-block">
                   <p>Approved</p>
                 </div>
               </td>
@@ -164,7 +165,7 @@ export default function SupervisorAttendance() {
               <td className="p-2">7.5</td>
               <td className="p-2">2023-10-01</td>
               <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
+                <div className="bg-[#3FC28A1A] px-2 py-1 rounded text-[#3FC28A] text-xs inline-block">
                   <p>Approved</p>
                 </div>
               </td>
@@ -177,7 +178,7 @@ export default function SupervisorAttendance() {
               <td className="p-2">7.5</td>
               <td className="p-2">2023-10-01</td>
               <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
+                <div className="bg-[#3FC28A1A] px-2 py-1 rounded text-[#3FC28A] text-xs inline-block">
                   <p>Approved</p>
                 </div>
               </td>
@@ -190,15 +191,15 @@ export default function SupervisorAttendance() {
               <td className="p-2">7.5</td>
               <td className="p-2">2023-10-01</td>
               <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
+                <div className="bg-[#3FC28A1A] px-2 py-1 rounded text-[#3FC28A] text-xs inline-block">
                   <p>Approved</p>
                 </div>
               </td>
             </tr>
-            
+
           </tbody>
 
-        </table>  
+        </table>
       </div>
     </>
   );

@@ -7,3 +7,4 @@ export {default as SupervisorTasks} from './pages/SupervisorTasks';
 export {default as SupervisorSettings} from './pages/SupervisorSettings';
 export {default as SupervisorNotifications} from './pages/SupervisorNotifications';
 export {default as UserTaskInformation} from './pages/UserTaskInformation';
+export {default as MyInternsProfiles} from './pages/MyInternsProfiles';

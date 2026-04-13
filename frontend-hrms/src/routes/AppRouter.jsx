@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 {/* imports galing sa Supervisor Pages */}
-import { SupervisorLayout, SupervisorDashboard, SupervisorMyInterns, SupervisorAttendance, SupervisorTasks, SupervisorEvaluations, SupervisorSettings, SupervisorNotifications, UserTaskInformation } from "../portals/supervisor/Index";
+import { SupervisorLayout, SupervisorDashboard, SupervisorMyInterns, SupervisorAttendance, SupervisorTasks, SupervisorEvaluations, SupervisorSettings, SupervisorNotifications, UserTaskInformation, MyInternsProfiles } from "../portals/supervisor/Index";
 
 import SideBarLayout from '../portals/hr-staff/components/SideBarLayout';
 import OperationsPage from '../portals/hr-staff/pages/OperationsPage';
@@ -36,6 +36,7 @@ export const AppRouter = () => {
             <Route path="/s" element={<SupervisorLayout />}>
                 <Route index element={<SupervisorDashboard />} />
                 <Route path="myinterns"  element={<SupervisorMyInterns />} />
+                <Route path="myinterns/internprofiles"  element={<MyInternsProfiles />} />
                 <Route path="attendance"  element={<SupervisorAttendance />} />
                 <Route path="tasks" element={<SupervisorTasks />} />
                 <Route path="tasks/usertaskinformation" element={<UserTaskInformation />} />

@@ -13,6 +13,7 @@ export default function Header() {
     '/s/evaluations': 'Evaluations',
     '/s/settings': 'Settings',
     '/s/notifications': 'Notifications',
+    '/s/myinterns/internprofiles': 'My Interns',
   };
 
   const headerLabelsPath = {
@@ -24,6 +25,7 @@ export default function Header() {
       '/s/evaluations': 'Assess and submit intern performance evaluations',
       '/s/settings': 'Manage your personal preferences and account security.',
       '/s/notifications': 'All Notifications',
+      '/s/myinterns/internprofiles': 'Manage and monitor your assigned interns',
   }
 };
 

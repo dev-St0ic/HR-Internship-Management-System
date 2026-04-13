@@ -15,7 +15,7 @@ export default function SupervisorEvaluations() {
             <span>Filter</span>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-6 grid-rows-6 gap-4 mb-4 mt-6">
 
           <div className="col-span-3 row-span-3 col-start-1 row-start-1 border border-gray-500/20 rounded-lg p-4">
@@ -103,7 +103,7 @@ export default function SupervisorEvaluations() {
                 <span className="bg-green-100 text-green-500 text-xs font-medium px-2.5 py-1 rounded">Completed</span>
               </div>
             </div>
-            
+
             <div className="py-3">
               <div className="py-2 flex justify-between">
                 <div className="flex justify-start items-center gap-2">
@@ -167,7 +167,7 @@ export default function SupervisorEvaluations() {
               <h1 className="font-bold text-md uppercase text-yellow-500">excellent</h1>
             </div>
           </div>
-          
+
           <div className="col-span-3 row-span-3 row-start-4 border border-gray-500/20 rounded-lg p-4">
             <div className="flex justify-between items-center border-b border-gray-500/20 pb-2">
               <div className="flex flex-col">
@@ -195,11 +195,11 @@ export default function SupervisorEvaluations() {
             </div>
             <div className="flex justify-center items-center h-32">
               <h1 className="text-gray-500 text-sm">Evaluation not yet submitted</h1>
-            </div>  
+            </div>
           </div>
-          
+
         </div>
-    
+
       </div>
     </>
   );
