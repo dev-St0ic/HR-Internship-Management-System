@@ -1,5 +1,5 @@
 import { Search, SlidersHorizontal, Star, MessageCircle, Target, NotebookPen, PenTool } from "lucide-react";
-import StarRatingUI from "../components/StarRatingUI";
+import StarRatingUI from "../components/StarRatingUI.jsx";
 
 export default function SupervisorEvaluations() {
   return (

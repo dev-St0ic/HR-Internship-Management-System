@@ -1,13 +1,21 @@
-import Header from '../Header';
-import Sidebar from '../Sidebar';
+import { Outlet } from "react-router-dom";
+import Sidebar from "../../../../common/components/layout/Sidebar";
+import { navigation } from "../../../../common/config/navigation";
 
-const SupervisorLayout = () => {
+export default function SupervisorLayout() {
+  const userRole = "supervisor"; 
+  
+  const navLinks = navigation[userRole] || [];
+
   return (
-    <div className="container mx-auto flex min-h-screen">
-      <Sidebar />
-      <Header />
+    <div className="flex">
+      {/* Sidebar should always be visible */}
+      <Sidebar links={navLinks} />
+
+      {/* Main content area */}
+      <div className="ml-60 p-6 flex-1">
+        <Outlet />
+      </div>
     </div>
   );
-};
-
-export default SupervisorLayout;
+}

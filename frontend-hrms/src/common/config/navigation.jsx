@@ -93,37 +93,37 @@ export const navigation = {
     },
   ],
 
-  supervisor: [
+ supervisor: [
     {
       to: "/supervisor",
       label: "Dashboard",
-      icon: <LayoutDashboard size={18} />,
+      icon: LayoutDashboard,
       end: true,
     },
     {
       to: "/supervisor/myinterns",
       label: "My Interns",
-      icon: <Users size={18} />,
+      icon: Users,
     },
     {
       to: "/supervisor/attendance",
       label: "Attendance",
-      icon: <CalendarCheck size={18} />,
+      icon: CalendarCheck,
     },
     {
       to: "/supervisor/tasks",
       label: "Tasks",
-      icon: <ClipboardList size={18} />,
+      icon: ClipboardList,
     },
     {
       to: "/supervisor/evaluation",
       label: "Evaluation",
-      icon: <BriefcaseBusiness size={18} />,
+      icon: BriefcaseBusiness,
     },
     {
       to: "/supervisor/settings",
       label: "Settings",
-      icon: <Settings size={18} />,
+      icon: Settings,
     },
   ],
 

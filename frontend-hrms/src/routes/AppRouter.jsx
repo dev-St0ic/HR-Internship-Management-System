@@ -72,7 +72,7 @@ export const AppRouter = () => {
           <Route path="myinterns" element={<SupervisorMyInterns />} />
           <Route path="attendance" element={<SupervisorAttendance />} />
           <Route path="tasks" element={<SupervisorTasks />} />
-          <Route path="evaluations" element={<SupervisorEvaluations />} />
+          <Route path="evaluation" element={<SupervisorEvaluations />} />
           <Route path="settings" element={<SupervisorSettings />} />
           <Route path="notifications" element={<SupervisorNotifications />} />
         </Route>
