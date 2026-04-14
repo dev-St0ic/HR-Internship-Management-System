@@ -1,13 +1,16 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Sidebar from '../../../common/components/layout/sidebar';
+import { LayoutDashboard } from 'lucide-react';
+
+const links = [
+  { to: '/supervisor', label: 'Dashboard', icon: LayoutDashboard, end: true },
+];
 
 const SupervisorLayout = () => {
   return (
     <div className="flex min-h-screen">
-      <nav className="bg-slate-200 p-5 w-250px">
-        <h2>Supervisor Sidebar</h2>
-        <ul>{/* <li><Link to="/supervisor">Dashboard</Link></li> */}</ul>
-      </nav>
-      <div className="row w-full">
+      <Sidebar links={links} />
+      <div className="flex-1 ml-60">
         <header className="h-16 border-b border-slate-200 flex items-center px-8">
           Supervisor Header
         </header>

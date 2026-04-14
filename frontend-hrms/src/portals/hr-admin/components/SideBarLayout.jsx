@@ -1,157 +1,23 @@
-﻿import { Outlet, Link as RouterLink } from 'react-router-dom';
-import Link from '@mui/material/Link';
+﻿import { Outlet } from 'react-router-dom';
+import Sidebar from '../../../common/components/layout/sidebar';
+import { LayoutDashboard, Users, FileText, BarChart3, Settings, Shield, UserCheck } from 'lucide-react';
+
+const links = [
+  { to: '/hr-admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
+  { to: '/hr-admin/recruitment', label: 'Recruitment', icon: UserCheck },
+  { to: '/hr-admin/intern-management', label: 'Intern Management', icon: Users },
+  { to: '/hr-admin/staff-management', label: 'Staff Management', icon: UserCheck },
+  { to: '/hr-admin/document-vault', label: 'Document Vault', icon: FileText },
+  { to: '/hr-admin/reports', label: 'Reports & Analytics', icon: BarChart3 },
+  { to: '/hr-admin/system-logs', label: 'System Logs', icon: Shield },
+  { to: '/hr-admin/settings', label: 'Settings', icon: Settings },
+];
 
 const SideBarLayout = () => {
   return (
     <div className='flex min-h-screen bg-slate-50'>
-      <nav className='bg-white border-r border-slate-200 p-5 w-[260px]'>
-        <div className='mb-8'>
-          <h1 className='text-xl font-bold text-indigo-700'>HRIMS</h1>
-          <p className='text-xs text-slate-500'>HR Admin</p>
-        </div>
-
-        <ul className='space-y-2'>
-          <li>
-            <Link
-              component={RouterLink}
-              to='/hr-admin'
-              sx={{
-                display: 'block',
-                px: 2,
-                py: 1,
-                borderRadius: 1.5,
-                color: 'text.primary',
-                textDecoration: 'none',
-                fontWeight: 'bold',
-                backgroundColor: 'grey.100',
-              }}
-            >
-              Dashboard
-            </Link>
-          </li>
-          <li>
-            <Link
-              component={RouterLink}
-              to='/hr-admin/recruitment'
-              sx={{
-                display: 'block',
-                px: 2,
-                py: 1,
-                borderRadius: 1.5,
-                color: 'text.secondary',
-                textDecoration: 'none',
-                '&:hover': { backgroundColor: 'grey.100', color: 'text.primary' },
-              }}
-            >
-              Recruitment
-            </Link>
-          </li>
-          <li>
-            <Link
-              component={RouterLink}
-              to='/hr-admin/intern-management'
-              sx={{
-                display: 'block',
-                px: 2,
-                py: 1,
-                borderRadius: 1.5,
-                color: 'text.secondary',
-                textDecoration: 'none',
-                '&:hover': { backgroundColor: 'grey.100', color: 'text.primary' },
-              }}
-            >
-              Intern Management
-            </Link>
-          </li>
-          <li>
-            <Link
-              component={RouterLink}
-              to='/hr-admin/staff-management'
-              sx={{
-                display: 'block',
-                px: 2,
-                py: 1,
-                borderRadius: 1.5,
-                color: 'text.secondary',
-                textDecoration: 'none',
-                '&:hover': { backgroundColor: 'grey.100', color: 'text.primary' },
-              }}
-            >
-              Staff Management
-            </Link>
-          </li>
-          <li>
-            <Link
-              component={RouterLink}
-              to='/hr-admin/document-vault'
-              sx={{
-                display: 'block',
-                px: 2,
-                py: 1,
-                borderRadius: 1.5,
-                color: 'text.secondary',
-                textDecoration: 'none',
-                '&:hover': { backgroundColor: 'grey.100', color: 'text.primary' },
-              }}
-            >
-              Document Vault
-            </Link>
-          </li>
-          <li>
-            <Link
-              component={RouterLink}
-              to='/hr-admin/reports'
-              sx={{
-                display: 'block',
-                px: 2,
-                py: 1,
-                borderRadius: 1.5,
-                color: 'text.secondary',
-                textDecoration: 'none',
-                '&:hover': { backgroundColor: 'grey.100', color: 'text.primary' },
-              }}
-            >
-              Reports & Analytics
-            </Link>
-          </li>
-          <li>
-            <Link
-              component={RouterLink}
-              to='/hr-admin/system-logs'
-              sx={{
-                display: 'block',
-                px: 2,
-                py: 1,
-                borderRadius: 1.5,
-                color: 'text.secondary',
-                textDecoration: 'none',
-                '&:hover': { backgroundColor: 'grey.100', color: 'text.primary' },
-              }}
-            >
-              System Logs
-            </Link>
-          </li>
-          <li>
-            <Link
-              component={RouterLink}
-              to='/hr-admin/settings'
-              sx={{
-                display: 'block',
-                px: 2,
-                py: 1,
-                borderRadius: 1.5,
-                color: 'text.secondary',
-                textDecoration: 'none',
-                '&:hover': { backgroundColor: 'grey.100', color: 'text.primary' },
-              }}
-            >
-              Settings
-            </Link>
-          </li>
-        </ul>
-      </nav>
-
-      <div className='flex flex-col flex-1'>
+      <Sidebar links={links} />
+      <div className='flex flex-col flex-1 ml-60'>
         <header className='h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8'>
           <div>
             <h2 className='text-xl font-semibold'>HR Admin</h2>
