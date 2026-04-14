@@ -13,3 +13,6 @@
     --font-roboto: 'RobotoLocal', sans-serif;
     --font-lexend: 'Lexend', sans-serif;
 }
+html {
+    scroll-behavior: smooth;
+}

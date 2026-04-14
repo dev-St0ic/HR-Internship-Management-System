@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 
-export default function OtpForm({ onBack, email = "companyemail@gmail.com" }) {
+export default function OtpForm({ onBack, email = "companyemail@gmail.com", onSuccess }) {
+    
     const [otp, setOtp] = useState(["", "", "", "", ""]);
     const inputRefs = useRef([]);
 
@@ -25,11 +26,15 @@ export default function OtpForm({ onBack, email = "companyemail@gmail.com" }) {
 
     const handleVerify = (e) => {
         e.preventDefault();
-        const fullOtp = otp.join("");
-        console.log("Verifying OTP:", fullOtp);
+        const finalCode = otp.join("");
+        console.log("Verifying OTP:", finalCode);
+        
+        onSuccess(); 
     };
 
     const isComplete = otp.every((digit) => digit !== "");
+
+    
 
     return (
         <div className="animate-fade-in flex flex-col">
@@ -77,7 +82,7 @@ export default function OtpForm({ onBack, email = "companyemail@gmail.com" }) {
                         disabled={!isComplete} 
                         className={`w-full font-medium py-3.5 rounded-lg transition-colors ${
                             isComplete 
-                                ? "bg-black hover:bg-gray-800 text-white" 
+                                ? "bg-[#7C3EFF] hover:bg-[#5b2ebd] text-white" 
                                 : "bg-[#b3b3b3] text-white cursor-not-allowed"
                         }`}
                     >

@@ -11,7 +11,7 @@ import {
 
 export default function Sidebar() {
   return (
-    <aside className="h-screen w-64 bg-gray-100 p-4 flex flex-col justify-between">
+    <aside className="h-screen w-64 sticky bg-gray-100 p-4 flex flex-col justify-between">
       {/* Top Section */}
       <div>
         {/* Logo/ Title */}

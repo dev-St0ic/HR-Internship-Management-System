@@ -1,14 +1,17 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../../common/components/layout/Sidebar";
+import { navigation } from "../../../common/config/navigation";
 
 export default function InternLayout() {
+  const userRole = "intern"; // This should ideally come from auth context or state management
+
   return (
-    <div className="flex ">
+    <div className="flex">
       {/* Sidebar should always be visible*/}
-      <Sidebar />
+      <Sidebar links={navigation[userRole]} />
 
       {/* Main content area */}
-      <div className="flex-1 p-6">
+      <div className="ml-60 p-6 flex-1">
         <Outlet />
       </div>
     </div>
