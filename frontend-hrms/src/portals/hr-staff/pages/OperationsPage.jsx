@@ -1,16 +1,28 @@
 import { Eye, Trash2 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 export default function OperationsPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const isHrAdmin = location.pathname.includes('/hr-admin');
-  //Sample Data 
-  const interns = [
-    { name: 'John Doe', id: '345321231', university: 'CIT-U', department: 'IT Department', startDate: 'Februry 27, 2026' },
-    { name: 'Jane Doe', id: '987890345', university: 'FEU', department: 'Department', startDate: 'December 14, 2025' },
-    { name: 'Jonathan Doe', id: '453367122', university: 'USJR', department: 'Department', startDate: 'January 11, 2026' },
+
+  // Dummy data for interns
+  const dummyInterns = [
+    { name: 'John Doe', id: '345321231', university: 'CIT-U', department: 'IT Department', startDate: 'February 27, 2026' },
+    { name: 'Jane Doe', id: '987890345', university: 'FEU', department: 'HR Department', startDate: 'December 14, 2025' },
+    { name: 'Jonathan Doe', id: '453367122', university: 'USJR', department: 'Marketing Department', startDate: 'January 11, 2026' },
   ];
+
+  const [interns, setInterns] = useState(dummyInterns);
+
+  // Commented out API call for interns
+  // useEffect(() => {
+  //   fetch('/api/interns')
+  //     .then(res => res.json())
+  //     .then(data => setInterns(data))
+  //     .catch(err => console.error('Error fetching interns:', err));
+  // }, []);
 
   return (
     <div className="p-6">

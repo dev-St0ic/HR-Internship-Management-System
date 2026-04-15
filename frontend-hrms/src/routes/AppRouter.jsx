@@ -6,7 +6,7 @@ import OperationsPage from "../portals/hr-staff/pages/OperationsPage";
 import InternDetailPage from "../portals/hr-staff/pages/InternDetailPage";
 import StaffManagement from "../portals/hr-staff/pages/StaffManagement";
 import DocumentVault from "../portals/hr-staff/pages/DocumentVault";
-import HrAdminSideBarLayout from "../portals/hr-admin/components/SideBarLayout";
+import HrAdminSideBarLayout from "../portals/hr-admin/components/HRAdminLayout";
 import HRAdminDashboard from "../portals/hr-admin/pages/HRAdminDashboard";
 import ReportsAndAnalytics from "../portals/hr-admin/pages/ReportsAndAnalytics";
 import SystemLogs from "../portals/hr-admin/pages/SystemLogs";
@@ -72,7 +72,10 @@ export const AppRouter = () => {
         </Route>
 
         <Route path="/hr-staff" element={<SideBarLayout />}>
+          <Route path="recruitment" element={<Recruitment />} />
           <Route path="operations" element={<OperationsPage />} />
+          <Route path="staff-management" element={<StaffManagement />} />
+          <Route path="document-vault" element={<DocumentVault />} />
           <Route path="intern/:internId" element={<InternDetailPage />} />
           <Route index element={<HRStaffDashboard />} />
         </Route>

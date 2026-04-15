@@ -1,4 +1,4 @@
-﻿import { useMemo } from 'react';
+﻿import { useMemo, useState, useEffect } from 'react';
 
 const HRAdminDashboard = () => {
   const today = useMemo(() => new Date(), []);
@@ -8,29 +8,62 @@ const HRAdminDashboard = () => {
     year: 'numeric',
   });
 
-  const metrics = [
-    { title: 'Total Interns', value: '470', trend: '+12%', trendColor: 'text-emerald-600' },
-    { title: 'Completed Interns', value: '1050', trend: '+5%', trendColor: 'text-emerald-600' },
-    { title: 'Active Interns', value: '470', trend: '-8%', trendColor: 'text-rose-500' },
-    { title: 'Partner Universities', value: '12', trend: '+12%', trendColor: 'text-emerald-600' },
+  // Dummy data for metrics
+  const dummyMetrics = [
+    { title: 'Total Interns', value: '520', trend: '+15%', trendColor: 'text-emerald-600' },
+    { title: 'Completed Interns', value: '1200', trend: '+8%', trendColor: 'text-emerald-600' },
+    { title: 'Active Interns', value: '520', trend: '-5%', trendColor: 'text-rose-500' },
+    { title: 'Partner Universities', value: '15', trend: '+20%', trendColor: 'text-emerald-600' },
   ];
 
-  const activities = [
+  const [metrics, setMetrics] = useState(dummyMetrics);
+
+  // Commented out API call for metrics
+  // useEffect(() => {
+  //   fetch('/api/metrics')
+  //     .then(res => res.json())
+  //     .then(data => setMetrics(data))
+  //     .catch(err => console.error('Error fetching metrics:', err));
+  // }, []);
+
+  // Dummy data for activities
+  const dummyActivities = [
     { label: 'New application submitted', description: 'A fresh intern application arrived today.' },
     { label: 'Supervisor evaluation completed', description: 'Rating submitted for intern performance review.' },
     { label: 'New DTR submitted', description: 'Daily time record uploaded by intern.' },
     { label: 'MOA uploaded', description: 'Memorandum of agreement added to records.' },
   ];
 
-  const attendanceData = [
-    { day: 'Mon', levels: [55, 75, 95] },
-    { day: 'Tue', levels: [60, 78, 97] },
-    { day: 'Wed', levels: [45, 65, 88] },
-    { day: 'Thu', levels: [58, 76, 96] },
-    { day: 'Fri', levels: [52, 74, 94] },
-    { day: 'Sat', levels: [42, 58, 83] },
-    { day: 'Sun', levels: [48, 62, 90] },
+  const [activities, setActivities] = useState(dummyActivities);
+
+  // Commented out API call for activities
+  // useEffect(() => {
+  //   fetch('/api/activities')
+  //     .then(res => res.json())
+  //     .then(data => setActivities(data))
+  //     .catch(err => console.error('Error fetching activities:', err));
+  // }, []);
+
+  // Dummy data for attendance
+  const dummyAttendanceData = [
+    { day: 'Mon', levels: [60, 80, 100] },
+    { day: 'Tue', levels: [65, 85, 105] },
+    { day: 'Wed', levels: [50, 70, 95] },
+    { day: 'Thu', levels: [62, 82, 102] },
+    { day: 'Fri', levels: [55, 78, 98] },
+    { day: 'Sat', levels: [45, 65, 90] },
+    { day: 'Sun', levels: [50, 68, 95] },
   ];
+
+  const [attendanceData, setAttendanceData] = useState(dummyAttendanceData);
+
+  // Commented out API call for attendance
+  // useEffect(() => {
+  //   fetch('/api/attendance')
+  //     .then(res => res.json())
+  //     .then(data => setAttendanceData(data))
+  //     .catch(err => console.error('Error fetching attendance:', err));
+  // }, []);
 
   return (
     <div className='space-y-6'>

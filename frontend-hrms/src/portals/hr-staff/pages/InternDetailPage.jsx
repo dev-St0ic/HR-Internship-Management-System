@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ChevronRight, Eye, Download } from 'lucide-react';
 
-const interns = [
+// Dummy data for interns
+const dummyInterns = [
   {
     id: '345321231',
     name: 'John Doe',
@@ -15,7 +16,7 @@ const interns = [
     gender: 'Male',
     university: 'CIT-U',
     program: 'BS Computer Science',
-    ojtHours: '240',
+    ojtHours: '250',
     address: '123 Example St.',
     city: 'Cebu City',
     zipCode: '6000',
@@ -32,14 +33,15 @@ const interns = [
     gender: 'Female',
     university: 'FEU',
     program: 'BS Business Administration',
-    ojtHours: '220',
+    ojtHours: '230',
     address: '456 Example Ave.',
     city: 'Manila',
     zipCode: '1000',
   },
 ];
 
-const documents = [
+// Dummy data for documents
+const dummyDocuments = [
   { id: 1, title: 'MOA.pdf', type: 'MOA', uploaded: '2025-12-10' },
   { id: 2, title: 'Certificate of Acceptance.pdf', type: 'Acceptance', uploaded: '2025-12-12' },
   { id: 3, title: 'NDA Letter.pdf', type: 'NDA', uploaded: '2025-12-14' },
@@ -48,16 +50,46 @@ const documents = [
   { id: 6, title: 'Endorsement Letter.pdf', type: 'Endorsement', uploaded: '2025-12-18' },
 ];
 
-const attendanceData = [
+// Dummy data for attendance
+const dummyAttendanceData = [
   { date: 'July 01, 2023', checkIn: '09:28 AM', checkOut: '07:00 PM', break: '00:30 Min', total: '09:02 Hrs', status: 'On Time' },
   { date: 'July 02, 2023', checkIn: '09:20 AM', checkOut: '07:00 PM', break: '00:20 Min', total: '09:20 Hrs', status: 'On Time' },
-
 ];
 
 export default function InternDetailPage() {
   const { internId } = useParams();
   const [activeTab, setActiveTab] = useState('personal');
   const [activePanel, setActivePanel] = useState('profile');
+
+  const [interns, setInterns] = useState(dummyInterns);
+
+  // Commented out API call for interns
+  // useEffect(() => {
+  //   fetch('/api/interns')
+  //     .then(res => res.json())
+  //     .then(data => setInterns(data))
+  //     .catch(err => console.error('Error fetching interns:', err));
+  // }, []);
+
+  const [documents, setDocuments] = useState(dummyDocuments);
+
+  // Commented out API call for documents
+  // useEffect(() => {
+  //   fetch('/api/documents')
+  //     .then(res => res.json())
+  //     .then(data => setDocuments(data))
+  //     .catch(err => console.error('Error fetching documents:', err));
+  // }, []);
+
+  const [attendanceData, setAttendanceData] = useState(dummyAttendanceData);
+
+  // Commented out API call for attendance
+  // useEffect(() => {
+  //   fetch('/api/attendance')
+  //     .then(res => res.json())
+  //     .then(data => setAttendanceData(data))
+  //     .catch(err => console.error('Error fetching attendance:', err));
+  // }, []);
 
   const intern = interns.find((i) => i.id === internId) || interns[0];
 

@@ -1,12 +1,23 @@
 ﻿import { Search, Upload, Download, Filter, FolderOpen } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
-const folders = [
-  { title: 'MOA', files: 20, color: 'bg-amber-100', icon: 'briefcase' },
-  { title: 'NDA', files: 20, color: 'bg-emerald-100', icon: 'shield' },
-  { title: 'Endorsement Letter', files: 20, color: 'bg-rose-100', icon: 'file-text' },
+// Dummy data for folders
+const dummyFolders = [
+  { title: 'MOA', files: 25, color: 'bg-amber-100', icon: 'briefcase' },
+  { title: 'NDA', files: 25, color: 'bg-emerald-100', icon: 'shield' },
+  { title: 'Endorsement Letter', files: 25, color: 'bg-rose-100', icon: 'file-text' },
 ];
 
 export default function DocumentVault() {
+  const [folders, setFolders] = useState(dummyFolders);
+
+  // Commented out API call for folders
+  // useEffect(() => {
+  //   fetch('/api/document-folders')
+  //     .then(res => res.json())
+  //     .then(data => setFolders(data))
+  //     .catch(err => console.error('Error fetching folders:', err));
+  // }, []);
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

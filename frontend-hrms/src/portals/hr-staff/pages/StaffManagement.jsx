@@ -1,9 +1,11 @@
 import { Search, Plus, Download } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
-const departments = [
+// Dummy data for departments
+const dummyDepartments = [
   {
     title: 'IT Department',
-    count: 20,
+    count: 22,
     members: [
       { name: 'John Doe', role: 'IT Intern' },
       { name: 'Jane Doe', role: 'HR Intern' },
@@ -12,7 +14,7 @@ const departments = [
   },
   {
     title: 'Sales Department',
-    count: 14,
+    count: 16,
     members: [
       { name: 'Darrell Steward', role: 'Sr. Sales Manager' },
       { name: 'Courtney Henry', role: 'BDM' },
@@ -21,7 +23,7 @@ const departments = [
   },
   {
     title: 'Project Manager Department',
-    count: 18,
+    count: 20,
     members: [
       { name: 'Ronald Richards', role: 'Sr. Project Manager' },
       { name: 'Savannah Nguyen', role: 'Project Manager' },
@@ -29,7 +31,7 @@ const departments = [
   },
   {
     title: 'Marketing Department',
-    count: 10,
+    count: 12,
     members: [
       { name: 'Brooklyn Simmons', role: 'Sr. Marketing Manager' },
       { name: 'Kristin Watson', role: 'Marketing Coordinator' },
@@ -38,6 +40,15 @@ const departments = [
 ];
 
 export default function StaffManagement() {
+  const [departments, setDepartments] = useState(dummyDepartments);
+
+  // Commented out API call for departments
+  // useEffect(() => {
+  //   fetch('/api/departments')
+  //     .then(res => res.json())
+  //     .then(data => setDepartments(data))
+  //     .catch(err => console.error('Error fetching departments:', err));
+  // }, []);
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

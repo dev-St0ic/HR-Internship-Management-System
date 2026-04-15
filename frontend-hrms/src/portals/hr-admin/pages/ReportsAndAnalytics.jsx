@@ -1,39 +1,41 @@
-﻿import React from 'react';
+﻿import React, { useState, useEffect, useMemo } from 'react';
 import { BarChart3, TrendingUp, Download } from 'lucide-react';
 
-const metrics = [
-  { label: 'Active Interns', value: '22', accent: 'bg-emerald-500', text: 'text-emerald-700' },
-  { label: 'Incoming Interns', value: '10', accent: 'bg-amber-400', text: 'text-amber-700' },
-  { label: 'Finalizing Internship', value: '3', accent: 'bg-rose-400', text: 'text-rose-700' },
+// Dummy data for metrics
+const dummyMetrics = [
+  { label: 'Active Interns', value: '28', accent: 'bg-emerald-500', text: 'text-emerald-700' },
+  { label: 'Incoming Interns', value: '15', accent: 'bg-amber-400', text: 'text-amber-700' },
+  { label: 'Finalizing Internship', value: '5', accent: 'bg-rose-400', text: 'text-rose-700' },
 ];
 
-const internshipOverview = [
-  { label: 'Figma', incoming: 89, active: 39, finalizing: 42 },
-  { label: 'Sketch', incoming: 50, active: 21, finalizing: 17 },
-  { label: 'XD', incoming: 32, active: 37, finalizing: 35 },
-  { label: 'Photoshop', incoming: 70, active: 42, finalizing: 15 },
-  { label: 'Illustrator', incoming: 53, active: 90, finalizing: 41 },
-  { label: 'AfterEffect', incoming: 57, active: 93, finalizing: 52 },
-  { label: 'InDesign', incoming: 36, active: 40, finalizing: 17 },
-  { label: 'Maya', incoming: 57, active: 82, finalizing: 29 },
-  { label: 'Premiere', incoming: 52, active: 94, finalizing: 63 },
-  { label: 'Final Cut', incoming: 92, active: 54, finalizing: 15 },
+// Dummy data for internship overview
+const dummyInternshipOverview = [
+  { label: 'Figma', incoming: 95, active: 45, finalizing: 48 },
+  { label: 'Sketch', incoming: 55, active: 25, finalizing: 20 },
+  { label: 'XD', incoming: 35, active: 40, finalizing: 38 },
+  { label: 'Photoshop', incoming: 75, active: 45, finalizing: 18 },
+  { label: 'Illustrator', incoming: 58, active: 95, finalizing: 45 },
+  { label: 'AfterEffect', incoming: 62, active: 98, finalizing: 55 },
+  { label: 'InDesign', incoming: 40, active: 45, finalizing: 20 },
+  { label: 'Maya', incoming: 60, active: 85, finalizing: 32 },
+  { label: 'Premiere', incoming: 55, active: 98, finalizing: 68 },
+  { label: 'Final Cut', incoming: 98, active: 58, finalizing: 18 },
 ];
 
-const universities = [
+// Dummy data for universities
+const dummyUniversities = [
   { name: 'University 1', color: 'bg-cyan-500' },
   { name: 'University 2', color: 'bg-amber-500' },
   { name: 'University 3', color: 'bg-violet-500' },
 ];
 
-const chartDays = [
-  { week: 'Week 1', values: [28, 42, 18, 36, 24, 52, 46, 70, 60, 80, 72, 95] },
-  { week: 'Week 2', values: [18, 32, 48, 52, 40, 44, 58, 80, 78, 88, 86, 92] },
-  { week: 'Week 3', values: [34, 56, 30, 48, 62, 72, 68, 90, 84, 76, 92, 86] },
+// Dummy data for chart days
+const dummyChartDays = [
+  { week: 'Week 1', values: [32, 46, 22, 40, 28, 56, 50, 74, 64, 84, 76, 99] },
+  { week: 'Week 2', values: [22, 36, 52, 56, 44, 48, 62, 84, 82, 92, 90, 96] },
+  { week: 'Week 3', values: [38, 60, 34, 52, 66, 76, 72, 94, 88, 80, 96, 90] },
 ];
 
-// Calculate max value for scaling the bars
-const maxValue = Math.max(...internshipOverview.flatMap(item => [item.incoming, item.active, item.finalizing]));
 const chartHeight = 200;
 
 /* Helper: build a clipPath polygon string from an array of values (0-100).
@@ -52,6 +54,49 @@ function buildClipPath(values) {
 }
 
 export default function ReportsAndAnalytics() {
+  const [metrics, setMetrics] = useState(dummyMetrics);
+
+  // Commented out API call for metrics
+  // useEffect(() => {
+  //   fetch('/api/metrics')
+  //     .then(res => res.json())
+  //     .then(data => setMetrics(data))
+  //     .catch(err => console.error('Error fetching metrics:', err));
+  // }, []);
+
+  const [internshipOverview, setInternshipOverview] = useState(dummyInternshipOverview);
+
+  // Commented out API call for internship overview
+  // useEffect(() => {
+  //   fetch('/api/internship-overview')
+  //     .then(res => res.json())
+  //     .then(data => setInternshipOverview(data))
+  //     .catch(err => console.error('Error fetching internship overview:', err));
+  // }, []);
+
+  const [universities, setUniversities] = useState(dummyUniversities);
+
+  // Commented out API call for universities
+  // useEffect(() => {
+  //   fetch('/api/universities')
+  //     .then(res => res.json())
+  //     .then(data => setUniversities(data))
+  //     .catch(err => console.error('Error fetching universities:', err));
+  // }, []);
+
+  const [chartDays, setChartDays] = useState(dummyChartDays);
+
+  // Commented out API call for chart days
+  // useEffect(() => {
+  //   fetch('/api/chart-days')
+  //     .then(res => res.json())
+  //     .then(data => setChartDays(data))
+  //     .catch(err => console.error('Error fetching chart days:', err));
+  // }, []);
+
+  // Calculate max value for scaling the bars
+  const maxValue = useMemo(() => Math.max(...internshipOverview.flatMap(item => [item.incoming, item.active, item.finalizing])), [internshipOverview]);
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

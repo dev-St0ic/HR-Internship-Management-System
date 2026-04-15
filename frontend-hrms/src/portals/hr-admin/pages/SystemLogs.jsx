@@ -1,6 +1,8 @@
 import { Search, Download, Filter } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
-const logs = [
+// Dummy data for logs
+const dummyLogs = [
   {
     timestamp: '2026-04-06 | 09:12:34',
     user: 'Supervisor 1',
@@ -36,6 +38,15 @@ const logs = [
 ];
 
 export default function SystemLogs() {
+  const [logs, setLogs] = useState(dummyLogs);
+
+  // Commented out API call for logs
+  // useEffect(() => {
+  //   fetch('/api/system-logs')
+  //     .then(res => res.json())
+  //     .then(data => setLogs(data))
+  //     .catch(err => console.error('Error fetching logs:', err));
+  // }, []);
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

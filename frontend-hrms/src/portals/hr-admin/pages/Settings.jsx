@@ -1,9 +1,9 @@
-﻿import { useState } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { ShieldCheck, User, Lock, Bell, ChevronRight } from 'lucide-react';
 import { Switch } from '@mui/material'
 
-// Placeholder-only UI data. Backend integration is not yet available, so these values are static.
-const tabs = [
+// Dummy data for tabs
+const dummyTabs = [
   { key: 'general', label: 'General Preferences' },
   { key: 'internPolicy', label: 'Intern Policy' },
   { key: 'rbac', label: 'RBAC' },
@@ -12,6 +12,15 @@ const tabs = [
 
 export default function Settings() {
   const [activeTab, setActiveTab] = useState('general');
+  const [tabs, setTabs] = useState(dummyTabs);
+
+  // Commented out API call for tabs
+  // useEffect(() => {
+  //   fetch('/api/settings-tabs')
+  //     .then(res => res.json())
+  //     .then(data => setTabs(data))
+  //     .catch(err => console.error('Error fetching tabs:', err));
+  // }, []);
 
   return (
     <div className="space-y-6">

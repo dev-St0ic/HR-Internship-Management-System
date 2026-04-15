@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from '../../../common/components/layout/sidebar';
+import Sidebar from '../../../common/components/layout/Sidebar';
 import {
   LayoutDashboard,
   User2,

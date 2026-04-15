@@ -1,6 +1,8 @@
 import { Search, Funnel } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
-const applications = [
+// Dummy data for applications
+const dummyApplications = [
   {
     name: 'Darlene Robertson',
     id: '345321231',
@@ -28,6 +30,15 @@ const applications = [
 ];
 
 export default function Recruitment() {
+  const [applications, setApplications] = useState(dummyApplications);
+
+  // Commented out API call for applications
+  // useEffect(() => {
+  //   fetch('/api/applications')
+  //     .then(res => res.json())
+  //     .then(data => setApplications(data))
+  //     .catch(err => console.error('Error fetching applications:', err));
+  // }, []);
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
