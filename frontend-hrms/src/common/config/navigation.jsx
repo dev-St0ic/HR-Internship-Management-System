@@ -116,6 +116,11 @@ export const navigation = {
       icon: ClipboardList,
     },
     {
+      to: "/supervisor/documents",
+      label: "Documents",
+      icon: ScrollText,
+    },
+    {
       to: "/supervisor/evaluations",
       label: "Evaluation",
       icon: BriefcaseBusiness,
