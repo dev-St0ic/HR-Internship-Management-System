@@ -11,6 +11,7 @@ import {
   SupervisorEvaluations,
   SupervisorSettings,
   SupervisorNotifications,
+  SupervisorDocuments,
 } from "../portals/supervisor/Index";
 
 import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
@@ -25,11 +26,11 @@ import Profile from "../portals/interns/pages/Profile";
 import Tasks from "../portals/interns/pages/Tasks";
 import Attendance from "../portals/interns/pages/Attendance";
 import Documents from "../portals/interns/pages/Documents";
-import Evaluation from "../portals/interns/pages/Evaluation";
 import NotificationsPage from "../portals/interns/pages/InternNotificationPage";
 import InternCalendarPage from "../portals/interns/pages/InternCalendarPage";
 import SettingsPage from "../common/components/layout/SettingsPage";
 import LoginPage from "../portals/Home/pages/LoginPage";
+import InternEvaluation from "../portals/interns/pages/InternEvaluation";
 
 // Temporary placeholders muna
 const Home = () => <>Homee</>;
@@ -60,7 +61,7 @@ export const AppRouter = () => {
           <Route path="tasks" element={<Tasks />} />
           <Route path="attendance" element={<Attendance />} />
           <Route path="documents" element={<Documents />} />
-          <Route path="evaluation" element={<Evaluation />} />
+          <Route path="evaluation" element={<InternEvaluation />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="notifications" element={<NotificationsPage />} />
           <Route path="calendar" element={<InternCalendarPage />} />
@@ -72,7 +73,8 @@ export const AppRouter = () => {
           <Route path="myinterns" element={<SupervisorMyInterns />} />
           <Route path="attendance" element={<SupervisorAttendance />} />
           <Route path="tasks" element={<SupervisorTasks />} />
-          <Route path="evaluation" element={<SupervisorEvaluations />} />
+          <Route path="documents" element={<SupervisorDocuments />} />
+          <Route path="evaluations" element={<SupervisorEvaluations />} />
           <Route path="settings" element={<SupervisorSettings />} />
           <Route path="notifications" element={<SupervisorNotifications />} />
         </Route>
