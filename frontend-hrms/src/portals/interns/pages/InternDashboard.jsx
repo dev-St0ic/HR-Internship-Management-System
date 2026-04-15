@@ -7,13 +7,15 @@ import CalendarPanel from "../components/ui/CalendarPanel";
 import TimeCard from "../components/ui/TimeCard";
 import { mockTasks } from "../components/mockTasks";
 import TaskListCard from "../components/ui/TaskListCard";
+import { useAuth } from "../../../contexts/AuthContext";
 
 export default function Dashboard() {
+  const { currentUser } = useAuth();
   const stats = dashboardStats.intern;
   return (
     <>
       <Header title="Dashboard" subtitle="Overview & activity" />
-      <GreetingHeader name="Dwight Robles" />
+      <GreetingHeader name={currentUser?.name} />
       <div className="grid grid-cols-3 gap-8 mt-5 px-6 max-w-7xl mx-auto">
         {/* Left Side */}
         <div className="col-span-2 space-y-5 max-w-3xl">
