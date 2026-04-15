@@ -8,6 +8,7 @@ import Documents from "./Documents";
 
 export default function ProfileView({ user, mode = "intern" }) {
   const [activeTab, setActiveTab] = useState("personal");
+  const [isEditing, setIsEditing] = useState(false);
 
   const tabs =
     mode === "intern"
@@ -17,7 +18,12 @@ export default function ProfileView({ user, mode = "intern" }) {
   return (
     <div className="bg-white rounded-xl shadow p-6">
       {/* Profile Header */}
-      <ProfileHeader user={user} mode={mode} activeTab={activeTab} />
+      <ProfileHeader
+        user={user}
+        mode={mode}
+        activeTab={activeTab}
+        onEdit={() => setIsEditing(!isEditing)}
+      />
 
       <div className="flex gap-6 mt-6">
         {/* HR-Admin & HR-Staff Sidebar */}
@@ -34,7 +40,11 @@ export default function ProfileView({ user, mode = "intern" }) {
           {/* Tab Content */}
           <div className="mt-6">
             {activeTab === "personal" && (
-              <PersonalInformation user={user} mode={mode} />
+              <PersonalInformation
+                user={user}
+                mode={mode}
+                isEditing={isEditing}
+              />
             )}
             {activeTab === "school" && mode === "intern" && (
               <SchoolInformation user={user} />
