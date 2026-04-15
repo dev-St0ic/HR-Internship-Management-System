@@ -46,9 +46,6 @@ export default function Header() {
         </NavLink>
       </div>
 
-      <main className="flex-1 px-5 m-0">
-        <Outlet />
-      </main>
     </div>
   );
 }

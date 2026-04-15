@@ -44,14 +44,13 @@ const criteriaList = [
 
     return (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-        <div className="bg-white rounded-2xl w-full max-w-3xl overflow-hidden shadow-2xl">
+            <div className="bg-white rounded-2xl w-full max-w-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
             
-            <div className="p-6 border-b border-gray-100">
-            <h2 className="text-xl font-bold text-gray-800">Evaluation for {intern.name}</h2>
+            <div className="p-6 border-b border-gray-100 flex-shrink-0">
+                <h2 className="text-xl font-bold text-gray-800">Evaluation for {intern.name}</h2>
             </div>
 
-            <form onSubmit={handleFormSubmit} className="p-6">
-            
+            <form onSubmit={handleFormSubmit} className="overflow-y-auto p-6 flex-grow custom-scrollbar">
             {/* Table Header (From Figma) */}
             <div className="flex text-xs font-medium text-gray-400 mb-2 px-3">
                 <div className="w-1/3">Criteria</div>
