@@ -93,7 +93,7 @@ export const navigation = {
     },
   ],
 
-  supervisor: [
+ supervisor: [
     {
       to: "/supervisor",
       label: "Dashboard",

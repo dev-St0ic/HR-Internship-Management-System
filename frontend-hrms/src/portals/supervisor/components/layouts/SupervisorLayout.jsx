@@ -13,6 +13,4 @@ const SupervisorLayout = () => {
       </div>
     </div>
   );
-};
-
-export default SupervisorLayout;
+}
