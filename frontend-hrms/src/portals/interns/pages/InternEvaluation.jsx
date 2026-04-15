@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import { Award, AlertCircle } from "lucide-react";
 import Header from "../../../common/components/layout/Header";
 import EvaluationCard from "../components/ui/EvaluiationCard";
+import { useAuth } from "../../../contexts/AuthContext"; // Import our global auth hook!
 
 export default function InternEvaluation() {
+  const { currentUser } = useAuth(); // Get the logged-in user from global state
   const [evaluationHistory, setEvaluationHistory] = useState([]);
-  const [internName, setInternName] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // Track if they are logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   useEffect(() => {
     const fetchEvaluations = () => {
-      const currentUser = localStorage.getItem("current_logged_in_user");
-      
+      // 1. Check if user exists via our Context
       if (!currentUser) {
         setIsLoggedIn(false);
         return;
@@ -19,19 +19,23 @@ export default function InternEvaluation() {
       
       setIsLoggedIn(true);
 
-      const formattedName = currentUser.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-      setInternName(formattedName);
-
-      const storageKey = `eval_${currentUser}`;
-      const storedData = JSON.parse(localStorage.getItem(storageKey) || "[]");
+      // 2. Fetch the BIG global evaluations table
+      const allEvals = JSON.parse(localStorage.getItem("hrims_evaluations_db") || "[]");
       
-      setEvaluationHistory(storedData.reverse());
+      // 3. FILTER: Only get evaluations where internId matches the current user's ID
+      // This bridges Sarah's submission (saved with Alex's ID) to Alex's screen.
+      const myData = allEvals.filter(record => record.internId === currentUser.id);
+      
+      // 4. Set state (reverse so newest is first)
+      setEvaluationHistory([...myData].reverse());
     };
 
     fetchEvaluations();
+    
+    // Sync if supervisor submits while intern is looking at the page
     window.addEventListener("storage", fetchEvaluations);
     return () => window.removeEventListener("storage", fetchEvaluations);
-  }, []);
+  }, [currentUser]); // Refresh whenever the logged-in user changes
 
   return (
     <div className="bg-gray-50/50 min-h-screen">
@@ -42,7 +46,7 @@ export default function InternEvaluation() {
         {!isLoggedIn ? (
             <div className="bg-red-50 text-red-600 p-4 rounded-xl flex items-center justify-center gap-2 font-bold mb-6 border border-red-200">
               <AlertCircle className="w-5 h-5" />
-              Please go to the /login page and select an account first!
+              Please login first to view your evaluations!
             </div>
         ) : null}
 
@@ -56,7 +60,6 @@ export default function InternEvaluation() {
           </div>
         ) : (
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-4">
-            {/* Loop through the history and render the new component! */}
             {evaluationHistory.map((evaluation) => (
               <EvaluationCard key={evaluation.id} evaluation={evaluation} />
             ))}

@@ -1,14 +1,49 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../../contexts/AuthContext";
 
 export default function LoginForm({ onForgotPassword }) {
+    // --- 1. State Variables ---
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState("");
     const navigate = useNavigate();
+    
+    // --- 2. Global Context ---
+    const { login } = useAuth(); 
 
+    // --- 3. Login Logic ---
     const handleLogin = (e) => {
-        e.preventDefault();
-        console.log("Logging in...");
-        navigate("/intern");
+        e.preventDefault(); // Prevent the page from refreshing
+        
+        const loginEmail = email.toLowerCase();
+        let selectedUserId = "";
+
+        // Determine which ID to use based on the email typed
+        if (loginEmail.includes("admin")) selectedUserId = "admin_system";
+        else if (loginEmail.includes("staff")) selectedUserId = "staff_hr";
+        else if (loginEmail.includes("supervisor")) selectedUserId = "supervisor";
+        else if (loginEmail.includes("it")) selectedUserId = "intern_it";
+        else if (loginEmail.includes("mktg") || loginEmail.includes("marketing")) selectedUserId = "intern_mktg";
+        else if (loginEmail.includes("hr")) selectedUserId = "intern_hr";
+        else {
+            alert("⚠️ For testing, please include 'admin', 'staff', 'supervisor', 'it', 'hr', or 'mktg' in the email.");
+            return;
+        }
+
+        // Send that ID to the global AuthContext
+        const user = login(selectedUserId);
+
+        // Safety check if the database hasn't loaded
+        if (!user) {
+            alert("User not found in mock DB. Make sure initializeMockDatabase() is running in App.jsx.");
+            return;
+        }
+
+        // Route the user to their specific dashboard based on their role
+        if (user.role === "ADMIN") navigate("/hr-admin");
+        else if (user.role === "HR_STAFF") navigate("/hr-staff");
+        else if (user.role === "SUPERVISOR") navigate("/supervisor");
+        else if (user.role === "INTERN") navigate("/intern");
     };
 
     return (
@@ -25,7 +60,12 @@ export default function LoginForm({ onForgotPassword }) {
                 <h2 className="text-[28px] md:text-[32px] font-bold text-gray-900 mb-2">
                     Welcome 👋
                 </h2>
-                <p className="text-[15px] text-gray-400 mb-10">Please login here</p>
+                <p className="text-[15px] text-gray-400 mb-4">Please login here</p>
+
+                {/* --- Helper text for the team during testing --- */}
+                <div className="mb-6 p-3 bg-purple-50 text-[#7C3EFF] text-xs rounded-lg border border-purple-100">
+                    <strong>Testing Accounts:</strong><br /> HR-Admin: <i>admin@company.com</i><br /> HR-Staff: <i>staff@company.com</i><br /> Supervisor: <i>supervisor@company.com</i><br /> Intern (IT): <i>it@company.com</i><br /> Intern (HR): <i>hr@company.com</i><br /> Intern (Marketing): <i>mktg@company.com</i><br /> Any password works!
+                </div>
 
                 <form onSubmit={handleLogin} className="flex flex-col">
                     
@@ -34,7 +74,9 @@ export default function LoginForm({ onForgotPassword }) {
                         <label className="block text-[11px] text-[#7C3EFF] mb-0.5 font-medium">Email Address</label>
                         <input 
                             type="email" 
-                            placeholder="companyemail@gmail.com" 
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="supervisor@company.com" 
                             className="w-full text-[15px] outline-none text-gray-900 bg-transparent placeholder-gray-400 font-medium"
                             required
                         />

@@ -1,11 +1,21 @@
 import { AppRouter } from "./routes/AppRouter";
+import { useEffect } from "react";
 import { AttendanceProvider } from "./contexts/AttendanceProvider";
+import { initializeMockDatabase } from "./common/utils/mockAuth";
+import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
+
+  useEffect(() => {
+    initializeMockDatabase();
+  }, []);
+
   return (
-    <AttendanceProvider>
-      <AppRouter />
-    </AttendanceProvider>
+    <AuthProvider>
+      <AttendanceProvider>
+        <AppRouter />
+      </AttendanceProvider>
+    </AuthProvider>
   );
 }
 

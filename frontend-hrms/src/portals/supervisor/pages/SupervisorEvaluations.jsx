@@ -1,66 +1,74 @@
 import { useState, useEffect } from "react";
-import EvaluationCard from "../components/ui/evaluations/EvaluationCard";
-import EvaluationModal from "../components/ui/evaluations/EvaluationModal";
-
-// Base directory of interns
-const internDirectory = [
-  { id: "cara_lim", name: "Cara Lim" },
-  { id: "juan_dela_cruz", name: "Juan Dela Cruz" },
-  { id: "ana_reyes", name: "Ana Reyes" },
-  { id: "maria_lopez", name: "Maria Lopez" },
-];
+import EvaluationCard from "../components/ui/evaluations/EvaluationCard"; // Adjust path if needed
+import EvaluationModal from "../components/ui/evaluations/EvaluationModal"; // Adjust path if needed
+import {useAuth} from "../../../contexts/AuthContext"
 
 export default function SupervisorEvaluations() {
+  const { currentUser } = useAuth(); // Gets Sarah's data
   const [interns, setInterns] = useState([]);
   const [selectedIntern, setSelectedIntern] = useState(null);
 
-  // When page loads, check localStorage to see how many evaluations each intern has
+  // When page loads, fetch the real database instead of the hardcoded list
   useEffect(() => {
     const loadInternData = () => {
-      const updatedInterns = internDirectory.map(intern => {
-        const storageKey = `eval_${intern.id}`;
-        const existingData = JSON.parse(localStorage.getItem(storageKey) || "[]");
+      // 1. Get ALL users and filter out only the Interns (Alex, Chloe, David)
+      const usersDb = JSON.parse(localStorage.getItem("hrims_users_db") || "{}");
+      const allInterns = Object.values(usersDb).filter(user => user.role === "INTERN");
+
+      // 2. Get the global evaluations table we created
+      const evalsDb = JSON.parse(localStorage.getItem("hrims_evaluations_db") || "[]");
+      
+      // 3. Map the evaluations to their respective interns
+      const updatedInterns = allInterns.map(intern => {
+        // Find all evaluations belonging specifically to THIS intern
+        const internHistory = evalsDb.filter(evalRecord => evalRecord.internId === intern.id);
         
         return {
           ...intern,
-          evaluationHistory: existingData,
-          evalCount: existingData.length
+          evaluationHistory: internHistory,
+          evalCount: internHistory.length
         };
       });
+      
       setInterns(updatedInterns);
     };
 
     loadInternData();
-  }, []); // Empty dependency array so it only runs on mount
+  }, []); 
 
   const handleEvaluationSubmit = (newEvaluationData) => {
-    const storageKey = `eval_${selectedIntern.id}`;
+    // 1. Check if we actually have a selected intern before doing anything
+    if (!selectedIntern) return;
+
+    // 2. Get the global evaluations table
+    const existingHistory = JSON.parse(localStorage.getItem("hrims_evaluations_db") || "[]");
     
-    // 1. Get the existing array (or an empty array if this is the first time)
-    const existingHistory = JSON.parse(localStorage.getItem(storageKey) || "[]");
+    // 3. Create the record USING the selectedIntern we have right now
+    const newRecord = {
+        ...newEvaluationData,
+        supervisorId: currentUser?.id || "unknown", 
+        supervisorName: currentUser?.name || "Supervisor", 
+        internId: selectedIntern.id, // This is where it was crashing
+    };
+
+    // 4. Save to localStorage
+    const updatedHistory = [...existingHistory, newRecord];
+    localStorage.setItem("hrims_evaluations_db", JSON.stringify(updatedHistory));
     
-    // 2. Add the new evaluation to the array
-    const updatedHistory = [...existingHistory, newEvaluationData];
-    
-    // 3. Save the array back to localStorage
-    localStorage.setItem(storageKey, JSON.stringify(updatedHistory));
-    
-    // 4. Trigger the storage event to update the Intern tab
-    window.dispatchEvent(new Event("storage"));
-    
-    // 5. UPDATE THE LOCAL UI STATE PROPERLY!
-    // Instead of just setting status="Completed", we actually update their history array and count
-    setInterns(interns.map(i => 
-      i.id === selectedIntern.id 
-        ? { 
+    // 5. Update local UI state
+    setInterns(prevInterns => prevInterns.map(i => {
+      if (i.id === selectedIntern.id) {
+        const updatedInternHistory = [...(i.evaluationHistory || []), newRecord];
+        return { 
             ...i, 
-            evaluationHistory: updatedHistory, 
-            evalCount: updatedHistory.length 
-          } 
-        : i
-    ));
+            evaluationHistory: updatedInternHistory, 
+            evalCount: updatedInternHistory.length 
+        };
+      }
+      return i;
+    }));
     
-    // 6. Close modal
+    // 6. ONLY NOW reset the selected intern to null to close the modal
     setSelectedIntern(null); 
   };
 
@@ -71,6 +79,7 @@ export default function SupervisorEvaluations() {
         <p className="text-gray-500">Conduct ongoing performance evaluations for your interns.</p>
       </div>
 
+      {/* The Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {interns.map((intern) => (
           <EvaluationCard
@@ -81,6 +90,7 @@ export default function SupervisorEvaluations() {
         ))}
       </div>
 
+      {/* The Modal */}
       {selectedIntern && (
         <EvaluationModal
           intern={selectedIntern} 
