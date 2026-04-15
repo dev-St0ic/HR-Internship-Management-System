@@ -1,16 +1,28 @@
 import Header from '../Header';
 import Sidebar from '../../../../common/components/layout/Sidebar';
 import {navigation} from '../../../../common/config/navigation';
+import {outlet} from "react-router-dom";
 
-const SupervisorLayout = () => {
-  const userRole = "supervisor";
+export default function SupervisorLayout() {
+  const userRole = "supervisor"; 
+  const navLinks = navigation[userRole] || [];
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar links={navigation[userRole]} />
+      
+      <Sidebar 
+        links={navLinks}
+        role="Supervisor"
+        userName="Cale Andren"
+      />
+
       <div className="flex-1 ml-60">
-        <Header />  
+        <Header />
+        <div className="p-6">
+          <Outlet />
+        </div>
       </div>
+
     </div>
   );
 }
