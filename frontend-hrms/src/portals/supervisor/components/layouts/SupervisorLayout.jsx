@@ -1,24 +1,28 @@
-import { Outlet } from "react-router-dom";
-import Sidebar from "../../../../common/components/layout/Sidebar";
-import { navigation } from "../../../../common/config/navigation";
+import Header from '../Header';
+import Sidebar from '../../../../common/components/layout/Sidebar';
+import {navigation} from '../../../../common/config/navigation';
+import {outlet} from "react-router-dom";
 
 export default function SupervisorLayout() {
   const userRole = "supervisor"; 
   const navLinks = navigation[userRole] || [];
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen">
       
-      {/* ADD THE ROLE PROP HERE */}
-      <Sidebar links={navLinks} 
-      
-      role="Supervisor" userName="Cale Andren"/>  {/* Temp Sidebar Profile Name & Role */}
-      
-      
+      <Sidebar 
+        links={navLinks}
+        role="Supervisor"
+        userName="Cale Andren"
+      />
 
-      <div className="ml-60 p-6 flex-1">
-        <Outlet />
+      <div className="flex-1 ml-60">
+        <Header />
+        <div className="p-6">
+          <Outlet />
+        </div>
       </div>
+
     </div>
   );
 }
