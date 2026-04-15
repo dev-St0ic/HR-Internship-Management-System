@@ -1,6 +1,10 @@
 import { Download, Eye } from 'lucide-react';
+import { useState } from 'react';
+import DocumentsViewModal from "../components/ui/DocumentsViewModal";
 
 export default function SupervisorDocuments() {
+  const [openPreview, setOpenPreview] = useState(false);
+  const [previewDocument, setPreviewDocument] = useState(null);
   
   const documentsAllData = [
     {
@@ -13,7 +17,29 @@ export default function SupervisorDocuments() {
                   </svg>,
       fileName : "Weekly AR",
       fileSize : "1.5 MB"
-    }
+    },
+    {
+      internName : "Ana Reyes",
+      internProfile : "../../../public/image.png",
+      requestedDate : "02-13-2026",
+      requestedStatus : "Pending",
+      fileIcon : <svg width="15" height="15" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 15.25C19.8968 15.25 20.8938 16.0344 20.6035 17.1748C20.0804 19.2295 18.2187 20.75 16 20.75H4V19.25C5.51631 19.25 6.79146 18.2107 7.14941 16.8047C7.34171 16.0495 8.00116 15.25 9 15.25H19ZM13 0C14.6569 0 16 1.34315 16 3V14.5H7.2998C6.85813 14.5001 6.50011 14.8581 6.5 15.2998C6.5 17.067 5.04261 18.4999 3.27539 18.5C1.48047 18.5 0 17.0449 0 15.25V3C0 1.34315 1.34315 0 3 0H13ZM4 9.25C3.58579 9.25 3.25 9.58579 3.25 10C3.25 10.4142 3.58579 10.75 4 10.75H8C8.41421 10.75 8.75 10.4142 8.75 10C8.75 9.58579 8.41421 9.25 8 9.25H4ZM4 4.25C3.58579 4.25 3.25 4.58579 3.25 5C3.25 5.41421 3.58579 5.75 4 5.75H12C12.4142 5.75 12.75 5.41421 12.75 5C12.75 4.58579 12.4142 4.25 12 4.25H4Z" fill="#7C3EFF"/>
+                  </svg>,
+      fileName : "COC",
+      fileSize : "2.5 MB"
+    },
+    {
+      internName : "Carlos Garcia",
+      internProfile : "../../../public/image.png",
+      requestedDate : "02-13-2026",
+      requestedStatus : "Approved",
+      fileIcon : <svg width="15" height="15" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 15.25C19.8968 15.25 20.8938 16.0344 20.6035 17.1748C20.0804 19.2295 18.2187 20.75 16 20.75H4V19.25C5.51631 19.25 6.79146 18.2107 7.14941 16.8047C7.34171 16.0495 8.00116 15.25 9 15.25H19ZM13 0C14.6569 0 16 1.34315 16 3V14.5H7.2998C6.85813 14.5001 6.50011 14.8581 6.5 15.2998C6.5 17.067 5.04261 18.4999 3.27539 18.5C1.48047 18.5 0 17.0449 0 15.25V3C0 1.34315 1.34315 0 3 0H13ZM4 9.25C3.58579 9.25 3.25 9.58579 3.25 10C3.25 10.4142 3.58579 10.75 4 10.75H8C8.41421 10.75 8.75 10.4142 8.75 10C8.75 9.58579 8.41421 9.25 8 9.25H4ZM4 4.25C3.58579 4.25 3.25 4.58579 3.25 5C3.25 5.41421 3.58579 5.75 4 5.75H12C12.4142 5.75 12.75 5.41421 12.75 5C12.75 4.58579 12.4142 4.25 12 4.25H4Z" fill="#7C3EFF"/>
+                  </svg>,
+      fileName : "Evaluation",
+      fileSize : "1.6 MB"
+    },
   ]
   return (
     <>
@@ -45,8 +71,8 @@ export default function SupervisorDocuments() {
                 <td className="p-2">Actions</td>
               </tr>
             </thead>
-            {documentsAllData.map((data, index) => (
             <tbody className="text-sm">
+              {documentsAllData.map((data, index) => (
               <tr key={index}>
                 <td>
                   <div className="py-2 flex justify-start items-center gap-2">
@@ -64,7 +90,8 @@ export default function SupervisorDocuments() {
                   </div>
                 </td>
                 <td><h1>{data.requestedDate}</h1></td>
-                <td className="text-xs">{data.requestedStatus === "Approved" ? (
+                <td className="text-xs">
+                  {data.requestedStatus === "Approved" ? (
                   <div className="bg-green-200 text-green-500 inline-block p-1 rounded-lg">
                     <span>{data.requestedStatus}</span>
                   </div>) : data.requestedStatus === "Pending" ? (
@@ -77,18 +104,30 @@ export default function SupervisorDocuments() {
                     )}
                 </td>
                 <td>
-                  <div className="flex justify-start gap-5 items-center">
-                    <Eye />
-                    <Download />
+                  <div className="flex justify-start gap-5 items-center transition">
+                    <Eye
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setPreviewDocument(data);
+                        setOpenPreview(true);
+                      }}
+                      className="cursor-pointer hover:text-violet-500 transition"
+                    />
+                    <button className="cursor-pointer hover:text-violet-500 duration-200"><Download /></button>
                   </div>
                 </td>
               </tr>
-            </tbody>
             ))}
+            </tbody>
           </table>
         </div>
-        
+        <DocumentsViewModal
+        isOpen={openPreview}
+        onClose={() => setOpenPreview(false)}
+        document={previewDocument}
+      />
     </div>
+    
     </>
   )
 }
