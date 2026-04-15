@@ -21,7 +21,7 @@ export default function PersonalInformation({ user, mode }) {
                   className="border rounded px-2 py-1 w-full"
                 />
               ) : (
-                <p className="border-b pb-1">{value}</p>
+                <p className="border-b border-gray-200 pb-1">{value}</p>
               )}
             </div>
           );
