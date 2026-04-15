@@ -1,7 +1,12 @@
 import { AppRouter } from "./routes/AppRouter";
+import { AttendanceProvider } from "./contexts/AttendanceProvider";
 
 function App() {
-  return <AppRouter />;
+  return (
+    <AttendanceProvider>
+      <AppRouter />
+    </AttendanceProvider>
+  );
 }
 
 export default App;

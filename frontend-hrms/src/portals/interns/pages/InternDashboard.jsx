@@ -5,7 +5,7 @@ import StatCard from "../../../common/components/ui/StatCard";
 import GreetingHeader from "../../../common/components/ui/GreetingHeader";
 import CalendarPanel from "../components/ui/CalendarPanel";
 import TimeCard from "../components/ui/TimeCard";
-import { internTasksData } from "../components/mockDataTasks";
+import { mockTasks } from "../components/mockTasks";
 import TaskListCard from "../components/ui/TaskListCard";
 
 export default function Dashboard() {
@@ -36,7 +36,7 @@ export default function Dashboard() {
 
           {/* Other Component */}
           <TimeCard />
-          <TaskListCard tasks={internTasksData.tasks} />
+          <TaskListCard tasks={mockTasks} />
         </div>
 
         {/* Right Side */}
