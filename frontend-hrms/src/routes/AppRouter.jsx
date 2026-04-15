@@ -11,6 +11,7 @@ import {
   SupervisorEvaluations,
   SupervisorSettings,
   SupervisorNotifications,
+  SupervisorDocuments,
 } from "../portals/supervisor/Index";
 
 import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
@@ -72,6 +73,7 @@ export const AppRouter = () => {
           <Route path="myinterns" element={<SupervisorMyInterns />} />
           <Route path="attendance" element={<SupervisorAttendance />} />
           <Route path="tasks" element={<SupervisorTasks />} />
+          <Route path="documents" element={<SupervisorDocuments />} />
           <Route path="evaluations" element={<SupervisorEvaluations />} />
           <Route path="settings" element={<SupervisorSettings />} />
           <Route path="notifications" element={<SupervisorNotifications />} />
