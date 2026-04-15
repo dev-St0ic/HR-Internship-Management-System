@@ -4,7 +4,7 @@ export default function StarRatingUI({ rating = 3, totalStars = 5 }) {
       {[...Array(totalStars)].map((_, i) => (
         <svg
           key={i}
-          className={`size-5 mx-3  ${
+          className={`size-5 mx-3 cursor-pointer  ${
             i < rating ? "text-yellow-400" : "text-gray-300"
           }`}
           fill="currentColor"

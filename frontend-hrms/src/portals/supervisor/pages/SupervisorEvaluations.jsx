@@ -1,7 +1,10 @@
 import { Search, SlidersHorizontal, Star, MessageCircle, Target, NotebookPen, PenTool } from "lucide-react";
 import StarRatingUI from "../components/StarRatingUI";
+import { useState } from "react";
+import InternEvaluationModal from "../components/ui/InternEvaluationModal";
 
 export default function SupervisorEvaluations() {
+  const [selectedIntern, setSelectedIntern] = useState(null);
 
   const evaluationInternData = [
   {
@@ -24,6 +27,14 @@ export default function SupervisorEvaluations() {
         "Attendance": 4,
         "Professionalism": 5
       },
+      evalLabelDescription: {
+        "Work Quality": "Accuracy and Quality of Work",
+        "Communication": "Interaction with Team Members",
+        "Initiative": "Ability to work Independently",
+        "Attendance": "Punctuality and Reliability",
+        "Professionalism": "Workplace Behavior"
+      },
+      evalSupervisorComments : ["Ana has been a reliable intern with excellent work quality, excellent communication, excellent initiative, and excellent professionalism. She can improve by being more punctual in the morning. Overall, she has great potential and is a valuable asset to the team."],
       get total() {
         return Object.values(this.evalLabelRate).reduce((sum, val) => sum + val, 0);
       },
@@ -59,6 +70,14 @@ export default function SupervisorEvaluations() {
         "Attendance": 4,
         "Professionalism": 5
       },
+      evalLabelDescription: {
+        "Work Quality": "Accuracy and Quality of Work",
+        "Communication": "Interaction with Team Members",
+        "Initiative": "Ability to work Independently",
+        "Attendance": "Punctuality and Reliability",
+        "Professionalism": "Workplace Behavior"
+      },
+      evalSupervisorComments : ["Cara has been a reliable intern with excellent work quality, excellent communication, excellent initiative, and excellent professionalism. She can improve by being more punctual in the morning. Overall, she has great potential and is a valuable asset to the team."],
       get total() {
         return Object.values(this.evalLabelRate).reduce((sum, val) => sum + val, 0);
       },
@@ -91,53 +110,57 @@ export default function SupervisorEvaluations() {
         </div>
         
         <div className="grid grid-cols-6 gap-4 mb-4 mt-6">
-        {evaluationInternData.map((intern, index) => (
-          <div key={index} className="col-span-3 row-span-3 border border-gray-500/20 rounded-lg p-4">
-            
-            {/* Header */}
-            <div className="flex justify-between items-center border-b border-gray-500/20 pb-2">
-              <div className="flex flex-col">
-                <span className="text-md font-semibold">{intern.internName}</span>
-                <span className="text-gray-500 text-xs">{intern.lastEvaluated}</span>
+          {evaluationInternData.map((intern, index) => (
+            <div key={index} onClick={() => setSelectedIntern(intern)} className="col-span-3 row-span-3 border border-gray-500/20 rounded-lg p-4 cursor-pointer hover:shadow-md transition">
+              
+              {/* Header */}
+              <div className="flex justify-between items-center border-b border-gray-500/20 pb-2">
+                <div className="flex flex-col">
+                  <span className="text-md font-semibold">{intern.internName}</span>
+                  <span className="text-gray-500 text-xs">{intern.lastEvaluated}</span>
+                </div>
+                <span className="bg-green-100 text-green-500 text-xs font-medium px-2.5 py-1 rounded">
+                  {intern.evalStatus}
+                </span>
               </div>
-              <span className="bg-green-100 text-green-500 text-xs font-medium px-2.5 py-1 rounded">
-                {intern.evalStatus}
-              </span>
-            </div>
 
-            {/* Ratings */}
-            {intern.evalData.evalLabel.map((label, i) => (
-              <div key={i} className="py-3">
-                <div className="flex justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="size-8 rounded-full flex items-center justify-center">
-                      {intern.evalData.evalIcon[label]}
+              {/* Ratings */}
+              {intern.evalData.evalLabel.map((label, i) => (
+                <div key={i} className="py-3">
+                  <div className="flex justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="size-8 rounded-full flex items-center justify-center">
+                        {intern.evalData.evalIcon[label]}
+                      </div>
+                      <h1 className="text-md">{label}</h1>
                     </div>
-                    <h1 className="text-md">{label}</h1>
-                  </div>
 
-                  <div className="flex items-center gap-1">
-                    <StarRatingUI 
-                      rating={intern.evalData.evalLabelRate[label]}
-                    />
+                    <div className="flex items-center gap-1">
+                      <StarRatingUI 
+                        rating={intern.evalData.evalLabelRate[label]}
+                      />
+                    </div>
                   </div>
                 </div>
+              ))}
+
+              {/* Summary */}
+              <div className="flex justify-between mt-4 border-t border-gray-500/20 pt-2">
+                <h1 className="font-semibold text-md">
+                  Total: {intern.evalData.total}
+                </h1>
+                <h1 className="font-bold text-md uppercase text-yellow-500">
+                  {intern.evalData.totalStatus}
+                </h1>
               </div>
-            ))}
 
-            {/* Summary */}
-            <div className="flex justify-between mt-4 border-t border-gray-500/20 pt-2">
-              <h1 className="font-semibold text-md">
-                Total: {intern.evalData.total}
-              </h1>
-              <h1 className="font-bold text-md uppercase text-yellow-500">
-                {intern.evalData.totalStatus}
-              </h1>
             </div>
-
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+                <InternEvaluationModal
+          selectedIntern={selectedIntern}
+          onClose={() => setSelectedIntern(null)}
+        />
     
       </div>
     </>
