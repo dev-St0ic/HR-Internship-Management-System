@@ -1,7 +1,6 @@
 import Header from "../../../common/components/layout/Header";
 import DragDropUpload from "../components/DragDropUpload";
 import { useState } from "react";
-import { useAuth } from "../../../contexts/AuthContext"; // Add this import!
 import {
   User2,
   BriefcaseBusiness,
@@ -15,10 +14,15 @@ import {
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState("personal");
-  const { currentUser } = useAuth(); // Get the global user
 
-  // Safety check: Don't crash if the user hasn't loaded yet
-  if (!currentUser) return <div className="p-8">Loading profile...</div>;
+  {
+    /* Temporary User Data */
+  }
+  const user = {
+    name: "John Doe",
+    role: "Intern",
+    email: "johndoe@gmail.com",
+  };
 
   return (
     <>
@@ -31,15 +35,16 @@ export default function Profile() {
             <div className="flex items-center gap-3 ">
               <div className="w-20 h-20 bg-gray-500 rounded-md"></div>
               <div>
-                {/* Dynamic User Info */}
-                <h2 className="font-bold text-xl">{currentUser.name}</h2>
+                {/* Temporary User Info */}
+                <h2 className="font-bold text-xl">{user.name}</h2>
                 <p className="flex items-center gap-1 text-sm text-gray-500">
+                  {" "}
                   <BriefcaseBusiness size={14}></BriefcaseBusiness>
-                  {currentUser.department} {currentUser.role.replace("_", " ")}
+                  {user.role}
                 </p>
                 <p className="flex items-center gap-1 text-sm text-gray-500">
                   <Mail size={14}></Mail>
-                  {currentUser.email}
+                  {user.email}
                 </p>
               </div>
             </div>
@@ -75,8 +80,8 @@ export default function Profile() {
 
           {/* Tab Content */}
           <div className="mt-6">
-            {activeTab === "personal" && <PersonalInformation user={currentUser} />}
-            {activeTab === "school" && <SchoolInformation user={currentUser} />}
+            {activeTab === "personal" && <PersonalInformation />}
+            {activeTab === "school" && <SchoolInformation />}
             {activeTab === "documents" && <Documents />}
           </div>
         </div>
@@ -100,30 +105,45 @@ export default function Profile() {
   }
 }
 
-// Pass the global user in as a prop
-function PersonalInformation({ user }) {
-  // Keys updated to match the mockAuth.js database exactly
+function PersonalInformation() {
+  {
+    /* Temporary Personal Information Data */
+  }
   const fields = [
     { key: "firstName", label: "First Name" },
     { key: "lastName", label: "Last Name" },
     { key: "phone", label: "Phone" },
     { key: "email", label: "Email Address" },
-    { key: "dob", label: "Date of Birth" },
-    { key: "maritalStatus", label: "Marital Status" },
+    { key: "birth", label: "Date of Birth" },
+    { key: "status", label: "Marital Status" },
     { key: "gender", label: "Gender" },
     { key: "nationality", label: "Nationality" },
     { key: "address", label: "Address" },
     { key: "city", label: "City" },
-    { key: "zipCode", label: "Zip Code" },
+    { key: "zip", label: "Zip Code" },
   ];
+
+  const userData = {
+    firstName: "John",
+    lastName: "Doe",
+    phone: "0912345678",
+    email: "companyemail@gmail.com",
+    birth: "01/01/2000",
+    status: "Single",
+    gender: "Male",
+    nationality: "Filipino",
+    address: "Address",
+    city: "City",
+    zip: "Zip Code",
+  };
 
   return (
     <div className="grid grid-cols-2 gap-x-12 gap-y-6">
       {fields.map((field) => (
         <div key={field.key}>
           <p className="text-gray-400 text-sm mb-1">{field.label}</p>
-          <p className="border-b border-gray-100 w-full pb-1 text-sm font-medium text-gray-800">
-            {user[field.key] || "—"} {/* Added fallback if data is missing */}
+          <p className="border-b border-gray-100 w-full pb-1 text-sm">
+            {userData[field.key]}
           </p>
         </div>
       ))}
@@ -131,8 +151,10 @@ function PersonalInformation({ user }) {
   );
 }
 
-// Pass the global user in as a prop
-function SchoolInformation({ user }) {
+function SchoolInformation() {
+  {
+    /* Temporary School Information Data */
+  }
   const fields = [
     { key: "university", label: "University" },
     { key: "course", label: "Course" },
@@ -141,14 +163,22 @@ function SchoolInformation({ user }) {
     { key: "year", label: "Current Year Level" },
     { key: "graduation", label: "Expected Graduation Date" },
   ];
+  const userData = {
+    university: "FEU",
+    course: "Bachelore of Science in Computer Science",
+    hours: "120 hours",
+    duration: "Feb 16, 2026 - May 30, 2026",
+    year: "4th Year",
+    graduation: "July 2026",
+  };
 
   return (
-    <div className="grid grid-cols-2 gap-x-12 gap-y-6 text-sm">
+    <div className="grid grid-cols-2 gap-6 text-sm">
       {fields.map((field) => (
         <div key={field.key}>
           <p className="text-gray-400 text-sm mb-1">{field.label}</p>
-          <p className="border-b border-gray-100 w-full pb-1 font-medium text-gray-800">
-            {user[field.key] || "—"} 
+          <p className="border-b border-gray-100 w-full pb-1">
+            {userData[field.key]}
           </p>
         </div>
       ))}
@@ -157,12 +187,16 @@ function SchoolInformation({ user }) {
 }
 
 function Documents() {
+  {
+    /* Temporary Documents Data */
+  }
+
   const files = [
     "Resume.pdf",
     "MOA.pdf",
     "NDA.pdf",
     "ID.pdf",
-    "Endorsement letter.pdf", // fixed small typo from Endoresement
+    "Endoresement letter.pdf",
     "Certificate of Acceptance.pdf",
   ];
 
@@ -175,13 +209,15 @@ function Documents() {
             key={index}
             className="flex justify-between items-center border border-gray-100 px-4 py-3 rounded-lg"
           >
-            <span className="text-sm font-medium text-gray-700">{file}</span>
+            <span className="text-sm">{file}</span>
             <div className="flex gap-2">
-              <button className="p-1 text-gray-500 hover:text-violet-500 hover:bg-violet-50 rounded transition">
-                <Eye size={16} />
+              <button className="p-1 hover:bg-gray-100 rounded">
+                {" "}
+                <Eye size={16}></Eye>
               </button>
-              <button className="p-1 text-gray-500 hover:text-violet-500 hover:bg-violet-50 rounded transition">
-                <Download size={16} />
+              <button className="p-1 hover:bg-gray-100 rounded">
+                {" "}
+                <Download size={16}></Download>
               </button>
             </div>
           </div>
@@ -189,9 +225,7 @@ function Documents() {
       </div>
 
       {/* Upload Area */}
-      <div className="pt-4">
-        <DragDropUpload label="Upload Missing Files" />
-      </div>
+      <DragDropUpload label="Upload Missing Files" />
     </div>
   );
 }
