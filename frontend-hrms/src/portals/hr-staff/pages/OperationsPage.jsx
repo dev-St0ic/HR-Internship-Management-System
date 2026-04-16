@@ -1,18 +1,12 @@
 import { Eye, Trash2 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { dummyInterns } from '../../../common/config/mockData';
 
 export default function OperationsPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const isHrAdmin = location.pathname.includes('/hr-admin');
-
-  // Dummy data for interns
-  const dummyInterns = [
-    { name: 'John Doe', id: '345321231', university: 'CIT-U', department: 'IT Department', startDate: 'February 27, 2026' },
-    { name: 'Jane Doe', id: '987890345', university: 'FEU', department: 'HR Department', startDate: 'December 14, 2025' },
-    { name: 'Jonathan Doe', id: '453367122', university: 'USJR', department: 'Marketing Department', startDate: 'January 11, 2026' },
-  ];
 
   const [interns, setInterns] = useState(dummyInterns);
 

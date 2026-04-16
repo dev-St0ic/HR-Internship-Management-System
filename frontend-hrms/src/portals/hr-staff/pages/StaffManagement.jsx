@@ -1,43 +1,6 @@
 import { Search, Plus, Download } from 'lucide-react';
 import { useState, useEffect } from 'react';
-
-// Dummy data for departments
-const dummyDepartments = [
-  {
-    title: 'IT Department',
-    count: 22,
-    members: [
-      { name: 'John Doe', role: 'IT Intern' },
-      { name: 'Jane Doe', role: 'HR Intern' },
-      { name: 'Jonathan Doe', role: 'IT Intern' },
-    ],
-  },
-  {
-    title: 'Sales Department',
-    count: 16,
-    members: [
-      { name: 'Darrell Steward', role: 'Sr. Sales Manager' },
-      { name: 'Courtney Henry', role: 'BDM' },
-      { name: 'Kathryn Murphy', role: 'BDE' },
-    ],
-  },
-  {
-    title: 'Project Manager Department',
-    count: 20,
-    members: [
-      { name: 'Ronald Richards', role: 'Sr. Project Manager' },
-      { name: 'Savannah Nguyen', role: 'Project Manager' },
-    ],
-  },
-  {
-    title: 'Marketing Department',
-    count: 12,
-    members: [
-      { name: 'Brooklyn Simmons', role: 'Sr. Marketing Manager' },
-      { name: 'Kristin Watson', role: 'Marketing Coordinator' },
-    ],
-  },
-];
+import { dummyDepartments } from '../../../common/config/mockData';
 
 export default function StaffManagement() {
   const [departments, setDepartments] = useState(dummyDepartments);

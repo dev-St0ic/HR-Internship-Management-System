@@ -1,60 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ChevronRight, Eye, Download } from 'lucide-react';
-
-// Dummy data for interns
-const dummyInterns = [
-  {
-    id: '345321231',
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    firstName: 'John',
-    lastName: 'Doe',
-    mobileNumber: '09123456789',
-    emailAddress: 'john.doe@example.com',
-    dateOfBirth: '1999-03-15',
-    gender: 'Male',
-    university: 'CIT-U',
-    program: 'BS Computer Science',
-    ojtHours: '250',
-    address: '123 Example St.',
-    city: 'Cebu City',
-    zipCode: '6000',
-  },
-  {
-    id: '987890345',
-    name: 'Jane Doe',
-    email: 'jane.doe@example.com',
-    firstName: 'Jane',
-    lastName: 'Doe',
-    mobileNumber: '09123456788',
-    emailAddress: 'jane.doe@example.com',
-    dateOfBirth: '2000-05-02',
-    gender: 'Female',
-    university: 'FEU',
-    program: 'BS Business Administration',
-    ojtHours: '230',
-    address: '456 Example Ave.',
-    city: 'Manila',
-    zipCode: '1000',
-  },
-];
-
-// Dummy data for documents
-const dummyDocuments = [
-  { id: 1, title: 'MOA.pdf', type: 'MOA', uploaded: '2025-12-10' },
-  { id: 2, title: 'Certificate of Acceptance.pdf', type: 'Acceptance', uploaded: '2025-12-12' },
-  { id: 3, title: 'NDA Letter.pdf', type: 'NDA', uploaded: '2025-12-14' },
-  { id: 4, title: 'ID.pdf', type: 'ID', uploaded: '2025-12-15' },
-  { id: 5, title: 'Resume.pdf', type: 'Resume', uploaded: '2025-12-16' },
-  { id: 6, title: 'Endorsement Letter.pdf', type: 'Endorsement', uploaded: '2025-12-18' },
-];
-
-// Dummy data for attendance
-const dummyAttendanceData = [
-  { date: 'July 01, 2023', checkIn: '09:28 AM', checkOut: '07:00 PM', break: '00:30 Min', total: '09:02 Hrs', status: 'On Time' },
-  { date: 'July 02, 2023', checkIn: '09:20 AM', checkOut: '07:00 PM', break: '00:20 Min', total: '09:20 Hrs', status: 'On Time' },
-];
+import { dummyInterns, dummyDocuments, dummyAttendanceData } from '../../../common/config/mockData';
 
 export default function InternDetailPage() {
   const { internId } = useParams();
@@ -167,16 +114,6 @@ export default function InternDetailPage() {
                 >
                   Documents
                 </button>
-                <button
-                  onClick={() => setActiveTab('access')}
-                  className={`pb-2 font-medium ${
-                    activeTab === 'access'
-                      ? 'border-b-2 border-gray-900 text-gray-900'
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`}
-                >
-                  Account Access
-                </button>
               </div>
 
               <div className="mt-6">
@@ -222,13 +159,6 @@ export default function InternDetailPage() {
                         </div>
                       </div>
                     ))}
-                  </div>
-                )}
-
-                {activeTab === 'access' && (
-                  <div className="text-gray-600">
-                    <p className="mb-3 font-medium">Account settings will be placed here (e.g., login status, role, reset credentials).</p>
-                    <p>Coming soon.</p>
                   </div>
                 )}
               </div>

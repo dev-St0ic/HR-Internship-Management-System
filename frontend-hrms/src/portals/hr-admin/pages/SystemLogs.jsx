@@ -1,41 +1,6 @@
 import { Search, Download, Filter } from 'lucide-react';
 import { useState, useEffect } from 'react';
-
-// Dummy data for logs
-const dummyLogs = [
-  {
-    timestamp: '2026-04-06 | 09:12:34',
-    user: 'Supervisor 1',
-    role: 'Supervisor',
-    action: 'Login',
-    description: 'Supervisor 1 logged into the system.',
-    details: 'View',
-  },
-  {
-    timestamp: '2026-04-06 | 09:18:02',
-    user: 'Intern 1',
-    role: 'Intern',
-    action: 'Submit Application',
-    description: 'Intern 1 submitted an application.',
-    details: 'View',
-  },
-  {
-    timestamp: '2026-04-06 | 09:25:47',
-    user: 'HR Staff 1',
-    role: 'HR Staff',
-    action: 'Update Record',
-    description: 'HR Staff 1 updated intern record.',
-    details: 'View',
-  },
-  {
-    timestamp: '2026-04-06 | 09:34:21',
-    user: 'Supervisor 2',
-    role: 'Supervisor',
-    action: 'Approve Request',
-    description: 'Supervisor 2 approved a request.',
-    details: 'View',
-  },
-];
+import { dummyLogs } from '../../../common/config/mockData';
 
 export default function SystemLogs() {
   const [logs, setLogs] = useState(dummyLogs);

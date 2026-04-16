@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SupervisorLayout from "../portals/supervisor/layouts/SupervisorLayout";
 import SupervisorDashboard from "../portals/supervisor/pages/SupervisorDashboard";
-import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
 import OperationsPage from "../portals/hr-staff/pages/OperationsPage";
 import InternDetailPage from "../portals/hr-staff/pages/InternDetailPage";
 import StaffManagement from "../portals/hr-staff/pages/StaffManagement";
 import DocumentVault from "../portals/hr-staff/pages/DocumentVault";
+import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
 import HrAdminSideBarLayout from "../portals/hr-admin/components/HRAdminLayout";
 import HRAdminDashboard from "../portals/hr-admin/pages/HRAdminDashboard";
 import ReportsAndAnalytics from "../portals/hr-admin/pages/ReportsAndAnalytics";

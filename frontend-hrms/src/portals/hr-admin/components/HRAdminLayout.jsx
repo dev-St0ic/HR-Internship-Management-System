@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Sidebar from '../../../common/components/layout/Sidebar';
+import Sidebar from '../../../common/components/layout/sidebar';
 import { navigation } from '../../../common/config/navigation';
 
 const HRAdminLayout = () => {

@@ -1,33 +1,6 @@
 import { Search, Funnel } from 'lucide-react';
 import { useState, useEffect } from 'react';
-
-// Dummy data for applications
-const dummyApplications = [
-  {
-    name: 'Darlene Robertson',
-    id: '345321231',
-    university: 'Cebu University',
-    program: 'BS Computer Science',
-    date: '2026-02-15',
-    status: 'Pending',
-  },
-  {
-    name: 'Floyd Miles',
-    id: '987890345',
-    university: 'FEU',
-    program: 'BS Business Administration',
-    date: '2026-03-02',
-    status: 'Pending',
-  },
-  {
-    name: 'Carmen Reed',
-    id: '453367122',
-    university: 'USJR',
-    program: 'BS Information Systems',
-    date: '2026-03-20',
-    status: 'Pending',
-  },
-];
+import { dummyApplications } from '../../../common/config/mockData';
 
 export default function Recruitment() {
   const [applications, setApplications] = useState(dummyApplications);
