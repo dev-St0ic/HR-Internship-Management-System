@@ -24,9 +24,9 @@ export default function FormStepper({ currentStep }) {
                             
                             <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-medium z-10 transition-colors duration-300 ${
                                 isCompleted 
-                                    ? "bg-black text-white border-3 border-black" 
+                                    ? "bg-[#06C270] text-white border-3 border-[#06C270]" 
                                     : isActive
-                                        ? "bg-white text-black border-3 border-black"
+                                        ? "bg-white text-[#FDCA32] border-3 border-[#FDCA32]"
                                         : "bg-white text-gray-500 border-3 border-gray-400" 
                             }`}>
                                 {isCompleted ? (

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import FormStepper from "../components/ui/FormStepper";
+import FormStepper from "../components/FormStepper";
 import { Link } from "react-router-dom";
-import PersonalInfoForm from "../components/forms/PersonalInfoForm";
-import SchoolInformationForm from "../components/forms/SchoolInfromationForm";
-import RequiredDocsForm from "../components/Forms/RequiredDocsForm";
+import RequiredDocsForm from "../forms/RequiredDocsForm";
+import PersonalInfoForm from "../forms/PersonalInfoForm";
+import SchoolInformationForm from "../forms/SchoolInfromationForm";
 
 
 
@@ -54,7 +54,7 @@ export default function ApplicationForm() {
                             </button>
                         )}
                         
-                        <button type="submit" onSubmit={handleNext} className="px-8 py-2 bg-black text-white rounded-md text-md font-medium hover:bg-gray-800 transition-colors">
+                        <button type="submit" onSubmit={handleNext} className="px-8 py-2 bg-[#7C3EFF] text-white rounded-md text-md font-medium hover:bg-gray-800 transition-colors">
                             {currentStep === 3 ? "Submit Application" : "Next"}
                         </button>
 

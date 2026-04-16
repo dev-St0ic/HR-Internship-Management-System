@@ -1,5 +1,5 @@
 import { useState } from "react";
-import FileDropzone from "../ui/FileDropzone";
+import FileDropzone from "../../interns/components/ui/FileDropzone";
 
 
 export default function RequiredDocsForm() {

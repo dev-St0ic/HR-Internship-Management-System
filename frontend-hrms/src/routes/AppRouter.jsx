@@ -18,8 +18,6 @@ import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
 import OperationsPage from "../portals/hr-staff/pages/OperationsPage";
 import LandingPageHeader from "../common/components/layout/LandingPageHeader";
 import LandingPage from "../portals/Home/pages/LandingPage";
-import ApplicationFormHeader from "../portals/interns/components/layout/ApplicationFormHeader";
-import ApplicationForm from "../portals/interns/pages/ApplicationForm";
 import InternLayout from "../portals/interns/layouts/InternLayout";
 import InternDashboard from "../portals/interns/pages/InternDashboard";
 import Profile from "../portals/interns/pages/Profile";
@@ -31,6 +29,13 @@ import InternCalendarPage from "../portals/interns/pages/InternCalendarPage";
 import SettingsPage from "../common/components/layout/SettingsPage";
 import LoginPage from "../portals/Home/pages/LoginPage";
 import InternEvaluation from "../portals/interns/pages/InternEvaluation";
+import ApplicationForm from "../portals/Home/pages/ApplicationForm";
+import ApplicationFormHeader from "../portals/Home/components/layout/ApplicationFormHeader";
+import ApplicantLayout from "../portals/applicant-intern/components/layout/ApplicantLayout";
+import ApplicantNotificationPage from "../portals/applicant-intern/pages/Notification";
+import Dashboard from "../portals/applicant-intern/pages/Dashboard";
+import MyApplication from "../portals/applicant-intern/pages/MyApplication";
+import Settings from "../portals/applicant-intern/pages/Settings";
 
 // Temporary placeholders muna
 const Home = () => <>Homee</>;
@@ -53,6 +58,14 @@ export const AppRouter = () => {
         {/* Application form intern route */}
         <Route path="/application-form" element={<ApplicationFormHeader />}>
           <Route index element={<ApplicationForm />} />
+        </Route>
+
+        {/* Applicant page route for pending interns */}
+        <Route path="/applicant" element={<ApplicantLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="notifications" element={<ApplicantNotificationPage />} />
+          <Route path="my-application" element={<MyApplication />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
 
         <Route path="/intern" element={<InternLayout />}>

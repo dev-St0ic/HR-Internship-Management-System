@@ -93,7 +93,7 @@ export const navigation = {
     },
   ],
 
- supervisor: [
+  supervisor: [
     {
       to: "/supervisor",
       label: "Dashboard",
@@ -157,5 +157,23 @@ export const navigation = {
       icon: NotebookPen,
     },
     { to: "/intern/settings", label: "Settings", icon: Settings },
+  ],
+  applicant: [
+    {
+      to: "/applicant",
+      label: "Dashboard",
+      icon: LayoutDashboard,
+      end: true,
+    },
+    { 
+      to: "/applicant/my-application", 
+      label: "My Application", 
+      icon: ScrollText 
+    },
+    
+    { 
+      to: "/applicant/settings", 
+      label: "Settings", 
+      icon: Settings },
   ],
 };
