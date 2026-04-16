@@ -1,16 +1,15 @@
 import { Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export default function NotificationBell() {
-  // TEMP This should come from auth context or state management
-  const userRole = "intern";
-
+// 1. Accept userRole as a prop here
+export default function NotificationBell({ userRole = "intern" }) {
   // TEMP This should come from notifications state or API call
   const notifications = [
     { id: 1, message: "New task assigned", action: "View tasks" },
   ];
   const hasNotifications = notifications.length > 0;
 
+  // 2. The path is now dynamic based on the prop!
   const path = `/${userRole}/notifications`;
 
   return (
