@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { LogOut, ChevronUp, ChevronDown } from "lucide-react";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function SidebarProfile() {
   const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
 
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
@@ -32,7 +34,14 @@ export default function SidebarProfile() {
     <div className="relative mt-auto w-full" ref={menuRef}>
       {isOpen && (
         <div className="absolute bottom-full left-0 w-full mb-3 z-50">
-          <button onClick={logout} className={logoutBtnStyle}>
+          <button
+            onClick={() => {
+              logout();
+              setIsOpen(false);
+              navigate("/login");
+            }}
+            className={logoutBtnStyle}
+          >
             <LogOut size={18} />
             <span>Logout</span>
           </button>
