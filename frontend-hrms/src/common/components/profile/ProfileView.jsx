@@ -43,35 +43,77 @@ export default function ProfileView({ user, mode }) {
       graduation: user.graduation,
     },
 
-    documents: user.documents || [], // fallback
+    documents: user.documents || [
+      "Resume.pdf",
+      "MOA.pdf",
+      "NDA.pdf",
+      "ID.pdf",
+      "Endoresement letter.pdf",
+      "Certificate of Acceptance.pdf",
+    ], // fallback
   };
 
   const [activeTab, setActiveTab] = useState("personal");
   const [isEditing, setIsEditing] = useState(false);
+  const [editedUser, setEditedUser] = useState(null);
+
+  const staffView = ["hr-admin", "hr-staff"].includes(mode);
 
   const tabs =
     mode === "intern"
       ? ["personal", "school", "documents"]
       : ["personal", "documents"];
 
+  //This will use edited user when editing
+  const displayUser = editedUser || formattedUser;
+
+  // This will handle the edit click
+  const handleEditToggle = () => {
+    if (!isEditing) {
+      setEditedUser(formattedUser); //This will start editing
+      setIsEditing(true);
+    } else {
+      // This will save
+      console.log("Saved Data: ", editedUser);
+
+      //This is where you will connect backend
+      //PUT /users/:id
+
+      setIsEditing(false);
+    }
+  };
+
+  // This will handle the input change
+  const handleChange = (section, key, value) => {
+    setEditedUser((prev) => ({
+      ...prev,
+      [section]: {
+        ...prev[section],
+        [key]: value,
+      },
+    }));
+  };
+
   return (
     <div className="bg-white rounded-xl shadow p-6">
       {/* Profile Header */}
       <ProfileHeader
-        user={formattedUser}
+        user={displayUser}
         mode={mode}
         activeTab={activeTab}
-        onEdit={() => setIsEditing(!isEditing)}
+        isEditing={isEditing}
+        onEditClick={handleEditToggle}
       />
 
       <div className="flex gap-6 mt-6">
         {/* HR-Admin & HR-Staff Sidebar */}
-        {mode === "hr-admin" || (mode === "hr-staff" && <ProfileSidebar />)}
+        {staffView && <ProfileSidebar />}
 
         <div className="flex-1">
           {/* Profile Tabs */}
           <ProfileTabs
-            user={formattedUser}
+            user={displayUser}
+            mode={mode}
             tabs={tabs}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
@@ -81,16 +123,17 @@ export default function ProfileView({ user, mode }) {
           <div className="mt-6">
             {activeTab === "personal" && (
               <PersonalInformation
-                user={formattedUser}
+                user={displayUser}
                 mode={mode}
                 isEditing={isEditing}
+                onChange={handleChange}
               />
             )}
             {activeTab === "school" && mode === "intern" && (
-              <SchoolInformation user={formattedUser} />
+              <SchoolInformation user={displayUser} />
             )}
             {activeTab === "documents" && (
-              <Documents user={formattedUser} mode={mode} />
+              <Documents user={displayUser} mode={mode} />
             )}
           </div>
         </div>
