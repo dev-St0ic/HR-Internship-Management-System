@@ -1,6 +1,12 @@
 import { BriefcaseBusiness, Mail, PenLine } from "lucide-react";
 
-export default function ProfileHeader({ user, mode, activeTab, onEdit }) {
+export default function ProfileHeader({
+  user,
+  mode,
+  isEditing,
+  onEditClick,
+  activeTab,
+}) {
   return (
     <div className="flex justify-between items-center pb-5 border-b border-gray-200 ">
       <div className="flex items-center gap-4">
@@ -22,11 +28,11 @@ export default function ProfileHeader({ user, mode, activeTab, onEdit }) {
       {/* This is only for intern and when the personal tab is active */}
       {mode === "intern" && activeTab === "personal" && (
         <button
-          onClick={onEdit}
+          onClick={onEditClick}
           className="flex items-center gap-2 px-4 py-2 text-sm bg-purple-500 text-white rounded-lg hover:text-purple-500 hover:bg-white transition"
         >
           <PenLine size={14} />
-          Edit Profile
+          {isEditing ? "Save changes" : "Edit Profile"}
         </button>
       )}
     </div>

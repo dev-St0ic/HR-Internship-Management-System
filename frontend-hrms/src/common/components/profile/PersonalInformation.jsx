@@ -1,4 +1,9 @@
-export default function PersonalInformation({ user, mode, isEditing }) {
+export default function PersonalInformation({
+  user,
+  mode,
+  isEditing,
+  onChange,
+}) {
   const editableFields = ["phone", "address", "city", "zip"];
   const canEdit = mode === "intern";
 
@@ -14,11 +19,12 @@ export default function PersonalInformation({ user, mode, isEditing }) {
 
               {isEditing && isEditable && canEdit ? (
                 <input
-                  defaultValue={value}
+                  value={value || ""}
+                  onChange={(e) => onChange("personal", key, e.target.value)}
                   className="border border-purple-500 rounded px-2 py-1 w-full"
                 />
               ) : (
-                <p className="border-b border-gray-200 pb-1">{value}</p>
+                <p className="border-b border-gray-200 pb-1">{value || "-"}</p>
               )}
             </div>
           );
