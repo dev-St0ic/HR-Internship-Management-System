@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Document;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -94,5 +95,10 @@ class Application extends Model
     {
         $required = ['resume_file', 'moa_file', 'endorsement_file', 'school_id_file'];
         return array_filter($required, fn($doc) => empty($this->$doc));
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
     }
 }

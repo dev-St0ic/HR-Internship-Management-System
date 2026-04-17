@@ -10,8 +10,13 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('intern_id')->constrained('interns')->onDelete('cascade');
-            $table->foreignId('uploaded_by')->constrained('users')->onDelete('restrict');
+            
+            // 1. ADD THIS: Link the document to the Application
+            $table->foreignId('application_id')->nullable()->constrained('applications')->onDelete('cascade');
+            
+            // 2. Make these nullable since applicants aren't interns/users yet
+            $table->foreignId('intern_id')->nullable()->constrained('interns')->onDelete('cascade');
+            $table->foreignId('uploaded_by')->nullable()->constrained('users')->onDelete('restrict');
 
             $table->enum('document_type', [
                 'resume',
