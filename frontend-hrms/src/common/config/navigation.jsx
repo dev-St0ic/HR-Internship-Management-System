@@ -19,43 +19,43 @@ export const navigation = {
     {
       to: "/hr-admin",
       label: "Dashboard",
-      icon: LayoutDashboard,
+      icon: <LayoutDashboard size={18} />,
       end: true,
     },
     {
       to: "/hr-admin/recruitment",
       label: "Recruitment",
-      icon: Users,
+      icon: <Users size={18} />,
     },
     {
-      to: "/hr-admin/intern-management",
+      to: "/hr-admin/internmanagement",
       label: "Intern Management",
-      icon: GitCompare,
+      icon: <GitCompare size={18} />,
     },
     {
-      to: "/hr-admin/staff-management",
+      to: "/hr-admin/staffmanagement",
       label: "Staff Management",
-      icon: CalendarCheck2,
+      icon: <CalendarCheck2 size={18} />,
     },
     {
-      to: "/hr-admin/document-vault",
+      to: "/hr-admin/documnetvault",
       label: "Document Vault",
-      icon: FileText,
+      icon: <FileText size={18} />,
     },
     {
-      to: "/hr-admin/reports",
+      to: "/hr-admin/reportsandanalytics",
       label: "Reports & Analytics",
-      icon: FolderGit2,
+      icon: <FolderGit2 size={18} />,
     },
     {
-      to: "/hr-admin/system-logs",
+      to: "/hr-admin/systemlogs",
       label: "System Logs",
-      icon: ScrollText,
+      icon: <ScrollText size={18} />,
     },
     {
       to: "/hr-admin/settings",
       label: "Settings",
-      icon: Settings,
+      icon: <Settings size={18} />,
     },
   ],
 
@@ -63,32 +63,37 @@ export const navigation = {
     {
       to: "/hr-staff",
       label: "Dashboard",
-      icon: LayoutDashboard,
+      icon: <LayoutDashboard size={18} />,
       end: true,
     },
     {
       to: "/hr-staff/recruitment",
       label: "Recruitment",
-      icon: Users,
+      icon: <Users size={18} />,
     },
     {
       to: "/hr-staff/operations",
       label: "Operations",
-      icon: GitCompare,
+      icon: <GitCompare size={18} />,
     },
     {
-      to: "/hr-staff/staff-management",
+      to: "/hr-staff/staffmanagment",
       label: "Staff Management",
-      icon: CalendarCheck2,
+      icon: <CalendarCheck2 size={18} />,
     },
     {
-      to: "/hr-staff/document-vault",
+      to: "/hr-staff/documentvault",
       label: "Document Vault",
-      icon: FileText,
+      icon: <FileText size={18} />,
+    },
+    {
+      to: "/hr-staff/settings",
+      label: "Settings",
+      icon: <Settings size={18} />,
     },
   ],
 
- supervisor: [
+  supervisor: [
     {
       to: "/supervisor",
       label: "Dashboard",
@@ -152,5 +157,24 @@ export const navigation = {
       icon: NotebookPen,
     },
     { to: "/intern/settings", label: "Settings", icon: Settings },
+  ],
+  applicant: [
+    {
+      to: "/applicant",
+      label: "Dashboard",
+      icon: LayoutDashboard,
+      end: true,
+    },
+    {
+      to: "/applicant/my-application",
+      label: "My Application",
+      icon: ScrollText,
+    },
+
+    {
+      to: "/applicant/settings",
+      label: "Settings",
+      icon: Settings,
+    },
   ],
 };

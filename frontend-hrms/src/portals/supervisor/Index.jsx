@@ -1,0 +1,9 @@
+export {default as SupervisorLayout} from './components/layouts/SupervisorLayout';
+export {default as SupervisorDashboard} from './pages/SupervisorDashboard';
+export {default as SupervisorMyInterns} from './pages/SupervisorMyInterns'
+export {default as SupervisorAttendance} from './pages/SupervisorAttendance';
+export {default as SupervisorEvaluations} from './pages/SupervisorEvaluations';
+export {default as SupervisorTasks} from './pages/SupervisorTasks';
+export {default as SupervisorSettings} from './pages/SupervisorSettings';
+export {default as SupervisorNotifications} from './pages/SupervisorNotifications';
+export {default as SupervisorDocuments} from './pages/SupervisorDocuments';

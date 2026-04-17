@@ -1,41 +1,37 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
+import Logo from "../../../assets/images/Logo.png";
 
 export default function LandingPageHeader() {
     return (
-        
-        <div className="min-h-screen font-roboto">
-            
-            
-            <header className="fixed top-8 left-1/2 -translate-x-1/2 w-full max-w-5xl px-4 z-50">
-                <nav className="flex items-center justify-between bg-white rounded-full px-8 py-3.5 shadow-sm">
+        <div className="relative">
+            <div className="fixed top-6 w-full flex justify-center z-50">
+                <header className="w-[90%] max-w-6xl bg-white/90 backdrop-blur-md shadow-lg rounded-full px-8 py-3 flex justify-between items-center">
                     
-                    <Link 
-                        to="/" 
-                        className="w-[80px] h-[32px] bg-[#d9d9d9] rounded-full hover:opacity-80 transition-opacity" 
-                        aria-label="Home"
-                    ></Link>
+                    {/* Left: Logo */}
+                    <a href="#home" className="flex items-center gap-2">
+                        <img src={Logo} alt="Ollopa Logo" className="h-12 w-auto object-contain scale-150 origin-left" />
+                    </a>
 
-                    <ul className="hidden md:flex items-center gap-8 text-base text-[#333333]">
-                        <li><Link to="/" className="hover:text-[#b8b8b8] transition-colors">Home</Link></li>
-                        <li><Link to="/about" className="hover:text-[#b8b8b8] transition-colors">About Program</Link></li>
-                        <li><Link to="/how-it-works" className="hover:text-[#b8b8b8] transition-colors">How It Works</Link></li>
-                        <li><Link to="/eligibility" className="hover:text-[#b8b8b8] transition-colors">Eligibility</Link></li>
-                        <li><Link to="/faqs" className="hover:text-[#b8b8b8] transition-colors">FAQs</Link></li>
-                    </ul>
+                    {/* Middle: Navigation Links */}
+                    <nav className="hidden md:flex gap-8 items-center text-sm font-bold text-gray-800">
+                        <a href="#home" className="hover:text-[#7C3EFF] transition-colors">Home</a>
+                        <a href="#about" className="hover:text-[#7C3EFF] transition-colors">About Program</a>
+                        <a href="#how-it-works" className="hover:text-[#7C3EFF] transition-colors">How It Works</a>
+                        <a href="#eligibility" className="hover:text-[#7C3EFF] transition-colors">Eligibility</a>
+                        <a href="#faqs" className="hover:text-[#7C3EFF] transition-colors">FAQs</a>
+                    </nav>
 
+                    {/* Right: Login Button */}
                     <Link 
                         to="/login" 
-                        className="px-8 py-2 text-base text-white bg-[#b8b8b8] hover:bg-gray-400 rounded-full transition-colors font-medium"
+                        className="bg-[#120071] hover:bg-[#130E49]/90 text-white text-sm font-bold px-8 py-2.5 rounded-full transition-all shadow-md"
                     >
                         Login
                     </Link>
-                </nav>
-            </header>
+                </header>
+            </div>
 
-            <main className="flex-1 w-full">
-                <Outlet />
-            </main>
-            
+            <Outlet />
         </div>
     );
 }
