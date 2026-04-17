@@ -14,27 +14,10 @@ import {
   SupervisorDocuments,
 } from "../portals/supervisor/Index";
 
-//Hr-Staff
 import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
 import OperationsPage from "../portals/hr-staff/pages/OperationsPage";
-import InternDetailPage from "../portals/hr-staff/pages/InternDetailPage";
-import StaffManagement from "../portals/hr-staff/pages/StaffManagement";
-import DocumentVault from "../portals/hr-staff/pages/DocumentVault";
-import Recruitment from "../portals/hr-staff/pages/Recruitment";
-
-//Hr-Admin
-import HrAdminSideBarLayout from "../portals/hr-admin/components/HRAdminLayout";
-import HRAdminDashboard from "../portals/hr-admin/pages/HRAdminDashboard";
-import ReportsAndAnalytics from "../portals/hr-admin/pages/ReportsAndAnalytics";
-import SystemLogs from "../portals/hr-admin/pages/SystemLogs";
-import AdminSettings from "../portals/hr-admin/pages/Settings";
-
-//Landing Page
 import LandingPageHeader from "../common/components/layout/LandingPageHeader";
 import LandingPage from "../portals/Home/pages/LandingPage";
-import LoginPage from "../portals/Home/pages/LoginPage";
-
-//Intern
 import InternLayout from "../portals/interns/layouts/InternLayout";
 import InternDashboard from "../portals/interns/pages/InternDashboard";
 import Profile from "../portals/interns/pages/Profile";
@@ -44,25 +27,22 @@ import Documents from "../portals/interns/pages/Documents";
 import NotificationsPage from "../portals/interns/pages/InternNotificationPage";
 import InternCalendarPage from "../portals/interns/pages/InternCalendarPage";
 import SettingsPage from "../common/components/layout/SettingsPage";
+import LoginPage from "../portals/Home/pages/LoginPage";
 import InternEvaluation from "../portals/interns/pages/InternEvaluation";
-
-//Application
 import ApplicationForm from "../portals/Home/pages/ApplicationForm";
 import ApplicationFormHeader from "../portals/Home/components/layout/ApplicationFormHeader";
-
-//Applicant
 import ApplicantLayout from "../portals/applicant-intern/components/layout/ApplicantLayout";
 import ApplicantNotificationPage from "../portals/applicant-intern/pages/Notification";
 import Dashboard from "../portals/applicant-intern/pages/Dashboard";
 import MyApplication from "../portals/applicant-intern/pages/MyApplication";
 import Settings from "../portals/applicant-intern/pages/Settings";
 
-const HRAdminSectionPage = ({ title }) => (
-  <div>
-    <h1 className="text-3xl font-bold text-slate-900">{title}</h1>
-    <p className="text-sm text-slate-500">Welcome to {title}.</p>
-  </div>
-);
+// Temporary placeholders muna
+const Home = () => <>Homee</>;
+
+const HRStaffDashboard = () => <>HR staff dashboard page</>;
+
+const HRAdminDashboard = () => <>HR admin dashboard page</>;
 
 export const AppRouter = () => {
   return (
@@ -72,7 +52,6 @@ export const AppRouter = () => {
         <Route path="/" element={<LandingPageHeader />}>
           <Route index element={<LandingPage />} />
         </Route>
-
         {/* Login page route */}
         <Route path="/login" element={<LoginPage />} />
 
@@ -89,7 +68,6 @@ export const AppRouter = () => {
           <Route path="settings" element={<Settings />} />
         </Route>
 
-        {/* Intern Page Route*/}
         <Route path="/intern" element={<InternLayout />}>
           <Route index element={<InternDashboard />} />
           <Route path="profile" element={<Profile />} />
@@ -102,7 +80,7 @@ export const AppRouter = () => {
           <Route path="calendar" element={<InternCalendarPage />} />
         </Route>
 
-        {/* supervisor route */}
+        {/* temp supervisor route */}
         <Route path="/supervisor" element={<SupervisorLayout />}>
           <Route index element={<SupervisorDashboard />} />
           <Route path="myinterns" element={<SupervisorMyInterns />} />
@@ -114,30 +92,12 @@ export const AppRouter = () => {
           <Route path="notifications" element={<SupervisorNotifications />} />
         </Route>
 
-        {/* Hr-Staff Route */}
         <Route path="/hr-staff" element={<SideBarLayout />}>
-          <Route index element={<HRStaffDashboard />} />
-          <Route path="recruitment" element={<Recruitment />} />
           <Route path="operations" element={<OperationsPage />} />
-          <Route path="staff-management" element={<StaffManagement />} />
-          <Route path="document-vault" element={<DocumentVault />} />
-          <Route path="intern/:internId" element={<InternDetailPage />} />
+          <Route index element={<HRStaffDashboard />} />
         </Route>
 
-        {/* Hr-Admin Route */}
-        <Route path="/hr-admin" element={<HrAdminSideBarLayout />}>
-          <Route index element={<HRAdminDashboard />} />
-          <Route path="recruitment" element={<Recruitment />} />
-          <Route path="intern-management">
-            <Route index element={<OperationsPage />} />
-            <Route path="intern/:internId" element={<InternDetailPage />} />
-          </Route>
-          <Route path="staff-management" element={<StaffManagement />} />
-          <Route path="document-vault" element={<DocumentVault />} />
-          <Route path="reports" element={<ReportsAndAnalytics />} />
-          <Route path="system-logs" element={<SystemLogs />} />
-          <Route path="settings" element={<AdminSettings />} />
-        </Route>
+        <Route path="/hr-admin/*" element={<HRAdminDashboard />} />
       </Routes>
     </BrowserRouter>
   );
