@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 {
-  /* imports galing sa Supervisor Pages */
+  /* Supervisor Pages */
 }
 import {
   SupervisorLayout,
@@ -14,10 +14,16 @@ import {
   SupervisorDocuments,
 } from "../portals/supervisor/Index";
 
+//HR-STAFF
 import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
 import OperationsPage from "../portals/hr-staff/pages/OperationsPage";
+
+//LANDING PAGE
 import LandingPageHeader from "../common/components/layout/LandingPageHeader";
 import LandingPage from "../portals/Home/pages/LandingPage";
+import LoginPage from "../portals/Home/pages/LoginPage";
+
+//INTERN
 import InternLayout from "../portals/interns/layouts/InternLayout";
 import InternDashboard from "../portals/interns/pages/InternDashboard";
 import Profile from "../portals/interns/pages/Profile";
@@ -27,10 +33,13 @@ import Documents from "../portals/interns/pages/Documents";
 import NotificationsPage from "../portals/interns/pages/InternNotificationPage";
 import InternCalendarPage from "../portals/interns/pages/InternCalendarPage";
 import SettingsPage from "../common/components/layout/SettingsPage";
-import LoginPage from "../portals/Home/pages/LoginPage";
 import InternEvaluation from "../portals/interns/pages/InternEvaluation";
+
+//APPLICATION
 import ApplicationForm from "../portals/Home/pages/ApplicationForm";
 import ApplicationFormHeader from "../portals/Home/components/layout/ApplicationFormHeader";
+
+//APPLICANT
 import ApplicantLayout from "../portals/applicant-intern/components/layout/ApplicantLayout";
 import ApplicantNotificationPage from "../portals/applicant-intern/pages/Notification";
 import Dashboard from "../portals/applicant-intern/pages/Dashboard";
@@ -68,6 +77,7 @@ export const AppRouter = () => {
           <Route path="settings" element={<Settings />} />
         </Route>
 
+        {/* Intern Page Route */}
         <Route path="/intern" element={<InternLayout />}>
           <Route index element={<InternDashboard />} />
           <Route path="profile" element={<Profile />} />
@@ -80,7 +90,7 @@ export const AppRouter = () => {
           <Route path="calendar" element={<InternCalendarPage />} />
         </Route>
 
-        {/* temp supervisor route */}
+        {/* Supervisor Route */}
         <Route path="/supervisor" element={<SupervisorLayout />}>
           <Route index element={<SupervisorDashboard />} />
           <Route path="myinterns" element={<SupervisorMyInterns />} />
@@ -92,11 +102,13 @@ export const AppRouter = () => {
           <Route path="notifications" element={<SupervisorNotifications />} />
         </Route>
 
+        {/* HR-STAFF Page Route */}
         <Route path="/hr-staff" element={<SideBarLayout />}>
           <Route path="operations" element={<OperationsPage />} />
           <Route index element={<HRStaffDashboard />} />
         </Route>
 
+        {/* HR-ADMIN Page Route */}
         <Route path="/hr-admin/*" element={<HRAdminDashboard />} />
       </Routes>
     </BrowserRouter>
