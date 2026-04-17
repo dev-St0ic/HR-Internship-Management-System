@@ -172,7 +172,7 @@ export const dummyAttendanceData = [
 export const dummyDepartments = [
   {
     title: 'IT Department',
-    count: 22,
+    count: 3,
     members: [
       { name: 'John Doe', role: 'IT Intern' },
       { name: 'Jane Doe', role: 'HR Intern' },
@@ -181,7 +181,7 @@ export const dummyDepartments = [
   },
   {
     title: 'Sales Department',
-    count: 16,
+    count: 3,
     members: [
       { name: 'Darrell Steward', role: 'Sr. Sales Manager' },
       { name: 'Courtney Henry', role: 'BDM' },
@@ -190,7 +190,7 @@ export const dummyDepartments = [
   },
   {
     title: 'Project Manager Department',
-    count: 20,
+    count: 2,
     members: [
       { name: 'Ronald Richards', role: 'Sr. Project Manager' },
       { name: 'Savannah Nguyen', role: 'Project Manager' },
@@ -198,7 +198,7 @@ export const dummyDepartments = [
   },
   {
     title: 'Marketing Department',
-    count: 12,
+    count: 2,
     members: [
       { name: 'Brooklyn Simmons', role: 'Sr. Marketing Manager' },
       { name: 'Kristin Watson', role: 'Marketing Coordinator' },

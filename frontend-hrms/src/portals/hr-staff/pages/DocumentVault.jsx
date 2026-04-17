@@ -1,6 +1,6 @@
 ﻿import { Search, Upload, Download, Filter, FolderOpen } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { dummyFolders } from '../../../common/config/mockData';
+import { dummyFolders } from '../../../common/config/mockData.jsx';
 
 export default function DocumentVault() {
   const [folders, setFolders] = useState(dummyFolders);

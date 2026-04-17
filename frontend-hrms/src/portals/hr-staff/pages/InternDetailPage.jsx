@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ChevronRight, Eye, Download } from 'lucide-react';
-import { dummyInterns, dummyDocuments, dummyAttendanceData } from '../../../common/config/mockData';
+import { dummyInterns, dummyDocuments, dummyAttendanceData } from '../../../common/config/mockData.jsx';
 
 export default function InternDetailPage() {
   const { internId } = useParams();

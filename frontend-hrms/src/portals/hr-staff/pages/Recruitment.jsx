@@ -1,6 +1,6 @@
 import { Search, Funnel } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { dummyApplications } from '../../../common/config/mockData';
+import { dummyApplications } from '../../../common/config/mockData.jsx';
 
 export default function Recruitment() {
   const [applications, setApplications] = useState(dummyApplications);

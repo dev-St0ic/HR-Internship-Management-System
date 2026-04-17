@@ -1,7 +1,7 @@
 import { Eye, Trash2 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { dummyInterns } from '../../../common/config/mockData';
+import { dummyInterns } from '../../../common/config/mockData.jsx';
 
 export default function OperationsPage() {
   const navigate = useNavigate();

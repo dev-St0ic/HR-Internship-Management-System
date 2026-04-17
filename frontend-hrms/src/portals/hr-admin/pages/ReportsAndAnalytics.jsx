@@ -1,6 +1,6 @@
 ﻿import React, { useMemo } from 'react';
 import { BarChart3, TrendingUp, Download } from 'lucide-react';
-import { dummyMetrics, dummyInternshipOverview, dummyUniversities, dummyChartDays } from '../../../common/config/mockData';
+import { dummyMetrics, dummyInternshipOverview, dummyUniversities, dummyChartDays } from '../../../common/config/mockData.jsx';
 
 export default function ReportsAndAnalytics() {
   const metrics = dummyMetrics;
@@ -77,7 +77,7 @@ export default function ReportsAndAnalytics() {
                   const finalizingHeight = (item.finalizing / total) * 100;
                   return (
                     <div key={item.label} className="flex h-full flex-col items-center gap-3">
-                      <div className="relative flex h-full w-16 flex-col justify-end overflow-hidden bg-slate-100">
+                      <div className="relative flex h-full w-8 flex-col justify-end overflow-hidden bg-slate-100">
                         <div className="bg-rose-400" style={{ height: `${finalizingHeight}%` }} />
                         <div className="bg-emerald-400" style={{ height: `${activeHeight}%` }} />
                         <div className="bg-amber-300" style={{ height: `${incomingHeight}%` }} />

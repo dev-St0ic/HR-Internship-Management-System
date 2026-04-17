@@ -1,6 +1,6 @@
 import { Search, Download, Filter } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { dummyLogs } from '../../../common/config/mockData';
+import { dummyLogs } from '../../../common/config/mockData.jsx';
 
 export default function SystemLogs() {
   const [logs, setLogs] = useState(dummyLogs);

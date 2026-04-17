@@ -1,4 +1,5 @@
 ﻿import { useMemo, useState, useEffect } from 'react';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 const HRAdminDashboard = () => {
   const today = useMemo(() => new Date(), []);
@@ -17,6 +18,11 @@ const HRAdminDashboard = () => {
   ];
 
   const [metrics, setMetrics] = useState(dummyMetrics);
+  const [action, setAction] = useState('');
+
+  const handleActionChange = (event) => {
+    setAction(event.target.value);
+  };
 
   // Commented out API call for metrics
   // useEffect(() => {
@@ -46,9 +52,9 @@ const HRAdminDashboard = () => {
 
   // Dummy data for attendance
   const dummyAttendanceData = [
-    { day: 'Mon', levels: [60, 80, 100] },
-    { day: 'Tue', levels: [65, 85, 105] },
-    { day: 'Wed', levels: [50, 70, 95] },
+    { day: 'Mon', levels: [60, 40, 80] },
+    { day: 'Tue', levels: [50, 85, 110] },
+    { day: 'Wed', levels: [50, 70, 50] },
     { day: 'Thu', levels: [62, 82, 102] },
     { day: 'Fri', levels: [55, 78, 98] },
     { day: 'Sat', levels: [45, 65, 90] },
@@ -75,13 +81,31 @@ const HRAdminDashboard = () => {
               <h1 className='mt-3 text-3xl font-semibold'>Hello, [Name]</h1>
               <p className='mt-1 text-sm text-slate-300'>Good morning</p>
             </div>
-            <button
-              type='button'
-              className='inline-flex items-center rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/20 hover:bg-white/15'
-            >
-              Quick Action
-              <span className='ml-2 text-xs'>▾</span>
-            </button>
+            <FormControl size='small' sx={{ minWidth: 170 }}>
+              <InputLabel sx={{ color: 'rgba(255,255,255,0.8)' }}>Quick Action</InputLabel>
+              <Select
+                value={action}
+                label='Quick Action'
+                onChange={handleActionChange}
+                sx={{
+                  color: '#fff',
+                  bgcolor: 'rgba(255,255,255,0.1)',
+                  borderRadius: '9999px',
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'rgba(255,255,255,0.2)',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'rgba(255,255,255,0.35)',
+                  },
+                  '& .MuiSvgIcon-root': {
+                    color: '#fff',
+                  },
+                }}
+              >
+                <MenuItem value='addIntern'>Add Intern</MenuItem>
+                <MenuItem value='generateReports'>Generate Reports</MenuItem>
+              </Select>
+            </FormControl>
           </div>
           <div className='mt-8 space-y-2 rounded-3xl bg-white/5 p-5'>
             <p className='text-sm uppercase tracking-[0.24em] text-slate-400'>Today</p>
@@ -136,10 +160,10 @@ const HRAdminDashboard = () => {
             <div className='flex items-end justify-between gap-3'>
               {attendanceData.map((item) => (
                 <div key={item.day} className='flex flex-col items-center gap-2'>
-                  <div className='flex h-40 w-10 flex-col justify-end gap-1 rounded-3xl bg-slate-200 p-1'>
-                    <div className='rounded-full bg-rose-400' style={{ height: `${item.levels[2] / 1.25}%` }} />
-                    <div className='rounded-full bg-amber-400' style={{ height: `${item.levels[1] / 1.25}%` }} />
-                    <div className='rounded-full bg-violet-600' style={{ height: `${item.levels[0] / 1.25}%` }} />
+                  <div className='flex h-70 w-12 flex-col justify-end gap-1 rounded-3xl bg-slate-200 p-1'>
+                    <div className='rounded-full bg-rose-400' style={{ height: `${item.levels[2]}%` }} />
+                    <div className='rounded-full bg-amber-400' style={{ height: `${item.levels[1]}%` }} />
+                    <div className='rounded-full bg-violet-600' style={{ height: `${item.levels[0]}%` }} />
                   </div>
                   <span className='text-xs font-semibold uppercase text-slate-500'>{item.day}</span>
                 </div>
