@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "../../../common/components/layout/Sidebar";
 import { navigation } from "../../../common/config/navigation";
+import Sidebar from "../../../common/components/layout/Sidebar";
 
 export default function InternLayout() {
   const userRole = "intern"; // This should ideally come from auth context or state management
@@ -9,6 +9,7 @@ export default function InternLayout() {
     <div className="flex">
       {/* Sidebar should always be visible*/}
       <Sidebar links={navigation[userRole]} 
+      
       
       role="Intern" userName="Intern" />  {/* Temp Sidebar Profile Name & Role */}
 
