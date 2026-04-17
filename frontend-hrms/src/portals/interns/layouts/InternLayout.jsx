@@ -8,10 +8,12 @@ export default function InternLayout() {
   return (
     <div className="flex">
       {/* Sidebar should always be visible*/}
-      <Sidebar links={navigation[userRole]} 
-      
-      role="Intern" userName="Intern" />  {/* Temp Sidebar Profile Name & Role */}
-
+      <Sidebar
+        links={navigation[userRole]}
+        role="Intern"
+        userName="Intern"
+      />{" "}
+      {/* Temp Sidebar Profile Name & Role */}
       {/* Main content area */}
       <div className="ml-60 p-6 flex-1">
         <Outlet />

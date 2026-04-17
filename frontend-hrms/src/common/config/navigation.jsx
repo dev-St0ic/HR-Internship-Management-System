@@ -165,15 +165,16 @@ export const navigation = {
       icon: LayoutDashboard,
       end: true,
     },
-    { 
-      to: "/applicant/my-application", 
-      label: "My Application", 
-      icon: ScrollText 
+    {
+      to: "/applicant/my-application",
+      label: "My Application",
+      icon: ScrollText,
     },
-    
-    { 
-      to: "/applicant/settings", 
-      label: "Settings", 
-      icon: Settings },
+
+    {
+      to: "/applicant/settings",
+      label: "Settings",
+      icon: Settings,
+    },
   ],
 };
