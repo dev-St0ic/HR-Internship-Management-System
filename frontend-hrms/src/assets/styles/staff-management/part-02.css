@@ -1,0 +1,60 @@
+.add-intern-btn:hover {
+  background: #5b21b6 !important;
+}
+/* --- Improved Filter and Add Intern Button Styles --- */
+.filter-btn {
+  background: #f7f7fa;
+  color: #111111;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  transition: background 0.15s, color 0.15s;
+  box-sizing: border-box;
+}
+.filter-btn-icon {
+  margin-right: 6px;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+.filter-btn:hover {
+  background: #ede9fe;
+  color: #111111;
+}
+.add-intern-btn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  height: 40px;
+  transition: background 0.15s;
+  box-sizing: border-box;
+}
+.add-intern-btn:hover {
+  background: #5b21b6;
+}
+/* --- Custom Filter and Add Intern Button Styles (override) --- */
+.filter-btn {
+  background: #f7f7fa;
+  color: #7c3aed;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  transition: background 0.15s, color 0.15s;
+}

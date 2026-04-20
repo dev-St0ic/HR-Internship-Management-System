@@ -29,6 +29,8 @@ import HRStaffDashboard from "../portals/hr-staff/pages/HrStaffDashboard";
 import RecruitmentPage from "../portals/hr-staff/pages/RecruitmentPage";
 import StaffManagementPage from "../portals/hr-staff/pages/StaffManagement";
 import DocumentVault from "../portals/hr-staff/pages/DocumentVault";
+import HrStaffShell from "../portals/hr-staff/components/SideBarLayout";
+import HrStaffSettingsPage from "../portals/hr-staff/pages/SettingsPage";
 
 //LANDING PAGE
 import LandingPageHeader from "../common/components/layout/LandingPageHeader";
@@ -115,13 +117,16 @@ export const AppRouter = () => {
         </Route>
 
         {/* HR-STAFF Page Route */}
-        <Route path="/hr-staff" element={<HrStaffLayout />}>
-          <Route index element={<HRStaffDashboard />} />
-          <Route path="recruitment" element={<RecruitmentPage />} />
-          <Route path="intern-management" element={<InternManagementPage />} />
-          <Route path="staff-management" element={<StaffManagementPage />} />
-          <Route path="document-vault" element={<DocumentVault />} />
-          <Route path="settings" element={<SettingsPage />} />
+        <Route path="/hr-staff" element={<HrStaffShell />}>
+          <Route
+            index
+            element={<Navigate to="/hr-staff/settings" replace />}
+          />
+          <Route path="settings" element={<HrStaffSettingsPage />} />
+          <Route
+            path="*"
+            element={<Navigate to="/hr-staff/settings" replace />}
+          />
         </Route>
 
         {/* HR-ADMIN Page Route */}

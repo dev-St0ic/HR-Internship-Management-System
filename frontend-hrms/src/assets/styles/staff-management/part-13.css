@@ -1,0 +1,59 @@
+.department-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.members {
+  color: #888;
+  font-size: 13px;
+}
+.view-all-btn {
+  background: none;
+  border: none;
+  color: #7c3aed;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 15px;
+}
+.employee-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.employee-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.employee-item:last-child {
+  margin-bottom: 0;
+}
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  border: 2px solid #eee;
+}
+
+/* Employee Table */
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  margin-top: 4px;
+  overflow: hidden;
+}
+.employee-table th, .employee-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
