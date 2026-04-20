@@ -9,9 +9,7 @@ export default function Profile() {
 
   return (
     <>
-      <Header title="Profile" subtitle="Profile Overview" />
-
-      <div className="p-6">
+      <div className="px-6 pb-3">
         <ProfileView user={currentUser} mode="intern" />
       </div>
     </>

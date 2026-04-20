@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
   /* Supervisor Pages */
 }
 import {
-  SupervisorLayout,
+  // SupervisorLayout,
   SupervisorDashboard,
   SupervisorMyInterns,
   SupervisorAttendance,
@@ -12,6 +12,7 @@ import {
   SupervisorNotifications,
   SupervisorDocuments,
 } from "../portals/supervisor/Index";
+import SupervisorLayout from "../portals/supervisor/layouts/SupervisorLayout";
 
 //HR-ADMIN
 import HrAdminLayout from "../portals/hr-admin/layouts/HrAdminLayout";

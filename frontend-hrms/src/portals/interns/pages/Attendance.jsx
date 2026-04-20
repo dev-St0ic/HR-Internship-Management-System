@@ -17,7 +17,6 @@ export default function Attendance() {
 
   return (
     <>
-      <Header title="Attendance" subtitle="Attendance tracking" userRole="intern" />
       <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm mt-6">
         {/* Top Stats Area */}
         <div className="grid grid-cols-3 border-b border-gray-200 mb-6">

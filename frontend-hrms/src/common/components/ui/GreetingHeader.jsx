@@ -12,7 +12,7 @@ export default function GreetingHeader({ name = "User" }) {
   }
 
   return (
-    <div className="w-full bg-white ">
+    <div className="w-full">
       <h3 className="font-bold text-base mt-1">Hello, {name}!</h3>
       <p className="text-xs text-gray-400">{greeting}</p>
     </div>
