@@ -1,0 +1,46 @@
+.hr-dashboard-page-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.hr-dashboard-overview-card,
+.hr-dashboard-card,
+.hr-dashboard-panel,
+.hr-dashboard-shortcut-button,
+.hr-dashboard-action-card,
+.hr-dashboard-queue-card,
+.hr-dashboard-department-card,
+.hr-dashboard-activity-item,
+.hr-dashboard-university-card,
+.hr-dashboard-partner-preview-card {
+  background: #ffffff;
+  border: 1px solid #ece8f6;
+  border-radius: 20px;
+  box-shadow: 0 18px 44px rgba(37, 22, 76, 0.06);
+}
+
+.hr-dashboard-overview-card {
+  display: grid;
+  grid-template-columns: minmax(0, 2.25fr) minmax(260px, 1fr);
+  gap: 24px;
+  padding: 28px;
+  background:
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.14), transparent 36%),
+    linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+}
+
+.hr-dashboard-overview-main {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hr-dashboard-kicker {
+  margin: 0;
+  color: #7c3aed;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

@@ -1,0 +1,40 @@
+
+.hr-dashboard-department-map-tile.is-positive {
+  background: linear-gradient(180deg, #ffffff 0%, #f4fdf8 100%);
+}
+
+.hr-dashboard-department-map-tile.is-attention {
+  background: linear-gradient(180deg, #ffffff 0%, #fff8ef 100%);
+}
+
+.hr-dashboard-department-map-tile.is-accent {
+  background: linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+}
+
+.hr-dashboard-department-map-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hr-dashboard-department-map-topline h3 {
+  margin: 0;
+  color: #1d1b27;
+}
+
+.hr-dashboard-department-map-topline p {
+  margin-top: 6px;
+}
+
+.hr-dashboard-department-map-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+}
+
+.hr-dashboard-department-map-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}

@@ -1,0 +1,43 @@
+
+.hr-dashboard-shortcut-topline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px;
+}
+
+.hr-dashboard-shortcut-topline h3,
+.hr-dashboard-partner-preview-copy h3 {
+  margin: 0;
+  color: #1d1b27;
+}
+
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-shortcut-topline h3 {
+  font-size: 0.96rem;
+  line-height: 1.25;
+}
+
+.hr-dashboard-shortcut-meta {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-shortcut-meta {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-shortcut-copy p {
+  display: none;
+}
+
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-badge,
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-status-pill {
+  min-height: 26px;
+  padding: 4px 8px;
+  font-size: 11px;
+  line-height: 1.1;
+  max-width: 96px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

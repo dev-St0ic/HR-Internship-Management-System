@@ -1,0 +1,54 @@
+
+.hr-dashboard-activity-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hr-dashboard-activity-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.hr-dashboard-university-card {
+  display: flex;
+  gap: 14px;
+}
+
+.hr-dashboard-university-mark {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.hr-dashboard-university-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (max-width: 1360px) {
+  .hr-dashboard-stats-grid,
+  .hr-dashboard-actions-grid,
+  .hr-dashboard-queues-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hr-dashboard-attendance-layout,
+  .hr-dashboard-department-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-workspace-groups,
+  .hr-dashboard-shortcut-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-toolbar-grid,
+  .hr-dashboard-attendance-months {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

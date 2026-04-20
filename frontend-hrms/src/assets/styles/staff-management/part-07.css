@@ -1,0 +1,58 @@
+
+.hrims-confirmation-button {
+  min-width: 128px;
+  min-height: 44px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.hrims-confirmation-button:hover {
+  transform: translateY(-1px);
+}
+
+.hrims-confirmation-button.is-cancel {
+  border: 1px solid #d5d9e5;
+  background: #ffffff;
+  color: #25263a;
+}
+
+.hrims-confirmation-button.is-cancel:hover {
+  background: #f8fafc;
+}
+
+.hrims-confirmation-button.is-confirm {
+  border: 1px solid transparent;
+  color: #ffffff;
+}
+
+.hrims-confirmation-button.is-confirm.is-accent {
+  background: linear-gradient(135deg, #7c3eff 0%, #6d28d9 100%);
+  box-shadow: 0 14px 28px rgba(124, 62, 255, 0.22);
+}
+
+.hrims-confirmation-button.is-confirm.is-success {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  box-shadow: 0 14px 28px rgba(22, 163, 74, 0.2);
+}
+
+.hrims-confirmation-button.is-confirm.is-danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 14px 28px rgba(239, 68, 68, 0.2);
+}
+
+.hrims-confirmation-button.is-confirm:hover {
+  filter: brightness(1.02);
+}
+
+.staff-detail-filter-modal {
+  width: min(680px, 90vw);
+  border: 1px solid #ececf2;
+  border-radius: 20px;
+  padding: 20px;
+  max-height: calc(100vh - 40px);
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(17, 24, 39, 0.14);
+}

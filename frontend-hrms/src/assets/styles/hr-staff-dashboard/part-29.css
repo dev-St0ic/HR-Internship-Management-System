@@ -1,0 +1,93 @@
+
+@media (max-width: 900px) {
+  .hr-dashboard-overview-card {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-overview-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-attendance-metrics-grid,
+  .hr-dashboard-department-insights-grid,
+  .hr-dashboard-department-map-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-toolbar-grid,
+  .hr-dashboard-attendance-months {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-workspace-group-wide {
+    grid-column: span 1;
+  }
+
+  .hr-dashboard-partner-preview-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-department-map-tile.is-wide {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .hr-dashboard-page-content {
+    gap: 20px;
+  }
+
+  .hr-dashboard-overview-card,
+  .hr-dashboard-panel,
+  .hr-dashboard-panel-tight,
+  .hr-dashboard-stat-card,
+  .hr-dashboard-action-card,
+  .hr-dashboard-queue-card,
+  .hr-dashboard-activity-item,
+  .hr-dashboard-university-card,
+  .hr-dashboard-attendance-month-card,
+  .hr-dashboard-attendance-metric-card,
+  .hr-dashboard-subpanel,
+  .hr-dashboard-department-map-tile,
+  .hr-dashboard-department-insight-card,
+  .hr-dashboard-shortcut-button,
+  .hr-dashboard-partner-preview-card {
+    padding: 18px;
+  }
+
+  .hr-dashboard-stats-grid,
+  .hr-dashboard-actions-grid,
+  .hr-dashboard-queues-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-action-topline,
+  .hr-dashboard-queue-topline,
+  .hr-dashboard-university-topline,
+  .hr-dashboard-activity-meta,
+  .hr-dashboard-attendance-month-topline,
+  .hr-dashboard-department-map-topline,
+  .hr-dashboard-issue-topline,
+  .hr-dashboard-department-ranking-topline,
+  .hr-dashboard-partner-preview-topline,
+  .hr-dashboard-section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hr-dashboard-shortcut-topline {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-shortcut-button.is-compact {
+    padding: 14px;
+  }
+
+  .hr-dashboard-workflow-item {
+    flex-direction: row;
+  }
+
+  .hr-dashboard-partner-preview-actions {
+    width: 100%;
+  }
+}

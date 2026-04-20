@@ -1,0 +1,40 @@
+
+.hr-dashboard-toolbar-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hr-dashboard-toolbar-grid-single {
+  grid-template-columns: 1fr;
+}
+
+.hr-dashboard-shortcut-grid-single {
+  grid-template-columns: 1fr;
+}
+
+.hr-dashboard-shortcut-button {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.hr-dashboard-shortcut-button:hover {
+  transform: translateY(-2px);
+  border-color: #d6caf7;
+  box-shadow: 0 20px 44px rgba(37, 22, 76, 0.1);
+}
+
+.hr-dashboard-shortcut-button.is-compact {
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  box-shadow: none;
+}
+
+.hr-dashboard-shortcut-button.is-compact:hover {
+  box-shadow: 0 14px 28px rgba(37, 22, 76, 0.08);
+}

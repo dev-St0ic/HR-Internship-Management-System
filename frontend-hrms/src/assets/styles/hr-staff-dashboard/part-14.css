@@ -1,0 +1,43 @@
+
+.hr-dashboard-attendance-bar-segment.is-positive {
+  background: linear-gradient(90deg, #34d399 0%, #10b981 100%);
+}
+
+.hr-dashboard-attendance-bar-segment.is-attention {
+  background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%);
+}
+
+.hr-dashboard-attendance-bar-segment.is-accent {
+  background: linear-gradient(90deg, #a78bfa 0%, #7c3aed 100%);
+}
+
+.hr-dashboard-attendance-bar-segment.is-danger {
+  background: linear-gradient(90deg, #fca5a5 0%, #ef4444 100%);
+}
+
+.hr-dashboard-attendance-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+
+.hr-dashboard-attendance-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.hr-dashboard-attendance-stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid #efeaf8;
+  background: #fbfaff;
+}
+
+.hr-dashboard-attendance-stat-card span {
+  color: #77738d;
+  font-size: 12px;
+}

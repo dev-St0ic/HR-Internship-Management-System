@@ -1,0 +1,41 @@
+
+.hr-dashboard-attendance-bar {
+  display: flex;
+  width: 100%;
+  min-height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #efeaf8;
+}
+
+.hr-dashboard-attendance-bar-segment.is-positive,
+.hr-dashboard-status-dot.is-positive,
+.hr-dashboard-status-pill.is-positive,
+.hr-dashboard-attendance-legend-item.is-positive .hr-dashboard-attendance-legend-dot {
+  background: #dcfce7;
+  color: #047857;
+}
+
+.hr-dashboard-attendance-bar-segment.is-attention,
+.hr-dashboard-status-dot.is-attention,
+.hr-dashboard-status-pill.is-attention,
+.hr-dashboard-attendance-legend-item.is-attention .hr-dashboard-attendance-legend-dot {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.hr-dashboard-attendance-bar-segment.is-accent,
+.hr-dashboard-status-dot.is-accent,
+.hr-dashboard-status-pill.is-accent,
+.hr-dashboard-attendance-legend-item.is-accent .hr-dashboard-attendance-legend-dot {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.hr-dashboard-attendance-bar-segment.is-danger,
+.hr-dashboard-status-dot.is-danger,
+.hr-dashboard-status-pill.is-danger,
+.hr-dashboard-attendance-legend-item.is-danger .hr-dashboard-attendance-legend-dot {
+  background: #fee2e2;
+  color: #b91c1c;
+}

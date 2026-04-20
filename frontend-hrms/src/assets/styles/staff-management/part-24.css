@@ -1,0 +1,55 @@
+
+.document-vault-filter-modal .filter-option.is-disabled:hover::after,
+.document-vault-filter-modal .filter-option.is-disabled:focus-within::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.document-vault-date-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.document-vault-date-field {
+  display: flex !important;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.document-vault-date-field span {
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.document-vault-date-field input {
+  height: 42px;
+  border: 1px solid #e6e7ef;
+  border-radius: 10px;
+  background: #fff;
+  color: #25263a;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.document-vault-date-field input:focus {
+  outline: none;
+  border-color: #c4b5fd;
+  box-shadow: 0 0 0 3px rgba(124, 62, 255, 0.12);
+  background: #fff;
+}
+
+.document-vault-filter-actions {
+  position: sticky;
+  bottom: -26px;
+  z-index: 3;
+  margin: 28px -30px -26px;
+  padding: 18px 30px 26px;
+  border-top: 1px solid #efeff5;
+  background: #ffffff;
+  box-shadow: 0 -18px 28px rgba(17, 24, 39, 0.08);
+}

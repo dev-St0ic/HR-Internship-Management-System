@@ -1,0 +1,44 @@
+
+html[data-theme='dark'] .hr-dashboard-attendance-stat-card.is-positive {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.22);
+}
+
+html[data-theme='dark'] .hr-dashboard-attendance-stat-card.is-attention {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.24);
+}
+
+.hr-dashboard-section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.hr-dashboard-section-heading h3,
+.hr-dashboard-action-topline h3,
+.hr-dashboard-queue-topline h3,
+.hr-dashboard-department-topline h3,
+.hr-dashboard-activity-copy h3,
+.hr-dashboard-university-topline h3 {
+  margin: 0;
+  color: #1d1b27;
+}
+
+.hr-dashboard-partner-preview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 22px;
+  background:
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.12), transparent 36%),
+    linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+}
+
+.hr-dashboard-partner-preview-topline {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}

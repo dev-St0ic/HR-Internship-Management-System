@@ -1,0 +1,49 @@
+
+.hr-dashboard-overview-metric span,
+.hr-dashboard-progress-copy span,
+.hr-dashboard-eyebrow,
+.hr-dashboard-activity-meta time,
+.hr-dashboard-university-metrics span,
+.hr-dashboard-attendance-metric-card span,
+.hr-dashboard-attendance-month-footer span,
+.hr-dashboard-department-map-footer span,
+.hr-dashboard-department-map-metric span,
+.hr-dashboard-department-insight-card span,
+.hr-dashboard-partner-preview-metrics span {
+  color: #77738d;
+  font-size: 13px;
+}
+
+.hr-dashboard-overview-metric strong,
+.hr-dashboard-progress-copy strong {
+  display: block;
+  margin-top: 8px;
+  color: #1d1b27;
+  font-size: 1.35rem;
+}
+
+.hr-dashboard-overview-status {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(124, 58, 237, 0.12);
+}
+
+.hr-dashboard-sync-pill,
+.hr-dashboard-badge,
+.hr-dashboard-activity-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}

@@ -1,0 +1,43 @@
+
+.hr-dashboard-department-map-footer {
+  color: #4d4960;
+}
+
+.hr-dashboard-department-sidebar {
+  align-self: stretch;
+}
+
+.hr-dashboard-department-ranking-copy {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hr-dashboard-department-ranking-topline h4 {
+  font-size: 0.96rem;
+}
+
+.hr-dashboard-queues-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hr-dashboard-queue-card {
+  align-items: flex-start;
+  padding: 18px;
+}
+
+.hr-dashboard-activity-list,
+.hr-dashboard-university-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hr-dashboard-activity-item,
+.hr-dashboard-university-card {
+  padding: 18px;
+}
+
+.hr-dashboard-activity-item {
+  display: flex;
+  align-items: flex-start;
+}
