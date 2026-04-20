@@ -13,9 +13,22 @@ import {
   SupervisorDocuments,
 } from "../portals/supervisor/Index";
 
+//HR-ADMIN
+import HrAdminLayout from "../portals/hr-admin/layouts/HrAdminLayout";
+import HrAdminDashboard from "../portals/hr-admin/pages/HrAdminDashboard";
+import AdminRecruitmentPage from "../portals/hr-admin/pages/AdminRecruitmentPage";
+import AdminInternManagementPage from "../portals/hr-admin/pages/AdminInternManagementPage";
+import AdminStaffManagementPage from "../portals/hr-admin/pages/AdminStaffManagementPage";
+import AdminDocumentVault from "../portals/hr-admin/pages/AdminDocumentVault";
+import ReportAnalyticsPage from "../portals/hr-admin/pages/ReportAnalyticsPage";
+import SystemLogs from "../portals/hr-admin/pages/SystemLogs";
+
 //HR-STAFF
-import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
-import OperationsPage from "../portals/hr-staff/pages/OperationsPage";
+import HrStaffLayout from "../portals/hr-staff/layouts/HrStaffLayout";
+import HRStaffDashboard from "../portals/hr-staff/pages/HrStaffDashboard";
+import RecruitmentPage from "../portals/hr-staff/pages/RecruitmentPage";
+import StaffManagementPage from "../portals/hr-staff/pages/StaffManagement";
+import DocumentVault from "../portals/hr-staff/pages/DocumentVault";
 
 //LANDING PAGE
 import LandingPageHeader from "../common/components/layout/LandingPageHeader";
@@ -44,14 +57,7 @@ import ApplicantNotificationPage from "../portals/applicant-intern/pages/Notific
 import Dashboard from "../portals/applicant-intern/pages/Dashboard";
 import MyApplication from "../portals/applicant-intern/pages/MyApplication";
 import Settings from "../portals/applicant-intern/pages/Settings";
-import CreateAccountPage from "../portals/applicant-intern/pages/CreateAccountPage";
-
-// Temporary placeholders muna
-const Home = () => <>Homee</>;
-
-const HRStaffDashboard = () => <>HR staff dashboard page</>;
-
-const HRAdminDashboard = () => <>HR admin dashboard page</>;
+import InternManagementPage from "../portals/hr-staff/pages/InternManagementPage";
 
 export const AppRouter = () => {
   return (
@@ -106,13 +112,35 @@ export const AppRouter = () => {
         </Route>
 
         {/* HR-STAFF Page Route */}
-        <Route path="/hr-staff" element={<SideBarLayout />}>
-          <Route path="operations" element={<OperationsPage />} />
+        <Route path="/hr-staff" element={<HrStaffLayout />}>
           <Route index element={<HRStaffDashboard />} />
+          <Route path="recruitment" element={<RecruitmentPage />} />
+          <Route path="intern-management" element={<InternManagementPage />} />
+          <Route path="staff-management" element={<StaffManagementPage />} />
+          <Route path="document-vault" element={<DocumentVault />} />
+          <Route path="settings" element={<SettingsPage />} />
         </Route>
 
         {/* HR-ADMIN Page Route */}
-        <Route path="/hr-admin/*" element={<HRAdminDashboard />} />
+        <Route path="/hr-admin" element={<HrAdminLayout />}>
+          <Route index element={<HrAdminDashboard />} />
+          <Route path="recruitment" element={<AdminRecruitmentPage />} />
+          <Route
+            path="intern-management"
+            element={<AdminInternManagementPage />}
+          />
+          <Route
+            path="staff-management"
+            element={<AdminStaffManagementPage />}
+          />
+          <Route path="document-vault" element={<AdminDocumentVault />} />
+          <Route
+            path="reports-and-analytics"
+            element={<ReportAnalyticsPage />}
+          />
+          <Route path="system-logs" element={<SystemLogs />} />
+          <Route path="settings" element={<SettingsPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
