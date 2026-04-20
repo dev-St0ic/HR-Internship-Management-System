@@ -1,7 +1,9 @@
 import { Outlet, useLocation, NavLink } from 'react-router-dom';
 import { Bell, Link } from 'lucide-react';  
+import { useTheme } from '../../../common/theme/ThemeProvider';
 
 export default function Header() {
+  const { isDark } = useTheme();
   const location = useLocation();
 
   const headerTitlePath = {
@@ -30,21 +32,21 @@ export default function Header() {
 
   return (
     <div className="row w-full">
-      <div className="header flex h-30 justify-between items-center px-5">
+      <div className={`header flex h-30 items-center justify-between px-5 ${isDark ? "text-slate-100" : ""}`}>
         <div className="header-title">
           <header className="flex items-center">
             <h1 className="font-medium text-lg">{headerTitle}</h1>
           </header>
-          <span className="text-gray-500 text-sm">{headerLabel}</span>
+          <span className={`text-sm ${isDark ? "text-slate-400" : "text-gray-500"}`}>{headerLabel}</span>
         </div>
         <NavLink to="/s/notifications">
-          <div className="hover:bg-gray-100 rounded-full p-2 cursor-pointer transition-colors duration-300">
+          <div className={`rounded-full p-2 cursor-pointer transition-colors duration-300 ${isDark ? "hover:bg-slate-800" : "hover:bg-gray-100"}`}>
             <Bell />
           </div>
         </NavLink>
       </div>
 
-      <main className="flex-1 px-5 m-0">
+      <main className="m-0 flex-1 px-5">
         <Outlet />
       </main>
     </div>

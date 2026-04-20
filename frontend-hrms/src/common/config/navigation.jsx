@@ -72,8 +72,8 @@ export const navigation = {
       icon: <Users size={18} />,
     },
     {
-      to: "/hr-staff/operations",
-      label: "Operations",
+      to: "/hr-staff/intern-management",
+      label: "Intern Management",
       icon: <GitCompare size={18} />,
     },
     {
