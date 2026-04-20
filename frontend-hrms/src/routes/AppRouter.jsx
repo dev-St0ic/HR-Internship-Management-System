@@ -59,6 +59,7 @@ import MyApplication from "../portals/applicant-intern/pages/MyApplication";
 import Settings from "../portals/applicant-intern/pages/Settings";
 import InternManagementPage from "../portals/hr-staff/pages/InternManagementPage";
 import CreateAccountPage from "../portals/applicant-intern/pages/CreateAccountPage";
+import ApplicantCalendarPage from "../portals/applicant-intern/pages/CalendarPage";
 
 export const AppRouter = () => {
   return (
@@ -85,6 +86,7 @@ export const AppRouter = () => {
           <Route path="notifications" element={<ApplicantNotificationPage />} />
           <Route path="my-application" element={<MyApplication />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="calendar" element={<ApplicantCalendarPage />} />
         </Route>
 
         {/* Intern Page Route */}
