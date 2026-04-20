@@ -1,3 +1,5 @@
+import MyInternsPage from "../../../common/components/my-interns/MyInternsPage";
+
 export default function AdminInternManagementPage() {
-  return <h1>Intern Management Page</h1>;
+  return <MyInternsPage />;
 }
