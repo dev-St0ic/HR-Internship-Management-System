@@ -1,0 +1,73 @@
+
+.recruitment-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  padding: 12px 12px 14px;
+  background: transparent;
+  color: #4b5563;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.recruitment-tab img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.7;
+  filter: grayscale(1);
+}
+
+.recruitment-tab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.recruitment-tab.is-active {
+  color: #7c3eff;
+}
+
+.recruitment-tab.is-active img {
+  opacity: 1;
+  filter: none;
+}
+
+.recruitment-tab.is-active::after {
+  background: #7c3eff;
+}
+
+.recruitment-tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: #f5f4fb;
+  color: #8b8b95;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.recruitment-tab.is-active .recruitment-tab-count {
+  background: #f3edff;
+  color: #7c3eff;
+}
+
+.recruitment-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 560px;
+  padding: 18px;
+}

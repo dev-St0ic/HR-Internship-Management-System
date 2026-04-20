@@ -1,0 +1,42 @@
+
+.hr-dashboard-shortcut-button.is-positive {
+  background: linear-gradient(180deg, #ffffff 0%, #f4fdf8 100%);
+}
+
+.hr-dashboard-shortcut-button.is-attention {
+  background: linear-gradient(180deg, #ffffff 0%, #fff8ef 100%);
+}
+
+.hr-dashboard-shortcut-button.is-accent {
+  background: linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+}
+
+.hr-dashboard-shortcut-icon-shell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #f5f1ff;
+  flex-shrink: 0;
+}
+
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-shortcut-icon-shell {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+}
+
+.hr-dashboard-shortcut-copy {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-shortcut-copy {
+  gap: 4px;
+}

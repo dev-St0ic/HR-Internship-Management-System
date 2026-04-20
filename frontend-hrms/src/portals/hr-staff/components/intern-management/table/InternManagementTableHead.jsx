@@ -1,0 +1,8 @@
+import { getHeaderSortIcon } from '../../../utils/intern-management/helpers';
+
+export default function InternManagementTableHead({ activeTab, columns, sortConfig, onSort, onResizeStart }) {
+  const currentSortConfig = sortConfig[activeTab];
+  return (
+    <thead><tr>{columns.map((column) => { const SortIcon = getHeaderSortIcon(column.key, currentSortConfig); const ariaSort = column.sortable ? (currentSortConfig.key === column.key ? (currentSortConfig.direction === 'asc' ? 'ascending' : 'descending') : 'none') : undefined; const sortLabel = `Sort by ${column.label} ${currentSortConfig.key === column.key && currentSortConfig.direction === 'asc' ? 'descending' : 'ascending'}`; return <th key={column.key} aria-sort={ariaSort}><div className="document-vault-header-cell">{column.sortable ? <button type="button" className={`document-vault-sort-button ${currentSortConfig.key === column.key ? 'is-active' : ''}`} onClick={() => onSort(column.key)} aria-label={sortLabel}><span className="document-vault-header-text">{column.label}</span><SortIcon size={14} className="document-vault-sort-icon" aria-hidden="true" /></button> : <span className="document-vault-header-text">{column.label}</span>}{column.resizable ? <button type="button" className="document-vault-resize-handle" aria-label={`Resize ${column.label} column`} onMouseDown={(event) => onResizeStart(event, column.key, column.minWidth)} /> : null}</div></th>; })}</tr></thead>
+  );
+}

@@ -1,0 +1,55 @@
+
+.intern-management-filter-options::-webkit-scrollbar {
+  width: 6px;
+}
+
+.intern-management-filter-options::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #d8dbea;
+}
+
+.intern-management-filter-option {
+  border: 1px solid #ececf2;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 9px 10px;
+  gap: 8px;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.intern-management-filter-option:hover {
+  border-color: #dbcfff;
+  background: #faf7ff;
+}
+
+.intern-management-filter-option:has(input:checked) {
+  border-color: #cdb7ff;
+  background: linear-gradient(180deg, #fbf8ff 0%, #f5efff 100%);
+  box-shadow: 0 0 0 1px rgba(124, 62, 255, 0.08);
+}
+
+.intern-management-filter-option input {
+  accent-color: #7c3eff;
+  margin: 0;
+}
+
+.intern-management-filter-option span {
+  padding-left: 8px;
+  font-size: 13px;
+}
+
+.intern-management-filter-option:has(input:checked) span {
+  color: #5b21b6;
+  font-weight: 600;
+}
+
+.intern-management-filter-actions {
+  position: sticky;
+  bottom: -20px;
+  z-index: 3;
+  margin: 18px -24px -20px;
+  padding: 16px 24px 20px;
+  border-top: 1px solid #efeff5;
+  background: #ffffff;
+  box-shadow: 0 -18px 28px rgba(17, 24, 39, 0.08);
+}

@@ -1,0 +1,55 @@
+
+.settings-secondary-btn {
+  border: 1px solid #e4dcff;
+  background: #f5f1ff;
+  color: #7c3eff;
+}
+
+.settings-primary-btn {
+  border: none;
+  background: #7c3eff;
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .settings-hero,
+  .settings-panel-header,
+  .settings-row,
+  .settings-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .settings-summary-grid,
+  .settings-metadata-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-summary-card {
+    min-height: 0;
+  }
+
+  .settings-row-control,
+  .settings-dropdown,
+  .settings-dropdown-wide {
+    width: 100%;
+  }
+
+  .settings-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Action Buttons */
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 8px;
+  font-size: 18px;
+  color: #7c3aed;
+  transition: color 0.15s;
+}
+.action-btn:last-child {
+  margin-right: 0;
+}

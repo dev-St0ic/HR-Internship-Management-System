@@ -1,0 +1,44 @@
+
+html[data-theme='dark'] .hr-dashboard-icon-shell,
+html[data-theme='dark'] .hr-dashboard-action-icon-shell,
+html[data-theme='dark'] .hr-dashboard-queue-icon-shell,
+html[data-theme='dark'] .hr-dashboard-activity-icon-shell,
+html[data-theme='dark'] .hr-dashboard-university-mark,
+html[data-theme='dark'] .hr-dashboard-partner-preview-mark {
+  background: rgba(167, 139, 250, 0.14);
+}
+
+html[data-theme='dark'] .hr-dashboard-sync-pill,
+html[data-theme='dark'] .hr-dashboard-badge,
+html[data-theme='dark'] .hr-dashboard-activity-category {
+  background: rgba(167, 139, 250, 0.16);
+  color: #ddd6fe;
+}
+
+html[data-theme='dark'] .hr-dashboard-shortcut-button.is-compact .hr-dashboard-shortcut-topline h3,
+html[data-theme='dark'] .hr-dashboard-shortcut-button.is-compact .hr-dashboard-badge,
+html[data-theme='dark'] .hr-dashboard-shortcut-button.is-compact .hr-dashboard-status-pill {
+  color: var(--theme-text);
+}
+
+html[data-theme='dark'] .hr-dashboard-shortcut-button.is-compact .hr-dashboard-shortcut-meta,
+html[data-theme='dark'] .hr-dashboard-overview-status p,
+html[data-theme='dark'] .hr-dashboard-workspace-group-heading p {
+  color: var(--theme-text-soft);
+}
+
+html[data-theme='dark'] .hr-dashboard-sync-pill.is-live {
+  background: rgba(45, 212, 191, 0.14);
+  color: #99f6e4;
+}
+
+html[data-theme='dark'] .hr-dashboard-sync-pill.is-error {
+  background: rgba(251, 191, 36, 0.16);
+  color: #fdba74;
+}
+
+html[data-theme='dark'] .hr-dashboard-attendance-bar,
+html[data-theme='dark'] .hr-dashboard-issue-track,
+html[data-theme='dark'] .hr-dashboard-progress-bar {
+  background: #1e293b;
+}

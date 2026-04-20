@@ -1,0 +1,50 @@
+
+.intern-management-person-cell-with-avatar {
+  gap: 12px;
+  min-width: 0;
+}
+
+.intern-management-cell-name,
+.intern-management-cell-university,
+.intern-management-cell-issue-type,
+.intern-management-cell-department {
+  overflow-wrap: anywhere;
+}
+
+.intern-management-cell-id,
+.intern-management-cell-date {
+  white-space: nowrap;
+}
+
+.intern-management-cell-status,
+.intern-management-cell-action {
+  text-align: center;
+}
+
+.intern-management-cell-action .intern-management-row-actions {
+  justify-content: center;
+  width: 100%;
+}
+
+.intern-management-table th:last-child,
+.intern-management-table td:last-child {
+  padding-right: 20px;
+}
+
+.intern-management-request-modal {
+  width: min(540px, 92vw);
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
+  padding: 26px 24px;
+}
+
+.intern-management-request-title-row {
+  margin-bottom: 18px;
+}
+
+.intern-management-request-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}

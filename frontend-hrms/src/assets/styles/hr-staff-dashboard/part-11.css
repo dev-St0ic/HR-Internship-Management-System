@@ -1,0 +1,41 @@
+
+.hr-dashboard-attendance-metrics-grid,
+.hr-dashboard-department-insights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.hr-dashboard-attendance-metric-card,
+.hr-dashboard-subpanel,
+.hr-dashboard-department-insight-card {
+  border: 1px solid #ece8f6;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+}
+
+.hr-dashboard-attendance-metric-card,
+.hr-dashboard-department-insight-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+}
+
+.hr-dashboard-attendance-metric-card strong,
+.hr-dashboard-department-insight-card strong,
+.hr-dashboard-department-map-metric strong,
+.hr-dashboard-partner-preview-metrics strong {
+  color: #1d1b27;
+  font-size: 1.55rem;
+  line-height: 1.1;
+}
+
+.hr-dashboard-attendance-months,
+.hr-dashboard-workflow-list,
+.hr-dashboard-issue-list,
+.hr-dashboard-department-ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}

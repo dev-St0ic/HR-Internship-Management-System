@@ -1,0 +1,51 @@
+
+.intern-management-secondary-button img,
+.intern-management-primary-button img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.intern-management-secondary-button {
+  border: 1px solid #ececf2;
+  background: #f8f5ff;
+  color: #7c3eff;
+}
+
+.intern-management-primary-button {
+  border: 1px solid transparent;
+  background: #7c3eff;
+  color: #ffffff;
+}
+
+.intern-management-month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.intern-management-month-nav h3 {
+  margin: 0;
+  color: #25263a;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.intern-management-month-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: #25263a;
+  cursor: pointer;
+}
+
+.intern-management-month-arrow:disabled {
+  color: #c9cad3;
+  cursor: not-allowed;
+}

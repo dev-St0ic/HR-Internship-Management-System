@@ -1,0 +1,46 @@
+
+.hr-dashboard-subpanel-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hr-dashboard-workflow-item,
+.hr-dashboard-issue-item,
+.hr-dashboard-department-ranking-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hr-dashboard-workflow-item strong,
+.hr-dashboard-issue-topline strong {
+  color: #1d1b27;
+}
+
+.hr-dashboard-workflow-copy,
+.hr-dashboard-issue-topline,
+.hr-dashboard-department-ranking-copy {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+
+.hr-dashboard-workflow-copy {
+  align-items: center;
+  gap: 10px;
+}
+
+.hr-dashboard-issue-item,
+.hr-dashboard-department-ranking-item {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.hr-dashboard-issue-topline,
+.hr-dashboard-department-ranking-topline {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}

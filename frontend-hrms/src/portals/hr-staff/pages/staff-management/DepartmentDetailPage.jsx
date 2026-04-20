@@ -1,32 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Link, useParams, useNavigate, useSearchParams } from 'react-router-dom';
-import EmployeeRow from '../../components/staff-management/EmployeeRow';
-import SearchBar from '../../components/staff-management/SearchBar';
-import NotificationIcon from '../../components/staff-management/NotificationIcon';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import DepartmentEmployeesTable from '../../components/staff-management/DepartmentEmployeesTable';
+import DetailPageHeader from '../../components/staff-management/DetailPageHeader';
+import DetailSearchToolbar from '../../components/staff-management/DetailSearchToolbar';
 import FilterModal from '../../components/staff-management/FilterModal';
 import PaginationControls from '../../components/staff-management/PaginationControls';
 import { actionIconMap, getThemeAsset } from '../../../../common/config/appIconRegistry';
 import { useTheme } from '../../../../common/theme/ThemeProvider';
 import { staffManagementDepartments } from '../../data/staffManagementData';
-
-const ITEMS_PER_PAGE = 6;
-const initialDepartmentFilters = {
-  designations: [],
-  workSetups: [],
-  internLoads: [],
-};
-
-function getInternLoadLabel(internCount) {
-  if (internCount >= 4) {
-    return '4+ interns';
-  }
-
-  if (internCount >= 2) {
-    return '2-3 interns';
-  }
-
-  return '0-1 intern';
-}
+import { getInternLoadLabel, initialDepartmentFilters, ITEMS_PER_PAGE } from '../../utils/staff-management/detailPageHelpers';
+import { useFilterState } from '../../utils/staff-management/useFilterState';
 
 const DepartmentDetailPage = () => {
   const { resolvedTheme } = useTheme();
@@ -35,12 +18,10 @@ const DepartmentDetailPage = () => {
   const pageParam = Number(searchParams.get('page'));
   const pageFromQuery = Number.isInteger(pageParam) && pageParam > 0 ? pageParam : 1;
   const [search, setSearch] = useState('');
-  const [filterOpen, setFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(pageFromQuery);
-  const [appliedFilters, setAppliedFilters] = useState(initialDepartmentFilters);
-  const [draftFilters, setDraftFilters] = useState(initialDepartmentFilters);
+  const { appliedFilters, closeFilters, draftFilters, filterOpen, handleApplyFilters, handleResetFilters, handleToggleFilterValue, openFilters } = useFilterState(initialDepartmentFilters);
   const navigate = useNavigate();
-  const filterIcon = getThemeAsset(actionIconMap.filter, resolvedTheme);
+  const filterIcon = getThemeAsset(actionIconMap.filter, resolvedTheme === 'dark' ? 'light' : resolvedTheme);
   const department = staffManagementDepartments.find(
     (entry) => String(entry.id) === String(departmentId)
   );
@@ -109,128 +90,14 @@ const DepartmentDetailPage = () => {
     setSearchParams({}, { replace: true });
   }, [currentPage, setSearchParams]);
 
-  const handleToggleFilterValue = (groupKey, option) => {
-    setDraftFilters((current) => ({
-      ...current,
-      [groupKey]: current[groupKey].includes(option)
-        ? current[groupKey].filter((value) => value !== option)
-        : [...current[groupKey], option],
-    }));
-  };
-
-  const handleApplyFilters = () => {
-    setAppliedFilters(draftFilters);
-    setFilterOpen(false);
-  };
-
-  const handleResetFilters = () => {
-    setDraftFilters(initialDepartmentFilters);
-    setAppliedFilters(initialDepartmentFilters);
-    setFilterOpen(false);
-  };
-
   return (
     <div className="staff-management-layout">
       <aside className="sidebar">{/* ... Side menu ... */}</aside>
       <main className="main-content detail-page-content">
-        <div className="header-row">
-          <div>
-            <h2>{department?.name || `Department ${departmentId}`}</h2>
-            <div className="subtitle">
-              <Link className="subtitle-link" to="/hr-staff/staff-management">
-                Staff Management
-              </Link>
-              <span className="subtitle-separator"> &gt; </span>
-              <span>
-                {department?.name || `Department ${departmentId}`}
-              </span>
-            </div>
-          </div>
-          <NotificationIcon />
-        </div>
-        <div className="search-row" style={{ display: 'flex', gap: 12 }}>
-          <SearchBar value={search} onChange={setSearch} placeholder="Search" />
-          <button className="filter-btn" onClick={() => {
-            setDraftFilters(appliedFilters);
-            setFilterOpen(true);
-          }}>
-            <img src={filterIcon} alt="" aria-hidden="true" className="filter-btn-icon" />
-            Filter
-          </button>
-        </div>
-        <section className="table-section">
-          <div className="table-shell">
-            <table className="employee-table">
-              <thead>
-                <tr>
-                  <th>Employee ID</th>
-                  <th>Employee Name</th>
-                  <th>Designation</th>
-                  <th>Type</th>
-                  <th>Number Of Interns</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {paginatedEmployees.length > 0 ? (
-                  <>
-                    {paginatedEmployees.map(emp => (
-                      <EmployeeRow key={emp.id} employee={{ ...emp, interns: emp.interns.length }} onEdit={() => navigate(`/hr-staff/staff-management/department/${departmentId}/employee/${emp.id}?page=${currentPage}`)} />
-                    ))}
-                    {Array.from({ length: emptyRowCount }, (_, index) => (
-                      <tr key={`department-placeholder-${index}`} className="staff-management-placeholder-row" aria-hidden="true">
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                      </tr>
-                    ))}
-                  </>
-                ) : (
-                  <>
-                    <tr>
-                      <td colSpan="6">
-                        <div className="staff-management-empty-state">
-                          No employees match the current search and filter settings.
-                        </div>
-                      </td>
-                    </tr>
-                    {Array.from({ length: emptyRowCount }, (_, index) => (
-                      <tr key={`department-placeholder-${index}`} className="staff-management-placeholder-row" aria-hidden="true">
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                      </tr>
-                    ))}
-                  </>
-                )}
-              </tbody>
-            </table>
-          </div>
-          {totalPages > 1 && (
-            <PaginationControls
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
-          )}
-        </section>
-        {filterOpen && (
-          <FilterModal
-            title="Filter Employees"
-            sections={filterSections}
-            draftFilters={draftFilters}
-            onToggleValue={handleToggleFilterValue}
-            onApply={handleApplyFilters}
-            onReset={handleResetFilters}
-            onClose={() => setFilterOpen(false)}
-          />
-        )}
+        <DetailPageHeader title={department?.name || `Department ${departmentId}`} breadcrumbs={[{ label: 'Staff Management', to: '/hr-staff/staff-management' }, { label: department?.name || `Department ${departmentId}` }]} />
+        <DetailSearchToolbar search={search} setSearch={setSearch} filterIcon={filterIcon} onOpenFilters={openFilters} />
+        <section className="table-section"><div className="table-shell"><DepartmentEmployeesTable employees={paginatedEmployees} emptyRowCount={emptyRowCount} onEditEmployee={(employeeIdValue) => navigate(`/hr-staff/staff-management/department/${departmentId}/employee/${employeeIdValue}?page=${currentPage}`)} /></div>{totalPages > 1 ? <PaginationControls currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} /> : null}</section>
+        {filterOpen ? <FilterModal title="Filter Employees" sections={filterSections} draftFilters={draftFilters} onToggleValue={handleToggleFilterValue} onApply={handleApplyFilters} onReset={handleResetFilters} onClose={closeFilters} /> : null}
       </main>
     </div>
   );

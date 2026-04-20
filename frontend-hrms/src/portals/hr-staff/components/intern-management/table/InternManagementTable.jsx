@@ -1,0 +1,9 @@
+import PaginationControls from '../../staff-management/PaginationControls';
+import InternManagementTableBody from './InternManagementTableBody';
+import InternManagementTableHead from './InternManagementTableHead';
+
+export default function InternManagementTable({ activeTab, columns, activeTableWidth, columnWidths, sortConfig, rows, emptyRowCount, totalPages, currentPage, onPageChange, onSort, onResizeStart, navigate, onRemoveIntern, onOpenRequestModal, viewIcon, removeIcon, editIcon }) {
+  return (
+    <><div className="document-vault-table-shell intern-management-table-shell"><div className="document-vault-table-scroll intern-management-table-scroll"><table className="document-vault-table intern-management-table" style={{ minWidth: `${activeTableWidth}px` }}><colgroup>{columns.map((column) => <col key={`${activeTab}-column-${column.key}`} style={{ width: `${columnWidths[activeTab][column.key]}px` }} />)}</colgroup><InternManagementTableHead activeTab={activeTab} columns={columns} sortConfig={sortConfig} onSort={onSort} onResizeStart={onResizeStart} /><InternManagementTableBody activeTab={activeTab} rows={rows} emptyRowCount={emptyRowCount} navigate={navigate} onRemoveIntern={onRemoveIntern} onOpenRequestModal={onOpenRequestModal} viewIcon={viewIcon} removeIcon={removeIcon} editIcon={editIcon} /></table></div></div><div className="intern-management-pagination-slot">{totalPages > 1 ? <PaginationControls currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} className="document-vault-pagination-bar" /> : <div className="document-vault-pagination-placeholder" aria-hidden="true" />}</div></>
+  );
+}

@@ -1,0 +1,7 @@
+import ApplicantCard from './ApplicantCard';
+import PartnerUniversityCard from './PartnerUniversityCard';
+
+export default function RecruitmentResultsGrid({ activeTab, items, placeholderCount, fixedHeight, onViewProfile, onMoveToAdminApproval, onEndorse }) {
+  const isUniversityTab = activeTab === 'partner-university'; const gridClassName = isUniversityTab ? 'recruitment-university-grid' : 'recruitment-application-grid'; const placeholderClassName = isUniversityTab ? 'recruitment-university-card recruitment-placeholder-card' : 'recruitment-applicant-card recruitment-placeholder-card';
+  return <div className={gridClassName}>{isUniversityTab ? items.map((university) => <PartnerUniversityCard key={university.id} university={university} fixedHeight={fixedHeight} />) : items.map((application) => <ApplicantCard key={application.id} application={application} onViewProfile={onViewProfile} onMoveToAdminApproval={onMoveToAdminApproval} onEndorse={onEndorse} fixedHeight={fixedHeight} />)}{Array.from({ length: placeholderCount }, (_, index) => <article key={`placeholder-${index + 1}`} className={placeholderClassName} style={fixedHeight ? { height: `${fixedHeight}px` } : undefined} aria-hidden="true" />)}</div>;
+}

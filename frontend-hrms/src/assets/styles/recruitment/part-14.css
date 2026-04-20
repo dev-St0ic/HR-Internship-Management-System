@@ -1,0 +1,79 @@
+
+.recruitment-university-featured-name {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  color: #25263a;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: left;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.recruitment-pagination-slot {
+  min-height: 52px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.recruitment-empty-state {
+  display: grid;
+  min-height: 320px;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.recruitment-empty-state h3 {
+  margin: 0 0 8px;
+  color: #16172b;
+  font-size: 24px;
+}
+
+.recruitment-empty-state p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+@media (max-width: 1180px) {
+  .recruitment-hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 880px) {
+  .recruitment-application-grid,
+  .recruitment-university-grid {
+    min-height: 0;
+  }
+
+  .recruitment-applicant-card,
+  .recruitment-university-card {
+    height: auto;
+  }
+
+  .recruitment-card-footer,
+  .recruitment-university-footer,
+  .recruitment-university-stats,
+  .recruitment-meta-grid,
+  .recruitment-metric-grid,
+  .recruitment-card-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .recruitment-university-title-row,
+  .recruitment-toolbar,
+  .recruitment-results-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .recruitment-toolbar-summary {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

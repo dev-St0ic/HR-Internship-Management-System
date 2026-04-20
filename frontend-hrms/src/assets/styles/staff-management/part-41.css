@@ -1,0 +1,58 @@
+
+.settings-date-field .MuiOutlinedInput-root {
+  height: 42px;
+  border-radius: 10px;
+  background: #fff;
+  color: #25263a;
+  font-size: 14px;
+}
+
+.settings-date-field .MuiOutlinedInput-input {
+  padding: 10px 14px;
+}
+
+.settings-date-field .MuiOutlinedInput-notchedOutline {
+  border-color: #e6e7ef;
+}
+
+.settings-date-field .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+.settings-date-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #cdbfff;
+}
+
+.settings-date-field .MuiInputLabel-root,
+.settings-date-field .MuiFormLabel-root {
+  display: none;
+}
+
+.settings-date-popper {
+  z-index: 40;
+}
+
+.settings-date-popper .MuiPaper-root {
+  transform-origin: top center;
+}
+
+.settings-date-popper .MuiPickersPopper-paper {
+  transform-origin: top center;
+}
+
+.settings-field-wide {
+  grid-column: 1 / -1;
+}
+
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.settings-secondary-btn,
+.settings-primary-btn {
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}

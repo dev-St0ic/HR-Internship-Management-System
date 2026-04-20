@@ -1,0 +1,55 @@
+
+.document-vault-action-button svg {
+  width: 15px;
+  height: 15px;
+}
+
+.document-vault-download-icon {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}
+
+.document-vault-empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 348px;
+  color: #8b8b95;
+  font-size: 14px;
+}
+
+.document-vault-pagination-slot {
+  margin-top: auto;
+  flex: 0 0 auto;
+  align-self: stretch;
+  width: 100%;
+  max-width: 100%;
+  min-height: 56px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-top: 14px;
+  overflow: hidden;
+}
+
+.document-vault-pagination-bar {
+  flex: 0 0 auto;
+  margin-top: 0;
+  margin-left: auto;
+}
+
+.document-vault-pagination-placeholder {
+  height: 36px;
+  width: 334px;
+}
+
+@keyframes document-vault-refresh-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

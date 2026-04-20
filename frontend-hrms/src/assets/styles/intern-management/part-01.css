@@ -1,0 +1,51 @@
+.intern-management-page-content,
+.intern-management-detail-page-content {
+  padding-top: 24px;
+  padding-right: 20px;
+  padding-bottom: 28px;
+}
+
+.intern-management-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.intern-management-toolbar-actions {
+  gap: 12px;
+}
+
+.intern-management-search-shell {
+  position: relative;
+  width: min(100%, 360px);
+}
+
+.intern-management-search-shell .search-bar {
+  padding-left: 40px;
+  height: 40px;
+  background: #ffffff;
+}
+
+.intern-management-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  color: #25263a;
+  transform: translateY(-50%);
+}
+
+.intern-management-toolbar-filter {
+  min-width: 112px;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.intern-management-card,
+.intern-management-detail-card {
+  border: 1px solid #ececf2;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+}

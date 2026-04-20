@@ -1,0 +1,12 @@
+export const appearanceOptions = [{ value: 'light', label: 'Light' }, { value: 'dark', label: 'Dark' }, { value: 'system', label: 'System Default' }];
+export const dateFormatOptions = [{ value: 'ymd24', label: 'YYYY-MM-DD | HH:MM:SS' }, { value: 'mdy12', label: 'MM/DD/YYYY | HH:MM AM/PM' }, { value: 'dmy24', label: 'DD/MM/YYYY | HH:MM:SS' }];
+export const densityOptions = [{ value: 'comfortable', label: 'Comfortable' }, { value: 'compact', label: 'Compact' }, { value: 'spacious', label: 'Spacious' }];
+export const landingPageOptions = [{ value: 'dashboard', label: 'Dashboard' }, { value: 'recruitment', label: 'Recruitment' }, { value: 'intern-management', label: 'Intern Management' }, { value: 'document-vault', label: 'Document Vault' }];
+export const refreshIntervalOptions = [{ value: 'off', label: 'Manual Refresh Only' }, { value: '15', label: 'Every 15 minutes' }, { value: '30', label: 'Every 30 minutes' }, { value: '60', label: 'Every 60 minutes' }];
+export const weekStartOptions = [{ value: 'monday', label: 'Monday' }, { value: 'sunday', label: 'Sunday' }];
+export const sessionTimeoutOptions = [{ value: '15', label: '15 minutes' }, { value: '30', label: '30 minutes' }, { value: '60', label: '60 minutes' }, { value: '120', label: '2 hours' }];
+export const recoveryChannelOptions = [{ value: 'work-email', label: 'Work Email' }, { value: 'sms', label: 'Mobile Number (SMS)' }];
+export const digestFrequencyOptions = [{ value: 'realtime', label: 'Real-time' }, { value: 'daily', label: 'Daily summary' }, { value: 'weekly', label: 'Weekly summary' }];
+export const quietHoursOptions = [{ value: 'none', label: 'Disabled' }, { value: 'after-hours', label: 'After working hours' }, { value: 'overnight', label: 'Overnight only' }];
+export const genderOptions = [{ value: 'Prefer not to say', label: 'Prefer not to say' }, { value: 'Female', label: 'Female' }, { value: 'Male', label: 'Male' }, { value: 'Non-binary', label: 'Non-binary' }];
+export const emptyPasswordForm = { currentPassword: '', newPassword: '', confirmPassword: '' };

@@ -1,0 +1,16 @@
+import SettingsActions from './SettingsActions';
+import SettingsPanelHeader from './SettingsPanelHeader';
+import SettingsSelectRow from './SettingsSelectRow';
+import SettingsToggleRow from './SettingsToggleRow';
+import { formatLastSavedLabel } from '../../utils/settings/helpers';
+
+export default function WorkspaceSettingsPanel({ config, draftSettings, appearanceOptions, dateFormatOptions, landingPageOptions, refreshIntervalOptions, densityOptions, weekStartOptions, workspaceToggleSettings, onFieldChange, onToggle, onReset, onSave }) {
+  const workspace = draftSettings.workspace;
+  return (
+    <div className="settings-panel">
+      <SettingsPanelHeader config={config} lastSavedLabel={formatLastSavedLabel(draftSettings.meta.lastSavedAt)} />
+      <div className="settings-grid-two"><div className="settings-section"><div className="settings-section-intro"><div><h3>Display and routing defaults</h3><p>Choose the view, refresh, and date standards that shape your daily HR workflow.</p></div></div><SettingsSelectRow title="Appearance" description="Control the theme shown across the HR staff workspace. Changes preview immediately until you save or reset." value={workspace.appearance} options={appearanceOptions} onChange={(value) => onFieldChange('workspace', 'appearance', value)} wide /><SettingsSelectRow title="Date and Time Format" description="Choose the date format used in records, reports, and queues." value={workspace.dateFormat} options={dateFormatOptions} onChange={(value) => onFieldChange('workspace', 'dateFormat', value)} wide /><SettingsSelectRow title="Default Landing Page" description="Choose which HR staff page opens first when entering the portal." value={workspace.landingPage} options={landingPageOptions} onChange={(value) => onFieldChange('workspace', 'landingPage', value)} wide /><SettingsSelectRow title="Refresh Interval" description="Set how often data-heavy HR pages refresh automatically." value={workspace.autoRefresh} options={refreshIntervalOptions} onChange={(value) => onFieldChange('workspace', 'autoRefresh', value)} wide /><SettingsSelectRow title="Table Density" description="Adjust how much information fits into list-heavy HR views." value={workspace.density} options={densityOptions} onChange={(value) => onFieldChange('workspace', 'density', value)} /><SettingsSelectRow title="Week Starts On" description="Set the weekday used first in scheduling and attendance views." value={workspace.weekStart} options={weekStartOptions} onChange={(value) => onFieldChange('workspace', 'weekStart', value)} /></div><div className="settings-section"><div className="settings-section-intro"><div><h3>Interaction rules</h3><p>Fine-tune how the workspace behaves while reviewing high-volume HR tasks.</p></div></div>{workspaceToggleSettings.map((item) => <SettingsToggleRow key={item.key} title={item.title} description={item.description} enabled={workspace[item.key]} onToggle={() => onToggle('workspace', item.key)} />)}</div></div>
+      <SettingsActions onReset={onReset} onSave={onSave} saveLabel="Save Workspace" />
+    </div>
+  );
+}

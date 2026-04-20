@@ -1,0 +1,50 @@
+
+.intern-management-evaluation-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #25263a;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.intern-management-evaluation-label img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.intern-management-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.intern-management-stars img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.intern-management-comments-box {
+  margin-top: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 14px 16px;
+}
+
+.intern-management-comments-box strong {
+  display: block;
+  color: #25263a;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.intern-management-comments-box p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.55;
+}

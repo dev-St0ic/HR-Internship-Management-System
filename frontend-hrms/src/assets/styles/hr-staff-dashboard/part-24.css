@@ -1,0 +1,43 @@
+
+.hr-dashboard-badge,
+.hr-dashboard-activity-category {
+  color: #5b21b6;
+  background: #f3ecff;
+}
+
+.hr-dashboard-university-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+}
+
+.hr-dashboard-progress-copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hr-dashboard-progress-copy strong {
+  margin-top: 0;
+  font-size: 15px;
+}
+
+.hr-dashboard-progress-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: #efeaf8;
+  overflow: hidden;
+}
+
+.hr-dashboard-progress-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%);
+}
+
+.hr-dashboard-progress-bar-compact {
+  height: 8px;
+}

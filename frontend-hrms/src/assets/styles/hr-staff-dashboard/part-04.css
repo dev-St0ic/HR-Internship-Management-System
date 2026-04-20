@@ -1,0 +1,44 @@
+
+.hr-dashboard-sync-pill {
+  width: fit-content;
+  color: #4c1d95;
+  background: #f3ecff;
+}
+
+.hr-dashboard-sync-pill.is-loading {
+  color: #7c3aed;
+  background: #f7f2ff;
+}
+
+.hr-dashboard-sync-pill.is-live {
+  color: #0f766e;
+  background: #ecfeff;
+}
+
+.hr-dashboard-sync-pill.is-error {
+  color: #b45309;
+  background: #fff7ed;
+}
+
+.hr-dashboard-stats-grid,
+.hr-dashboard-actions-grid,
+.hr-dashboard-queues-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.hr-dashboard-stats-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.hr-dashboard-card,
+.hr-dashboard-action-card,
+.hr-dashboard-queue-card {
+  display: flex;
+  gap: 14px;
+}
+
+.hr-dashboard-stat-card {
+  align-items: flex-start;
+  padding: 18px;
+}

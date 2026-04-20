@@ -1,0 +1,73 @@
+
+.recruitment-hero-highlight {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgba(124, 62, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: #25263a;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+}
+
+.recruitment-hero-highlight:hover {
+  background: #f7f2ff;
+  border-color: rgba(124, 62, 255, 0.28);
+  color: #5b21b6;
+}
+
+.recruitment-hero-highlight:focus-visible {
+  outline: 2px solid #7c3eff;
+  outline-offset: 2px;
+}
+
+.recruitment-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.recruitment-metric-card {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 16px;
+  border: 1px solid rgba(124, 62, 255, 0.1);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
+}
+
+.recruitment-metric-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #f5efff;
+  color: #7c3eff;
+}
+
+.recruitment-metric-label {
+  display: block;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.recruitment-metric-value {
+  display: block;
+  margin-top: 8px;
+  color: #16172b;
+  font-size: 30px;
+  line-height: 1;
+}

@@ -1,0 +1,74 @@
+
+@media (max-width: 640px) {
+  .recruitment-page-content {
+    padding-top: 18px;
+  }
+
+  .recruitment-hero,
+  .recruitment-panel {
+    padding: 16px;
+  }
+
+  .recruitment-hero-main h3 {
+    font-size: 28px;
+  }
+
+  .recruitment-applicant-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .recruitment-applicant-cover-topline {
+    flex-wrap: wrap;
+  }
+
+  .recruitment-application-grid,
+  .recruitment-university-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recruitment-tab {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+html[data-theme='dark'] .recruitment-hero,
+html[data-theme='dark'] .recruitment-workspace-card,
+html[data-theme='dark'] .recruitment-toolbar-summary,
+html[data-theme='dark'] .recruitment-metric-card,
+html[data-theme='dark'] .recruitment-applicant-card,
+html[data-theme='dark'] .recruitment-university-card,
+html[data-theme='dark'] .recruitment-university-panel,
+html[data-theme='dark'] .recruitment-measure-card {
+  border-color: var(--theme-border);
+  background: var(--theme-surface);
+  box-shadow: var(--theme-shadow);
+}
+
+html[data-theme='dark'] .recruitment-hero {
+  background:
+    radial-gradient(circle at top right, rgba(167, 139, 250, 0.2), transparent 40%),
+    linear-gradient(135deg, #162235 0%, #111c2e 52%, #0f172a 100%);
+}
+
+html[data-theme='dark'] .recruitment-hero-highlight,
+html[data-theme='dark'] .recruitment-university-stat,
+html[data-theme='dark'] .recruitment-university-featured-item {
+  border-color: rgba(148, 163, 184, 0.18);
+  background: rgba(11, 22, 38, 0.78);
+}
+
+html[data-theme='dark'] .recruitment-hero-main h3,
+html[data-theme='dark'] .recruitment-metric-value,
+html[data-theme='dark'] .recruitment-university-title-row h3,
+html[data-theme='dark'] .recruitment-university-panel-copy strong,
+html[data-theme='dark'] .recruitment-meta-item strong,
+html[data-theme='dark'] .recruitment-card-footer strong,
+html[data-theme='dark'] .recruitment-document-progress-copy strong,
+html[data-theme='dark'] .recruitment-university-stat strong,
+html[data-theme='dark'] .recruitment-university-featured-name,
+html[data-theme='dark'] .recruitment-empty-state h3,
+html[data-theme='dark'] .recruitment-action-button.is-secondary {
+  color: var(--theme-text);
+}

@@ -1,0 +1,43 @@
+
+.hr-dashboard-partner-preview-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: #efe7ff;
+  flex-shrink: 0;
+}
+
+.hr-dashboard-partner-preview-copy {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hr-dashboard-partner-preview-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.hr-dashboard-partner-preview-metrics div {
+  border: 1px solid rgba(124, 58, 237, 0.14);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.hr-dashboard-partner-preview-metrics strong {
+  display: block;
+  margin-top: 8px;
+}
+
+.hr-dashboard-partner-preview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}

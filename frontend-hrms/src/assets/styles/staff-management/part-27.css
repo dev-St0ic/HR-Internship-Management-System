@@ -1,0 +1,56 @@
+
+.document-vault-sort-button:focus-visible {
+  outline: 2px solid #8eb8ff;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.document-vault-sort-button.is-active {
+  color: #2d3a63;
+}
+
+.document-vault-header-text {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.document-vault-sort-icon {
+  flex-shrink: 0;
+  color: #9aa1b5;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.document-vault-sort-button:hover .document-vault-sort-icon,
+.document-vault-sort-button:focus-visible .document-vault-sort-icon,
+.document-vault-sort-button.is-active .document-vault-sort-icon {
+  color: #4a5f95;
+}
+
+.document-vault-resize-handle {
+  position: absolute;
+  top: -12px;
+  right: -18px;
+  bottom: -12px;
+  width: 16px;
+  border: none;
+  background: transparent;
+  cursor: col-resize;
+  padding: 0;
+  z-index: 2;
+}
+
+.document-vault-resize-handle::after {
+  content: '';
+  position: absolute;
+  top: 18%;
+  bottom: 18%;
+  left: 50%;
+  width: 1px;
+  background: #d7d9e4;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}

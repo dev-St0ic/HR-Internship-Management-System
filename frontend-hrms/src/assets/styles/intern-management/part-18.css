@@ -1,0 +1,49 @@
+
+.intern-management-detail-table tbody tr:hover {
+  background: #fcfbff;
+}
+
+.intern-management-detail-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.intern-management-detail-placeholder-row td {
+  color: transparent;
+}
+
+.intern-management-detail-pagination {
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.intern-management-detail-pagination-slot {
+  min-height: 84px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.intern-management-detail-pagination-slot .intern-management-detail-pagination {
+  width: 100%;
+}
+
+.intern-management-detail-actions,
+.intern-management-month-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.intern-management-secondary-button,
+.intern-management-primary-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 18px;
+}

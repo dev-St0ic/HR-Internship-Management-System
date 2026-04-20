@@ -1,0 +1,55 @@
+
+.intern-management-filter-date-picker .MuiIconButton-root {
+  margin-right: 2px;
+}
+
+.intern-management-filter-date-picker .MuiSvgIcon-root {
+  font-size: 20px;
+}
+
+.intern-management-filter-date-popper {
+  z-index: 40;
+}
+
+.intern-management-filter-date-popper .MuiPaper-root,
+.intern-management-filter-date-popper .MuiPickersPopper-paper {
+  transform-origin: top left;
+}
+
+.intern-management-filter-section {
+  margin-bottom: 0;
+  border: 1px solid #ececf2;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #ffffff 0%, #fafaff 100%);
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(17, 24, 39, 0.04);
+}
+
+.intern-management-filter-section-wide {
+  grid-column: 1 / -1;
+}
+
+.intern-management-filter-date-section {
+  justify-self: start;
+  width: min(100%, 452px);
+  margin-top: 14px;
+}
+
+.intern-management-filter-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.intern-management-filter-search-field {
+  position: relative;
+  display: block;
+  height: 38px;
+  margin-top: 12px;
+  border: 1px solid #e6e7ef;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #9ca3af;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}

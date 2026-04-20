@@ -1,0 +1,46 @@
+
+.hr-dashboard-attendance-stat-card strong {
+  color: #1d1b27;
+  font-size: 1rem;
+  line-height: 1.1;
+}
+
+.hr-dashboard-attendance-stat-card.is-positive {
+  background: #f3fdf7;
+  border-color: #d5f5df;
+}
+
+.hr-dashboard-attendance-stat-card.is-attention {
+  background: #fffaf0;
+  border-color: #fde7ba;
+}
+
+.hr-dashboard-attendance-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #4d4960;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hr-dashboard-attendance-legend-dot,
+.hr-dashboard-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.hr-dashboard-attendance-month-footer,
+.hr-dashboard-department-map-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+
+.hr-dashboard-subpanel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+}

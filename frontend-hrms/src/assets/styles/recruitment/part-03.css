@@ -1,0 +1,72 @@
+
+.recruitment-metric-card p {
+  margin: 8px 0 0;
+  color: #5f6475;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.recruitment-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.recruitment-search-shell {
+  position: relative;
+  width: min(100%, 440px);
+}
+
+.recruitment-search-shell .search-bar {
+  height: 42px;
+  padding-left: 40px;
+  background: #ffffff;
+}
+
+.recruitment-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  color: #25263a;
+  transform: translateY(-50%);
+}
+
+.recruitment-toolbar-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid #ececf2;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #25263a;
+}
+
+.recruitment-toolbar-summary-label {
+  color: #8b8b95;
+  font-size: 13px;
+}
+
+.recruitment-toolbar-summary strong {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.recruitment-workspace-card {
+  border: 1px solid #ececf2;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+}
+
+.recruitment-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px 0;
+  border-bottom: 1px solid #efeff5;
+  flex-wrap: wrap;
+}

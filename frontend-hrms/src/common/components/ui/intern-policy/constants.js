@@ -1,0 +1,2 @@
+export const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+export const initialPolicyData = { startTime: '', endTime: '', gracePeriod: '', maxHours: '', workingDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] };

@@ -1,0 +1,5 @@
+export default function AttendanceTable({ records }) {
+  return (
+    <div className="border border-gray-500/20 rounded mt-4 px-3 py-1"><table className="table-fixed w-full text-left"><thead className="border-b border-gray-500/10 text-sm"><tr className="text-gray-500"><td className="p-2">Intern Name</td><td className="p-2">Time In</td><td className="p-2">Time Out</td><td className="p-2">Hours</td><td className="p-2">Date</td><td className="p-2">Status</td></tr></thead><tbody className="divide-y divide-gray-500/10 text-md text-gray-700">{records.map((record, index) => <tr key={`${record.name}-${index}`} className="hover:bg-gray-100"><td className="p-2">{record.name}</td><td className="p-2">{record.timeIn}</td><td className="p-2">{record.timeOut}</td><td className="p-2">{record.hours}</td><td className="p-2">{record.date}</td><td className="p-2"><div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block"><p>{record.status}</p></div></td></tr>)}</tbody></table></div>
+  );
+}

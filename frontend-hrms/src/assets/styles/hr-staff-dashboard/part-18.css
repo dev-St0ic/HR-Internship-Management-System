@@ -1,0 +1,46 @@
+
+.hr-dashboard-issue-track {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #efeaf8;
+}
+
+.hr-dashboard-issue-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%);
+}
+
+.hr-dashboard-panel {
+  padding: 24px;
+}
+
+.hr-dashboard-panel-tight {
+  padding: 22px;
+}
+
+html[data-theme='dark'] .hr-dashboard-overview-card,
+html[data-theme='dark'] .hr-dashboard-card,
+html[data-theme='dark'] .hr-dashboard-panel,
+html[data-theme='dark'] .hr-dashboard-shortcut-button,
+html[data-theme='dark'] .hr-dashboard-action-card,
+html[data-theme='dark'] .hr-dashboard-queue-card,
+html[data-theme='dark'] .hr-dashboard-department-card,
+html[data-theme='dark'] .hr-dashboard-activity-item,
+html[data-theme='dark'] .hr-dashboard-university-card,
+html[data-theme='dark'] .hr-dashboard-partner-preview-card,
+html[data-theme='dark'] .hr-dashboard-department-map-tile {
+  border-color: var(--theme-border);
+  background: var(--theme-surface);
+  box-shadow: var(--theme-shadow);
+}
+
+html[data-theme='dark'] .hr-dashboard-overview-card,
+html[data-theme='dark'] .hr-dashboard-partner-preview-card {
+  background:
+    radial-gradient(circle at top right, rgba(167, 139, 250, 0.2), transparent 38%),
+    linear-gradient(180deg, #162235 0%, #0f172a 100%);
+}

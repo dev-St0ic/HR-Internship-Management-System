@@ -1,0 +1,42 @@
+
+.hr-dashboard-attendance-months {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.hr-dashboard-attendance-month-card,
+.hr-dashboard-department-map-tile {
+  border: 1px solid #ece8f6;
+  border-radius: 20px;
+  background: #ffffff;
+}
+
+.hr-dashboard-attendance-month-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.hr-dashboard-attendance-month-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hr-dashboard-attendance-rate-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: #5b21b6;
+  background: #f3ecff;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}

@@ -1,0 +1,40 @@
+
+.hr-dashboard-stat-card .hr-dashboard-icon-shell {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+}
+
+.hr-dashboard-stat-card .hr-dashboard-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.hr-dashboard-icon-shell,
+.hr-dashboard-action-icon-shell,
+.hr-dashboard-queue-icon-shell,
+.hr-dashboard-activity-icon-shell,
+.hr-dashboard-university-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: #f5f1ff;
+  flex-shrink: 0;
+}
+
+.hr-dashboard-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.hr-dashboard-stat-copy,
+.hr-dashboard-action-copy,
+.hr-dashboard-queue-copy,
+.hr-dashboard-activity-copy,
+.hr-dashboard-university-copy {
+  min-width: 0;
+}

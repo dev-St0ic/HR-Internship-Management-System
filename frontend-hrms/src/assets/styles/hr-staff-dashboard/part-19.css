@@ -1,0 +1,41 @@
+
+html[data-theme='dark'] .hr-dashboard-overview-metric,
+html[data-theme='dark'] .hr-dashboard-overview-status,
+html[data-theme='dark'] .hr-dashboard-attendance-stat-card,
+html[data-theme='dark'] .hr-dashboard-workspace-group,
+html[data-theme='dark'] .hr-dashboard-partner-preview-metrics div {
+  border-color: rgba(148, 163, 184, 0.18);
+  background: rgba(11, 22, 38, 0.76);
+}
+
+html[data-theme='dark'] .hr-dashboard-overview-main h1,
+html[data-theme='dark'] .hr-dashboard-overview-metric strong,
+html[data-theme='dark'] .hr-dashboard-stat-copy strong,
+html[data-theme='dark'] .hr-dashboard-section-heading h3,
+html[data-theme='dark'] .hr-dashboard-action-topline h3,
+html[data-theme='dark'] .hr-dashboard-queue-topline h3,
+html[data-theme='dark'] .hr-dashboard-department-topline h3,
+html[data-theme='dark'] .hr-dashboard-activity-copy h3,
+html[data-theme='dark'] .hr-dashboard-university-topline h3,
+html[data-theme='dark'] .hr-dashboard-workspace-group-heading h4,
+html[data-theme='dark'] .hr-dashboard-workflow-item strong,
+html[data-theme='dark'] .hr-dashboard-issue-topline strong,
+html[data-theme='dark'] .hr-dashboard-partner-preview-metrics strong {
+  color: var(--theme-text);
+}
+
+html[data-theme='dark'] .hr-dashboard-overview-main > p,
+html[data-theme='dark'] .hr-dashboard-section-heading p,
+html[data-theme='dark'] .hr-dashboard-action-copy p,
+html[data-theme='dark'] .hr-dashboard-queue-copy p,
+html[data-theme='dark'] .hr-dashboard-shortcut-copy p,
+html[data-theme='dark'] .hr-dashboard-activity-copy p,
+html[data-theme='dark'] .hr-dashboard-university-copy p,
+html[data-theme='dark'] .hr-dashboard-overview-status p,
+html[data-theme='dark'] .hr-dashboard-shortcut-meta,
+html[data-theme='dark'] .hr-dashboard-workspace-group-heading p,
+html[data-theme='dark'] .hr-dashboard-partner-preview-copy p,
+html[data-theme='dark'] .hr-dashboard-overview-metric span,
+html[data-theme='dark'] .hr-dashboard-eyebrow {
+  color: var(--theme-text-soft);
+}

@@ -1,0 +1,52 @@
+
+.intern-management-placeholder-row td {
+  height: 72px;
+}
+
+.intern-management-table td {
+  line-height: 1.45;
+}
+
+.intern-management-empty-state {
+  display: grid;
+  min-height: 220px;
+  place-items: center;
+  color: #8b8b95;
+  font-size: 14px;
+}
+
+.intern-management-pagination-slot {
+  min-height: 52px;
+  margin: 0 16px;
+  padding: 12px 0 0;
+}
+
+.intern-management-row-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.intern-management-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.intern-management-icon-button img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.intern-management-action-icon {
+  width: 15px !important;
+  height: 15px !important;
+  object-fit: contain;
+}

@@ -1,0 +1,51 @@
+
+.intern-management-card {
+  padding: 0 0 16px;
+  min-height: calc(100vh - 190px);
+  overflow: hidden;
+}
+
+.intern-management-overview-tabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px 0;
+  border-bottom: 1px solid #efeff5;
+}
+
+.intern-management-overview-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: transparent;
+  color: #4b5563;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 12px 12px 14px;
+}
+
+.intern-management-overview-tab img,
+.intern-management-side-link img,
+.intern-management-subtab img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.68;
+  filter: grayscale(1);
+}
+
+.intern-management-overview-tab::after,
+.intern-management-subtab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: transparent;
+}

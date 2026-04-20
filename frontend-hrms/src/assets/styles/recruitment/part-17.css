@@ -1,0 +1,5 @@
+
+html[data-theme='dark'] .recruitment-document-track,
+html[data-theme='dark'] .recruitment-university-progress-track {
+  background: #1e293b;
+}

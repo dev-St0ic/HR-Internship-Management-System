@@ -1,0 +1,69 @@
+
+.recruitment-measure-layer {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 18px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.recruitment-measure-card {
+  height: auto;
+}
+
+.recruitment-results-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.recruitment-application-grid,
+.recruitment-university-grid {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.recruitment-application-grid {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.recruitment-university-grid {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.recruitment-applicant-card,
+.recruitment-university-card {
+  border: 1px solid #ececf2;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+}
+
+.recruitment-placeholder-card {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.recruitment-applicant-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 470px;
+}
+
+.recruitment-applicant-cover {
+  min-height: 170px;
+  padding: 16px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

@@ -1,0 +1,45 @@
+
+.hr-dashboard-overview-main h1 {
+  margin: 0;
+  color: #1d1b27;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.hr-dashboard-overview-main > p,
+.hr-dashboard-section-heading p,
+.hr-dashboard-action-copy p,
+.hr-dashboard-queue-copy p,
+.hr-dashboard-shortcut-copy p,
+.hr-dashboard-activity-copy p,
+.hr-dashboard-university-copy p,
+.hr-dashboard-overview-status p,
+.hr-dashboard-attendance-intro p,
+.hr-dashboard-attendance-metric-card p,
+.hr-dashboard-attendance-month-topline p,
+.hr-dashboard-attendance-month-footer span,
+.hr-dashboard-subpanel p,
+.hr-dashboard-department-map-topline p,
+.hr-dashboard-department-map-note,
+.hr-dashboard-department-insight-card p,
+.hr-dashboard-department-ranking-topline span,
+.hr-dashboard-shortcut-meta,
+.hr-dashboard-partner-preview-copy p {
+  margin: 0;
+  color: #6b6880;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.hr-dashboard-overview-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.hr-dashboard-overview-metric {
+  border: 1px solid rgba(124, 58, 237, 0.14);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.78);
+}

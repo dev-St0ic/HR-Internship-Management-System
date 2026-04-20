@@ -1,0 +1,55 @@
+
+.intern-management-month-footer {
+  justify-content: space-between;
+}
+
+.intern-management-month-footer p {
+  margin: 0;
+  color: #25263a;
+  font-size: 14px;
+}
+
+.intern-management-back-button {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.intern-management-evaluation-card {
+  border: 1px solid #ececf2;
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 18px 18px 14px;
+}
+
+.intern-management-evaluation-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.intern-management-evaluation-header h3 {
+  margin: 0;
+  color: #25263a;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.intern-management-evaluation-header p {
+  margin: 4px 0 0;
+  color: #b0b0bb;
+  font-size: 13px;
+}
+
+.intern-management-evaluation-rows {
+  display: grid;
+  gap: 12px;
+}
+
+.intern-management-evaluation-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
