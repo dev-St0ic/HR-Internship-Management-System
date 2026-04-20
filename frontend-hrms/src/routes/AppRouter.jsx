@@ -9,7 +9,6 @@ import {
   SupervisorAttendance,
   SupervisorTasks,
   SupervisorEvaluations,
-  SupervisorSettings,
   SupervisorNotifications,
   SupervisorDocuments,
 } from "../portals/supervisor/Index";
@@ -102,7 +101,7 @@ export const AppRouter = () => {
           <Route path="tasks" element={<SupervisorTasks />} />
           <Route path="documents" element={<SupervisorDocuments />} />
           <Route path="evaluations" element={<SupervisorEvaluations />} />
-          <Route path="settings" element={<SupervisorSettings />} />
+          <Route path="settings" element={<SettingsPage />} />
           <Route path="notifications" element={<SupervisorNotifications />} />
         </Route>
 
