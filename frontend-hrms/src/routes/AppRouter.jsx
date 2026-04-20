@@ -58,6 +58,7 @@ import Dashboard from "../portals/applicant-intern/pages/Dashboard";
 import MyApplication from "../portals/applicant-intern/pages/MyApplication";
 import Settings from "../portals/applicant-intern/pages/Settings";
 import InternManagementPage from "../portals/hr-staff/pages/InternManagementPage";
+import CreateAccountPage from "../portals/applicant-intern/pages/CreateAccountPage";
 
 export const AppRouter = () => {
   return (
@@ -72,7 +73,7 @@ export const AppRouter = () => {
 
         {/* Create Account Route */}
         <Route path="/create-account" element={<CreateAccountPage />} />
-      
+
         {/* Application form intern route */}
         <Route path="/application-form" element={<ApplicationFormHeader />}>
           <Route index element={<ApplicationForm />} />
