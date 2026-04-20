@@ -1,9 +1,9 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Sidebar from "../../../common/components/layout/Sidebar";
 import { navigation } from "../../../common/config/navigation";
 import { useAuth } from "../../../contexts/AuthContext";
 
-export default function InternLayout() {
+export default function HrAdminLayout() {
   const { currentUser } = useAuth();
 
   //If you are not logged in, will go to log in page

@@ -15,165 +15,77 @@ import {
 } from "lucide-react";
 
 export const navigation = {
-  hradmin: [
+  "hr-admin": [
+    { to: "/hr-admin", label: "Dashboard", icon: LayoutDashboard, end: true },
+    { to: "/hr-admin/recruitment", label: "Recruitment", icon: Users },
     {
-      to: "/hr-admin",
-      label: "Dashboard",
-      icon: <LayoutDashboard size={18} />,
-      end: true,
-    },
-    {
-      to: "/hr-admin/recruitment",
-      label: "Recruitment",
-      icon: <Users size={18} />,
-    },
-    {
-      to: "/hr-admin/internmanagement",
+      to: "/hr-admin/intern-management",
       label: "Intern Management",
-      icon: <GitCompare size={18} />,
+      icon: GitCompare,
     },
     {
-      to: "/hr-admin/staffmanagement",
+      to: "/hr-admin/staff-management",
       label: "Staff Management",
-      icon: <CalendarCheck2 size={18} />,
+      icon: CalendarCheck2,
     },
+    { to: "/hr-admin/document-vault", label: "Document Vault", icon: FileText },
     {
-      to: "/hr-admin/documnetvault",
-      label: "Document Vault",
-      icon: <FileText size={18} />,
-    },
-    {
-      to: "/hr-admin/reportsandanalytics",
+      to: "/hr-admin/reports-and-analytics",
       label: "Reports & Analytics",
-      icon: <FolderGit2 size={18} />,
+      icon: FolderGit2,
     },
-    {
-      to: "/hr-admin/systemlogs",
-      label: "System Logs",
-      icon: <ScrollText size={18} />,
-    },
-    {
-      to: "/hr-admin/settings",
-      label: "Settings",
-      icon: <Settings size={18} />,
-    },
+    { to: "/hr-admin/system-logs", label: "System Logs", icon: ScrollText },
+    { to: "/hr-admin/settings", label: "Settings", icon: Settings },
   ],
 
-  hrstaff: [
+  "hr-staff": [
+    { to: "/hr-staff", label: "Dashboard", icon: LayoutDashboard, end: true },
+    { to: "/hr-staff/recruitment", label: "Recruitment", icon: Users },
     {
-      to: "/hr-staff",
-      label: "Dashboard",
-      icon: <LayoutDashboard size={18} />,
-      end: true,
+      to: "/hr-staff/intern-management",
+      label: "Intern Management",
+      icon: GitCompare,
     },
     {
-      to: "/hr-staff/recruitment",
-      label: "Recruitment",
-      icon: <Users size={18} />,
-    },
-    {
-      to: "/hr-staff/operations",
-      label: "Operations",
-      icon: <GitCompare size={18} />,
-    },
-    {
-      to: "/hr-staff/staffmanagment",
+      to: "/hr-staff/staff-management",
       label: "Staff Management",
-      icon: <CalendarCheck2 size={18} />,
+      icon: CalendarCheck2,
     },
-    {
-      to: "/hr-staff/documentvault",
-      label: "Document Vault",
-      icon: <FileText size={18} />,
-    },
-    {
-      to: "/hr-staff/settings",
-      label: "Settings",
-      icon: <Settings size={18} />,
-    },
+    { to: "/hr-staff/document-vault", label: "Document Vault", icon: FileText },
+    { to: "/hr-staff/settings", label: "Settings", icon: Settings },
   ],
 
   supervisor: [
-    {
-      to: "/supervisor",
-      label: "Dashboard",
-      icon: LayoutDashboard,
-      end: true,
-    },
-    {
-      to: "/supervisor/myinterns",
-      label: "My Interns",
-      icon: Users,
-    },
-    {
-      to: "/supervisor/attendance",
-      label: "Attendance",
-      icon: CalendarCheck,
-    },
-    {
-      to: "/supervisor/tasks",
-      label: "Tasks",
-      icon: ClipboardList,
-    },
-    {
-      to: "/supervisor/documents",
-      label: "Documents",
-      icon: ScrollText,
-    },
+    { to: "/supervisor", label: "Dashboard", icon: LayoutDashboard, end: true },
+    { to: "/supervisor/myinterns", label: "My Interns", icon: Users },
+    { to: "/supervisor/attendance", label: "Attendance", icon: CalendarCheck },
+    { to: "/supervisor/tasks", label: "Tasks", icon: ClipboardList },
+    { to: "/supervisor/documents", label: "Documents", icon: ScrollText },
     {
       to: "/supervisor/evaluations",
       label: "Evaluation",
       icon: BriefcaseBusiness,
     },
-    {
-      to: "/supervisor/settings",
-      label: "Settings",
-      icon: Settings,
-    },
+    { to: "/supervisor/settings", label: "Settings", icon: Settings },
   ],
 
   intern: [
-    {
-      to: "/intern",
-      label: "Dashboard",
-      icon: LayoutDashboard,
-      end: true,
-    },
+    { to: "/intern", label: "Dashboard", icon: LayoutDashboard, end: true },
     { to: "/intern/profile", label: "Profile", icon: User2 },
     { to: "/intern/tasks", label: "Tasks", icon: ClipboardList },
-    {
-      to: "/intern/attendance",
-      label: "Attendance",
-      icon: CalendarCheck,
-    },
-    {
-      to: "/intern/documents",
-      label: "Documents",
-      icon: FileText,
-    },
-    {
-      to: "/intern/evaluation",
-      label: "Evaluation",
-      icon: NotebookPen,
-    },
+    { to: "/intern/attendance", label: "Attendance", icon: CalendarCheck },
+    { to: "/intern/documents", label: "Documents", icon: FileText },
+    { to: "/intern/evaluation", label: "Evaluation", icon: NotebookPen },
     { to: "/intern/settings", label: "Settings", icon: Settings },
   ],
+
   applicant: [
+    { to: "/applicant", label: "Dashboard", icon: LayoutDashboard, end: true },
     {
-      to: "/applicant",
-      label: "Dashboard",
-      icon: LayoutDashboard,
-      end: true,
+      to: "/applicant/my-application",
+      label: "My Application",
+      icon: ScrollText,
     },
-    { 
-      to: "/applicant/my-application", 
-      label: "My Application", 
-      icon: ScrollText 
-    },
-    
-    { 
-      to: "/applicant/settings", 
-      label: "Settings", 
-      icon: Settings },
+    { to: "/applicant/settings", label: "Settings", icon: Settings },
   ],
 };
