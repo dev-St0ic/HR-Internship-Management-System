@@ -1,18 +1,91 @@
 @import "tailwindcss";
 
-@font-face{
-    font-family: 'RobotoLocal';
-    src: url('../fonts/Roboto-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-
+/* --- 1. Define your brand colors right here in the CSS! --- */
 @theme {
-    --font-roboto: 'RobotoLocal', sans-serif;
-    --font-lexend: 'Lexend', sans-serif;
-}
-html {
-    scroll-behavior: smooth;
+    --color-primary: #7C3EFF;
+    --color-primary-hover: #6A32E6;
+    --color-primary-light: #F4F0FF;
+    
+    --color-success: #10B981;
+    --color-success-light: #ECFDF5;
+    
+    --color-warning: #FFCA28;
+    --color-warning-light: #FEFCE8;
+    
+    --color-error: #EF4444;
+    --color-background: #F8F9FA;
+    
+    --font-lexend: "Lexend", sans-serif;
+    }
+
+    /* --- 2. Base Styles --- */
+    @layer base {
+    body {
+        @apply font-lexend bg-background text-gray-900;
+    }
+    }
+
+    /* --- 3. Reusable Components --- */
+    @layer components {
+    /* =========================================
+        BUTTONS
+        ========================================= */
+    .btn-primary {
+        @apply w-full bg-primary hover:bg-primary-hover text-white font-medium py-[14px] rounded-lg transition-colors text-[15px] flex items-center justify-center gap-2 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed;
+    }
+
+    .btn-icon {
+        @apply w-9 h-9 bg-primary rounded-lg flex items-center justify-center text-white cursor-pointer hover:bg-primary-hover transition-all shadow-sm;
+    }
+
+    /* =========================================
+        FORM INPUTS
+        ========================================= */
+    .input-wrapper {
+        @apply mb-4 border border-[#D0D5DD] rounded-lg px-4 py-2.5 transition-all bg-white relative focus-within:ring-1 focus-within:border-primary focus-within:ring-primary;
+    }
+
+    .input-wrapper.error {
+        @apply border-error focus-within:border-error focus-within:ring-error;
+    }
+
+    .input-label {
+        @apply block text-[11px] mb-0.5 font-medium text-primary;
+    }
+
+    .input-label.error {
+        @apply text-error;
+    }
+
+    .input-field {
+        @apply w-full text-[15px] outline-none text-gray-900 bg-transparent placeholder-gray-400 font-medium;
+    }
+
+    /* =========================================
+        CARDS & PANELS
+        ========================================= */
+    .card-panel {
+        @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8;
+    }
+
+    /* =========================================
+        STATUS BADGES
+        ========================================= */
+    .badge-success {
+        @apply text-[10px] font-bold text-success bg-success-light px-2 py-1 rounded tracking-wide uppercase;
+    }
+
+    .badge-warning {
+        @apply text-[10px] font-bold text-warning bg-warning-light px-2 py-1 rounded tracking-wide uppercase;
+    }
+    }
+
+    /* --- 4. Custom Animations --- */
+    @keyframes fade-in {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in {
+    animation: fade-in 0.4s ease-out forwards;
 }

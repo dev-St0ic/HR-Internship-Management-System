@@ -85,8 +85,8 @@ export default function CreateAccountStep2({ formData, setFormData, onBack }) {
                     {/* --- Email Input --- */}
                     {/* Swaps to red-500 if errors.email is true */}
                     <div className={`mb-4 rounded-lg px-4 py-2.5 transition-all bg-white border focus-within:ring-1 ${errors.email ? 'border-red-500 focus-within:border-red-500 focus-within:ring-red-500' : 'border-[#D0D5DD] focus-within:border-[#7C3EFF] focus-within:ring-[#7C3EFF]'}`}>
-                        <label className={`block text-[11px] mb-0.5 font-medium ${errors.email ? 'text-red-500' : 'text-[#7C3EFF]'}`}>
-                            Email Address {errors.email && <span className="font-bold">- Invalid format</span>}
+                        <label className={`input-label ${errors.email ? 'error' : ''}`}>
+                            Email Address {errors.email && <span>- Invalid format</span>}
                         </label>
                         <input 
                             type="email" name="email" 
@@ -174,7 +174,7 @@ export default function CreateAccountStep2({ formData, setFormData, onBack }) {
                     </div>
 
                     {/* --- Submit Button --- */}
-                    <button type="submit" className="w-full bg-[#7C3EFF] hover:bg-[#6A32E6] text-white font-medium py-[14px] rounded-lg transition-colors text-[15px]">
+                    <button type="submit" className="btn-primary">
                         Create account
                     </button>
 
