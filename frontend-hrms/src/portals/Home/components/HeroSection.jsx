@@ -21,7 +21,7 @@ export default function HeroSection() {
                     for the next generation of forward-thinking professionals.
                 </p>
                 <Link 
-                    to="/application-form"
+                    to="/create-account"
                     className="px-8 py-3 rounded-full font-medium text-white bg-[#120071] hover:bg-[#130E49]/90 transition shadow-lg mb-16"
                 >
                     Apply Now
