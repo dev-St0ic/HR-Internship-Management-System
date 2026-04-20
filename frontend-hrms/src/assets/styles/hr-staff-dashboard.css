@@ -1,0 +1,1299 @@
+.hr-dashboard-page-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.hr-dashboard-overview-card,
+.hr-dashboard-card,
+.hr-dashboard-panel,
+.hr-dashboard-shortcut-button,
+.hr-dashboard-action-card,
+.hr-dashboard-queue-card,
+.hr-dashboard-department-card,
+.hr-dashboard-activity-item,
+.hr-dashboard-university-card,
+.hr-dashboard-partner-preview-card {
+  background: #ffffff;
+  border: 1px solid #ece8f6;
+  border-radius: 20px;
+  box-shadow: 0 18px 44px rgba(37, 22, 76, 0.06);
+}
+
+.hr-dashboard-overview-card {
+  display: grid;
+  grid-template-columns: minmax(0, 2.25fr) minmax(260px, 1fr);
+  gap: 24px;
+  padding: 28px;
+  background:
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.14), transparent 36%),
+    linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+}
+
+.hr-dashboard-overview-main {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hr-dashboard-kicker {
+  margin: 0;
+  color: #7c3aed;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hr-dashboard-overview-main h1 {
+  margin: 0;
+  color: #1d1b27;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.hr-dashboard-overview-main > p,
+.hr-dashboard-section-heading p,
+.hr-dashboard-action-copy p,
+.hr-dashboard-queue-copy p,
+.hr-dashboard-shortcut-copy p,
+.hr-dashboard-activity-copy p,
+.hr-dashboard-university-copy p,
+.hr-dashboard-overview-status p,
+.hr-dashboard-attendance-intro p,
+.hr-dashboard-attendance-metric-card p,
+.hr-dashboard-attendance-month-topline p,
+.hr-dashboard-attendance-month-footer span,
+.hr-dashboard-subpanel p,
+.hr-dashboard-department-map-topline p,
+.hr-dashboard-department-map-note,
+.hr-dashboard-department-insight-card p,
+.hr-dashboard-department-ranking-topline span,
+.hr-dashboard-shortcut-meta,
+.hr-dashboard-partner-preview-copy p {
+  margin: 0;
+  color: #6b6880;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.hr-dashboard-overview-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.hr-dashboard-overview-metric {
+  border: 1px solid rgba(124, 58, 237, 0.14);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.hr-dashboard-overview-metric span,
+.hr-dashboard-progress-copy span,
+.hr-dashboard-eyebrow,
+.hr-dashboard-activity-meta time,
+.hr-dashboard-university-metrics span,
+.hr-dashboard-attendance-metric-card span,
+.hr-dashboard-attendance-month-footer span,
+.hr-dashboard-department-map-footer span,
+.hr-dashboard-department-map-metric span,
+.hr-dashboard-department-insight-card span,
+.hr-dashboard-partner-preview-metrics span {
+  color: #77738d;
+  font-size: 13px;
+}
+
+.hr-dashboard-overview-metric strong,
+.hr-dashboard-progress-copy strong {
+  display: block;
+  margin-top: 8px;
+  color: #1d1b27;
+  font-size: 1.35rem;
+}
+
+.hr-dashboard-overview-status {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(124, 58, 237, 0.12);
+}
+
+.hr-dashboard-sync-pill,
+.hr-dashboard-badge,
+.hr-dashboard-activity-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.hr-dashboard-sync-pill {
+  width: fit-content;
+  color: #4c1d95;
+  background: #f3ecff;
+}
+
+.hr-dashboard-sync-pill.is-loading {
+  color: #7c3aed;
+  background: #f7f2ff;
+}
+
+.hr-dashboard-sync-pill.is-live {
+  color: #0f766e;
+  background: #ecfeff;
+}
+
+.hr-dashboard-sync-pill.is-error {
+  color: #b45309;
+  background: #fff7ed;
+}
+
+.hr-dashboard-stats-grid,
+.hr-dashboard-actions-grid,
+.hr-dashboard-queues-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.hr-dashboard-stats-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.hr-dashboard-card,
+.hr-dashboard-action-card,
+.hr-dashboard-queue-card {
+  display: flex;
+  gap: 14px;
+}
+
+.hr-dashboard-stat-card {
+  align-items: flex-start;
+  padding: 18px;
+}
+
+.hr-dashboard-stat-card .hr-dashboard-icon-shell {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+}
+
+.hr-dashboard-stat-card .hr-dashboard-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.hr-dashboard-icon-shell,
+.hr-dashboard-action-icon-shell,
+.hr-dashboard-queue-icon-shell,
+.hr-dashboard-activity-icon-shell,
+.hr-dashboard-university-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: #f5f1ff;
+  flex-shrink: 0;
+}
+
+.hr-dashboard-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.hr-dashboard-stat-copy,
+.hr-dashboard-action-copy,
+.hr-dashboard-queue-copy,
+.hr-dashboard-activity-copy,
+.hr-dashboard-university-copy {
+  min-width: 0;
+}
+
+.hr-dashboard-stat-copy strong {
+  display: block;
+  margin: 6px 0 8px;
+  color: #1d1b27;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.hr-dashboard-stat-copy p {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.hr-dashboard-attendance-layout,
+.hr-dashboard-department-map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(250px, 0.9fr);
+  gap: 18px;
+}
+
+.hr-dashboard-compact-section-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hr-dashboard-attendance-primary,
+.hr-dashboard-attendance-secondary,
+.hr-dashboard-department-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hr-dashboard-shortcut-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.hr-dashboard-toolbar-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hr-dashboard-toolbar-grid-single {
+  grid-template-columns: 1fr;
+}
+
+.hr-dashboard-shortcut-grid-single {
+  grid-template-columns: 1fr;
+}
+
+.hr-dashboard-shortcut-button {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.hr-dashboard-shortcut-button:hover {
+  transform: translateY(-2px);
+  border-color: #d6caf7;
+  box-shadow: 0 20px 44px rgba(37, 22, 76, 0.1);
+}
+
+.hr-dashboard-shortcut-button.is-compact {
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  box-shadow: none;
+}
+
+.hr-dashboard-shortcut-button.is-compact:hover {
+  box-shadow: 0 14px 28px rgba(37, 22, 76, 0.08);
+}
+
+.hr-dashboard-shortcut-button.is-positive {
+  background: linear-gradient(180deg, #ffffff 0%, #f4fdf8 100%);
+}
+
+.hr-dashboard-shortcut-button.is-attention {
+  background: linear-gradient(180deg, #ffffff 0%, #fff8ef 100%);
+}
+
+.hr-dashboard-shortcut-button.is-accent {
+  background: linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+}
+
+.hr-dashboard-shortcut-icon-shell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #f5f1ff;
+  flex-shrink: 0;
+}
+
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-shortcut-icon-shell {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+}
+
+.hr-dashboard-shortcut-copy {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-shortcut-copy {
+  gap: 4px;
+}
+
+.hr-dashboard-shortcut-topline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px;
+}
+
+.hr-dashboard-shortcut-topline h3,
+.hr-dashboard-partner-preview-copy h3 {
+  margin: 0;
+  color: #1d1b27;
+}
+
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-shortcut-topline h3 {
+  font-size: 0.96rem;
+  line-height: 1.25;
+}
+
+.hr-dashboard-shortcut-meta {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-shortcut-meta {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-shortcut-copy p {
+  display: none;
+}
+
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-badge,
+.hr-dashboard-shortcut-button.is-compact .hr-dashboard-status-pill {
+  min-height: 26px;
+  padding: 4px 8px;
+  font-size: 11px;
+  line-height: 1.1;
+  max-width: 96px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hr-dashboard-panel-link-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.hr-dashboard-panel-link-button:hover {
+  transform: translateY(-1px);
+}
+
+.hr-dashboard-panel-link-button-block {
+  width: 100%;
+}
+
+.hr-dashboard-panel-link-button.is-primary {
+  color: #ffffff;
+  background: linear-gradient(90deg, #7c3aed 0%, #5b21b6 100%);
+  box-shadow: 0 14px 30px rgba(91, 33, 182, 0.22);
+}
+
+.hr-dashboard-panel-link-button.is-secondary {
+  color: #5b21b6;
+  background: #f3ecff;
+  border: 1px solid rgba(124, 58, 237, 0.18);
+}
+
+.hr-dashboard-attendance-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hr-dashboard-attendance-intro strong,
+.hr-dashboard-subpanel-heading h4,
+.hr-dashboard-department-ranking-topline h4,
+.hr-dashboard-attendance-month-topline h3 {
+  margin: 0;
+  color: #1d1b27;
+}
+
+.hr-dashboard-attendance-metrics-grid,
+.hr-dashboard-department-insights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.hr-dashboard-attendance-metric-card,
+.hr-dashboard-subpanel,
+.hr-dashboard-department-insight-card {
+  border: 1px solid #ece8f6;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+}
+
+.hr-dashboard-attendance-metric-card,
+.hr-dashboard-department-insight-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+}
+
+.hr-dashboard-attendance-metric-card strong,
+.hr-dashboard-department-insight-card strong,
+.hr-dashboard-department-map-metric strong,
+.hr-dashboard-partner-preview-metrics strong {
+  color: #1d1b27;
+  font-size: 1.55rem;
+  line-height: 1.1;
+}
+
+.hr-dashboard-attendance-months,
+.hr-dashboard-workflow-list,
+.hr-dashboard-issue-list,
+.hr-dashboard-department-ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hr-dashboard-attendance-months {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.hr-dashboard-attendance-month-card,
+.hr-dashboard-department-map-tile {
+  border: 1px solid #ece8f6;
+  border-radius: 20px;
+  background: #ffffff;
+}
+
+.hr-dashboard-attendance-month-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.hr-dashboard-attendance-month-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hr-dashboard-attendance-rate-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: #5b21b6;
+  background: #f3ecff;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.hr-dashboard-attendance-bar {
+  display: flex;
+  width: 100%;
+  min-height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #efeaf8;
+}
+
+.hr-dashboard-attendance-bar-segment.is-positive,
+.hr-dashboard-status-dot.is-positive,
+.hr-dashboard-status-pill.is-positive,
+.hr-dashboard-attendance-legend-item.is-positive .hr-dashboard-attendance-legend-dot {
+  background: #dcfce7;
+  color: #047857;
+}
+
+.hr-dashboard-attendance-bar-segment.is-attention,
+.hr-dashboard-status-dot.is-attention,
+.hr-dashboard-status-pill.is-attention,
+.hr-dashboard-attendance-legend-item.is-attention .hr-dashboard-attendance-legend-dot {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.hr-dashboard-attendance-bar-segment.is-accent,
+.hr-dashboard-status-dot.is-accent,
+.hr-dashboard-status-pill.is-accent,
+.hr-dashboard-attendance-legend-item.is-accent .hr-dashboard-attendance-legend-dot {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.hr-dashboard-attendance-bar-segment.is-danger,
+.hr-dashboard-status-dot.is-danger,
+.hr-dashboard-status-pill.is-danger,
+.hr-dashboard-attendance-legend-item.is-danger .hr-dashboard-attendance-legend-dot {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.hr-dashboard-attendance-bar-segment.is-positive {
+  background: linear-gradient(90deg, #34d399 0%, #10b981 100%);
+}
+
+.hr-dashboard-attendance-bar-segment.is-attention {
+  background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%);
+}
+
+.hr-dashboard-attendance-bar-segment.is-accent {
+  background: linear-gradient(90deg, #a78bfa 0%, #7c3aed 100%);
+}
+
+.hr-dashboard-attendance-bar-segment.is-danger {
+  background: linear-gradient(90deg, #fca5a5 0%, #ef4444 100%);
+}
+
+.hr-dashboard-attendance-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+
+.hr-dashboard-attendance-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.hr-dashboard-attendance-stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid #efeaf8;
+  background: #fbfaff;
+}
+
+.hr-dashboard-attendance-stat-card span {
+  color: #77738d;
+  font-size: 12px;
+}
+
+.hr-dashboard-attendance-stat-card strong {
+  color: #1d1b27;
+  font-size: 1rem;
+  line-height: 1.1;
+}
+
+.hr-dashboard-attendance-stat-card.is-positive {
+  background: #f3fdf7;
+  border-color: #d5f5df;
+}
+
+.hr-dashboard-attendance-stat-card.is-attention {
+  background: #fffaf0;
+  border-color: #fde7ba;
+}
+
+.hr-dashboard-attendance-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #4d4960;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hr-dashboard-attendance-legend-dot,
+.hr-dashboard-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.hr-dashboard-attendance-month-footer,
+.hr-dashboard-department-map-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+
+.hr-dashboard-subpanel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+}
+
+.hr-dashboard-workspace-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hr-dashboard-workspace-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.hr-dashboard-workspace-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #efeaf8;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #fcfbff 100%);
+}
+
+.hr-dashboard-workspace-group-wide {
+  grid-column: 1 / -1;
+}
+
+.hr-dashboard-workspace-group-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hr-dashboard-workspace-group-heading h4 {
+  margin: 0;
+  color: #1d1b27;
+}
+
+.hr-dashboard-workspace-group-heading p {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.hr-dashboard-subpanel-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hr-dashboard-workflow-item,
+.hr-dashboard-issue-item,
+.hr-dashboard-department-ranking-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hr-dashboard-workflow-item strong,
+.hr-dashboard-issue-topline strong {
+  color: #1d1b27;
+}
+
+.hr-dashboard-workflow-copy,
+.hr-dashboard-issue-topline,
+.hr-dashboard-department-ranking-copy {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+
+.hr-dashboard-workflow-copy {
+  align-items: center;
+  gap: 10px;
+}
+
+.hr-dashboard-issue-item,
+.hr-dashboard-department-ranking-item {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.hr-dashboard-issue-topline,
+.hr-dashboard-department-ranking-topline {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hr-dashboard-issue-track {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #efeaf8;
+}
+
+.hr-dashboard-issue-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%);
+}
+
+.hr-dashboard-panel {
+  padding: 24px;
+}
+
+.hr-dashboard-panel-tight {
+  padding: 22px;
+}
+
+html[data-theme='dark'] .hr-dashboard-overview-card,
+html[data-theme='dark'] .hr-dashboard-card,
+html[data-theme='dark'] .hr-dashboard-panel,
+html[data-theme='dark'] .hr-dashboard-shortcut-button,
+html[data-theme='dark'] .hr-dashboard-action-card,
+html[data-theme='dark'] .hr-dashboard-queue-card,
+html[data-theme='dark'] .hr-dashboard-department-card,
+html[data-theme='dark'] .hr-dashboard-activity-item,
+html[data-theme='dark'] .hr-dashboard-university-card,
+html[data-theme='dark'] .hr-dashboard-partner-preview-card,
+html[data-theme='dark'] .hr-dashboard-department-map-tile {
+  border-color: var(--theme-border);
+  background: var(--theme-surface);
+  box-shadow: var(--theme-shadow);
+}
+
+html[data-theme='dark'] .hr-dashboard-overview-card,
+html[data-theme='dark'] .hr-dashboard-partner-preview-card {
+  background:
+    radial-gradient(circle at top right, rgba(167, 139, 250, 0.2), transparent 38%),
+    linear-gradient(180deg, #162235 0%, #0f172a 100%);
+}
+
+html[data-theme='dark'] .hr-dashboard-overview-metric,
+html[data-theme='dark'] .hr-dashboard-overview-status,
+html[data-theme='dark'] .hr-dashboard-attendance-stat-card,
+html[data-theme='dark'] .hr-dashboard-workspace-group,
+html[data-theme='dark'] .hr-dashboard-partner-preview-metrics div {
+  border-color: rgba(148, 163, 184, 0.18);
+  background: rgba(11, 22, 38, 0.76);
+}
+
+html[data-theme='dark'] .hr-dashboard-overview-main h1,
+html[data-theme='dark'] .hr-dashboard-overview-metric strong,
+html[data-theme='dark'] .hr-dashboard-stat-copy strong,
+html[data-theme='dark'] .hr-dashboard-section-heading h3,
+html[data-theme='dark'] .hr-dashboard-action-topline h3,
+html[data-theme='dark'] .hr-dashboard-queue-topline h3,
+html[data-theme='dark'] .hr-dashboard-department-topline h3,
+html[data-theme='dark'] .hr-dashboard-activity-copy h3,
+html[data-theme='dark'] .hr-dashboard-university-topline h3,
+html[data-theme='dark'] .hr-dashboard-workspace-group-heading h4,
+html[data-theme='dark'] .hr-dashboard-workflow-item strong,
+html[data-theme='dark'] .hr-dashboard-issue-topline strong,
+html[data-theme='dark'] .hr-dashboard-partner-preview-metrics strong {
+  color: var(--theme-text);
+}
+
+html[data-theme='dark'] .hr-dashboard-overview-main > p,
+html[data-theme='dark'] .hr-dashboard-section-heading p,
+html[data-theme='dark'] .hr-dashboard-action-copy p,
+html[data-theme='dark'] .hr-dashboard-queue-copy p,
+html[data-theme='dark'] .hr-dashboard-shortcut-copy p,
+html[data-theme='dark'] .hr-dashboard-activity-copy p,
+html[data-theme='dark'] .hr-dashboard-university-copy p,
+html[data-theme='dark'] .hr-dashboard-overview-status p,
+html[data-theme='dark'] .hr-dashboard-shortcut-meta,
+html[data-theme='dark'] .hr-dashboard-workspace-group-heading p,
+html[data-theme='dark'] .hr-dashboard-partner-preview-copy p,
+html[data-theme='dark'] .hr-dashboard-overview-metric span,
+html[data-theme='dark'] .hr-dashboard-eyebrow {
+  color: var(--theme-text-soft);
+}
+
+html[data-theme='dark'] .hr-dashboard-icon-shell,
+html[data-theme='dark'] .hr-dashboard-action-icon-shell,
+html[data-theme='dark'] .hr-dashboard-queue-icon-shell,
+html[data-theme='dark'] .hr-dashboard-activity-icon-shell,
+html[data-theme='dark'] .hr-dashboard-university-mark,
+html[data-theme='dark'] .hr-dashboard-partner-preview-mark {
+  background: rgba(167, 139, 250, 0.14);
+}
+
+html[data-theme='dark'] .hr-dashboard-sync-pill,
+html[data-theme='dark'] .hr-dashboard-badge,
+html[data-theme='dark'] .hr-dashboard-activity-category {
+  background: rgba(167, 139, 250, 0.16);
+  color: #ddd6fe;
+}
+
+html[data-theme='dark'] .hr-dashboard-sync-pill.is-live {
+  background: rgba(45, 212, 191, 0.14);
+  color: #99f6e4;
+}
+
+html[data-theme='dark'] .hr-dashboard-sync-pill.is-error {
+  background: rgba(251, 191, 36, 0.16);
+  color: #fdba74;
+}
+
+html[data-theme='dark'] .hr-dashboard-attendance-bar,
+html[data-theme='dark'] .hr-dashboard-issue-track,
+html[data-theme='dark'] .hr-dashboard-progress-bar {
+  background: #1e293b;
+}
+
+html[data-theme='dark'] .hr-dashboard-attendance-stat-card.is-positive {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.22);
+}
+
+html[data-theme='dark'] .hr-dashboard-attendance-stat-card.is-attention {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.24);
+}
+
+.hr-dashboard-section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.hr-dashboard-section-heading h3,
+.hr-dashboard-action-topline h3,
+.hr-dashboard-queue-topline h3,
+.hr-dashboard-department-topline h3,
+.hr-dashboard-activity-copy h3,
+.hr-dashboard-university-topline h3 {
+  margin: 0;
+  color: #1d1b27;
+}
+
+.hr-dashboard-partner-preview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 22px;
+  background:
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.12), transparent 36%),
+    linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+}
+
+.hr-dashboard-partner-preview-topline {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.hr-dashboard-partner-preview-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: #efe7ff;
+  flex-shrink: 0;
+}
+
+.hr-dashboard-partner-preview-copy {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hr-dashboard-partner-preview-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.hr-dashboard-partner-preview-metrics div {
+  border: 1px solid rgba(124, 58, 237, 0.14);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.hr-dashboard-partner-preview-metrics strong {
+  display: block;
+  margin-top: 8px;
+}
+
+.hr-dashboard-partner-preview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hr-dashboard-actions-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hr-dashboard-action-card,
+.hr-dashboard-queue-card,
+.hr-dashboard-activity-item {
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.hr-dashboard-action-card:hover,
+.hr-dashboard-queue-card:hover,
+.hr-dashboard-activity-item:hover {
+  transform: translateY(-2px);
+  border-color: #d6caf7;
+  box-shadow: 0 20px 44px rgba(37, 22, 76, 0.1);
+}
+
+.hr-dashboard-action-card {
+  align-items: flex-start;
+  padding: 18px;
+}
+
+.hr-dashboard-action-copy,
+.hr-dashboard-queue-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hr-dashboard-action-topline,
+.hr-dashboard-queue-topline,
+.hr-dashboard-university-topline,
+.hr-dashboard-department-topline {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.hr-dashboard-badge,
+.hr-dashboard-activity-category {
+  color: #5b21b6;
+  background: #f3ecff;
+}
+
+.hr-dashboard-university-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+}
+
+.hr-dashboard-progress-copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hr-dashboard-progress-copy strong {
+  margin-top: 0;
+  font-size: 15px;
+}
+
+.hr-dashboard-progress-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: #efeaf8;
+  overflow: hidden;
+}
+
+.hr-dashboard-progress-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%);
+}
+
+.hr-dashboard-progress-bar-compact {
+  height: 8px;
+}
+
+.hr-dashboard-status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.hr-dashboard-department-map-layout {
+  align-items: start;
+}
+
+.hr-dashboard-department-map-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.hr-dashboard-department-map-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.hr-dashboard-department-map-tile:hover {
+  transform: translateY(-2px);
+  border-color: #d6caf7;
+  box-shadow: 0 20px 44px rgba(37, 22, 76, 0.1);
+}
+
+.hr-dashboard-department-map-tile.is-wide {
+  grid-column: span 2;
+}
+
+.hr-dashboard-department-map-tile.is-positive {
+  background: linear-gradient(180deg, #ffffff 0%, #f4fdf8 100%);
+}
+
+.hr-dashboard-department-map-tile.is-attention {
+  background: linear-gradient(180deg, #ffffff 0%, #fff8ef 100%);
+}
+
+.hr-dashboard-department-map-tile.is-accent {
+  background: linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+}
+
+.hr-dashboard-department-map-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hr-dashboard-department-map-topline h3 {
+  margin: 0;
+  color: #1d1b27;
+}
+
+.hr-dashboard-department-map-topline p {
+  margin-top: 6px;
+}
+
+.hr-dashboard-department-map-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+}
+
+.hr-dashboard-department-map-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hr-dashboard-department-map-footer {
+  color: #4d4960;
+}
+
+.hr-dashboard-department-sidebar {
+  align-self: stretch;
+}
+
+.hr-dashboard-department-ranking-copy {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hr-dashboard-department-ranking-topline h4 {
+  font-size: 0.96rem;
+}
+
+.hr-dashboard-queues-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hr-dashboard-queue-card {
+  align-items: flex-start;
+  padding: 18px;
+}
+
+.hr-dashboard-activity-list,
+.hr-dashboard-university-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hr-dashboard-activity-item,
+.hr-dashboard-university-card {
+  padding: 18px;
+}
+
+.hr-dashboard-activity-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.hr-dashboard-activity-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hr-dashboard-activity-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.hr-dashboard-university-card {
+  display: flex;
+  gap: 14px;
+}
+
+.hr-dashboard-university-mark {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.hr-dashboard-university-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (max-width: 1360px) {
+  .hr-dashboard-stats-grid,
+  .hr-dashboard-actions-grid,
+  .hr-dashboard-queues-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hr-dashboard-attendance-layout,
+  .hr-dashboard-department-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-workspace-groups,
+  .hr-dashboard-shortcut-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-toolbar-grid,
+  .hr-dashboard-attendance-months {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .hr-dashboard-overview-card {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-overview-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-attendance-metrics-grid,
+  .hr-dashboard-department-insights-grid,
+  .hr-dashboard-department-map-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-toolbar-grid,
+  .hr-dashboard-attendance-months {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-workspace-group-wide {
+    grid-column: span 1;
+  }
+
+  .hr-dashboard-partner-preview-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-department-map-tile.is-wide {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .hr-dashboard-page-content {
+    gap: 20px;
+  }
+
+  .hr-dashboard-overview-card,
+  .hr-dashboard-panel,
+  .hr-dashboard-panel-tight,
+  .hr-dashboard-stat-card,
+  .hr-dashboard-action-card,
+  .hr-dashboard-queue-card,
+  .hr-dashboard-activity-item,
+  .hr-dashboard-university-card,
+  .hr-dashboard-attendance-month-card,
+  .hr-dashboard-attendance-metric-card,
+  .hr-dashboard-subpanel,
+  .hr-dashboard-department-map-tile,
+  .hr-dashboard-department-insight-card,
+  .hr-dashboard-shortcut-button,
+  .hr-dashboard-partner-preview-card {
+    padding: 18px;
+  }
+
+  .hr-dashboard-stats-grid,
+  .hr-dashboard-actions-grid,
+  .hr-dashboard-queues-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-action-topline,
+  .hr-dashboard-queue-topline,
+  .hr-dashboard-university-topline,
+  .hr-dashboard-activity-meta,
+  .hr-dashboard-attendance-month-topline,
+  .hr-dashboard-department-map-topline,
+  .hr-dashboard-issue-topline,
+  .hr-dashboard-department-ranking-topline,
+  .hr-dashboard-partner-preview-topline,
+  .hr-dashboard-section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hr-dashboard-shortcut-topline {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-dashboard-shortcut-button.is-compact {
+    padding: 14px;
+  }
+
+  .hr-dashboard-workflow-item {
+    flex-direction: row;
+  }
+
+  .hr-dashboard-partner-preview-actions {
+    width: 100%;
+  }
+}
