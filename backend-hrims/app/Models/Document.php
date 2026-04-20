@@ -4,27 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes; 
 
 class Document extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'intern_id', 'uploaded_by',
+        'documentable_id', 'documentable_type', 
+        
         'document_type', 'file_name', 'file_path', 'file_size',
-        'status', 'uploaded_at',
+        'status', 'uploaded_by', 'uploaded_at',
+        
+        'verified_by', 'verified_at', 'expiry_date',
+
         'follow_up_requested', 'follow_up_note', 'follow_up_at', 'follow_up_by',
     ];
 
     protected $casts = [
         'uploaded_at'         => 'datetime',
+        'verified_at'         => 'datetime',
+        'expiry_date'         => 'date',
         'follow_up_requested' => 'boolean',
         'follow_up_at'        => 'datetime',
     ];
 
-    public function intern()
+    public function documentable()
     {
-        return $this->belongsTo(Intern::class);
+        return $this->morphTo();
     }
 
     public function uploader()
@@ -32,15 +39,22 @@ class Document extends Model
         return $this->belongsTo(User::class, 'uploaded_by');
     }
 
+    public function verifiedBy()
+    {
+        return $this->belongsTo(User::class, 'verified_by');
+    }
+
     public function followUpBy()
     {
         return $this->belongsTo(User::class, 'follow_up_by');
     }
 
+    // Status Helpers
     public function isVerified(): bool { return $this->status === 'verified'; }
     public function isPending(): bool  { return $this->status === 'pending'; }
     public function isRejected(): bool { return $this->status === 'rejected'; }
 
+    // Follow Up Helper
     public function requestFollowUp(User $staff, string $note = ''): void
     {
         $this->update([
@@ -51,6 +65,7 @@ class Document extends Model
         ]);
     }
 
+    // Type Label Formatter
     public function getTypeLabelAttribute(): string
     {
         return match ($this->document_type) {

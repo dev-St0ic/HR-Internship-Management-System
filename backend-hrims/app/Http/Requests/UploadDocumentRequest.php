@@ -14,11 +14,9 @@ class UploadDocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // Ensure they tell us what kind of document this is
-            'document_type' => 'required|string|in:resume,endorsement,moa,transcript,school_id',
-            
-            // Validate the actual file (max 10240 kilobytes = 10MB)
-            'file' => 'required|file|mimes:pdf,doc,docx,jpg,png|max:10240',
+            'documents'          => 'required|array',
+            'documents.*.file'   => 'required|file|max:10240', // 10MB limit (10240 KB)
+            'documents.*.type'   => 'required|string|in:resume,moa,nda,endorsement_letter,enrollment_assessment,school_id,insurance,coa,coc,evaluation,dtr,other',
         ];
     }
 }

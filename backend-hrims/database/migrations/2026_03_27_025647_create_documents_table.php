@@ -7,48 +7,34 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     public function up(): void
-    {
-        Schema::create('documents', function (Blueprint $table) {
-            $table->id();
-            
-            // 1. ADD THIS: Link the document to the Application
-            $table->foreignId('application_id')->nullable()->constrained('applications')->onDelete('cascade');
-            
-            // 2. Make these nullable since applicants aren't interns/users yet
-            $table->foreignId('intern_id')->nullable()->constrained('interns')->onDelete('cascade');
-            $table->foreignId('uploaded_by')->nullable()->constrained('users')->onDelete('restrict');
+{
+    Schema::create('documents', function (Blueprint $table) {
+        $table->id();
+        
+        $table->morphs('documentable'); 
+        
+        $table->foreignId('uploaded_by')->nullable()->constrained('users')->onDelete('restrict');
 
-            $table->enum('document_type', [
-                'resume',
-                'moa',
-                'nda',
-                'endorsement_letter',
-                'enrollment_assessment',
-                'school_id',
-                'insurance',
-                'coa',
-                'coc',
-                'evaluation',
-                'dtr',
-                'other',
-            ]);
+        $table->enum('document_type', [
+            'resume', 'moa', 'nda', 'endorsement_letter', 
+            'enrollment_assessment', 'school_id', 'insurance', 
+            'coa', 'coc', 'evaluation', 'dtr', 'other'
+        ]);
 
-            $table->string('file_name');
-            $table->string('file_path');
-            $table->string('file_size')->nullable();
+        $table->string('file_name');
+        $table->string('file_path');
+        $table->string('file_size')->nullable();
 
-            $table->enum('status', ['pending', 'verified', 'rejected'])->default('pending');
-
-            $table->boolean('follow_up_requested')->default(false);
-            $table->text('follow_up_note')->nullable();
-            $table->timestamp('follow_up_at')->nullable();
-            $table->foreignId('follow_up_by')
-                ->nullable()->constrained('users')->onDelete('set null');
-
-            $table->timestamp('uploaded_at')->useCurrent();
-            $table->timestamps();
-        });
-    }
+        $table->enum('status', ['pending', 'verified', 'rejected'])->default('pending');
+        $table->timestamp('verified_at')->nullable();
+        $table->foreignId('verified_by')->nullable()->constrained('users')->onDelete('set null');
+        $table->date('expiry_date')->nullable();
+        
+        $table->timestamp('uploaded_at')->useCurrent();
+        $table->timestamps();
+        $table->softDeletes(); 
+    });
+}
 
     public function down(): void
     {
