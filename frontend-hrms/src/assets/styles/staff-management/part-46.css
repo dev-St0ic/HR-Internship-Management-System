@@ -1,0 +1,62 @@
+
+html[data-theme='dark'] .document-vault-tab,
+html[data-theme='dark'] .settings-tab,
+html[data-theme='dark'] .document-vault-status-dropdown .settings-dropdown-trigger,
+html[data-theme='dark'] .document-vault-filter-modal .filter-option span,
+html[data-theme='dark'] .document-vault-date-field input,
+html[data-theme='dark'] .settings-dropdown-option {
+  color: var(--theme-text);
+}
+
+html[data-theme='dark'] .settings-dropdown-chevron {
+  color: var(--theme-text-soft);
+}
+
+html[data-theme='dark'] .document-vault-tab.is-active,
+html[data-theme='dark'] .settings-tab.is-active,
+html[data-theme='dark'] .settings-dropdown-option:hover,
+html[data-theme='dark'] .settings-dropdown-option.is-selected {
+  background: rgba(167, 139, 250, 0.14);
+  color: #ddd6fe;
+}
+
+html[data-theme='dark'] .document-vault-active-summary,
+html[data-theme='dark'] .document-vault-filter-count,
+html[data-theme='dark'] .settings-secondary-btn {
+  border-color: rgba(167, 139, 250, 0.22);
+  background: rgba(167, 139, 250, 0.14);
+  color: #ddd6fe;
+}
+
+html[data-theme='dark'] .settings-last-saved,
+html[data-theme='dark'] .settings-inline-note {
+  border-color: rgba(167, 139, 250, 0.18);
+  background: rgba(167, 139, 250, 0.12);
+}
+
+html[data-theme='dark'] .document-vault-sort-button {
+  color: var(--theme-text-soft);
+}
+
+html[data-theme='dark'] .document-vault-sort-button.is-active {
+  color: var(--theme-text);
+}
+
+html[data-theme='dark'] .document-vault-sort-icon {
+  color: var(--theme-text-muted);
+}
+
+html[data-theme='dark'] .document-vault-sort-button:hover .document-vault-sort-icon,
+html[data-theme='dark'] .document-vault-sort-button:focus-visible .document-vault-sort-icon,
+html[data-theme='dark'] .document-vault-sort-button.is-active .document-vault-sort-icon {
+  color: #ddd6fe;
+}
+
+html[data-theme='dark'] .document-vault-sync-tooltip,
+html[data-theme='dark'] .document-vault-filter-modal .filter-option.is-disabled::after,
+html[data-theme='dark'] .settings-dropdown-menu {
+  border-color: var(--theme-border);
+  background: #020617;
+  color: var(--theme-text);
+  box-shadow: var(--theme-shadow);
+}

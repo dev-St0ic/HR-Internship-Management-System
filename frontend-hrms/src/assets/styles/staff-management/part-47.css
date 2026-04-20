@@ -1,0 +1,38 @@
+
+html[data-theme='dark'] .document-vault-sync-tooltip::before {
+  background: #020617;
+}
+
+html[data-theme='dark'] .document-vault-filter-modal .filter-option.is-disabled {
+  border-color: var(--theme-border);
+  background: #111827;
+}
+
+html[data-theme='dark'] .document-vault-filter-actions {
+  background: rgba(13, 22, 38, 0.96);
+}
+
+html[data-theme='dark'] .settings-toggle {
+  background: #1e293b;
+}
+
+html[data-theme='dark'] .settings-toggle.is-enabled {
+  background: #7c3eff;
+}
+
+html[data-theme='dark'] .settings-toggle-knob {
+  background: #f8fafc;
+}
+
+html[data-theme='dark'] .notification-icon {
+  background: var(--theme-surface);
+  box-shadow: var(--theme-shadow);
+}
+
+html[data-theme='dark'] .action-btn {
+  color: #ddd6fe;
+}
+
+html[data-theme='dark'] .action-btn:hover {
+  color: #a78bfa;
+}

@@ -1,0 +1,64 @@
+
+.document-vault-table th:hover .document-vault-resize-handle::after,
+.document-vault-is-resizing .document-vault-resize-handle::after,
+.document-vault-resize-handle:hover::after {
+  opacity: 1;
+}
+
+.document-vault-resize-handle:hover::after {
+  background: #7c3eff;
+}
+
+.document-vault-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.document-vault-table tbody tr {
+  height: 72px;
+}
+
+.document-vault-placeholder-row td {
+  color: transparent;
+}
+
+.document-vault-file-cell,
+.document-vault-person-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.document-vault-person-cell-with-avatar {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.document-vault-person-avatar {
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px #ececf2;
+}
+
+.document-vault-file-name,
+.document-vault-person-cell span:first-child {
+  display: block;
+  color: #25263a;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.document-vault-file-meta,
+.document-vault-person-cell span:last-child {
+  display: block;
+  color: #8b8b95;
+  font-size: 12px;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
