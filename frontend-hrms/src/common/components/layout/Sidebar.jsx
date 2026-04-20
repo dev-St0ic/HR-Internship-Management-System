@@ -35,7 +35,7 @@ const Sidebar = ({ links = [], userName, role }) => {
                 <li key={link.to}>
                   <NavLink to={link.to} end={link.end} className={getNavClass}>
                     {Icon && <Icon size={18} />}
-                    <span>{link.label}</span>
+                    <span className="truncate">{link.label}</span>
                   </NavLink>
                 </li>
               );

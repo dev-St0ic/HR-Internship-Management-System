@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Eye, Download, ScrollText } from "lucide-react";
 
-import Header from "../../../common/components/layout/Header";
 import SearchInput from "../../../common/components/ui/SearchInput";
 
 import UploadModal from "../components/ui/UploadModal";
@@ -37,9 +36,7 @@ export default function Documents() {
 
   return (
     <>
-      <Header title="Documents" subtitle="File upload overview" />
-
-      <div className="p-6 space-y-5">
+      <div className="px-6 space-y-5">
         {/* This is the top bar */}
         <div className="flex justify-between items-center">
           <SearchInput

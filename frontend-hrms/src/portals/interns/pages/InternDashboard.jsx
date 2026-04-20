@@ -14,7 +14,6 @@ export default function Dashboard() {
   const stats = dashboardStats.intern;
   return (
     <>
-      <Header title="Dashboard" subtitle="Overview & activity" />
       <GreetingHeader name={currentUser?.name} />
       <div className="grid grid-cols-3 gap-8 mt-5 px-6 max-w-7xl mx-auto">
         {/* Left Side */}

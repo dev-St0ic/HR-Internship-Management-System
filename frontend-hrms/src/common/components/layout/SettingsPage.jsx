@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Header from "./Header";
 import { Settings, User, ShieldAlert, Lock, Users } from "lucide-react";
 import GeneralPreferences from "../ui/GeneralPreference";
 import ProfileSettings from "../ui/ProfileSettings";
@@ -45,11 +44,6 @@ export default function SettingsPage() {
 
   return (
     <>
-      <Header
-        title="Settings"
-        subtitle="Manage your personal preferences and account security."
-      />
-
       <div className="p-6">
         <div className="bg-white rounded-xl shadow p-6">
           {/* Tabs Header */}
@@ -67,7 +61,7 @@ export default function SettingsPage() {
           </div>
 
           {/* Tab Content Rendering */}
-          <div className="mt-6">
+          <div className="mt-1">
             {/* Common Tabs */}
             {activeTab === "general" && <GeneralPreferences />}
             {activeTab === "profile" && <ProfileSettings role={userRole} />}
