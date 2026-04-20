@@ -17,35 +17,35 @@ export default function RequiredDocsForm() {
                 label="Resume" 
                 fileName={resume} 
                 setFileName={setResume} 
-                required={true} 
+                required={false} 
             />
             
             <FileDropzone 
                 label="MOA" 
                 fileName={moa} 
                 setFileName={setMoa} 
-                required={true} 
+                required={false} 
             />
             
             <FileDropzone 
                 label="Endorsement Letter" 
                 fileName={endorsement} 
                 setFileName={setEndorsement} 
-                required={true} 
+                required={false} 
             />
             
             <FileDropzone 
                 label="School ID" 
                 fileName={schoolId} 
                 setFileName={setSchoolId} 
-                required={true} 
+                required={false} 
             />
             
             <FileDropzone 
                 label="Upload Enrollment Assessment" 
                 fileName={assessment} 
                 setFileName={setAssessment} 
-                required={true} 
+                required={false} 
             />
 
         </div>

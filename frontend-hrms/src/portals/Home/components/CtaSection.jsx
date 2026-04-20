@@ -20,7 +20,7 @@ export default function CtaSection() {
                 
                 {/* Apply Now Button */}
                 <Link 
-                    to="/application-form"
+                    to="/create-account"
                     className="inline-block bg-[#120071] hover:bg-[#0B1D4B]/90 text-white font-bold text-[15px] px-10 py-3.5 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                 >
                     Apply Now
