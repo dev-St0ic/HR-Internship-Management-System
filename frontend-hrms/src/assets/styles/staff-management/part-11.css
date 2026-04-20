@@ -1,0 +1,56 @@
+
+.staff-detail-filter-option label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.staff-detail-filter-option:has(input:checked) label {
+  color: #5b21b6;
+  font-weight: 600;
+}
+
+.staff-detail-filter-actions {
+  margin-top: 14px;
+  padding-top: 4px;
+}
+
+@media (max-width: 640px) {
+  .staff-detail-filter-modal {
+    width: 92vw;
+    padding: 18px 14px;
+    max-height: calc(100vh - 24px);
+  }
+
+  .staff-detail-filter-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .staff-detail-filter-title-row h4 {
+    font-size: 24px;
+  }
+
+  .staff-detail-filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .staff-detail-filter-options.is-two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .hrims-confirmation-modal {
+    width: min(420px, calc(100vw - 24px));
+    padding: 18px;
+  }
+
+  .hrims-confirmation-modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .hrims-confirmation-button {
+    width: 100%;
+  }
+}

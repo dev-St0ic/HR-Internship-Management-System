@@ -1,0 +1,60 @@
+
+.document-vault-date-cell,
+.document-vault-type-cell {
+  color: #4b5563;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.document-vault-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 82px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.document-vault-status.is-verified {
+  background: #e8f9ef;
+  color: #15803d;
+}
+
+.document-vault-status.is-pending {
+  background: #fff4d6;
+  color: #b7791f;
+}
+
+.document-vault-status.is-review {
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+.document-vault-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.document-vault-action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e6e7ef;
+  border-radius: 9px;
+  background: #fff;
+  color: #25263a;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.document-vault-action-button:hover {
+  background: #f5f1ff;
+  border-color: #d4c2ff;
+  color: #7c3eff;
+}

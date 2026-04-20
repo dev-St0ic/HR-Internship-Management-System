@@ -1,0 +1,64 @@
+
+.settings-row:last-child {
+  border-bottom: none;
+}
+
+.settings-row h3,
+.settings-profile-header h3 {
+  margin: 0;
+  color: #25263a;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.settings-row p,
+.settings-profile-header p {
+  margin: 4px 0 0;
+  color: #8b8b95;
+  font-size: 14px;
+}
+
+.settings-row-control {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.settings-row-control:has(.settings-dropdown.is-open),
+.settings-field:has(.settings-dropdown.is-open) {
+  z-index: 120;
+}
+
+.settings-dropdown,
+.settings-field input {
+  font-size: 14px;
+}
+
+.settings-dropdown {
+  position: relative;
+  z-index: 1;
+  width: 124px;
+}
+
+.settings-dropdown.is-open {
+  z-index: 80;
+}
+
+.settings-dropdown-wide {
+  width: 260px;
+}
+
+.settings-dropdown-full {
+  width: 100%;
+}
+
+.settings-dropdown-trigger,
+.settings-field input {
+  height: 42px;
+  width: 100%;
+  border: 1px solid #e6e7ef;
+  border-radius: 10px;
+  background: #fff;
+  color: #25263a;
+  font-size: 14px;
+  padding: 0 14px;
+}

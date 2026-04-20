@@ -1,0 +1,57 @@
+
+.document-vault-sync-button.is-live svg {
+  animation: document-vault-live-pulse 1.6s ease-in-out infinite;
+}
+
+.document-vault-sync-button.is-polling svg,
+.document-vault-sync-button.is-refreshing svg {
+  animation: document-vault-refresh-spin 0.9s linear infinite;
+}
+
+.document-vault-sync-tooltip {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  z-index: 6;
+  min-width: max-content;
+  max-width: 280px;
+  border: 1px solid #e6e7ef;
+  border-radius: 10px;
+  background: #111827;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.3;
+  padding: 8px 10px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.document-vault-sync-tooltip::before {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  background: #111827;
+  transform: rotate(45deg);
+}
+
+.document-vault-sync-indicator:hover .document-vault-sync-tooltip,
+.document-vault-sync-indicator:focus-within .document-vault-sync-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.document-vault-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 500;
+}
