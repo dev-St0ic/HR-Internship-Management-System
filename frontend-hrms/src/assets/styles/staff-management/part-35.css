@@ -1,0 +1,64 @@
+
+.settings-section-intro p {
+  margin: 6px 0 0;
+  color: #8b8b95;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.settings-metadata-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.settings-metadata-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  min-height: 88px;
+  border: 1px solid #f0f0f4;
+  border-radius: 14px;
+  background: #fafafd;
+  padding: 13px 14px;
+}
+
+.settings-metadata-label {
+  display: block;
+  color: #8b8b95;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.settings-metadata-value {
+  display: block;
+  margin-top: 8px;
+  color: #46506b;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.settings-inline-note {
+  margin: 0;
+  border-radius: 12px;
+  background: #f8f5ff;
+  color: #6545c8;
+  font-size: 13px;
+  line-height: 1.55;
+  padding: 12px 14px;
+}
+
+.settings-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 16px;
+  border-bottom: 1px solid #f3f3f7;
+}

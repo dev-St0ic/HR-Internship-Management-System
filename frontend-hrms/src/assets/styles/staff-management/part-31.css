@@ -1,0 +1,59 @@
+
+@keyframes document-vault-live-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 0.72;
+  }
+}
+
+.settings-card {
+  background: #fff;
+  border: 1px solid #ececf2;
+  border-radius: 18px;
+  overflow: visible;
+  isolation: isolate;
+  padding: 18px 22px 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.settings-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid #efeff5;
+  margin-bottom: 18px;
+}
+
+.settings-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 6px 11px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #70707b;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.settings-tab.is-active {
+  border-bottom-color: #7c3eff;
+  color: #7c3eff;
+  font-weight: 600;
+}
+
+.settings-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow: visible;
+}

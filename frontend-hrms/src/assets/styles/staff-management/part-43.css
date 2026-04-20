@@ -1,0 +1,70 @@
+.action-btn:hover {
+  color: #4c1d95;
+}
+
+/* Filter Button */
+.filter-btn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.filter-btn:hover {
+  background: #5b21b6;
+}
+
+/* Search Bar */
+.search-bar {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  font-size: 15px;
+  background: #f7f7fa;
+  outline: none;
+}
+
+/* Notification Icon */
+.notification-icon {
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.notification-icon svg {
+  color: #7c3aed;
+  transform-origin: top center;
+}
+.notification-icon:hover svg {
+  animation: bell-ring 700ms ease-in-out;
+}
+
+@keyframes bell-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(16deg);
+  }
+  40% {
+    transform: rotate(-14deg);
+  }
+  60% {
+    transform: rotate(10deg);
+  }
+  80% {
+    transform: rotate(-6deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

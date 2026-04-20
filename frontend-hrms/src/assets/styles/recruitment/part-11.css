@@ -1,0 +1,66 @@
+
+.recruitment-university-title-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  min-height: 34px;
+  padding-left: 0;
+}
+
+.recruitment-university-relationship-pill {
+  padding: 7px 12px;
+  font-size: 10px;
+  letter-spacing: 0.03em;
+}
+
+.recruitment-university-info-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #eef4ff;
+  color: #3156c9;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.recruitment-university-copy p {
+  margin: 0;
+  color: #5f6475;
+  font-size: 12px;
+  line-height: 1.5;
+  max-width: 26ch;
+  min-height: 40px;
+}
+
+.recruitment-university-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.recruitment-university-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #ececf2;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.88);
+  text-align: center;
+}
+
+.recruitment-university-stat span {
+  display: block;
+  min-height: 32px;
+  color: #8b8b95;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

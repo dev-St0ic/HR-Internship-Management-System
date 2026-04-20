@@ -1,0 +1,68 @@
+
+html[data-theme='dark'] .recruitment-hero-main p,
+html[data-theme='dark'] .recruitment-metric-card p,
+html[data-theme='dark'] .recruitment-toolbar-summary-label,
+html[data-theme='dark'] .recruitment-university-copy p,
+html[data-theme='dark'] .recruitment-action-note,
+html[data-theme='dark'] .recruitment-empty-state p,
+html[data-theme='dark'] .recruitment-results-meta,
+html[data-theme='dark'] .recruitment-university-progress-copy,
+html[data-theme='dark'] .recruitment-university-panel-note,
+html[data-theme='dark'] .recruitment-muted-copy,
+html[data-theme='dark'] .recruitment-meta-item span,
+html[data-theme='dark'] .recruitment-card-footer span,
+html[data-theme='dark'] .recruitment-section-label,
+html[data-theme='dark'] .recruitment-document-progress-copy span {
+  color: var(--theme-text-soft);
+}
+
+html[data-theme='dark'] .recruitment-eyebrow,
+html[data-theme='dark'] .recruitment-tag,
+html[data-theme='dark'] .recruitment-chip,
+html[data-theme='dark'] .recruitment-tab-count {
+  background: rgba(167, 139, 250, 0.16);
+  color: #ddd6fe;
+}
+
+html[data-theme='dark'] .recruitment-chip.is-department,
+html[data-theme='dark'] .recruitment-university-info-pill,
+html[data-theme='dark'] .recruitment-university-featured-rank {
+  background: rgba(59, 130, 246, 0.16);
+  color: #bfdbfe;
+}
+
+html[data-theme='dark'] .recruitment-search-shell .search-bar {
+  background: var(--theme-surface-elevated);
+  border-color: var(--theme-border);
+}
+
+html[data-theme='dark'] .recruitment-search-icon,
+html[data-theme='dark'] .recruitment-tab,
+html[data-theme='dark'] .recruitment-metric-label,
+html[data-theme='dark'] .recruitment-university-stat span {
+  color: var(--theme-text-soft);
+}
+
+html[data-theme='dark'] .recruitment-tabs,
+html[data-theme='dark'] .recruitment-results-meta {
+  border-color: var(--theme-border);
+}
+
+html[data-theme='dark'] .recruitment-tab:hover {
+  color: #ddd6fe;
+}
+
+html[data-theme='dark'] .recruitment-tab.is-active {
+  color: #ddd6fe;
+}
+
+html[data-theme='dark'] .recruitment-action-button.is-secondary {
+  border-color: var(--theme-border);
+  background: var(--theme-surface-elevated);
+}
+
+html[data-theme='dark'] .recruitment-action-button:disabled {
+  border-color: var(--theme-border);
+  background: #1e293b;
+  color: var(--theme-text-muted);
+}

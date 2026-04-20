@@ -1,0 +1,10 @@
+import ActionFeedbackBanner from '../staff-management/ActionFeedbackBanner';
+import PaginationControls from '../staff-management/PaginationControls';
+import RecruitmentMeasureLayer from './RecruitmentMeasureLayer';
+import RecruitmentResultsGrid from './RecruitmentResultsGrid';
+import RecruitmentTabs from './RecruitmentTabs';
+
+export default function RecruitmentWorkspaceCard({ state }) {
+  const emptyMessage = state.currentItems.length === 0 ? 'No records match the current search.' : `Showing ${state.currentSliceStart + 1}-${state.currentSliceStart + state.currentPageItems.length} of ${state.currentItems.length} ${state.activeTab === 'partner-university' ? 'partner universities' : 'applicants'}.`;
+  return <section ref={state.workspaceCardRef} className="recruitment-workspace-card"><RecruitmentTabs activeTab={state.activeTab} onSelect={state.selectRecruitmentTab} resolvedTheme={state.resolvedTheme} tabCounts={state.tabCounts} /><div className="recruitment-panel"><RecruitmentMeasureLayer activeTab={state.activeTab} items={state.currentItems} measureLayerRef={state.measureLayerRef} /><div className="recruitment-results-meta"><span>{emptyMessage}</span></div><ActionFeedbackBanner feedback={state.actionFeedback} />{state.currentItems.length === 0 ? <div className="recruitment-empty-state"><div><h3>No matching recruitment records</h3><p>Try a broader search term to surface applicants or partner universities from the current dataset.</p></div></div> : <RecruitmentResultsGrid activeTab={state.activeTab} items={state.currentPageItems} placeholderCount={state.currentPlaceholderCount} fixedHeight={state.currentFixedCardHeight} onViewProfile={state.onViewProfile} onMoveToAdminApproval={state.handleMoveToAdminApproval} onEndorse={state.handleEndorse} />}{state.currentPageCount > 1 ? <div className="recruitment-pagination-slot"><PaginationControls currentPage={state.currentPage} totalPages={state.currentPageCount} onPageChange={(page) => state.setPageByTab((current) => ({ ...current, [state.activeTab]: page }))} /></div> : null}</div></section>;
+}

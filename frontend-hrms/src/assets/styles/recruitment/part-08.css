@@ -1,0 +1,70 @@
+
+.recruitment-document-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recruitment-document-progress-copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.recruitment-document-progress-copy span {
+  color: #8b8b95;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.recruitment-document-progress-copy strong {
+  color: #25263a;
+  font-size: 12px;
+}
+
+.recruitment-document-track {
+  height: 8px;
+  border-radius: 999px;
+  background: #edf2ff;
+  overflow: hidden;
+}
+
+.recruitment-document-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7c3eff 0%, #9ca3ff 100%);
+}
+
+.recruitment-tag-list,
+.recruitment-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.recruitment-tag,
+.recruitment-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f5f3ff;
+  color: #6d28d9;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.recruitment-chip.is-department {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.recruitment-card-footer,
+.recruitment-university-footer {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: auto;
+}
