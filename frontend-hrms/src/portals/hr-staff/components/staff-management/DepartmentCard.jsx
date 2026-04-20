@@ -1,8 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ChevronRight } from 'lucide-react';
+import EmployeeAvatar from './EmployeeAvatar';
 
 const DepartmentCard = ({ department }) => {
   const navigate = useNavigate();
+  const previewEmployees = department.employees.slice(0, 6);
+
   return (
     <div className="department-card">
       <div className="department-header">
@@ -13,9 +17,9 @@ const DepartmentCard = ({ department }) => {
         <button className="view-all-btn" onClick={() => navigate(`/hr-staff/staff-management/department/${department.id}`)}>View All</button>
       </div>
       <ul className="employee-list">
-        {department.employees.map(emp => (
+        {previewEmployees.map(emp => (
           <li key={emp.id} className="employee-item" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <img src={emp.avatar} alt={emp.name} className="avatar" />
+            <EmployeeAvatar src={emp.avatar} alt={emp.name} name={emp.name} className="avatar" />
             <span>{emp.name}</span>
             <button
               className="arrow-btn"
@@ -23,7 +27,7 @@ const DepartmentCard = ({ department }) => {
               style={{ background: 'none', border: 'none', cursor: 'pointer', marginLeft: 'auto', padding: 0 }}
               onClick={() => navigate(`/hr-staff/staff-management/department/${department.id}/employee/${emp.id}`)}
             >
-              <span role="img" aria-label="arrow">➔</span>
+              <ChevronRight aria-hidden="true" size={24} strokeWidth={2} />
             </button>
           </li>
         ))}
