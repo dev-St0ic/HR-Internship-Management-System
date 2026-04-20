@@ -57,7 +57,7 @@ export default function ProfileView({ user, mode }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState(null);
 
-  const staffView = ["hr-admin", "hr-staff"].includes(mode);
+  const staffView = ["hr-admin", "hr-staff", "supervisor"].includes(mode);
 
   const tabs =
     mode === "intern"
