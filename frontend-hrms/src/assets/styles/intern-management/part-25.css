@@ -1,0 +1,24 @@
+
+html[data-theme='dark'] .intern-management-filter-modal .filter-option span,
+html[data-theme='dark'] .intern-management-request-form label span,
+html[data-theme='dark'] .intern-management-supporting-document span {
+  color: var(--theme-text-soft);
+}
+
+html[data-theme='dark'] .intern-management-filter-actions,
+html[data-theme='dark'] .intern-management-request-actions {
+  border-top-color: var(--theme-border);
+}
+
+html[data-theme='dark'] .intern-management-detail-table tbody tr:hover {
+  background: rgba(167, 139, 250, 0.08);
+}
+
+html[data-theme='dark'] .intern-management-month-arrow,
+html[data-theme='dark'] .intern-management-icon-button {
+  color: var(--theme-text);
+}
+
+html[data-theme='dark'] .intern-management-comments-box {
+  background: var(--theme-surface-elevated);
+}

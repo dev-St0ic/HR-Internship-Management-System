@@ -1,0 +1,62 @@
+
+html[data-theme='dark'] .staff-management-layout {
+  background: var(--theme-page-bg);
+}
+
+html[data-theme='dark'] .main-content,
+html[data-theme='dark'] .detail-page-content {
+  color: var(--theme-text);
+}
+
+html[data-theme='dark'] .filter-modal-overlay {
+  background: rgba(2, 6, 23, 0.52);
+  backdrop-filter: blur(10px);
+}
+
+html[data-theme='dark'] .department-card,
+html[data-theme='dark'] .employee-table,
+html[data-theme='dark'] .intern-table,
+html[data-theme='dark'] .notifications-card,
+html[data-theme='dark'] .document-vault-card,
+html[data-theme='dark'] .document-vault-filter-modal,
+html[data-theme='dark'] .document-vault-filter-card,
+html[data-theme='dark'] .document-vault-table-shell,
+html[data-theme='dark'] .settings-card,
+html[data-theme='dark'] .settings-summary-card,
+html[data-theme='dark'] .settings-section,
+html[data-theme='dark'] .settings-metadata-card,
+html[data-theme='dark'] .filter-modal {
+  border-color: var(--theme-border);
+  background: var(--theme-surface);
+  box-shadow: var(--theme-shadow);
+}
+
+html[data-theme='dark'] .settings-hero {
+  border-color: rgba(167, 139, 250, 0.18);
+  background:
+    radial-gradient(circle at top right, rgba(167, 139, 250, 0.2), transparent 40%),
+    linear-gradient(135deg, #162235 0%, #0f172a 100%);
+}
+
+html[data-theme='dark'] .settings-summary-card,
+html[data-theme='dark'] .settings-metadata-card,
+html[data-theme='dark'] .document-vault-filter-modal .filter-option,
+html[data-theme='dark'] .document-vault-active-summary {
+  background: rgba(11, 22, 38, 0.76);
+}
+
+html[data-theme='dark'] .header-row h2,
+html[data-theme='dark'] .department-header h3,
+html[data-theme='dark'] .notification-row-heading h3,
+html[data-theme='dark'] .document-vault-filter-modal h4,
+html[data-theme='dark'] .document-vault-file-name,
+html[data-theme='dark'] .document-vault-person-cell span:first-child,
+html[data-theme='dark'] .settings-hero-copy h3,
+html[data-theme='dark'] .settings-summary-value,
+html[data-theme='dark'] .settings-panel-header h3,
+html[data-theme='dark'] .settings-section-intro h3,
+html[data-theme='dark'] .settings-metadata-value,
+html[data-theme='dark'] .settings-row h3,
+html[data-theme='dark'] .settings-profile-header h3 {
+  color: var(--theme-text);
+}

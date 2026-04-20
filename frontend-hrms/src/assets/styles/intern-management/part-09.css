@@ -1,0 +1,53 @@
+
+.intern-management-filter-search-field svg {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.intern-management-filter-search-field:focus-within {
+  border-color: #cdbfff;
+  box-shadow: 0 0 0 3px rgba(124, 62, 255, 0.12);
+}
+
+.intern-management-filter-search-field input {
+  display: block;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  color: #25263a;
+  font-size: 13px;
+  line-height: 38px;
+  padding: 0 12px 0 38px;
+}
+
+.intern-management-filter-search-field input:focus {
+  outline: none;
+}
+
+.intern-management-filter-search-field input::placeholder {
+  color: #9ca3af;
+}
+
+.intern-management-filter-section > label {
+  color: #25263a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.intern-management-filter-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 12px;
+  max-height: 188px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #d8dbea transparent;
+}

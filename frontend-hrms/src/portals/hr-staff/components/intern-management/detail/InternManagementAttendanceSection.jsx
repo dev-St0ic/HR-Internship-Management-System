@@ -1,0 +1,8 @@
+import { attendanceTableColumns } from '../../../utils/intern-management/detail/constants';
+import { getStatusClassName } from '../../../utils/intern-management/detail/helpers';
+import InternManagementDetailTable from './InternManagementDetailTable';
+
+export default function InternManagementAttendanceSection({ entries, emptyRowCount, currentPage, totalPages, onPageChange, monthlyDtrIcon, exportAttendanceIcon, onViewMonthlyDtr, onExport }) {
+  const footer = <div className="intern-management-detail-actions"><button type="button" className="intern-management-secondary-button" onClick={onViewMonthlyDtr}><img src={monthlyDtrIcon} alt="" aria-hidden="true" /><span>View Monthly DTR</span></button><button type="button" className="intern-management-primary-button" onClick={onExport}><img src={exportAttendanceIcon} alt="" aria-hidden="true" /><span>Export Attendance</span></button></div>;
+  return <InternManagementDetailTable columns={attendanceTableColumns} rows={entries} emptyRowCount={emptyRowCount} totalPages={totalPages} currentPage={currentPage} onPageChange={onPageChange} footer={footer} renderRow={(entry) => <tr key={entry.id}><td>{entry.date}</td><td>{entry.checkIn}</td><td>{entry.checkOut}</td><td>{entry.breakDuration}</td><td>{entry.workingHours}</td><td><span className={`intern-management-status-pill is-${getStatusClassName(entry.status)}`}>{entry.status}</span></td></tr>} />;
+}

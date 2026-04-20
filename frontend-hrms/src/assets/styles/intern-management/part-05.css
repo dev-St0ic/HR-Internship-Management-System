@@ -1,0 +1,50 @@
+
+.intern-management-status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.intern-management-status-pill.is-approved,
+.intern-management-status-pill.is-on-time,
+.intern-management-status-pill.is-completed {
+  background: #e8fbf0;
+  color: #3bb98b;
+}
+
+.intern-management-status-pill.is-pending,
+.intern-management-status-pill.is-late {
+  background: #fff6dc;
+  color: #e7be33;
+}
+
+.intern-management-status-pill.is-rejected,
+.intern-management-status-pill.is-absent {
+  background: #ffe8e8;
+  color: #ff7c7c;
+}
+
+.intern-management-status-pill.is-excused {
+  background: #ede9fe;
+  color: #7c3eff;
+}
+
+.intern-management-filter-modal {
+  width: min(860px, 88vw);
+  max-height: 78vh;
+  overflow-y: auto;
+  border: 1px solid #ececf2;
+  padding: 22px 24px 20px;
+}
+
+.intern-management-filter-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}

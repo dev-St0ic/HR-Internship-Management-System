@@ -1,0 +1,77 @@
+
+.document-vault-filter-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+  margin-top: 14px;
+}
+
+.document-vault-filter-modal .filter-option {
+  min-width: 0;
+  border: 1px solid #ececf2;
+  border-radius: 12px;
+  background: #fff;
+  padding: 11px 12px;
+  gap: 10px;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.document-vault-filter-modal .filter-option:hover {
+  border-color: #d8c7ff;
+  background: #faf7ff;
+}
+
+.document-vault-filter-modal .filter-option.is-disabled {
+  position: relative;
+  border-color: #ececf2;
+  background: #f7f7fb;
+  cursor: not-allowed;
+}
+
+.document-vault-filter-modal .filter-option.is-disabled:hover {
+  border-color: #e1e3eb;
+  background: #f1f2f7;
+}
+
+.document-vault-filter-modal .filter-option input {
+  accent-color: #7c3eff;
+  margin: 0;
+}
+
+.document-vault-filter-modal .filter-option input:disabled {
+  cursor: not-allowed;
+}
+
+.document-vault-filter-modal .filter-option span {
+  color: #25263a;
+  font-size: 14px;
+  font-weight: 500;
+  padding-left: 4px;
+}
+
+.document-vault-filter-modal .filter-option.is-disabled span {
+  color: #a6a9b6;
+}
+
+.document-vault-filter-modal .filter-option.is-disabled::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%) translateY(4px);
+  min-width: 170px;
+  max-width: 220px;
+  padding: 7px 9px;
+  border-radius: 8px;
+  background: #25263a;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: center;
+  white-space: normal;
+  box-shadow: 0 10px 22px rgba(17, 24, 39, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}

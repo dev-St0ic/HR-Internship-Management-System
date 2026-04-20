@@ -1,0 +1,7 @@
+import EmployeeAvatar from '../../staff-management/EmployeeAvatar';
+
+export default function InternManagementInternRow({ intern, navigate, onRemoveIntern, viewIcon, removeIcon }) {
+  return (
+    <tr><td className="intern-management-cell-name"><div className="document-vault-person-cell document-vault-person-cell-with-avatar intern-management-person-cell-with-avatar"><EmployeeAvatar src={intern.avatar} alt={intern.name} name={intern.name} size={30} className="document-vault-person-avatar" /><span title={intern.name}>{intern.name}</span></div></td><td className="intern-management-cell-id">{intern.internNumericId}</td><td className="intern-management-cell-university">{intern.university}</td><td className="intern-management-cell-department">{intern.department}</td><td className="intern-management-cell-date">{intern.startedAtLabel}</td><td className="intern-management-cell-action"><div className="document-vault-actions intern-management-row-actions"><button type="button" className="document-vault-action-button intern-management-icon-button" onClick={() => navigate(`/hr-staff/intern-management/intern/${intern.slug}/profile`)} aria-label={`View ${intern.name}`}><img src={viewIcon} alt="" aria-hidden="true" className="intern-management-action-icon" /></button><button type="button" className="document-vault-action-button intern-management-icon-button" onClick={() => onRemoveIntern(intern)} aria-label={`Remove ${intern.name}`}><img src={removeIcon} alt="" aria-hidden="true" className="intern-management-action-icon" /></button></div></td></tr>
+  );
+}

@@ -1,0 +1,60 @@
+/* HRIMS layout wrapper for sidebar and main content */
+.hrims-layout {
+  border: 2px solid #e5e7eb;
+  border-radius: 18px;
+  margin: 32px;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+.hrims-layout nav {
+  border-right: none;
+  border-bottom: none;
+  border-radius: 0;
+}
+.add-intern-btn {
+  min-width: 160px !important;
+}
+.filter-btn {
+  background: #f7f7fa !important;
+  color: #111111 !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  padding: 8px 18px !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  height: 40px !important;
+  transition: background 0.15s, color 0.15s !important;
+  box-sizing: border-box !important;
+}
+.filter-btn-icon {
+  margin-right: 6px !important;
+  width: 18px !important;
+  height: 18px !important;
+  object-fit: contain !important;
+}
+.filter-btn:hover {
+  background: #ede9fe !important;
+  color: #111111 !important;
+}
+.filter-btn-wide {
+  min-width: 112px !important;
+  justify-content: center !important;
+}
+.add-intern-btn {
+  background: #7c3aed !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 8px 18px !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  height: 40px !important;
+  transition: background 0.15s !important;
+  box-sizing: border-box !important;
+}

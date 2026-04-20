@@ -1,0 +1,61 @@
+.filter-btn:hover {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+.add-intern-btn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  height: 40px;
+  transition: background 0.15s;
+}
+.add-intern-btn:hover {
+  background: #5b21b6;
+}
+/* Arrow button for employee navigation */
+.arrow-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  color: #7c3aed;
+  font-size: 20px;
+  transition: color 0.15s;
+}
+.arrow-btn:hover {
+  color: #5b21b6;
+}
+.intern-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  margin-top: 24px;
+  overflow: hidden;
+}
+.intern-table th, .intern-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.intern-table tbody td {
+  height: 61px;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.intern-table th {
+  background: #f7f7fa;
+  color: #888;
+  font-size: 14px;
+  font-weight: 600;
+}

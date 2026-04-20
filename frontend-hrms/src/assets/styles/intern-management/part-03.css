@@ -1,0 +1,57 @@
+
+.intern-management-overview-tab.is-active,
+.intern-management-subtab.is-active {
+  color: #7c3eff;
+  font-weight: 600;
+}
+
+.intern-management-overview-tab.is-active img,
+.intern-management-side-link.is-active img,
+.intern-management-subtab.is-active img {
+  opacity: 1;
+  filter: none;
+}
+
+.intern-management-overview-tab.is-active::after,
+.intern-management-subtab.is-active::after {
+  background: #7c3eff;
+}
+
+.intern-management-table-shell,
+.intern-management-table-scroll-shell {
+  overflow-x: auto;
+}
+
+.intern-management-table-shell {
+  min-height: 372px;
+  margin: 14px 16px 0;
+}
+
+.intern-management-table-scroll {
+  height: 100%;
+}
+
+.intern-management-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.intern-management-table th,
+.intern-management-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid #f1f1f5;
+  color: #25263a;
+  font-size: 13px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.intern-management-table th {
+  position: relative;
+  background: #fafafd;
+  color: #8b8b95;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}

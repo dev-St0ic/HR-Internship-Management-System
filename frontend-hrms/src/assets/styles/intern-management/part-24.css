@@ -1,0 +1,53 @@
+
+html[data-theme='dark'] .intern-management-overview-tab.is-active,
+html[data-theme='dark'] .intern-management-side-link.is-active,
+html[data-theme='dark'] .intern-management-subtab.is-active {
+  color: #ddd6fe;
+}
+
+html[data-theme='dark'] .intern-management-overview-tab img,
+html[data-theme='dark'] .intern-management-side-link img,
+html[data-theme='dark'] .intern-management-subtab img {
+  opacity: 0.92;
+  filter: none;
+}
+
+html[data-theme='dark'] .intern-management-table th,
+html[data-theme='dark'] .intern-management-detail-table th {
+  background: #132033;
+  color: var(--theme-text-soft);
+}
+
+html[data-theme='dark'] .intern-management-table td,
+html[data-theme='dark'] .intern-management-detail-table td,
+html[data-theme='dark'] .intern-management-document-copy strong,
+html[data-theme='dark'] .intern-management-month-nav h3,
+html[data-theme='dark'] .intern-management-month-footer p,
+html[data-theme='dark'] .intern-management-evaluation-header h3,
+html[data-theme='dark'] .intern-management-evaluation-label,
+html[data-theme='dark'] .intern-management-comments-box strong,
+html[data-theme='dark'] .intern-management-evaluation-footer {
+  color: var(--theme-text);
+}
+
+html[data-theme='dark'] .intern-management-table th,
+html[data-theme='dark'] .intern-management-table td,
+html[data-theme='dark'] .intern-management-detail-table th,
+html[data-theme='dark'] .intern-management-detail-table td,
+html[data-theme='dark'] .intern-management-document-card {
+  border-color: var(--theme-border);
+}
+
+html[data-theme='dark'] .intern-management-toolbar-filter,
+html[data-theme='dark'] .intern-management-search-shell .search-bar,
+html[data-theme='dark'] .intern-management-filter-date-field input,
+html[data-theme='dark'] .intern-management-secondary-button {
+  background: var(--theme-surface-elevated);
+  border-color: var(--theme-border);
+  color: var(--theme-text);
+}
+
+html[data-theme='dark'] .intern-management-filter-modal .filter-option {
+  border-color: var(--theme-border);
+  background: var(--theme-surface-elevated);
+}

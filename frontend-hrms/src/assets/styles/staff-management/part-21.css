@@ -1,0 +1,62 @@
+
+.document-vault-tabs-row .document-vault-tabs {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.document-vault-filter-button {
+  flex: 0 0 auto;
+  min-width: 124px;
+  justify-content: center;
+}
+
+.document-vault-filter-summary-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.document-vault-active-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 280px;
+  padding: 7px 11px;
+  border: 1px solid #ebe7fb;
+  border-radius: 999px;
+  background: #f8f5ff;
+}
+
+.document-vault-active-summary-label {
+  flex-shrink: 0;
+  color: #7b7590;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.document-vault-active-summary-value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #5d36cc;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.document-vault-filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  margin-left: 4px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgba(124, 62, 255, 0.12);
+  color: #7c3eff;
+  font-size: 11px;
+  font-weight: 700;
+}

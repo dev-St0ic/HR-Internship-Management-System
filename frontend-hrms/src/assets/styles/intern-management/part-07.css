@@ -1,0 +1,53 @@
+
+.intern-management-filter-date-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 196px;
+}
+
+.intern-management-filter-date-field span {
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.intern-management-filter-date-picker {
+  width: 100%;
+}
+
+.intern-management-filter-date-picker .MuiOutlinedInput-root {
+  height: 42px;
+  border-radius: 10px;
+  background: #fff;
+  color: #25263a;
+  font-size: 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.intern-management-filter-date-picker .MuiOutlinedInput-input {
+  padding: 10px 14px;
+}
+
+.intern-management-filter-date-picker .MuiOutlinedInput-notchedOutline {
+  border-color: #e6e7ef;
+}
+
+.intern-management-filter-date-picker .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+.intern-management-filter-date-picker .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #cdbfff;
+}
+
+.intern-management-filter-date-picker .MuiOutlinedInput-root.Mui-focused {
+  box-shadow: 0 0 0 3px rgba(124, 62, 255, 0.12);
+}
+
+.intern-management-filter-date-picker .MuiInputBase-input::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+.intern-management-filter-date-picker .MuiInputLabel-root,
+.intern-management-filter-date-picker .MuiFormLabel-root {
+  display: none;
+}

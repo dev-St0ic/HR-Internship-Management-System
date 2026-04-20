@@ -1,0 +1,50 @@
+
+.intern-management-request-form .settings-dropdown-trigger {
+  border-color: #dddde3;
+}
+
+.intern-management-status-dropdown .settings-dropdown-trigger span {
+  font-weight: 400;
+}
+
+.intern-management-status-dropdown.is-disabled .settings-dropdown-trigger {
+  cursor: default;
+  background: #fafafd;
+}
+
+.intern-management-status-dropdown.is-disabled .settings-dropdown-chevron {
+  color: #9ca3af;
+}
+
+.intern-management-request-form .settings-dropdown-menu {
+  z-index: 70;
+}
+
+.intern-management-request-form input[readonly],
+.intern-management-request-form textarea[readonly] {
+  background: #fafafd;
+}
+
+.intern-management-request-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.intern-management-supporting-document {
+  display: grid;
+  gap: 6px;
+}
+
+.intern-management-supporting-document strong {
+  color: #25263a;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.intern-management-request-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}

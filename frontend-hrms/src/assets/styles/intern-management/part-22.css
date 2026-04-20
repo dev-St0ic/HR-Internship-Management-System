@@ -1,0 +1,75 @@
+
+.intern-management-evaluation-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  color: #25263a;
+}
+
+.intern-management-evaluation-footer strong,
+.intern-management-evaluation-footer span {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+@media (max-width: 1180px) {
+  .intern-management-detail-body {
+    grid-template-columns: 1fr;
+  }
+
+  .intern-management-side-nav {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .intern-management-toolbar,
+  .intern-management-month-footer,
+  .intern-management-detail-actions,
+  .intern-management-request-grid,
+  .intern-management-info-grid,
+  .intern-management-documents-grid,
+  .intern-management-filter-grid {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .intern-management-toolbar,
+  .intern-management-month-footer,
+  .intern-management-detail-actions {
+    display: flex;
+  }
+
+  .intern-management-toolbar-actions {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .intern-management-side-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .intern-management-detail-hero {
+    align-items: flex-start;
+  }
+
+  .intern-management-detail-hero h3 {
+    font-size: 24px;
+  }
+
+  .intern-management-filter-date-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .intern-management-filter-date-field {
+    width: 100%;
+  }
+
+  .intern-management-filter-date-section {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

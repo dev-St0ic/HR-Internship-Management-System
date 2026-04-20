@@ -1,0 +1,51 @@
+
+.intern-management-request-title img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.intern-management-request-title h4 {
+  margin: 0;
+  color: #25263a;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.intern-management-request-form {
+  display: grid;
+  gap: 14px;
+}
+
+.intern-management-request-form label {
+  display: grid;
+  gap: 8px;
+}
+
+.intern-management-request-form span,
+.intern-management-supporting-document span {
+  color: #25263a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.intern-management-request-form input,
+.intern-management-request-form select,
+.intern-management-request-form textarea {
+  width: 100%;
+  border: 1px solid #dddde3;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #25263a;
+  font-size: 14px;
+  padding: 10px 12px;
+}
+
+.intern-management-request-form textarea {
+  min-height: 96px;
+  resize: none;
+}
+
+.intern-management-request-form .settings-dropdown {
+  width: 100%;
+}

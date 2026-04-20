@@ -1,0 +1,54 @@
+
+@media (max-width: 640px) {
+  .intern-management-page-content,
+  .intern-management-detail-page-content {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .intern-management-filter-actions {
+    bottom: -20px;
+    margin-right: -24px;
+    margin-left: -24px;
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .intern-management-overview-tabs,
+  .intern-management-subtabs {
+    overflow-x: auto;
+  }
+
+  .intern-management-side-nav {
+    grid-template-columns: 1fr;
+  }
+}
+
+html[data-theme='dark'] .intern-management-card,
+html[data-theme='dark'] .intern-management-detail-card,
+html[data-theme='dark'] .intern-management-filter-modal,
+html[data-theme='dark'] .intern-management-request-modal,
+html[data-theme='dark'] .intern-management-document-card,
+html[data-theme='dark'] .intern-management-comments-box,
+html[data-theme='dark'] .intern-management-evaluation-card {
+  border-color: var(--theme-border);
+  background: var(--theme-surface);
+  box-shadow: var(--theme-shadow);
+}
+
+html[data-theme='dark'] .intern-management-overview-tabs,
+html[data-theme='dark'] .intern-management-subtabs,
+html[data-theme='dark'] .intern-management-table th,
+html[data-theme='dark'] .intern-management-detail-table th {
+  border-color: var(--theme-border);
+}
+
+html[data-theme='dark'] .intern-management-overview-tab,
+html[data-theme='dark'] .intern-management-side-link,
+html[data-theme='dark'] .intern-management-subtab,
+html[data-theme='dark'] .intern-management-search-icon,
+html[data-theme='dark'] .intern-management-empty-state,
+html[data-theme='dark'] .intern-management-evaluation-header p,
+html[data-theme='dark'] .intern-management-comments-box p {
+  color: var(--theme-text-soft);
+}
