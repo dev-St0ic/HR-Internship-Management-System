@@ -1,0 +1,55 @@
+
+.notification-row-time {
+  flex-shrink: 0;
+  color: #a1a1aa;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.notification-unread-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7c3eff;
+  flex-shrink: 0;
+}
+
+.notifications-empty-state {
+  padding: 48px 24px;
+  text-align: center;
+  color: #8b8b95;
+  font-size: 14px;
+}
+
+.notifications-pagination-bar {
+  margin-top: 28px;
+}
+
+.document-vault-page-content {
+  min-width: 0;
+  padding-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.document-vault-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  min-height: calc(100vh - 182px);
+  background: #fff;
+  border: 1px solid #ececf2;
+  border-radius: 18px;
+  padding: 18px 18px 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  overflow: hidden;
+}
+
+.document-vault-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}

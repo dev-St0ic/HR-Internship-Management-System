@@ -1,0 +1,61 @@
+
+@media (max-width: 900px) {
+  .document-vault-filter-card-grid,
+  .document-vault-filter-date-sections,
+  .document-vault-date-grid,
+  .document-vault-filter-options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .document-vault-filter-modal {
+    padding: 22px 20px 20px;
+  }
+
+  .document-vault-filter-actions {
+    bottom: -20px;
+    margin-right: -20px;
+    margin-bottom: -20px;
+    margin-left: -20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+  }
+}
+
+.document-vault-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: #70707b;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  transition: background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.document-vault-tab:hover {
+  background: #f8f6ff;
+  color: #5b21b6;
+}
+
+.document-vault-tab.is-active {
+  background: #f5f1ff;
+  color: #7c3eff;
+}
+
+.document-vault-tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: rgba(124, 62, 255, 0.12);
+  font-size: 11px;
+}

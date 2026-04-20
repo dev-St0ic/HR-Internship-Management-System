@@ -1,0 +1,56 @@
+
+.document-vault-filter-modal {
+  width: min(980px, 92vw);
+  max-height: 84vh;
+  overflow-y: auto;
+  border: 1px solid #ececf2;
+  padding: 28px 30px 26px;
+}
+
+.document-vault-filter-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.document-vault-filter-modal h4 {
+  margin: 0;
+  color: #25263a;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.document-vault-filter-header p {
+  margin: 8px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.document-vault-filter-card-grid,
+.document-vault-filter-date-sections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.document-vault-filter-date-sections {
+  margin-top: 18px;
+}
+
+.document-vault-filter-card {
+  margin-bottom: 0;
+  border: 1px solid #ececf2;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #fafaff 100%);
+  padding: 18px 18px 16px;
+  box-shadow: 0 6px 20px rgba(17, 24, 39, 0.04);
+}
+
+.document-vault-filter-modal .filter-section label {
+  color: #25263a;
+  font-size: 15px;
+  font-weight: 600;
+}

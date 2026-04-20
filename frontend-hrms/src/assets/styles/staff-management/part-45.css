@@ -1,0 +1,64 @@
+
+html[data-theme='dark'] .subtitle,
+html[data-theme='dark'] .members,
+html[data-theme='dark'] .pagination-text,
+html[data-theme='dark'] .notifications-empty-state,
+html[data-theme='dark'] .notification-row-copy p,
+html[data-theme='dark'] .notification-row-time,
+html[data-theme='dark'] .document-vault-filter,
+html[data-theme='dark'] .document-vault-filter-header p,
+html[data-theme='dark'] .document-vault-date-field span,
+html[data-theme='dark'] .settings-hero-copy p,
+html[data-theme='dark'] .settings-summary-meta,
+html[data-theme='dark'] .settings-panel-header p,
+html[data-theme='dark'] .settings-metadata-label,
+html[data-theme='dark'] .settings-last-saved,
+html[data-theme='dark'] .settings-profile-header p,
+html[data-theme='dark'] .settings-row p,
+html[data-theme='dark'] .settings-field span,
+html[data-theme='dark'] .settings-section-intro p {
+  color: var(--theme-text-soft);
+}
+
+html[data-theme='dark'] .employee-table th,
+html[data-theme='dark'] .intern-table th,
+html[data-theme='dark'] .document-vault-table th {
+  background: #132033;
+  color: var(--theme-text-soft);
+}
+
+html[data-theme='dark'] .employee-table th,
+html[data-theme='dark'] .employee-table td,
+html[data-theme='dark'] .intern-table th,
+html[data-theme='dark'] .intern-table td,
+html[data-theme='dark'] .notification-row-card,
+html[data-theme='dark'] .document-vault-table th,
+html[data-theme='dark'] .document-vault-table td,
+html[data-theme='dark'] .document-vault-tabs-row,
+html[data-theme='dark'] .document-vault-filter-actions {
+  border-color: var(--theme-border);
+}
+
+html[data-theme='dark'] .pagination-btn,
+html[data-theme='dark'] .pagination-input,
+html[data-theme='dark'] .document-vault-sync-button,
+html[data-theme='dark'] .document-vault-refresh-button,
+html[data-theme='dark'] .document-vault-date-field input,
+html[data-theme='dark'] .settings-dropdown-trigger,
+html[data-theme='dark'] .settings-secondary-btn,
+html[data-theme='dark'] .search-bar,
+html[data-theme='dark'] .filter-btn {
+  border-color: var(--theme-border);
+  background: var(--theme-surface-elevated);
+  color: var(--theme-text);
+}
+
+html[data-theme='dark'] .document-vault-filter-modal .filter-option:hover,
+html[data-theme='dark'] .filter-btn:hover,
+html[data-theme='dark'] .pagination-btn:hover:not(:disabled),
+html[data-theme='dark'] .document-vault-refresh-button:hover:not(:disabled),
+html[data-theme='dark'] .settings-tab:hover,
+html[data-theme='dark'] .document-vault-tab:hover {
+  background: rgba(167, 139, 250, 0.12);
+  color: #ddd6fe;
+}

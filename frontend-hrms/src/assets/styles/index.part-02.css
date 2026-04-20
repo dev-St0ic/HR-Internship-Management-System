@@ -1,0 +1,67 @@
+html[data-theme='dark'] .bg-white {
+    background-color: var(--theme-surface) !important;
+}
+
+html[data-theme='dark'] .bg-white\/90 {
+    background-color: rgba(11, 18, 32, 0.9) !important;
+}
+
+html[data-theme='dark'] .bg-gray-50,
+html[data-theme='dark'] .bg-gray-100,
+html[data-theme='dark'] .bg-gray-200,
+html[data-theme='dark'] .bg-gray-300\/70 {
+    background-color: var(--theme-surface-muted) !important;
+}
+
+html[data-theme='dark'] .text-gray-900,
+html[data-theme='dark'] .text-gray-800,
+html[data-theme='dark'] .text-gray-700 {
+    color: var(--theme-text) !important;
+}
+
+html[data-theme='dark'] .text-gray-600,
+html[data-theme='dark'] .text-gray-500,
+html[data-theme='dark'] .text-gray-400 {
+    color: var(--theme-text-soft) !important;
+}
+
+html[data-theme='dark'] .border-gray-100,
+html[data-theme='dark'] .border-gray-200,
+html[data-theme='dark'] .border-gray-300,
+html[data-theme='dark'] .border-gray-500\/10,
+html[data-theme='dark'] .border-gray-500\/20,
+html[data-theme='dark'] .border-gray-500\/30 {
+    border-color: var(--theme-border) !important;
+}
+
+html[data-theme='dark'] .divide-gray-500\/10 > :not([hidden]) ~ :not([hidden]) {
+    border-color: var(--theme-border) !important;
+}
+
+html[data-theme='dark'] .shadow-sm,
+html[data-theme='dark'] .shadow-md,
+html[data-theme='dark'] .shadow-lg {
+    box-shadow: var(--theme-shadow) !important;
+}
+
+html[data-theme='dark'] .hover\:bg-gray-100:hover,
+html[data-theme='dark'] .hover\:bg-gray-300\/70:hover {
+    background-color: #1e293b !important;
+}
+
+html[data-theme='dark'] .MuiPaper-root {
+    background: var(--theme-surface) !important;
+    color: var(--theme-text) !important;
+}
+
+html[data-theme='dark'] .MuiPickersDay-root,
+html[data-theme='dark'] .MuiDayCalendar-weekDayLabel,
+html[data-theme='dark'] .MuiPickersCalendarHeader-label,
+html[data-theme='dark'] .MuiIconButton-root,
+html[data-theme='dark'] .MuiSvgIcon-root {
+    color: var(--theme-text) !important;
+}
+
+html[data-theme='dark'] .MuiOutlinedInput-notchedOutline {
+    border-color: var(--theme-border) !important;
+}

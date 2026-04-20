@@ -1,0 +1,62 @@
+
+.document-vault-status-dropdown {
+  width: 160px;
+}
+
+.document-vault-status-dropdown .settings-dropdown-trigger {
+  height: 38px;
+  font-size: 13px;
+}
+
+.document-vault-status-dropdown .settings-dropdown-option {
+  font-size: 13px;
+}
+
+.document-vault-refresh-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  border: 1px solid #e6e7ef;
+  border-radius: 9px;
+  background: #fff;
+  color: #25263a;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 14px;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.document-vault-refresh-button:hover:not(:disabled) {
+  background: #f5f1ff;
+  border-color: #d4c2ff;
+  color: #7c3eff;
+}
+
+.document-vault-refresh-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.document-vault-refresh-button.is-refreshing svg {
+  animation: document-vault-refresh-spin 0.9s linear infinite;
+}
+
+.document-vault-tabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  overflow-x: auto;
+}
+
+.document-vault-tabs-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #efeff5;
+}
