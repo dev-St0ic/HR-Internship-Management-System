@@ -76,7 +76,7 @@ export default function LoginForm({ onForgotPassword }) {
                             type="email" 
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="supervisor@company.com" 
+                            placeholder="Enter your email address" 
                             className="w-full text-[15px] outline-none text-gray-900 bg-transparent placeholder-gray-400 font-medium"
                             required
                         />

@@ -36,7 +36,7 @@ export default function CreateAccountStep1({ formData, setFormData, onNext }) {
                         <input 
                             type="text" name="firstName" 
                             value={formData.firstName} onChange={handleChange}
-                            placeholder="Juan" 
+                            placeholder="Enter your first name" 
                             className="w-full text-[15px] outline-none text-gray-900 bg-transparent placeholder-gray-400 font-medium"
                             required
                         />
@@ -48,7 +48,7 @@ export default function CreateAccountStep1({ formData, setFormData, onNext }) {
                         <input 
                             type="text" name="middleName" 
                             value={formData.middleName} onChange={handleChange}
-                            placeholder="Optional" 
+                            placeholder="Enter your middle name (Optional)" 
                             className="w-full text-[15px] outline-none text-gray-900 bg-transparent placeholder-gray-400 font-medium"
                         />
                     </div>
@@ -59,7 +59,7 @@ export default function CreateAccountStep1({ formData, setFormData, onNext }) {
                         <input 
                             type="text" name="lastName" 
                             value={formData.lastName} onChange={handleChange}
-                            placeholder="Dela Cruz" 
+                            placeholder="Enter your last name" 
                             className="w-full text-[15px] outline-none text-gray-900 bg-transparent placeholder-gray-400 font-medium"
                             required
                         />

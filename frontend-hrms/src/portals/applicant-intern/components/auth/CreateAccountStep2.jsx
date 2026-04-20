@@ -1,9 +1,14 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function CreateAccountStep2({ formData, setFormData, onBack }) {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    
+    // --- 1. Track our errors here ---
+    const [errors, setErrors] = useState({ email: false, match: false });
+    
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -11,24 +16,46 @@ export default function CreateAccountStep2({ formData, setFormData, onBack }) {
             ...formData, 
             [name]: type === 'checkbox' ? checked : value 
         });
+
+        // --- 2. Clear the red ring as soon as they start typing to fix it ---
+        if (name === 'email') setErrors(prev => ({ ...prev, email: false }));
+        if (name === 'password' || name === 'confirmPassword') setErrors(prev => ({ ...prev, match: false }));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         
+        let hasError = false;
+        const newErrors = { email: false, match: false };
+
+        // --- 3. Validate Email (Basic Regex check) ---
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            newErrors.email = true;
+            hasError = true;
+        }
+        
+        // --- 4. Validate Passwords Match ---
         if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match!");
-            return;
+            newErrors.match = true;
+            hasError = true;
         }
 
+        // Apply errors to trigger the red rings
+        setErrors(newErrors);
+
+        // Stop the form submission if there are errors
+        if (hasError) return;
+
         console.log("Submitting to Laravel backend:", formData);
+        navigate("/application-form");
     };
 
     return (
         <div>
             <div className="animate-fade-in">
                 
-                {/* --- Back Button (Imported exactly from your ForgotPassword style) --- */}
+                {/* --- Back Button --- */}
                 <button 
                     type="button" 
                     onClick={onBack}
@@ -56,27 +83,38 @@ export default function CreateAccountStep2({ formData, setFormData, onBack }) {
                 <form onSubmit={handleSubmit} className="flex flex-col">
 
                     {/* --- Email Input --- */}
-                    <div className="mb-4 border border-[#D0D5DD] rounded-lg px-4 py-2.5 focus-within:border-[#7C3EFF] focus-within:ring-1 focus-within:ring-[#7C3EFF] transition-all bg-white">
-                        <label className="block text-[11px] text-[#7C3EFF] mb-0.5 font-medium">Email Address</label>
+                    {/* Swaps to red-500 if errors.email is true */}
+                    <div className={`mb-4 rounded-lg px-4 py-2.5 transition-all bg-white border focus-within:ring-1 ${errors.email ? 'border-red-500 focus-within:border-red-500 focus-within:ring-red-500' : 'border-[#D0D5DD] focus-within:border-[#7C3EFF] focus-within:ring-[#7C3EFF]'}`}>
+                        <label className={`block text-[11px] mb-0.5 font-medium ${errors.email ? 'text-red-500' : 'text-[#7C3EFF]'}`}>
+                            Email Address {errors.email && <span className="font-bold">- Invalid format</span>}
+                        </label>
                         <input 
                             type="email" name="email" 
                             value={formData.email} onChange={handleChange}
-                            placeholder="applicant@university.edu" 
+                            placeholder="Enter your email address" 
                             className="w-full text-[15px] outline-none text-gray-900 bg-transparent placeholder-gray-400 font-medium"
                             required
+                            onInvalid={(e) => e.target.setCustomValidity("Please enter a valid email address.")}
+                            onInput={(e) => e.target.setCustomValidity("")}
                         />
                     </div>
 
                     {/* --- Password Input --- */}
-                    <div className="mb-4 border border-[#D0D5DD] rounded-lg px-4 py-2.5 focus-within:border-[#7C3EFF] focus-within:ring-1 focus-within:ring-[#7C3EFF] transition-all bg-white relative">
-                        <label className="block text-[11px] text-[#7C3EFF] mb-0.5 font-medium">Password</label>
+                    {/* Swaps to red-500 if errors.match is true */}
+                    <div className={`mb-4 rounded-lg px-4 py-2.5 transition-all bg-white relative border focus-within:ring-1 ${errors.match ? 'border-red-500 focus-within:border-red-500 focus-within:ring-red-500' : 'border-[#D0D5DD] focus-within:border-[#7C3EFF] focus-within:ring-[#7C3EFF]'}`}>
+                        <label className={`block text-[11px] mb-0.5 font-medium ${errors.match ? 'text-red-500' : 'text-[#7C3EFF]'}`}>
+                            Password {errors.match && <span className="font-bold">- Passwords do not match</span>}
+                        </label>
                         <input 
                             type={showPassword ? "text" : "password"} name="password"
                             value={formData.password} onChange={handleChange}
-                            placeholder="••••••••••••" 
+                            placeholder="••••••••" 
                             className="w-full text-[15px] outline-none text-gray-900 bg-transparent placeholder-gray-400 font-medium tracking-widest pr-10"
                             minLength={8}
                             required
+                            /* This removes the dynamic (your password is 7 characters) message! */
+                            onInvalid={(e) => e.target.setCustomValidity("Password must be at least 8 characters long.")}
+                            onInput={(e) => e.target.setCustomValidity("")}
                         />
                         <button 
                             type="button" 
@@ -92,12 +130,12 @@ export default function CreateAccountStep2({ formData, setFormData, onBack }) {
                     </div>
 
                     {/* --- Confirm Password Input --- */}
-                    <div className="mb-6 border border-[#D0D5DD] rounded-lg px-4 py-2.5 focus-within:border-[#7C3EFF] focus-within:ring-1 focus-within:ring-[#7C3EFF] transition-all bg-white relative">
-                        <label className="block text-[11px] text-[#7C3EFF] mb-0.5 font-medium">Confirm Password</label>
+                    <div className={`mb-6 rounded-lg px-4 py-2.5 transition-all bg-white relative border focus-within:ring-1 ${errors.match ? 'border-red-500 focus-within:border-red-500 focus-within:ring-red-500' : 'border-[#D0D5DD] focus-within:border-[#7C3EFF] focus-within:ring-[#7C3EFF]'}`}>
+                        <label className={`block text-[11px] mb-0.5 font-medium ${errors.match ? 'text-red-500' : 'text-[#7C3EFF]'}`}>Confirm Password</label>
                         <input 
                             type={showConfirmPassword ? "text" : "password"} name="confirmPassword"
                             value={formData.confirmPassword} onChange={handleChange}
-                            placeholder="••••••••••••" 
+                            placeholder="••••••••" 
                             className="w-full text-[15px] outline-none text-gray-900 bg-transparent placeholder-gray-400 font-medium tracking-widest pr-10"
                             required
                         />
@@ -136,12 +174,9 @@ export default function CreateAccountStep2({ formData, setFormData, onBack }) {
                     </div>
 
                     {/* --- Submit Button --- */}
-                    <Link to="/application-form" className="w-full">
-                    <button  type="submit" className="w-full bg-[#7C3EFF] hover:bg-[#6A32E6] text-white font-medium py-[14px] rounded-lg transition-colors text-[15px]">
+                    <button type="submit" className="w-full bg-[#7C3EFF] hover:bg-[#6A32E6] text-white font-medium py-[14px] rounded-lg transition-colors text-[15px]">
                         Create account
                     </button>
-                    </Link>
-
 
                     <p className="text-center text-[14px] text-gray-600 mt-6">
                         Already have an account? <Link to="/login" className="font-bold text-[#7C3EFF] hover:text-[#5B29CC] hover:underline transition-colors">Log in</Link>
