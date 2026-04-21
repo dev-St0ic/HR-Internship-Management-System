@@ -1,9 +1,9 @@
 import React from 'react';
 
 export default function DashboardStepper({ 
-    currentStep = 3, 
-    status = 'warning', 
-    statusMessage = '2 Documents Missing' 
+    currentStep, 
+    status, 
+    statusMessage
 }) {
     // Define all steps for the dashboard tracker
     const steps = [

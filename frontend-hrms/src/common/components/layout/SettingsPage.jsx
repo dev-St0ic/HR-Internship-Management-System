@@ -17,6 +17,7 @@ export default function SettingsPage() {
     HR_STAFF: "hr-staff",
     SUPERVISOR: "supervisor",
     INTERN: "intern",
+    APPLICANT: "applicant"
   };
 
   const userRole = roleMap[currentUser?.role] || "intern";
