@@ -1,11 +1,16 @@
-import Header from "../../../common/components/layout/Header";
 import { useAttendance } from "../../../contexts/useAttendance";
 import { useState } from "react";
 import { LogIn, LogOut } from "lucide-react";
 
-export default function Attendance() {
+export default function Attendance({
+  readOnly = false,
+  externalRecords = null,
+}) {
   const { records, timeIn, timeOut, getStatus } = useAttendance();
   const [activeAction, setActiveAction] = useState(null); // "timeIn" or "timeOut"
+
+  //This will use external records if provided (for hr view only)
+  const data = externalRecords || records;
 
   //Will come from backend in the future, for now we will hardcode it
   const totalRequired = 486;
@@ -53,37 +58,39 @@ export default function Attendance() {
         {/* Main content Area */}
         <div className="grid grid-cols-4 gap-6">
           {/* Left Button Area */}
-          <div className="flex flex-col gap-3 w-60">
-            <button
-              onClick={() => {
-                setActiveAction("timeIn");
-                timeIn();
-              }}
-              className={`p-3 rounded-lg transition ${
-                activeAction === "timeIn"
-                  ? "bg-purple-600 text-white"
-                  : "bg-white hover:bg-gray-100"
-              }`}
-            >
-              <LogIn size={20} className="inline-block mr-2" />
-              Time In
-            </button>
+          {!readOnly && (
+            <div className="flex flex-col gap-3 w-60">
+              <button
+                onClick={() => {
+                  setActiveAction("timeIn");
+                  timeIn();
+                }}
+                className={`p-3 rounded-lg transition ${
+                  activeAction === "timeIn"
+                    ? "bg-purple-600 text-white"
+                    : "bg-white hover:bg-gray-100"
+                }`}
+              >
+                <LogIn size={20} className="inline-block mr-2" />
+                Time In
+              </button>
 
-            <button
-              onClick={() => {
-                setActiveAction("timeOut");
-                timeOut();
-              }}
-              className={`p-3 rounded-lg transition ${
-                activeAction === "timeOut"
-                  ? "bg-purple-600 text-white"
-                  : "bg-white hover:bg-gray-100"
-              }`}
-            >
-              <LogOut size={20} className="inline-block mr-2" />
-              Time Out
-            </button>
-          </div>
+              <button
+                onClick={() => {
+                  setActiveAction("timeOut");
+                  timeOut();
+                }}
+                className={`p-3 rounded-lg transition ${
+                  activeAction === "timeOut"
+                    ? "bg-purple-600 text-white"
+                    : "bg-white hover:bg-gray-100"
+                }`}
+              >
+                <LogOut size={20} className="inline-block mr-2" />
+                Time Out
+              </button>
+            </div>
+          )}
 
           {/* Right Table Area */}
           <div className="col-span-3">
@@ -103,7 +110,7 @@ export default function Attendance() {
 
                 {/* Table Body */}
                 <tbody>
-                  {records.map((rec, index) => (
+                  {data.map((rec, index) => (
                     <tr
                       key={index}
                       className="border-b border-gray-200 shadow-sm hover:bg-gray-50 transition"

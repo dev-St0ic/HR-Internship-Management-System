@@ -32,4 +32,9 @@ export const internHeaderConfig = {
     title: "Notifications",
     subtitle: "All notifications",
   },
+
+  "/intern/calendar": {
+    title: "Calendar",
+    subtitle: "Your Schedule & Events",
+  },
 };

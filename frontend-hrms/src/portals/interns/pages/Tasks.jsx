@@ -44,8 +44,6 @@ export default function Tasks() {
 
   return (
     <>
-      <Header title="Task" subtitle="Task Management" />
-
       {/* Previous Button will only show at Detailed mode */}
       {viewMode === "detail" && (
         <div className="mt-4">

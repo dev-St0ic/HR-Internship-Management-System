@@ -48,7 +48,7 @@ export default function Documents() {
           <div className="flex gap-3 relative">
             <button
               onClick={() => setShowUpload(true)}
-              className="bg-linear-to-r from-[#7C3EFF] to-[#9F67FF] text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90"
+              className="bg-linear-to-r from-primary to-[#9F67FF] text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90"
             >
               Upload Document
             </button>
@@ -58,7 +58,7 @@ export default function Documents() {
                 e.stopPropagation();
                 setShowDropDown((prev) => !prev);
               }}
-              className="border border-[#7C3EFF] text-[#7C3EFF] px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-50 flex items-center gap-2"
+              className="border border-primary text-primary px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-50 flex items-center gap-2"
             >
               Request Document
             </button>
