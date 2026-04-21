@@ -6,7 +6,7 @@ const HRAdminLayout = () => {
   return (
     <div className='flex min-h-screen bg-slate-50'>
       <Sidebar links={navigation.hradmin} />
-      <div className='flex-1 p-6'>
+      <div className='flex-1 ml-60 p-6'>
         <header className='h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8'>
           <div>
             <h2 className='text-xl font-semibold'>HR Admin</h2>

@@ -35,7 +35,7 @@ const Sidebar = ({ links }) => {
             return (
               <li key={link.to}>
                 <NavLink to={link.to} end={link.end} className={getNavClass}>
-                  {Icon && <Icon size={18} />}
+                  {Icon && typeof Icon === "function" && <Icon size={18} />}
                   <span>{link.label}</span>
                 </NavLink>
               </li>

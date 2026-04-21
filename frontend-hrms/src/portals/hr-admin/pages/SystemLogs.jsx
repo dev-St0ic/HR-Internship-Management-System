@@ -64,11 +64,7 @@ export default function SystemLogs() {
                   </td>
                   <td className="px-4 py-4 text-slate-900">{log.action}</td>
                   <td className="px-4 py-4 text-slate-900">{log.description}</td>
-                  <td className="px-4 py-4 text-slate-900">
-                    <button className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                      {log.details}
-                    </button>
-                  </td>
+                  <td className="px-4 py-4 text-slate-900">Details</td>
                 </tr>
               ))}
             </tbody>

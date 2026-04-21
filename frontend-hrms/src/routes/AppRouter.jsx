@@ -16,6 +16,7 @@ import {
 
 //Hr-Staff
 import SideBarLayout from "../portals/hr-staff/components/SideBarLayout";
+import HRStaffDashboard from "../portals/hr-staff/pages/HRStaffDashboard";
 import OperationsPage from "../portals/hr-staff/pages/OperationsPage";
 import InternDetailPage from "../portals/hr-staff/pages/InternDetailPage";
 import StaffManagement from "../portals/hr-staff/pages/StaffManagement";
@@ -28,6 +29,11 @@ import HRAdminDashboard from "../portals/hr-admin/pages/HRAdminDashboard";
 import ReportsAndAnalytics from "../portals/hr-admin/pages/ReportsAndAnalytics";
 import SystemLogs from "../portals/hr-admin/pages/SystemLogs";
 import AdminSettings from "../portals/hr-admin/pages/Settings";
+import internmanagement from "../portals/hr-admin/pages/AdminInternDetailPage";
+import AdminDocumentVault from "../portals/hr-admin/pages/AdminDocumentVault";
+import AdminStaffManagement from "../portals/hr-admin/pages/AdminStaffManagement";
+import AdminRecruitment from "../portals/hr-admin/pages/AdminRecruitment";
+import AdminOperationsPage from "../portals/hr-admin/pages/AdminOperationsPage";
 
 //Landing Page
 import LandingPageHeader from "../common/components/layout/LandingPageHeader";
@@ -127,15 +133,15 @@ export const AppRouter = () => {
         {/* Hr-Admin Route */}
         <Route path="/hr-admin" element={<HrAdminSideBarLayout />}>
           <Route index element={<HRAdminDashboard />} />
-          <Route path="recruitment" element={<Recruitment />} />
-          <Route path="intern-management">
-            <Route index element={<OperationsPage />} />
-            <Route path="intern/:internId" element={<InternDetailPage />} />
+          <Route path="recruitment" element={<AdminRecruitment />} />
+          <Route path="internmanagement">
+            <Route index element={<AdminOperationsPage />} />
+            <Route path="intern/:internId" element={<internmanagement />} />
           </Route>
-          <Route path="staff-management" element={<StaffManagement />} />
-          <Route path="document-vault" element={<DocumentVault />} />
-          <Route path="reports" element={<ReportsAndAnalytics />} />
-          <Route path="system-logs" element={<SystemLogs />} />
+          <Route path="staffmanagement" element={<AdminStaffManagement />} />
+          <Route path="documnetvault" element={<AdminDocumentVault />} />
+          <Route path="reportsandanalytics" element={<ReportsAndAnalytics />} />
+          <Route path="systemlogs" element={<SystemLogs />} />
           <Route path="settings" element={<AdminSettings />} />
         </Route>
       </Routes>
