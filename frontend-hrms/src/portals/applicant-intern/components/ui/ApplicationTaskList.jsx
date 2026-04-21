@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function ApplicationTaskList() {
+export default function ApplicationTaskList({
+    documentsList = [],
+    progress = 0, 
+}
+    
+) {
     // State to toggle the documents dropdown
     const [isDocsOpen, setIsDocsOpen] = useState(true);
 
-    // Dummy data for the documents checklist to make it easy to map
-    const documentsList = [
-        { name: 'Resume', status: 'uploaded' },
-        { name: 'Endorsement Letter', status: 'uploaded' },
-        { name: 'MOA', status: 'uploaded' },
-        { name: 'School ID', status: 'missing' },
-        { name: 'Certificate of Acceptance', status: 'missing' },
-    ];
+    const totalDocs = documentsList.length;
+    const uploadedDocs = documentsList.filter(doc => doc.status === 'uploaded').length;
+    
 
     return (
         <div className="w-full">
@@ -53,7 +53,9 @@ export default function ApplicationTaskList() {
                                     <span className="text-xs font-bold text-white">!</span>
                                 </div>
                                 <span className="text-sm font-bold text-gray-900">Documents</span>
-                                <span className="text-xs text-[#FFCA28] font-bold ml-2">3/5 Uploaded</span>
+                                <span className="text-xs text-[#FFCA28] font-bold ml-2">
+                                    {uploadedDocs}/{totalDocs} Uploaded
+                                </span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <span className="text-[10px] font-bold text-[#FFCA28] bg-yellow-50 px-2 py-1 rounded tracking-wide uppercase">In Progress</span>
@@ -109,16 +111,19 @@ export default function ApplicationTaskList() {
             <div className="mt-8">
                 {/* Progress Bar */}
                 <div className="flex items-center gap-4 mb-6">
-                    <span className="text-sm font-medium text-gray-700">Progress: 60%</span>
+                    <span className="text-sm font-medium text-gray-700">Progress: {progress}%</span>
                     <div className="flex-1 h-2.5 bg-gray-100 rounded-full overflow-hidden">
-                        <div className="h-full bg-[#10B981] rounded-full w-[60%] transition-all duration-500"></div>
+                        <div 
+                            className="h-full bg-[#10B981] rounded-full transition-all duration-500" 
+                            style={{ width: `${progress}%` }}
+                        ></div>
                     </div>
                 </div>
 
                 {/* Continue Application Button (Routed to /applicant/applications) */}
                 <Link to="/applicant/applications" className="block w-full">
-                    <button className="w-full bg-[#7C3EFF] hover:bg-[#6A32E6] text-white font-medium py-[14px] rounded-lg transition-colors text-[13px] tracking-wide flex items-center justify-center gap-2 shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <button className="btn-primary text-[13px] tracking-wide">
+                        
                         CONTINUE APPLICATION
                     </button>
                 </Link>
