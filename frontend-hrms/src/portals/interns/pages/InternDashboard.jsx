@@ -12,9 +12,10 @@ import { useAuth } from "../../../contexts/AuthContext";
 export default function Dashboard() {
   const { currentUser } = useAuth();
   const stats = dashboardStats.intern;
+  const userName = currentUser ? `${currentUser.first_name} ${currentUser.last_name}` : "User";
   return (
     <>
-      <GreetingHeader name={currentUser?.name} />
+      <GreetingHeader name={userName} />
       <div className="grid grid-cols-3 gap-8 mt-5 px-6 max-w-7xl mx-auto">
         {/* Left Side */}
         <div className="col-span-2 space-y-5 max-w-3xl">

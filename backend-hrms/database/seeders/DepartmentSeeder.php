@@ -10,12 +10,21 @@ class DepartmentSeeder extends Seeder
 
     public function run(): void
     {
-        $managerIds = \App\Models\User::where('role_id', 2)->pluck('id');
-
         Department::create([
             'department_name' => 'IT Department',
             'description'     => 'Handles technical infrastructure',
-            'manager_id'      => $managerIds->random(),
+            'is_active'       => true,
+        ]);
+
+        Department::create([
+            'department_name' => 'Human Resources',
+            'description'     => 'Manages personnel and recruitment',
+            'is_active'       => true,
+        ]);
+
+        Department::create([
+            'department_name' => 'Finance',
+            'description'     => 'Handles budgets and financial operations',
             'is_active'       => true,
         ]);
     }

@@ -6,44 +6,40 @@ export default function LoginForm({ onForgotPassword }) {
     // --- 1. State Variables ---
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const navigate = useNavigate();
     
     // --- 2. Global Context ---
     const { login } = useAuth(); 
 
     // --- 3. Login Logic ---
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault(); // Prevent the page from refreshing
         
-        const loginEmail = email.toLowerCase();
-        let selectedUserId = "";
-
-        // Determine which ID to use based on the email typed
-        if (loginEmail.includes("admin")) selectedUserId = "admin_system";
-        else if (loginEmail.includes("staff")) selectedUserId = "staff_hr";
-        else if (loginEmail.includes("supervisor")) selectedUserId = "supervisor";
-        else if (loginEmail.includes("it")) selectedUserId = "intern_it";
-        else if (loginEmail.includes("mktg") || loginEmail.includes("marketing")) selectedUserId = "intern_mktg";
-        else if (loginEmail.includes("hr")) selectedUserId = "intern_hr";
-        else {
-            alert("⚠️ For testing, please include 'admin', 'staff', 'supervisor', 'it', 'hr', or 'mktg' in the email.");
+        if (!email || !password) {
+            setError("Email and password are required");
             return;
         }
 
-        // Send that ID to the global AuthContext
-        const user = login(selectedUserId);
+        setLoading(true);
+        setError("");
 
-        // Safety check if the database hasn't loaded
-        if (!user) {
-            alert("User not found in mock DB. Make sure initializeMockDatabase() is running in App.jsx.");
-            return;
+        try {
+            const user = await login(email, password);
+            
+            // Route the user to their specific dashboard based on their role
+            if (user.role_id === 1) navigate("/hr-admin");
+            else if (user.role_id === 2) navigate("/hr-staff");
+            else if (user.role_id === 3) navigate("/supervisor");
+            else if (user.role_id === 4) navigate("/intern");
+            else navigate("/");
+        } catch (err) {
+            setError(err.response?.data?.message || "Login failed. Please try again.");
+        } finally {
+            setLoading(false);
         }
-
-        // Route the user to their specific dashboard based on their role
-        if (user.role === "ADMIN") navigate("/hr-admin");
-        else if (user.role === "HR_STAFF") navigate("/hr-staff");
-        else if (user.role === "SUPERVISOR") navigate("/supervisor");
-        else if (user.role === "INTERN") navigate("/intern");
     };
 
     return (
@@ -63,9 +59,33 @@ export default function LoginForm({ onForgotPassword }) {
                 <p className="text-[15px] text-gray-400 mb-4">Please login here</p>
 
                 {/* --- Helper text for the team during testing --- */}
-                <div className="mb-6 p-3 bg-purple-50 text-[#7C3EFF] text-xs rounded-lg border border-purple-100">
-                    <strong>Testing Accounts:</strong><br /> HR-Admin: <i>admin@company.com</i><br /> HR-Staff: <i>staff@company.com</i><br /> Supervisor: <i>supervisor@company.com</i><br /> Intern (IT): <i>it@company.com</i><br /> Intern (HR): <i>hr@company.com</i><br /> Intern (Marketing): <i>mktg@company.com</i><br /> Any password works!
+                <div className="mb-6 p-4 bg-purple-50 text-[#7C3EFF] text-xs rounded-lg border border-purple-200">
+                    <strong className="block mb-3 text-sm">🧪 Test Accounts:</strong>
+                    <div className="space-y-2 text-gray-700">
+                        <div className="flex justify-between">
+                            <span><strong>HR Admin:</strong> admin@example.com</span>
+                            <span className="text-[#7C3EFF]">password</span>
+                        </div>
+                        <div className="flex justify-between">
+                            <span><strong>HR Staff:</strong> staff@example.com</span>
+                            <span className="text-[#7C3EFF]">password</span>
+                        </div>
+                        <div className="flex justify-between">
+                            <span><strong>Supervisor:</strong> supervisor@example.com</span>
+                            <span className="text-[#7C3EFF]">password</span>
+                        </div>
+                        <div className="flex justify-between">
+                            <span><strong>Intern:</strong> intern@example.com</span>
+                            <span className="text-[#7C3EFF]">password</span>
+                        </div>
+                    </div>
                 </div>
+
+                {error && (
+                    <div className="mb-6 p-3 bg-red-50 text-red-700 text-sm rounded-lg border border-red-200">
+                        {error}
+                    </div>
+                )}
 
                 <form onSubmit={handleLogin} className="flex flex-col">
                     
@@ -86,7 +106,9 @@ export default function LoginForm({ onForgotPassword }) {
                     <div className="mb-6 border border-[#D0D5DD] rounded-lg px-4 py-2.5 focus-within:border-[#7C3EFF] focus-within:ring-1 focus-within:ring-[#7C3EFF] transition-all bg-white relative">
                         <label className="block text-[11px] text-[#7C3EFF] mb-0.5 font-medium">Password</label>
                         <input 
-                            type={showPassword ? "text" : "password"} 
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             placeholder="••••••••••••" 
                             className="w-full text-[15px] outline-none text-gray-900 bg-transparent placeholder-gray-400 font-medium tracking-widest pr-10"
                             required
@@ -121,8 +143,8 @@ export default function LoginForm({ onForgotPassword }) {
                     </div>
 
                     {/* --- Login Button --- */}
-                    <button type="submit" className="w-full bg-[#7C3EFF] hover:bg-[#6A32E6] text-white font-medium py-[14px] rounded-lg transition-colors text-[15px]">
-                        Login
+                    <button type="submit" disabled={loading} className="w-full bg-[#7C3EFF] hover:bg-[#6A32E6] disabled:bg-gray-400 text-white font-medium py-[14px] rounded-lg transition-colors text-[15px]">
+                        {loading ? "Logging in..." : "Login"}
                     </button>
                     
                 </form>
