@@ -30,7 +30,7 @@ class DashboardService
 
     public function getRecentActivities()
     {
-        return Activity::latest()->limit(20)->get();
+        return Activity::latest()->paginate(20);
     }
 
     public function getInternPersonalStats($userId)

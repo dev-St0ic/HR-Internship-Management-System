@@ -15,6 +15,7 @@ class DashboardController extends Controller
         $this->dashboardService = $dashboardService;
     }
 
+    // hr dashboard controller
     public function index()
     {
         $data = [
@@ -28,13 +29,22 @@ class DashboardController extends Controller
         return view('dashboard', compact('data'));
     }
 
+    // intern dashboard controller
     public function internDashboard()
-{
-    // temporary intern data
-    $userId = 1;
+    {
+        // temporary intern data
+        $userId = 1;
 
-    return response()->json(
-        $this->dashboardService->getInternPersonalStats($userId)
-    );
-}
+        return response()->json(
+            $this->dashboardService->getInternPersonalStats($userId)
+        );
+    }
+
+    // activity_logs controlloer
+    public function recentActivities()
+    {
+        return response()->json(
+            $this->dashboardService->getRecentActivities()
+        );
+    }
 }
