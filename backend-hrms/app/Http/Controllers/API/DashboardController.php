@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Services\DashboardService;
 use Illuminate\Http\Request;
+use App\Http\Resources\ActivityResource;
 
 class DashboardController extends Controller
 {
@@ -43,7 +44,7 @@ class DashboardController extends Controller
     // activity_logs controlloer
     public function recentActivities()
     {
-        return response()->json(
+        return ActivityResource::collection(
             $this->dashboardService->getRecentActivities()
         );
     }

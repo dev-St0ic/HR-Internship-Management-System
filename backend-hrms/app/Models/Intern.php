@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use LogsActivity;
 
 class Intern extends Model
 {
@@ -153,5 +154,13 @@ class Intern extends Model
             'hours_today'            => $today,
             'hours_last_computed_at' => now(),
         ]);
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll()
+            ->logOnlyDirty()
+            ->setDescriptionForEvent(fn(string $eventName) => "Intern {$eventName}");
     }
 }
