@@ -35,10 +35,12 @@ class DashboardService
 
     public function getInternPersonalStats($userId)
     {
-        $intern = Intern::where('user_id', $userId)->first();
+        $intern = Intern::where('id', $userId)->first();
 
         if (!$intern) {
-            return null;
+            return [
+                'message' => 'Intern record not found'
+            ];
         }
 
         return [
@@ -46,6 +48,7 @@ class DashboardService
             'required_hours' => $intern->required_hours,
             'remaining_hours' => $intern->required_hours - $intern->completed_hours,
             'status' => $intern->status,
+            'start_date' => $intern->start_date,
             'end_date' => $intern->end_date,
         ];
     }

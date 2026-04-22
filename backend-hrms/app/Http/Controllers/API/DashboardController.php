@@ -16,15 +16,25 @@ class DashboardController extends Controller
     }
 
     public function index()
-{
-    $data = [
-        'total_interns' => $this->dashboardService->getTotalInterns(),
-        'active_interns' => $this->dashboardService->getActiveInterns(),
-        'completed_interns' => $this->dashboardService->getCompletedInterns(),
-        'universities' => $this->dashboardService->getPartnerUniversities(),
-        'recent_activities' => $this->dashboardService->getRecentActivities(),
-    ];
+    {
+        $data = [
+            'total_interns' => $this->dashboardService->getTotalInterns(),
+            'active_interns' => $this->dashboardService->getActiveInterns(),
+            'completed_interns' => $this->dashboardService->getCompletedInterns(),
+            'universities' => $this->dashboardService->getPartnerUniversities(),
+            'recent_activities' => $this->dashboardService->getRecentActivities(),
+        ];
 
-    return view('dashboard', compact('data'));
+        return view('dashboard', compact('data'));
+    }
+
+    public function internDashboard()
+{
+    // temporary intern data
+    $userId = 1;
+
+    return response()->json(
+        $this->dashboardService->getInternPersonalStats($userId)
+    );
 }
 }
