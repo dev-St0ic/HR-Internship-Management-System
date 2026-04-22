@@ -101,6 +101,6 @@ class Application extends Model
 
     public function documents()
     {
-        return $this->hasMany(Document::class, 'documentable');
+        return $this->morphMany(Document::class, 'documentable');
     }
 }
