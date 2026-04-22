@@ -12,26 +12,29 @@ export default function LayoutTemplate({ headerConfig }) {
     return <Navigate to="/login" />;
   }
 
+  // Map role_id to role key for navigation
   const roleMap = {
-    INTERN: "intern",
-    SUPERVISOR: "supervisor",
-    HR_STAFF: "hr-staff",
-    ADMIN: "hr-admin",
+    1: "hr-admin",
+    2: "hr-staff",
+    3: "supervisor",
+    4: "intern",
   };
 
-  const userRole = roleMap[currentUser.role];
+  const userRole = roleMap[currentUser.role_id] || "intern";
 
   const currentHeader = headerConfig[location.pathname] || {
     title: "Dashboard",
     subtitle: "",
   };
 
+  const userName = `${currentUser.first_name} ${currentUser.last_name}`;
+
   return (
     <div className="flex">
       <Sidebar
         links={navigation[userRole]}
-        role={currentUser.role}
-        userName={currentUser.name}
+        role={userRole}
+        userName={userName}
       />
 
       <div className="ml-60 flex-1">
