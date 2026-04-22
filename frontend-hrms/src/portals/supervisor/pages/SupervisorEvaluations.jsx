@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Search, Filter } from "lucide-react"; // Icons for the search and filter
 import EvaluationCard from "../components/ui/evaluations/EvaluationCard";
 import EvaluationModal from "../components/ui/evaluations/EvaluationModal";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/useAuth";
 
 export default function SupervisorEvaluations() {
   const { currentUser } = useAuth();

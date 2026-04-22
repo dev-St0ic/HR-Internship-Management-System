@@ -1,8 +1,8 @@
-import { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { authAPI } from '../services/api';
 
 // 1. Create the Context
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 // 2. Create the Provider Component
 export function AuthProvider({ children }) {
@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
             if (token) {
                 try {
                     const response = await authAPI.getCurrentUser();
-                    setCurrentUser(response.data.user);
+                    setCurrentUser(response.data?.data?.user ?? response.data?.user ?? null);
                 } catch (err) {
                     console.error('Auth check failed:', err);
                     localStorage.removeItem('auth_token');
@@ -34,7 +34,8 @@ export function AuthProvider({ children }) {
         try {
             setError(null);
             const response = await authAPI.login(email, password);
-            const { token, user } = response.data;
+            const payload = response.data?.data ?? response.data;
+            const { token, user } = payload;
             
             localStorage.setItem('auth_token', token);
             setCurrentUser(user);
@@ -51,7 +52,8 @@ export function AuthProvider({ children }) {
         try {
             setError(null);
             const response = await authAPI.register(userData);
-            const { token, user } = response.data;
+            const payload = response.data?.data ?? response.data;
+            const { token, user } = payload;
             
             localStorage.setItem('auth_token', token);
             setCurrentUser(user);
@@ -80,6 +82,3 @@ export function AuthProvider({ children }) {
         </AuthContext.Provider>
     );
 }
-
-// 3. Create a custom hook to make it super easy to use anywhere
-export const useAuth = () => useContext(AuthContext);

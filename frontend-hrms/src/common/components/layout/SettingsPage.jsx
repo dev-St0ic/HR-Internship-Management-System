@@ -4,7 +4,7 @@ import GeneralPreferences from "../ui/GeneralPreference";
 import ProfileSettings from "../ui/ProfileSettings";
 import InternPolicySettings from "../ui/InternPolicySettings";
 import RBACSettings from "../ui/RBACSettings";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/useAuth";
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("general");

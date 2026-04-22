@@ -21,6 +21,9 @@ class UserFactory extends Factory
             'email'            => fake()->unique()->safeEmail(),
             'mobile_number'    => '09' . fake()->numerify('#########'),
             'role_id'          => $role->id,
+            'status'           => 'active',
+            'failed_login_attempts' => 0,
+            'locked_until' => null,
             'password'         => Hash::make('password'),
             'email_verified_at' => now(),
         ];

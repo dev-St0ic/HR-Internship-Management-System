@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Award, AlertCircle } from "lucide-react";
 import EvaluationCard from "../components/ui/EvaluiationCard";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/useAuth";
 
 export default function InternEvaluation() {
   const { currentUser } = useAuth();

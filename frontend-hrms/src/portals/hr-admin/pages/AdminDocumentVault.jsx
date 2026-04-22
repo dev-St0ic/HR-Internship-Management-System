@@ -1,3 +1,29 @@
 export default function AdminDocumentVault() {
-  return (\n    <div className=\"p-6\">\n      <div className=\"bg-white rounded-lg shadow p-8\">\n        <h2 className=\"text-2xl font-bold text-gray-900 mb-4\">Document Vault</h2>\n        <p className=\"text-gray-600\">Centralized document management for all interns and staff</p>\n        \n        <div className=\"mt-8 grid grid-cols-1 md:grid-cols-4 gap-6\">\n          <div className=\"bg-purple-50 rounded-lg p-6 border-l-4 border-[#7C3EFF]\">\n            <h3 className=\"font-semibold text-gray-900\">Total Documents</h3>\n            <p className=\"text-3xl font-bold text-[#7C3EFF] mt-2\">0</p>\n          </div>\n          <div className=\"bg-blue-50 rounded-lg p-6 border-l-4 border-blue-600\">\n            <h3 className=\"font-semibold text-gray-900\">Pending Review</h3>\n            <p className=\"text-3xl font-bold text-blue-600 mt-2\">0</p>\n          </div>\n          <div className=\"bg-green-50 rounded-lg p-6 border-l-4 border-green-600\">\n            <h3 className=\"font-semibold text-gray-900\">Approved</h3>\n            <p className=\"text-3xl font-bold text-green-600 mt-2\">0</p>\n          </div>\n          <div className=\"bg-red-50 rounded-lg p-6 border-l-4 border-red-600\">\n            <h3 className=\"font-semibold text-gray-900\">Rejected</h3>\n            <p className=\"text-3xl font-bold text-red-600 mt-2\">0</p>\n          </div>\n        </div>\n      </div>\n    </div>\n  );
+  return (
+    <div className="p-6">
+      <div className="bg-white rounded-lg shadow p-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Document Vault</h2>
+        <p className="text-gray-600">Centralized document management for all interns and staff</p>
+
+        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-4">
+          <div className="rounded-lg border-l-4 border-[#7C3EFF] bg-purple-50 p-6">
+            <h3 className="font-semibold text-gray-900">Total Documents</h3>
+            <p className="mt-2 text-3xl font-bold text-[#7C3EFF]">0</p>
+          </div>
+          <div className="rounded-lg border-l-4 border-blue-600 bg-blue-50 p-6">
+            <h3 className="font-semibold text-gray-900">Pending Review</h3>
+            <p className="mt-2 text-3xl font-bold text-blue-600">0</p>
+          </div>
+          <div className="rounded-lg border-l-4 border-green-600 bg-green-50 p-6">
+            <h3 className="font-semibold text-gray-900">Approved</h3>
+            <p className="mt-2 text-3xl font-bold text-green-600">0</p>
+          </div>
+          <div className="rounded-lg border-l-4 border-red-600 bg-red-50 p-6">
+            <h3 className="font-semibold text-gray-900">Rejected</h3>
+            <p className="mt-2 text-3xl font-bold text-red-600">0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -30,6 +30,7 @@
     26 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     27 => 'Termwind\\Laravel\\TermwindServiceProvider',
     28 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+    29 => 'Laravel\\Sanctum\\SanctumServiceProvider',
   ),
   'eager' => 
   array (
@@ -47,6 +48,7 @@
     11 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     12 => 'Termwind\\Laravel\\TermwindServiceProvider',
     13 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+    14 => 'Laravel\\Sanctum\\SanctumServiceProvider',
   ),
   'deferred' => 
   array (

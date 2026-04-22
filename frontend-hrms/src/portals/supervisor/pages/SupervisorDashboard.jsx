@@ -1,4 +1,4 @@
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from '../../../contexts/useAuth';
 import GreetingHeader from '../../../common/components/ui/GreetingHeader';
 
 export default function SupervisorDashboard() {

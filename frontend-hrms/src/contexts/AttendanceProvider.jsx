@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { AttendanceContext } from "./AttendanceContext";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/useAuth";
 
 export const AttendanceProvider = ({ children }) => {
   const { currentUser } = useAuth();

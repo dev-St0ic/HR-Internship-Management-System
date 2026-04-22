@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { LogOut, ChevronUp, ChevronDown } from "lucide-react";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/useAuth";
 import { useNavigate } from "react-router-dom";
 
 export default function SidebarProfile() {
@@ -11,7 +11,7 @@ export default function SidebarProfile() {
   const menuRef = useRef(null);
 
   const userName = currentUser?.name || "Guest";
-  const role = currentUser?.role || "User";
+  const roleLabel = currentUser?.role?.name || currentUser?.role_name || "User";
 
   const displayAvatar =
     currentUser?.avatar ||
@@ -60,7 +60,7 @@ export default function SidebarProfile() {
               {userName}
             </span>
             <span className="text-xs font-medium text-gray-500 mt-0.5 truncate w-full">
-              {role}
+              {roleLabel}
             </span>
           </div>
         </div>

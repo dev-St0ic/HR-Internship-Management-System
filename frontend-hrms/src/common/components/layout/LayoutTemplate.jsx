@@ -2,7 +2,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import Sidebar from "../layout/Sidebar";
 import Header from "../layout/Header";
 import { navigation } from "../../config/navigation";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/useAuth";
 
 export default function LayoutTemplate({ headerConfig }) {
   const { currentUser } = useAuth();

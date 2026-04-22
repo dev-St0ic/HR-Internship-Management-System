@@ -7,7 +7,7 @@ import CalendarPanel from "../components/ui/CalendarPanel";
 import TimeCard from "../components/ui/TimeCard";
 import { mockTasks } from "../components/mockTasks";
 import TaskListCard from "../components/ui/TaskListCard";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/useAuth";
 
 export default function Dashboard() {
   const { currentUser } = useAuth();

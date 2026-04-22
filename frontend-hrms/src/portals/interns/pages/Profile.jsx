@@ -1,6 +1,6 @@
 import Header from "../../../common/components/layout/Header";
 import ProfileView from "../../../common/components/profile/ProfileView";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/useAuth";
 import { useLocation } from "react-router-dom";
 
 export default function Profile() {
