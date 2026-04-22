@@ -14,6 +14,7 @@ use App\Http\Resources\ApplicationResource;
 use App\Http\Resources\ApplicationCollection;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ApplicationApprovedMail;
+use App\Mail\ApplicationRejectedMail;
 
 class ApplicationController extends Controller
 {
@@ -162,17 +163,18 @@ class ApplicationController extends Controller
             return response()->json(['message' => 'Application has already been processed.'], 400);
         }
 
-        // Allow HR to optionally submit a rejection reason
         $request->validate(['reason' => 'nullable|string']);
+        $reason = $request->input('reason', 'No specific reason provided.');
 
-        // 1. Change status to rejected
+        // 1. Change status
         $application->update(['status' => 'rejected']);
 
-        // 2. TODO: EmailService will be called right here to send the rejection notification
+        // 2. Send the Rejection Email
+        Mail::to($application->email)->send(new ApplicationRejectedMail($application, $reason));
 
         return response()->json([
-            'message' => 'Application rejected successfully.',
-            'reason'  => $request->input('reason')
+            'message' => 'Application rejected successfully and email sent.',
+            'reason'  => $reason
         ], 200);
     }
 }
