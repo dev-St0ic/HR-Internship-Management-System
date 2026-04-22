@@ -5,6 +5,9 @@ import ProfileSidebar from "./ProfileSidebar";
 import PersonalInformation from "./PersonalInformation";
 import SchoolInformation from "./SchoolInformation";
 import Documents from "./Documents";
+import AttendanceSection from "./sections/AttendanceSection";
+import EvaluationSection from "./sections/EvaluationSection";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileView({ user, mode }) {
   {
@@ -56,11 +59,17 @@ export default function ProfileView({ user, mode }) {
   const [activeTab, setActiveTab] = useState("personal");
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState(null);
+  const [activeSection, setActiveSection] = useState("profile");
 
-  const staffView = ["hr-admin", "hr-staff", "supervisor"].includes(mode);
+  const navigate = useNavigate();
+
+  const normalizedMode = mode?.toLowerCase();
+
+  const isStaff =
+    normalizedMode !== "intern" && normalizedMode !== "supervisor";
 
   const tabs =
-    mode === "intern"
+    mode === "INTERN"
       ? ["personal", "school", "documents"]
       : ["personal", "documents"];
 
@@ -103,39 +112,69 @@ export default function ProfileView({ user, mode }) {
         activeTab={activeTab}
         isEditing={isEditing}
         onEditClick={handleEditToggle}
+        onBackClick={() => {
+          if (mode === "hr-admin") navigate("/hr-admin/intern-management");
+          else if (mode === "hr-staff") navigate("/hr-staff/intern-management");
+          else navigate("/supervisor/myinterns");
+        }}
       />
 
-      <div className="flex gap-6 mt-6">
+      <div className="flex items-start gap-6 mt-6">
         {/* HR-Admin & HR-Staff Sidebar */}
-        {staffView && <ProfileSidebar />}
+        {isStaff && (
+          <ProfileSidebar
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+          />
+        )}
 
         <div className="flex-1">
-          {/* Profile Tabs */}
-          <ProfileTabs
-            user={displayUser}
-            mode={mode}
-            tabs={tabs}
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-          />
-
-          {/* Tab Content */}
-          <div className="mt-6">
-            {activeTab === "personal" && (
-              <PersonalInformation
+          {activeSection === "profile" && (
+            <>
+              {/* Profile Tabs */}
+              <ProfileTabs
                 user={displayUser}
                 mode={mode}
-                isEditing={isEditing}
-                onChange={handleChange}
+                tabs={tabs}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
               />
-            )}
-            {activeTab === "school" && mode === "intern" && (
-              <SchoolInformation user={displayUser} />
-            )}
-            {activeTab === "documents" && (
-              <Documents user={displayUser} mode={mode} />
-            )}
-          </div>
+
+              {/* Tab Content */}
+              <div className="mt-6">
+                {activeTab === "personal" && (
+                  <PersonalInformation
+                    user={displayUser}
+                    mode={mode}
+                    isEditing={isEditing}
+                    onChange={handleChange}
+                  />
+                )}
+                {activeTab === "school" && mode === "intern" && (
+                  <SchoolInformation user={displayUser} />
+                )}
+                {activeTab === "documents" && (
+                  <Documents user={displayUser} mode={mode} />
+                )}
+              </div>
+            </>
+          )}
+
+          {activeSection === "attendance" && (
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <AttendanceSection user={user} mode={mode} />
+            </div>
+          )}
+
+          {activeSection === "tasks" && (
+            <div className="p-4 bg-gray-50 rounded-lg">Task Content</div>
+          )}
+
+          {activeSection === "evaluation" && (
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <EvaluationSection user={displayUser} />
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -63,7 +63,7 @@ export default function CalendarPanel() {
       {/* Mini Calendar on the right side */}
       <div>
         {/* Header */}
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center mb-2">
           <h2 className="text-xl font-bold">My Schedule</h2>
           <button
             onClick={() => navigate("/intern/calendar")}
@@ -87,7 +87,7 @@ export default function CalendarPanel() {
         </LocalizationProvider>
 
         {/* Events */}
-        <div className="mt-4 border-t pt-3 max-h-60 overflow-y-auto">
+        <div className=" border-t pt-2 max-h-60 overflow-y-auto">
           <h3 className="text-sm font-semibold mb-3">
             {selectedDate.format("dddd, DD MMMM YYYY")}
           </h3>

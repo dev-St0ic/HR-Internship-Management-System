@@ -40,7 +40,7 @@ export default function MyInternsPage() {
       (intern.id || "").toLowerCase().includes(search.toLowerCase()),
   );
 
-  //View Button
+  //View Row
   const handleView = (intern) => {
     navigate("/intern/profile", { state: { intern } });
   };
@@ -107,7 +107,7 @@ export default function MyInternsPage() {
         <div className="overflow-x-auto">
           <table className="w-full border-separate border-spacing-y-2">
             <thead>
-              <tr className="text-left text-gray-600">
+              <tr className="text-left text-gray-600 border-b border-gray-200 shadow-sm">
                 <th className="px-3">Intern Name</th>
                 <th className="px-3">Intern ID</th>
                 <th className="px-3">University</th>
@@ -120,7 +120,11 @@ export default function MyInternsPage() {
             <tbody>
               {filteredInterns.length > 0 ? (
                 filteredInterns.map((intern) => (
-                  <tr key={intern.id} className=" hover:bg-gray-100">
+                  <tr
+                    key={intern.id}
+                    onClick={() => handleView(intern)}
+                    className=" hover:bg-purple-100 cursor-pointer transition border-b border-gray-200 shadow-sm"
+                  >
                     <td className="px-3 py-3">{intern.name}</td>
                     <td className="px-3">{intern.id}</td>
                     <td className="px-3">{intern.university}</td>
@@ -130,20 +134,18 @@ export default function MyInternsPage() {
                         ? intern.duration.split(" - ")[0]
                         : "N/A"}
                     </td>
-                    <td className="px-3 flex gap-0.5">
-                      <button
-                        onClick={() => handleView(intern)}
-                        className="px-2 py-1 items-center rounded hover:bg-purple-500 hover:text-white"
-                      >
-                        <Eye size={16} />
-                      </button>
-
-                      <button
-                        onClick={() => handleDelete(intern.id)}
-                        className="px-2 py-1 rounded hover:bg-purple-500 hover:text-white"
-                      >
-                        <Trash size={16} />
-                      </button>
+                    <td className="px-3">
+                      <div className="flex items-center justify-center">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(intern.id);
+                          }}
+                          className="p-2 rounded hover:bg-purple-500 hover:text-white"
+                        >
+                          <Trash size={16} />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))

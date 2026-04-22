@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Award, AlertCircle } from "lucide-react";
-import Header from "../../../common/components/layout/Header";
 import EvaluationCard from "../components/ui/EvaluiationCard";
 import { useAuth } from "../../../contexts/AuthContext";
 
