@@ -29,7 +29,7 @@ import HRAdminDashboard from "../portals/hr-admin/pages/HRAdminDashboard";
 import ReportsAndAnalytics from "../portals/hr-admin/pages/ReportsAndAnalytics";
 import SystemLogs from "../portals/hr-admin/pages/SystemLogs";
 import AdminSettings from "../portals/hr-admin/pages/Settings";
-import internmanagement from "../portals/hr-admin/pages/AdminInternDetailPage";
+import InternManagement from "../portals/hr-admin/pages/AdminInternDetailPage";
 import AdminDocumentVault from "../portals/hr-admin/pages/AdminDocumentVault";
 import AdminStaffManagement from "../portals/hr-admin/pages/AdminStaffManagement";
 import AdminRecruitment from "../portals/hr-admin/pages/AdminRecruitment";
@@ -136,7 +136,7 @@ export const AppRouter = () => {
           <Route path="recruitment" element={<AdminRecruitment />} />
           <Route path="internmanagement">
             <Route index element={<AdminOperationsPage />} />
-            <Route path="intern/:internId" element={<internmanagement />} />
+            <Route path="intern/:internId" element={<InternManagement />} />
           </Route>
           <Route path="staffmanagement" element={<AdminStaffManagement />} />
           <Route path="documnetvault" element={<AdminDocumentVault />} />

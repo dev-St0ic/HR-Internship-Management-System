@@ -6,7 +6,7 @@ import {
   PickersDay,
 } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { calendarEvents } from "../../../../common/config/mockCalendarData";
+import { calendarEvents } from "../../../../common/utils/mockAuth.js";
 import { useNavigate } from "react-router-dom";
 import { CalendarDays } from "lucide-react";
 

@@ -1,6 +1,6 @@
 import { Search, Plus, Download } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { dummyDepartments } from '../../../common/config/mockData.jsx';
+import { dummyDepartments } from '../../../common/utils/mockAuth.js';
 
 export default function StaffManagement() {
   const [departments, setDepartments] = useState(dummyDepartments);

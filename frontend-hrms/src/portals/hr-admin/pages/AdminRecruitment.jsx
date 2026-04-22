@@ -1,333 +1,353 @@
-import { Search, Funnel, X, Eye, Download } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import { dummyApplications, dummyDocuments } from '../../../common/config/mockData.jsx';
+import { ChevronLeft, ChevronRight, Download, Eye, FileText, Filter, Search, User } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { dummyApplications, dummyDocuments } from '../../../common/utils/mockAuth.js';
+
+const PARTNER_SUMMARY = [
+  { label: 'Active MOA', value: 22, tone: 'emerald', icon: 'M' },
+  { label: 'Expiring MOA', value: 10, tone: 'amber', icon: 'E' },
+  { label: 'Expired MOA', value: 3, tone: 'rose', icon: 'X' },
+];
+
+const PARTNER_ITEMS = [
+  { id: 1, name: 'Cebu University', date: 'Updated Apr 02, 2026' },
+  { id: 2, name: 'Polytechnic University', date: 'Updated Apr 05, 2026' },
+  { id: 3, name: 'University of San Jose', date: 'Updated Apr 09, 2026' },
+  { id: 4, name: 'De La Salle University', date: 'Updated Apr 10, 2026' },
+];
+
+function getStatusClasses(status) {
+  if (status === 'Approved') {
+    return 'bg-emerald-50 text-emerald-500';
+  }
+
+  if (status === 'Rejected') {
+    return 'bg-rose-50 text-rose-500';
+  }
+
+  return 'bg-amber-50 text-amber-500';
+}
 
 export default function Recruitment() {
-  const [applications, setApplications] = useState(dummyApplications);
+  const [applications, setApplications] = useState(
+    dummyApplications.map((application, index) => ({
+      ...application,
+      status: index === 1 ? 'Rejected' : index === 2 ? 'Approved' : 'Pending',
+    })),
+  );
   const [selectedApplicant, setSelectedApplicant] = useState(null);
-  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const [activeTab, setActiveTab] = useState('information');
-  const [documents, setDocuments] = useState(dummyDocuments);
-  const [view, setView] = useState('application'); 
+  const [documents] = useState(dummyDocuments);
+  const [view, setView] = useState('application');
+  const [searchTerm, setSearchTerm] = useState('');
 
+  const filteredApplications = useMemo(() => {
+    const normalized = searchTerm.trim().toLowerCase();
 
-  // Reset tab when opening modal
+    if (!normalized) {
+      return applications;
+    }
+
+    return applications.filter((application) =>
+      [application.name, application.id, application.university, application.program, application.date, application.status]
+        .join(' ')
+        .toLowerCase()
+        .includes(normalized),
+    );
+  }, [applications, searchTerm]);
+
   const openApplicant = (applicant, index) => {
-    setActiveTab('information');
     setSelectedApplicant(applicant);
     setSelectedIndex(index);
+    setActiveTab('information');
   };
 
-  // Navigate to previous applicant
   const goToPrevious = () => {
     if (selectedIndex > 0) {
-      openApplicant(applications[selectedIndex - 1], selectedIndex - 1);
+      openApplicant(filteredApplications[selectedIndex - 1], selectedIndex - 1);
     }
   };
 
-  // Navigate to next applicant
   const goToNext = () => {
-    if (selectedIndex < applications.length - 1) {
-      openApplicant(applications[selectedIndex + 1], selectedIndex + 1);
+    if (selectedIndex < filteredApplications.length - 1) {
+      openApplicant(filteredApplications[selectedIndex + 1], selectedIndex + 1);
     }
   };
 
-  // Commented out API call for applications
-  // useEffect(() => {
-  //   fetch('/api/applications')
-  //     .then(res => res.json())
-  //     .then(data => setApplications(data))
-  //     .catch(err => console.error('Error fetching applications:', err));
-  // }, []);
+  const handleDecision = (status) => {
+    if (!selectedApplicant) {
+      return;
+    }
+
+    const updated = applications.map((application) =>
+      application.id === selectedApplicant.id ? { ...application, status } : application,
+    );
+
+    setApplications(updated);
+
+    const updatedSelected = updated.find((application) => application.id === selectedApplicant.id);
+    if (updatedSelected) {
+      setSelectedApplicant(updatedSelected);
+    }
+  };
 
   return (
-    <>
-      <div className="space-y-6">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold text-slate-900">Recruitment</h1>
-            <p className="text-sm text-slate-500">All Talent Acquisition</p>
+    <div className="space-y-6">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h1 className="text-2xl font-semibold text-slate-900">Recruitment</h1>
+          <p className="text-sm text-slate-500">All Talent Acquisition</p>
+        </div>
+      </div>
+
+      <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="mb-4 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="relative w-full lg:max-w-[220px]">
+            <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              placeholder="Search"
+              className="h-11 w-full rounded-2xl border border-slate-200 bg-white pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+            />
           </div>
-          <button className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50">
-            <Funnel size={16} />
+          <button className="inline-flex h-11 items-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+            <Filter size={16} />
             Filter
           </button>
         </div>
 
-        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="flex flex-col gap-4 w-full">
-            <div className="relative w-full md:w-[320px]">
-              <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-              <input
-                type="text"
-                placeholder="Search"
-                className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-              />
-            </div>
-            <div className="flex gap-3 rounded-2xl bg-slate-50 p-2 w-full md:w-auto">
-              <button
-                onClick={() => setView('application')}
-                className={`rounded-2xl px-4 py-2 text-sm font-semibold transition flex-1 md:flex-none ${
-                  view === 'application'
-                    ? 'text-indigo-600 bg-white'
-                    : 'text-slate-500 hover:bg-white'
-                }`}
-              >
-                👤Application
-              </button>
+        <div className="mb-4 flex flex-wrap items-center gap-4 border-b border-slate-100 pb-3">
+          <button
+            type="button"
+            onClick={() => setView('application')}
+            className={`inline-flex items-center gap-2 border-b-2 pb-2 text-sm font-semibold transition ${
+              view === 'application'
+                ? 'border-indigo-500 text-indigo-600'
+                : 'border-transparent text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <User size={16} />
+            Application
+          </button>
+          <button
+            type="button"
+            onClick={() => setView('partner')}
+            className={`inline-flex items-center gap-2 border-b-2 pb-2 text-sm font-semibold transition ${
+              view === 'partner'
+                ? 'border-indigo-500 text-indigo-600'
+                : 'border-transparent text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <FileText size={16} />
+            Partner University
+          </button>
+        </div>
 
-              <button
-                onClick={() => setView('partner')}
-                className={`rounded-2xl px-4 py-2 text-sm font-semibold transition flex-1 md:flex-none ${
-                  view === 'partner'
-                    ? 'text-indigo-600 bg-white'
-                    : 'text-slate-500 hover:bg-white'
-                }`}
-              >
-                🎓Partner University
-              </button>
-            </div>
-          </div>
-          
-          <div className="mt-6">
-            {view === 'application' ? (
-              <div className="overflow-x-auto">
-                <table className="min-w-full text-left text-sm">
-                  <thead className="bg-slate-50 text-slate-500">
-                    <tr>
-                      <th className="px-4 py-4 font-medium">Intern Name</th>
-                      <th className="px-4 py-4 font-medium">Intern ID</th>
-                      <th className="px-4 py-4 font-medium">University</th>
-                      <th className="px-4 py-4 font-medium">Program</th>
-                      <th className="px-4 py-4 font-medium">Date</th>
-                      <th className="px-4 py-4 font-medium">Status</th>
+        {view === 'application' ? (
+          <div className="grid gap-6 xl:grid-cols-[minmax(0,1.7fr)_320px]">
+            <div className="min-w-0 overflow-x-auto">
+              <table className="min-w-full text-left text-sm">
+                <thead className="text-slate-400">
+                  <tr>
+                    <th className="border-b border-slate-100 px-3 py-3 font-medium">Intern Name</th>
+                    <th className="border-b border-slate-100 px-3 py-3 font-medium">Intern ID</th>
+                    <th className="border-b border-slate-100 px-3 py-3 font-medium">University</th>
+                    <th className="border-b border-slate-100 px-3 py-3 font-medium">Program</th>
+                    <th className="border-b border-slate-100 px-3 py-3 font-medium">Date</th>
+                    <th className="border-b border-slate-100 px-3 py-3 font-medium">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredApplications.map((application, index) => (
+                    <tr
+                      key={`${application.id}-${index}`}
+                      onClick={() => openApplicant(application, index)}
+                      className={`cursor-pointer transition hover:bg-slate-50 ${
+                        selectedApplicant?.id === application.id ? 'bg-slate-50/80' : ''
+                      }`}
+                    >
+                      <td className="border-b border-slate-100 px-3 py-4 text-slate-900">{application.name}</td>
+                      <td className="border-b border-slate-100 px-3 py-4 text-slate-700">{application.id}</td>
+                      <td className="border-b border-slate-100 px-3 py-4 text-slate-700">{application.university}</td>
+                      <td className="border-b border-slate-100 px-3 py-4 text-slate-700">{application.program}</td>
+                      <td className="border-b border-slate-100 px-3 py-4 text-slate-700">{application.date}</td>
+                      <td className="border-b border-slate-100 px-3 py-4">
+                        <span className={`inline-flex rounded-md px-3 py-1 text-xs font-medium ${getStatusClasses(application.status)}`}>
+                          {application.status}
+                        </span>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {applications.map((application, index) => (
-                      <tr key={application.id} className="border-t border-slate-100 hover:bg-slate-50 cursor-pointer" onClick={() => openApplicant(application, index)}>
-                        <td className="px-4 py-4 text-slate-900">{application.name}</td>
-                        <td className="px-4 py-4 text-slate-900">{application.id}</td>
-                        <td className="px-4 py-4 text-slate-900">{application.university}</td>
-                        <td className="px-4 py-4 text-slate-900">{application.program}</td>
-                        <td className="px-4 py-4 text-slate-900">{application.date}</td>
-                        <td className="px-4 py-4">
-                          <span className="inline-flex rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700">
-                            {application.status}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <div className="space-y-6">
-                {/* TOP CARDS */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {/* Active */}
-                  <div className="flex items-center justify-between border border-emerald-300 bg-emerald-50 rounded-2xl p-4">
-                    <div>
-                      <p className="text-sm text-slate-500">Active MOA</p>
-                      <p className="text-2xl font-bold text-slate-900">22</p>
-                    </div>
-                    <div className="w-10 h-10 bg-emerald-200 rounded-lg flex items-center justify-center">
-                      📋
-                    </div>
-                  </div>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-                  {/* Expiring */}
-                  <div className="flex items-center justify-between border border-amber-300 bg-amber-50 rounded-2xl p-4">
-                    <div>
-                      <p className="text-sm text-slate-500">Expiring MOA</p>
-                      <p className="text-2xl font-bold text-slate-900">10</p>
-                    </div>
-                    <div className="w-10 h-10 bg-amber-200 rounded-lg flex items-center justify-center">
-                      📁
-                    </div>
-                  </div>
-
-                  {/* Expired */}
-                  <div className="flex items-center justify-between border border-rose-300 bg-rose-50 rounded-2xl p-4">
-                    <div>
-                      <p className="text-sm text-slate-500">Expired MOA</p>
-                      <p className="text-2xl font-bold text-slate-900">3</p>
-                    </div>
-                    <div className="w-10 h-10 bg-rose-200 rounded-lg flex items-center justify-center">
-                      ❌
-                    </div>
-                  </div>
-                </div>
-
-                {/* ADD BUTTON */}
-                <div className="flex justify-end">
-                  <button className="bg-indigo-600 text-white px-4 py-2 rounded-xl">
-                    + Add Partner University
+            {selectedApplicant && (
+              <aside className="rounded-2xl border border-slate-200 bg-white p-5">
+                <div className="mb-4 flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={goToPrevious}
+                    disabled={selectedIndex === 0}
+                    className="rounded-lg p-1.5 text-slate-500 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={goToNext}
+                    disabled={selectedIndex === filteredApplications.length - 1}
+                    className="rounded-lg p-1.5 text-slate-500 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    <ChevronRight size={18} />
                   </button>
                 </div>
 
-                {/* LIST */}
-                <div className="space-y-3">
-                  {[1,2,3,4].map((item) => (
-                    <div key={item} className="flex items-center justify-between border rounded-xl p-4 hover:bg-slate-50">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-purple-300 rounded-full" />
-                        <div>
-                          <p className="font-medium text-slate-900">University</p>
-                          <p className="text-sm text-slate-500">Date</p>
-                        </div>
+                <div className="mb-5 flex gap-4">
+                  <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-200 via-rose-200 to-violet-200 text-xl font-semibold text-slate-700">
+                    {selectedApplicant.name.charAt(0)}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="truncate text-[30px] font-semibold leading-tight text-slate-900">{selectedApplicant.name}</h3>
+                    <p className="mt-1 text-sm text-slate-500">company@gmail.com</p>
+                    <span className={`mt-2 inline-flex rounded-md px-3 py-1 text-xs font-medium ${getStatusClasses(selectedApplicant.status)}`}>
+                      {selectedApplicant.status}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mb-4 flex gap-6 border-b border-slate-100">
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab('information')}
+                    className={`inline-flex items-center gap-2 border-b-2 pb-3 text-sm font-semibold transition ${
+                      activeTab === 'information'
+                        ? 'border-indigo-500 text-indigo-600'
+                        : 'border-transparent text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    <User size={16} />
+                    Information
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab('documents')}
+                    className={`inline-flex items-center gap-2 border-b-2 pb-3 text-sm font-semibold transition ${
+                      activeTab === 'documents'
+                        ? 'border-indigo-500 text-indigo-600'
+                        : 'border-transparent text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    <FileText size={16} />
+                    Documents
+                  </button>
+                </div>
+
+                {activeTab === 'information' ? (
+                  <div className="space-y-5">
+                    {[
+                      ['University', selectedApplicant.university],
+                      ['Program', selectedApplicant.program],
+                      ['Year Level', '3rd Year'],
+                      ['Required Hours', '240 Hours'],
+                      ['Preferred Department', 'IT Department'],
+                    ].map(([label, value]) => (
+                      <div key={label} className="border-b border-slate-100 pb-3 last:border-b-0 last:pb-0">
+                        <p className="mb-1 text-xs text-slate-400">{label}</p>
+                        <p className="text-sm font-medium text-slate-800">{value}</p>
                       </div>
-                      <span>⌄</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="mt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-sm text-slate-500">
-            <div>Showing 1 to {applications.length} of {applications.length} records</div>
-            <div className="flex items-center gap-3">
-              <button className="rounded-full border border-slate-200 px-3 py-2 text-slate-700 hover:bg-slate-50">1</button>
-              <button className="rounded-full border border-slate-200 px-3 py-2 text-slate-700 hover:bg-slate-50">2</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Applicant Profile Side Panel */}
-      {selectedApplicant && (
-        <>
-          <div 
-            className="fixed inset-0 z-40" 
-            onClick={() => setSelectedApplicant(null)}
-          />
-          <div className="fixed right-0 top-0 h-full w-96 bg-white shadow-2xl z-50 overflow-y-auto border-l border-slate-200">
-            <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4">
-              <div className="flex items-center justify-between mb-4">
-                <button 
-                  onClick={goToPrevious}
-                  disabled={selectedIndex === 0}
-                  className="p-2 hover:bg-slate-100 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <span className="text-xl">‹</span>
-                </button>
-                <button 
-                  onClick={goToNext}
-                  disabled={selectedIndex === applications.length - 1}
-                  className="p-2 hover:bg-slate-100 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <span className="text-xl">›</span>
-                </button>
-              </div>
-
-              {/* Profile Card */}
-              <div className="flex gap-4">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
-                  {selectedApplicant.name.charAt(0)}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-slate-900">{selectedApplicant.name}</h3>
-                  <p className="text-sm text-slate-500 mb-2">company@gmail.com</p>
-                  <span className="inline-flex rounded-full bg-amber-100 px-2 py-1 text-xs font-semibold text-amber-700">
-                    {selectedApplicant.status}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Tabs */}
-            <div className="px-6 py-4 border-b border-slate-200">
-              <div className="flex gap-6">
-                <button
-                  onClick={() => setActiveTab('information')}
-                  className={`pb-2 font-medium text-sm transition ${
-                    activeTab === 'information'
-                      ? 'border-b-2 border-indigo-600 text-indigo-600'
-                      : 'text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  Information
-                </button>
-                <button
-                  onClick={() => setActiveTab('documents')}
-                  className={`pb-2 font-medium text-sm transition ${
-                    activeTab === 'documents'
-                      ? 'border-b-2 border-indigo-600 text-indigo-600'
-                      : 'text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  Documents
-                </button>
-              </div>
-            </div>
-
-            <div className="px-6 py-6">
-              {activeTab === 'information' && (
-                <div className="space-y-6">
-                  <div>
-                    <label className="block text-xs font-medium text-slate-500 mb-2">University</label>
-                    <p className="text-slate-900 font-medium">{selectedApplicant.university}</p>
+                    ))}
                   </div>
-                  <div>
-                    <label className="block text-xs font-medium text-slate-500 mb-2">Program</label>
-                    <p className="text-slate-900 font-medium">{selectedApplicant.program}</p>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-slate-500 mb-2">Year Level</label>
-                    <p className="text-slate-900 font-medium">3rd Year</p>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-slate-500 mb-2">Required Hours</label>
-                    <p className="text-slate-900 font-medium">240 Hours</p>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-slate-500 mb-2">Preferred Department</label>
-                    <p className="text-slate-900 font-medium">IT Department</p>
-                  </div>
-                </div>
-              )}
-
-              {activeTab === 'documents' && (
-                <div className="space-y-3">
-                  {documents && documents.length > 0 ? (
-                    documents.map((doc) => (
-                      <div key={doc.id} className="border border-slate-200 rounded-lg p-3 flex items-center justify-between hover:bg-slate-50">
-                        <div>
-                          <p className="font-medium text-slate-900 text-sm">{doc.title}</p>
+                ) : (
+                  <div className="space-y-3">
+                    {documents.map((doc) => (
+                      <div key={doc.id} className="flex items-center justify-between rounded-xl border border-slate-200 p-3">
+                        <div className="min-w-0">
+                          <p className="truncate text-sm font-medium text-slate-900">{doc.title}</p>
                           <p className="text-xs text-slate-500">Uploaded: {doc.uploaded}</p>
                         </div>
                         <div className="flex items-center gap-2">
-                          <button className="p-2 hover:bg-slate-200 rounded-lg" title="Preview">
+                          <button type="button" className="rounded-lg p-2 transition hover:bg-slate-100" title="Preview">
                             <Eye size={16} className="text-slate-600" />
                           </button>
-                          <button className="p-2 hover:bg-slate-200 rounded-lg" title="Download">
+                          <button type="button" className="rounded-lg p-2 transition hover:bg-slate-100" title="Download">
                             <Download size={16} className="text-slate-600" />
                           </button>
                         </div>
                       </div>
-                    ))
-                  ) : (
-                    <p className="text-slate-500 text-sm">No documents available</p>
-                  )}
+                    ))}
+
+                    <div className="mt-5 flex gap-3">
+                      <button
+                        type="button"
+                        onClick={() => handleDecision('Rejected')}
+                        className="flex-1 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+                      >
+                        Reject
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleDecision('Approved')}
+                        className="flex-1 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-indigo-700"
+                      >
+                        Approve
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </aside>
+            )} 
+          </div>
+        ) : (
+          <div className="space-y-6">
+            <div className="grid gap-4 md:grid-cols-3">
+              {PARTNER_SUMMARY.map((card) => (
+                <div
+                  key={card.label}
+                  className={`flex items-center justify-between rounded-2xl border p-4 ${
+                    card.tone === 'emerald'
+                      ? 'border-emerald-200 bg-emerald-50'
+                      : card.tone === 'amber'
+                        ? 'border-amber-200 bg-amber-50'
+                        : 'border-rose-200 bg-rose-50'
+                  }`}
+                >
+                  <div>
+                    <p className="text-sm text-slate-500">{card.label}</p>
+                    <p className="mt-1 text-2xl font-bold text-slate-900">{card.value}</p>
+                  </div>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/60 text-sm font-semibold text-slate-700">
+                    {card.icon}
+                  </div>
                 </div>
-              )}
+              ))}
             </div>
 
-            <div className="border-t border-slate-200 px-6 py-4 flex gap-3 sticky bottom-0 bg-white">
-              <button 
-                onClick={() => setSelectedApplicant(null)}
-                className="flex-1 px-4 py-2 border border-slate-200 rounded-lg text-slate-700 hover:bg-slate-50 font-medium"
-              >
-                Reject
-              </button>
-              <button className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium">
-                Approve
+            <div className="flex justify-end">
+              <button className="rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700">
+                Add Partner University
               </button>
             </div>
+
+            <div className="space-y-3">
+              {PARTNER_ITEMS.map((item) => (
+                <div key={item.id} className="flex items-center justify-between rounded-2xl border border-slate-200 p-4 transition hover:bg-slate-50">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-full bg-violet-200" />
+                    <div>
+                      <p className="font-medium text-slate-900">{item.name}</p>
+                      <p className="text-sm text-slate-500">{item.date}</p>
+                    </div>
+                  </div>
+                  <ChevronRight size={18} className="text-slate-400" />
+                </div>
+              ))}
+            </div>
           </div>
-        </>
-      )}
-    </>
+        )}
+      </section>
+    </div>
   );
 }

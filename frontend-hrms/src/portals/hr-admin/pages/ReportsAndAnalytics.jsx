@@ -1,6 +1,42 @@
 ﻿import React, { useMemo } from 'react';
-import { BarChart3, TrendingUp, Download } from 'lucide-react';
-import { dummyMetrics, dummyInternshipOverview, dummyUniversities, dummyChartDays } from '../../../common/config/mockData.jsx';
+import { BarChart3, Download, TrendingUp } from 'lucide-react';
+import {
+  dummyChartDays,
+  dummyInternshipOverview,
+  dummyMetrics,
+  dummyUniversities,
+} from '../../../common/utils/mockAuth.js';
+
+const METRIC_STYLES = [
+  {
+    border: 'border-emerald-200',
+    bg: 'bg-emerald-50',
+    iconBg: 'bg-emerald-200',
+    iconText: 'text-emerald-600',
+  },
+  {
+    border: 'border-amber-200',
+    bg: 'bg-amber-50',
+    iconBg: 'bg-amber-200',
+    iconText: 'text-amber-600',
+  },
+  {
+    border: 'border-rose-200',
+    bg: 'bg-rose-50',
+    iconBg: 'bg-rose-200',
+    iconText: 'text-rose-600',
+  },
+];
+
+const OVERVIEW_TICKS = [0, 60, 120, 180, 240, 300];
+const OVERVIEW_MAX = 300;
+const OVERVIEW_HEIGHT = 260;
+const OVERVIEW_SERIES = [
+  { key: 'finalizing', label: 'Finalizing', color: '#fb7185', text: 'text-rose-600' },
+  { key: 'incoming', label: 'Incoming', color: '#fde047', text: 'text-amber-600' },
+  { key: 'active', label: 'Active', color: '#6ee7b7', text: 'text-emerald-600' },
+];
+const LINE_COLORS = ['#4f46e5', '#8b5cf6', '#6ee7b7'];
 
 export default function ReportsAndAnalytics() {
   const metrics = dummyMetrics;
@@ -8,183 +44,301 @@ export default function ReportsAndAnalytics() {
   const universities = dummyUniversities;
   const chartDays = dummyChartDays;
 
-  const totalIncoming = useMemo(() => internshipOverview.reduce((sum, item) => sum + item.incoming, 0), [internshipOverview]);
-  const totalActive = useMemo(() => internshipOverview.reduce((sum, item) => sum + item.active, 0), [internshipOverview]);
-  const totalFinalizing = useMemo(() => internshipOverview.reduce((sum, item) => sum + item.finalizing, 0), [internshipOverview]);
-
+  const total = useMemo(() => universities.reduce((sum, item) => sum + item.value, 0), [universities]);
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div className="space-y-5">
+      <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900">Reports & Analytics</h1>
-          <p className="text-sm text-slate-500">Performance Tracking</p>
+          <h1 className="text-xl font-semibold text-slate-900">Reports &amp; Analytics</h1>
+          <p className="mt-1 text-xs text-slate-400">Performance Tracking</p>
         </div>
-        <button className="inline-flex items-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100">
-          <TrendingUp size={16} />
+        <button className="inline-flex h-10 items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50">
+          <TrendingUp size={15} />
           Export report
         </button>
       </div>
 
-      {/* Metrics */}
-      <div className="grid gap-4 md:grid-cols-3">
-        {metrics.map((metric) => (
-          <div key={metric.label} className="rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <div className="p-6">
-              <div className="flex items-start justify-between gap-4">
+      <div className="grid gap-4 xl:grid-cols-3">
+        {metrics.slice(0, 3).map((metric, index) => {
+          const style = METRIC_STYLES[index] || METRIC_STYLES[0];
+          return (
+            <div
+              key={metric.label}
+              className={`rounded-2xl border ${style.border} ${style.bg} px-5 py-4 shadow-[0_8px_30px_rgba(15,23,42,0.04)]`}
+            >
+              <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-sm font-medium text-slate-500">{metric.label}</p>
-                  <p className={`mt-4 text-3xl font-semibold ${metric.text}`}>{metric.value}</p>
+                  <p className="text-sm font-medium text-slate-600">{metric.label}</p>
+                  <p className="mt-1 text-3xl font-semibold text-slate-900">{metric.value}</p>
                 </div>
-                <div className={`flex h-12 w-12 items-center justify-center rounded-3xl ${metric.accent}`}>
-                  <BarChart3 size={20} className="text-white" />
+                <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${style.iconBg}`}>
+                  <BarChart3 size={16} className={style.iconText} />
                 </div>
               </div>
             </div>
-            <div className="border-t border-slate-100 bg-slate-50 px-6 py-3 text-xs text-slate-500">Updated monthly</div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Internship Overview */}
-      <div className="grid gap-6">
-        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h2 className="text-lg font-semibold text-slate-900">Internship Overview</h2>
-              <p className="text-sm text-slate-500">Incoming, active, and finalizing internships this quarter</p>
-            </div>
-            <div className="flex flex-wrap items-center gap-3">
-              <button className="inline-flex items-center gap-2 rounded-2xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-700">
-                <Download size={16} />
-                Export
-              </button>
-              <select className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-700 outline-none">
-                <option>All Departments</option>
-              </select>
-              <select className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-700 outline-none">
-                <option>Week</option>
-              </select>
-            </div>
+      <section className="rounded-2xl border border-slate-200 bg-white px-7 py-5 shadow-[0_10px_30px_rgba(15,23,42,0.04)]">
+        <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <h2 className="text-[17px] font-semibold tracking-[-0.01em] text-slate-900">
+            Internship Overview (Incoming, Active and Finalizing)
+          </h2>
+          <div className="flex flex-wrap items-center gap-2">
+            <button className="inline-flex h-9 items-center gap-2 rounded-xl bg-violet-500 px-4 text-sm font-medium text-white transition hover:bg-violet-600">
+              <Download size={14} />
+              Export
+            </button>
+            <select className="h-9 rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-700 outline-none">
+              <option>All Department</option>
+            </select>
+            <select className="h-9 rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-700 outline-none">
+              <option>Week</option>
+            </select>
           </div>
+        </div>
 
-          <div className="grid gap-6 xl:grid-cols-[1.45fr_0.95fr]">
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
-              <div className="flex items-end justify-between gap-4 h-[340px] px-3">
-                {internshipOverview.map((item) => {
-                  const total = item.incoming + item.active + item.finalizing || 1;
-                  const incomingHeight = (item.incoming / total) * 100;
-                  const activeHeight = (item.active / total) * 100;
-                  const finalizingHeight = (item.finalizing / total) * 100;
-                  return (
-                    <div key={item.label} className="flex h-full flex-col items-center gap-3">
-                      <div className="relative flex h-full w-8 flex-col justify-end overflow-hidden bg-slate-100">
-                        <div className="bg-rose-400" style={{ height: `${finalizingHeight}%` }} />
-                        <div className="bg-emerald-400" style={{ height: `${activeHeight}%` }} />
-                        <div className="bg-amber-300" style={{ height: `${incomingHeight}%` }} />
-                      </div>
-                      <span className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-600">{item.label}</span>
-                    </div>
-                  );
-                })}
-              </div>
+        <div className="overflow">
+          <div className="relative min-w-[980px] pl-11 pr-4">
+            <div className="absolute bottom-0 left-11 right-4 border-b border-slate-300" />
+            <div className="absolute bottom-0 left-11 top-0 border-l border-slate-300" />
 
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                <div className="rounded-3xl bg-white p-4 text-center shadow-sm">
-                  <p className="text-2xl font-semibold text-slate-900">{totalIncoming}</p>
-                  <p className="mt-2 text-xs uppercase tracking-[0.2em] text-slate-500">Incoming</p>
-                </div>
-                <div className="rounded-3xl bg-white p-4 text-center shadow-sm">
-                  <p className="text-2xl font-semibold text-slate-900">{totalActive}</p>
-                  <p className="mt-2 text-xs uppercase tracking-[0.2em] text-slate-500">Active</p>
-                </div>
-                <div className="rounded-3xl bg-white p-4 text-center shadow-sm">
-                  <p className="text-2xl font-semibold text-slate-900">{totalFinalizing}</p>
-                  <p className="mt-2 text-xs uppercase tracking-[0.2em] text-slate-500">Finalizing</p>
-                </div>
-              </div>
+            <div className="pointer-events-none absolute inset-y-0 left-11 right-4 h-[260px]">
+              {OVERVIEW_TICKS.map((tick) => {
+                const y = ((OVERVIEW_MAX - tick) / OVERVIEW_MAX) * OVERVIEW_HEIGHT;
+                return (
+                  <div
+                    key={`tick-${tick}`}
+                    className="absolute left-0 right-0 border-t border-dashed border-slate-300/70"
+                    style={{ top: `${y}px` }}
+                  />
+                );
+              })}
+              {internshipOverview.slice(0, -1).map((_, index) => (
+                <div
+                  key={`column-${index}`}
+                  className="absolute top-0 bottom-0 border-l border-dashed border-slate-300/50"
+                  style={{ left: `${((index + 1) / internshipOverview.length) * 100}%` }}
+                />
+              ))}
             </div>
 
-            <div className="space-y-6">
-              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="text-base font-semibold text-slate-900">Interns by University</h3>
-                  <button className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700">Export</button>
-                </div>
-                <div className="flex flex-col gap-5 lg:flex-row lg:items-center">
-                  <div className="flex h-44 w-44 items-center justify-center rounded-full bg-slate-100">
-                    <div className="flex h-36 w-36 items-center justify-center rounded-full bg-white text-3xl font-semibold text-slate-900">155</div>
-                  </div>
-                  <div className="space-y-3">
-                    {universities.map((item) => (
-                      <div key={item.name} className="flex items-center gap-3">
-                        <span className={`h-3.5 w-3.5 rounded-full ${item.color}`} />
-                        <div>
-                          <p className="text-sm font-semibold text-slate-900">{item.name}</p>
-                          <p className="text-sm text-slate-500">Interns by university</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+            {OVERVIEW_TICKS.map((tick) => {
+              const y = ((OVERVIEW_MAX - tick) / OVERVIEW_MAX) * OVERVIEW_HEIGHT;
+              return (
+                <span
+                  key={`label-${tick}`}
+                  className="absolute left-0 -translate-y-1/2 text-[11px] font-medium text-slate-500"
+                  style={{ top: `${y}px` }}
+                >
+                  {tick}
+                </span>
+              );
+            })}
 
-              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <div className="mb-6 flex items-center justify-between">
-                  <h3 className="text-base font-semibold text-slate-900">Task Completion Rate</h3>
-                  <button className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700">Export</button>
-                </div>
-                <div className="h-[240px] overflow-hidden rounded-3xl bg-slate-100 p-4">
-                  <svg viewBox="0 0 360 220" className="h-full w-full">
-                    <defs>
-                      <linearGradient id="gradient1" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#22c55e" stopOpacity="0.35" />
-                        <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
-                      </linearGradient>
-                      <linearGradient id="gradient2" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#a855f7" stopOpacity="0.35" />
-                        <stop offset="100%" stopColor="#a855f7" stopOpacity="0" />
-                      </linearGradient>
-                      <linearGradient id="gradient3" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.35" />
-                        <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
-                      </linearGradient>
-                    </defs>
-                    <g opacity="0.2">
-                      {[0, 50, 100, 150, 200].map((y) => (
-                        <line key={y} x1="0" y1={y} x2="360" y2={y} stroke="#94a3b8" strokeWidth="1" />
-                      ))}
-                    </g>
-                    {chartDays.map((series, idx) => {
-                      const pathData = series.values
-                        .map((value, index) => {
-                          const x = (360 / (series.values.length - 1)) * index;
-                          const y = 200 - (value / 100) * 180;
-                          return `${index === 0 ? 'M' : 'L'} ${x} ${y}`;
-                        })
-                        .join(' ');
+            <div
+              className="relative grid h-[260px] items-end gap-3"
+              style={{ gridTemplateColumns: `repeat(${internshipOverview.length}, minmax(0, 1fr))` }}
+            >
+              {internshipOverview.map((item) => (
+                <div key={item.label} className="flex min-w-0 flex-col items-center gap-1">
+                  <div className="flex h-[260px] w-full max-w-[54px] flex-col justify-end">
+                    {OVERVIEW_SERIES.map((series) => {
+                      const rawValue = Number(item[series.key]) || 0;
+                      const height = Math.max((rawValue / OVERVIEW_MAX) * OVERVIEW_HEIGHT, 2);
                       return (
-                        <g key={series.week}>
-                          <path d={`${pathData} L 360 200 L 0 200 Z`} fill={`url(#gradient${idx + 1})`} />
-                          <path d={pathData} fill="none" stroke={idx === 0 ? '#22c55e' : idx === 1 ? '#a855f7' : '#38bdf8'} strokeWidth="3" />
-                        </g>
+                        <div
+                          key={`${item.label}-${series.key}`}
+                          className="flex items-center justify-center text-[11px] font-medium leading-none"
+                          style={{
+                            height: `${height}px`,
+                            backgroundColor: series.color,
+                            color: '#334155',
+                          }}
+                        >
+                          {rawValue}
+                        </div>
                       );
                     })}
-                    {Array.from({ length: 6 }).map((_, index) => {
-                      const x = (360 / 5) * index;
-                      return <line key={index} x1={x} y1="0" x2={x} y2="200" stroke="#94a3b8" opacity="0.12" />;
-                    })}
-                  </svg>
+                  </div>
+                  <span className="text-[11px] font-medium text-slate-600">{item.label}</span>
                 </div>
-                <div className="mt-4 flex flex-wrap items-center gap-3">
-                  <span className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">Week 1</span>
-                  <span className="inline-flex items-center gap-2 rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-700">Week 2</span>
-                  <span className="inline-flex items-center gap-2 rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold text-cyan-700">Week 3</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
-      </div>
+
+        <div className="mt-7 flex flex-wrap items-center justify-center gap-6">
+          {OVERVIEW_SERIES.map((series) => (
+            <div key={series.key} className="flex items-center gap-2 text-[12px] text-slate-600">
+              <span className="h-2 w-2 rounded-[2px]" style={{ backgroundColor: series.color }} />
+              {series.label}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Interns by University */}
+      <section className="rounded-2xl border border-slate-200 bg-white px-7 py-6 shadow-[0_10px_30px_rgba(15,23,42,0.04)]">
+        <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <h2 className="text-[18px] font-semibold tracking-[-0.01em] text-slate-900">Interns by University</h2>
+          <div className="flex items-center gap-2">
+            <button className="inline-flex h-10 items-center gap-2 rounded-xl bg-violet-500 px-5 text-sm font-medium text-white transition hover:bg-violet-600">
+              <Download size={14} />
+              Export
+            </button>
+            <select className="h-10 rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-700 outline-none">
+              <option>Week</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="grid gap-0 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-center">
+          <div className="flex justify-center lg:justify-start lg:pl-8">
+            <div className="relative h-48 w-48">
+              <svg viewBox="0 0 36 36" className="h-full w-full -rotate-90">
+                <circle cx="18" cy="18" r="15.915" fill="none" stroke="#f1f5f9" strokeWidth="3.8" />
+                {(() => {
+                  let cumulative = 0;
+
+                  return universities.map((item) => {
+                    const percent = (item.value / total) * 100;
+                    const circle = (
+                      <circle
+                        key={item.name}
+                        cx="18"
+                        cy="18"
+                        r="15.915"
+                        fill="none"
+                        stroke={item.color}
+                        strokeWidth="3.8"
+                        strokeDasharray={`${percent} ${100 - percent}`}
+                        strokeDashoffset={-cumulative}
+                      />
+                    );
+
+                    cumulative += percent;
+                    return circle;
+                  });
+                })()}
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-[18px] font-semibold text-slate-800">{total}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-5 pt-1">
+            {universities.map((item) => (
+              <div key={item.name} className="flex items-center gap-3 border-b border-slate-100 pb-4 last:border-b-0 last:pb-0">
+                <span className="h-10 w-1 rounded-full" style={{ backgroundColor: item.color }} />
+                <p className="text-[14px] font-medium text-slate-700">{item.name || 'Unknown University'}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+          
+      {/* Task Completion Rate */}
+      <section className="rounded-2xl border border-slate-200 bg-white px-7 py-6 shadow-[0_10px_30px_rgba(15,23,42,0.04)]">
+        <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <h2 className="text-[18px] font-semibold tracking-[-0.01em] text-slate-900">Task Completion Rate</h2>
+          <div className="flex flex-wrap items-center gap-2">
+            <button className="inline-flex h-10 items-center gap-2 rounded-xl bg-violet-500 px-5 text-sm font-medium text-white transition hover:bg-violet-600">
+              <Download size={14} />
+              Export
+            </button>
+            <select className="h-10 rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-700 outline-none">
+              <option>All Department</option>
+            </select>
+            <select className="h-10 rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-700 outline-none">
+              <option>Week</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_170px] xl:items-start">
+          <div className="min-w-0">
+            <svg viewBox="0 0 620 270" className="h-[320px] w-full">
+              <defs>
+                {LINE_COLORS.map((color, index) => (
+                  <linearGradient key={color} id={`completion-gradient-${index}`} x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor={color} stopOpacity="0.85" />
+                    <stop offset="100%" stopColor={color} stopOpacity="0.08" />
+                  </linearGradient>
+                ))}
+              </defs>
+
+              {[0, 20, 40, 60, 80, 100].map((tick) => {
+                const y = 230 - (tick / 100) * 185;
+                return (
+                  <g key={`line-${tick}`}>
+                    <line x1="38" y1={y} x2="548" y2={y} stroke="#94a3b8" strokeDasharray="2 3" strokeOpacity="0.65" />
+                    <text x="26" y={y + 4} textAnchor="end" fontSize="11" fill="#64748b">
+                      {tick}
+                    </text>
+                  </g>
+                );
+              })}
+
+              {Array.from({ length: 12 }).map((_, index) => {
+                const x = 38 + (510 / 11) * index;
+                return (
+                  <g key={`x-${index}`}>
+                    <line x1={x} y1="45" x2={x} y2="230" stroke="#94a3b8" strokeDasharray="2 3" strokeOpacity="0.45" />
+                    <text x={x} y="248" textAnchor="middle" fontSize="11" fill="#64748b">
+                      {index + 1}
+                    </text>
+                  </g>
+                );
+              })}
+
+              <line x1="38" y1="230" x2="548" y2="230" stroke="#94a3b8" strokeOpacity="0.65" />
+              <line x1="38" y1="45" x2="38" y2="230" stroke="#94a3b8" strokeOpacity="0.65" />
+
+              {chartDays.map((series, index) => {
+                const path = series.values
+                  .map((value, valueIndex) => {
+                    const x = 38 + (510 / (series.values.length - 1)) * valueIndex;
+                    const y = 230 - (value / 100) * 185;
+                    return `${valueIndex === 0 ? 'M' : 'L'} ${x} ${y}`;
+                  })
+                  .join(' ');
+
+                return (
+                  <g key={series.week}>
+                    <path d={`${path} L 548 230 L 38 230 Z`} fill={`url(#completion-gradient-${index})`} />
+                    <path d={path} fill="none" stroke={LINE_COLORS[index]} strokeWidth="2.6" strokeLinecap="round" />
+                    {series.values.map((value, valueIndex) => {
+                      const x = 38 + (510 / (series.values.length - 1)) * valueIndex;
+                      const y = 230 - (value / 100) * 185;
+                      return (
+                        <g key={`${series.week}-${valueIndex}`}>
+                          <circle cx={x} cy={y} r="6" fill="#ffffff" fillOpacity="0.3" />
+                          <circle cx={x} cy={y} r="3.2" fill={LINE_COLORS[index]} stroke="#ffffff" strokeWidth="1" />
+                        </g>
+                      );
+                    })}
+                  </g>
+                );
+              })}
+            </svg>
+
+            <div className="mt-1 flex flex-wrap items-center justify-center gap-4">
+              {chartDays.map((series, index) => (
+                <div key={series.week} className="flex items-center gap-2 text-[12px] text-slate-500">
+                  <span className="h-2 w-2 rounded-full" style={{ backgroundColor: LINE_COLORS[index] }} />
+                  {series.week}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="pt-14 text-[15px] font-semibold text-slate-900">Summary</div>
+        </div>
+      </section>
     </div>
   );
 }

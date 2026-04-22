@@ -1,6 +1,6 @@
 import { useState } from "react";
 import dayjs from "dayjs";
-import { calendarEvents } from "../../../../common/config/mockCalendarData";
+import { calendarEvents } from "../../../../common/utils/mockAuth.js";
 
 export default function BigCalendar() {
   const [currentMonth, setCurrentMonth] = useState(dayjs());

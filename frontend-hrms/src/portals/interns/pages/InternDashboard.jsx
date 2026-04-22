@@ -1,5 +1,5 @@
 import Header from "../../../common/components/layout/Header";
-import { dashboardStats } from "../../../common/config/mockData";
+import { dashboardStats } from "../../../common/utils/mockAuth.js";
 import { iconMap } from "../../../common/config/iconMap";
 import StatCard from "../../../common/components/ui/StatCard";
 import GreetingHeader from "../../../common/components/ui/GreetingHeader";

@@ -1,51 +1,43 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { ChevronRight, Eye, Download } from 'lucide-react';
-import { dummyInterns, dummyDocuments, dummyAttendanceData } from '../../../common/config/mockData.jsx';
+import { CalendarDays, ChevronLeft, ClipboardList, Download, Eye, FileText, Pencil, Trophy, UserRound } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { dummyAttendanceData, dummyDocuments, dummyInterns } from '../../../common/utils/mockAuth.js';
+
+const sidePanels = [
+  { key: 'profile', label: 'Profile', icon: UserRound },
+  { key: 'attendance', label: 'Attendance', icon: CalendarDays },
+  { key: 'tasks', label: 'Tasks', icon: ClipboardList },
+  { key: 'evaluation', label: 'Evaluation', icon: Trophy },
+];
+
+const profileTabs = [
+  { key: 'personal', label: 'Personal Information', icon: UserRound },
+  { key: 'documents', label: 'Documents', icon: FileText },
+];
 
 export default function InternDetailPage() {
+  const navigate = useNavigate();
   const { internId } = useParams();
+
   const [activeTab, setActiveTab] = useState('personal');
   const [activePanel, setActivePanel] = useState('profile');
-
-  const [interns, setInterns] = useState(dummyInterns);
-  const [documents, setDocuments] = useState(dummyDocuments);
-  const [attendanceData, setAttendanceData] = useState(dummyAttendanceData);
+  const [interns] = useState(dummyInterns);
+  const [documents] = useState(dummyDocuments);
+  const [attendanceData] = useState(dummyAttendanceData);
   const [intern, setIntern] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Commented out API call for interns
-  // useEffect(() => {
-  //   fetch('/api/interns')
-  //     .then(res => res.json())
-  //     .then(data => setInterns(data))
-  //     .catch(err => console.error('Error fetching interns:', err));
-  // }, []);
-
-  // Commented out API call for documents
-  // useEffect(() => {
-  //   fetch('/api/documents')
-  //     .then(res => res.json())
-  //     .then(data => setDocuments(data))
-  //     .catch(err => console.error('Error fetching documents:', err));
-  // }, []);
-
-  // Commented out API call for attendance
-  // useEffect(() => {
-  //   fetch('/api/attendance')
-  //     .then(res => res.json())
-  //     .then(data => setAttendanceData(data))
-  //     .catch(err => console.error('Error fetching attendance:', err));
-  // }, []);
-
-  // Fetch intern data based on ID
   useEffect(() => {
-    if (internId && interns.length > 0) {
-      const foundIntern = interns.find((i) => String(i.id) === String(internId));
+    if (internId) {
+      const foundIntern = interns.find((item) => String(item.id) === String(internId));
       setIntern(foundIntern || null);
       setLoading(false);
     }
   }, [internId, interns]);
+
+  const handleBackToInternManagement = () => {
+    navigate('/hr-admin/internmanagement');
+  };
 
   if (loading) {
     return (
@@ -59,201 +51,197 @@ export default function InternDetailPage() {
     return (
       <div className="p-6">
         <h1 className="text-2xl font-semibold text-slate-900">Intern Not Found</h1>
-        <p className="text-sm text-slate-500 mt-2">The intern with ID <strong>{internId}</strong> does not exist in the database.</p>
-        <p className="text-xs text-slate-400 mt-4">Available IDs: {interns.map(i => i.id).join(', ')}</p>
+        <p className="mt-2 text-sm text-slate-500">
+          The intern with ID <strong>{internId}</strong> does not exist.
+        </p>
       </div>
     );
   }
 
+  const personalFields = [
+    { label: 'First Name', value: intern.firstName || intern.name?.split(' ')[0] || '-' },
+    { label: 'Last Name', value: intern.lastName || intern.name?.split(' ').slice(1).join(' ') || '-' },
+    { label: 'Mobile Number', value: intern.mobileNumber || '-' },
+    { label: 'Email Address', value: intern.emailAddress || intern.email || '-' },
+    { label: 'Date of Birth', value: intern.dateOfBirth || '-' },
+    { label: 'Marital Status', value: intern.maritalStatus || 'Single' },
+    { label: 'Gender', value: intern.gender || '-' },
+    { label: 'Nationality', value: intern.nationality || 'Filipino' },
+    { label: 'Address', value: intern.address || '-' },
+    { label: 'City', value: intern.city || '-' },
+    { label: 'Zip Code', value: intern.zipCode || '-' },
+    { label: 'University', value: intern.university || '-' },
+  ];
+
   return (
-    <div className="p-6">
-      <div className="flex items-center gap-2 text-sm text-gray-600 mb-6">
-        <span>Operation</span>
-        <ChevronRight size={16} />
-        <span className="text-gray-900 font-medium">{intern.name}</span>
-        <ChevronRight size={16} />
-        <span>Profile</span>
+    <div className="space-y-5">
+      <button
+              onClick={handleBackToInternManagement}
+              className="inline-flex w-fit items-center gap-2 text-sm font-medium text-slate-500 transition hover:text-slate-700"
+            >
+              <ChevronLeft size={16} />
+              Back to Intern Management
+            </button>
+      <div>
+        <h1 className="text-2xl font-semibold text-slate-900">{intern.name}</h1>
+        <p className="text-sm text-slate-500">Intern Management &gt; {intern.name}</p>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-        <div className="px-6 py-5 border-b border-gray-200 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">Avatar</div>
+      <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="mb-5 flex items-start justify-between gap-4 border-b border-slate-100 pb-5">
+          <div className="flex gap-4">
+            <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-100 via-rose-100 to-violet-100 text-2xl font-semibold text-slate-700">
+              {intern.name.charAt(0)}
+            </div>
             <div>
-              <h1 className="text-2xl font-bold">{intern.name}</h1>
-              <p className="text-gray-600 flex items-center gap-2">
-                <span>✉</span>
-                {intern.email || intern.emailAddress}
-              </p>
+              <h2 className="text-[28px] font-semibold leading-tight text-slate-900">{intern.name}</h2>
+              <p className="mt-1 text-sm text-slate-500">Intern</p>
+              <p className="mt-1 text-sm text-slate-500">{intern.emailAddress || intern.email}</p>
             </div>
           </div>
-          <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 flex items-center gap-2">
-            <span>✎</span>
+
+          <button className="inline-flex h-11 items-center gap-2 rounded-2xl bg-indigo-600 px-5 text-sm font-medium text-white transition hover:bg-indigo-700">
+            <Pencil size={15} />
             Edit Profile
           </button>
         </div>
-        <div className="flex">
-          <aside className="w-64 border-r border-gray-200 p-4 bg-gray-50">
+
+        <div className="grid gap-4 xl:grid-cols-[120px_minmax(0,1fr)]">
+          <aside className="rounded-2xl border border-slate-200 bg-white p-2 w-40">
             <nav className="space-y-2">
-              {[
-                { key: 'profile', label: 'Profile' },
-                { key: 'attendance', label: 'Attendance' },
-                { key: 'tasks', label: 'Tasks' },
-                { key: 'evaluation', label: 'Evaluation' },
-              ].map((item) => (
-                <button
-                  key={item.key}
-                  onClick={() => setActivePanel(item.key)}
-                  className={`w-full text-left px-3 py-2 rounded-lg ${
-                    activePanel === item.key
-                      ? 'bg-white text-gray-900 font-semibold shadow-sm'
-                      : 'text-gray-600 hover:bg-white hover:text-gray-900'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
+              {sidePanels.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    key={item.key}
+                    type="button"
+                    onClick={() => setActivePanel(item.key)}
+                    className={`flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition ${
+                      activePanel === item.key
+                        ? 'bg-indigo-600 text-white'
+                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                    }`}
+                  >
+                    <Icon size={15} />
+                    {item.label}
+                  </button>
+                );
+              })}
             </nav>
           </aside>
 
-          {activePanel === 'profile' && (
-            <section className="flex-1 p-6">
-              <div className="flex gap-6 border-b border-gray-200 pb-4">
-                <button
-                  onClick={() => setActiveTab('personal')}
-                  className={`pb-2 font-medium ${
-                    activeTab === 'personal'
-                      ? 'border-b-2 border-gray-900 text-gray-900'
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`}
-                >
-                  Personal Information
-                </button>
-                <button
-                  onClick={() => setActiveTab('documents')}
-                  className={`pb-2 font-medium ${
-                    activeTab === 'documents'
-                      ? 'border-b-2 border-gray-900 text-gray-900'
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`}
-                >
-                  Documents
-                </button>
-              </div>
+          <div className="marginLeft rounded-2xl border border-slate-200 bg-white p-5"  style={{marginLeft: '30px'}}>
+            {activePanel === 'profile' && (
+              <>
+                <div className="mb-5 flex gap-6 border-b border-slate-100">
+                  {profileTabs.map((tab) => {
+                    const Icon = tab.icon;
+                    return (
+                      <button
+                        key={tab.key}
+                        type="button"
+                        onClick={() => setActiveTab(tab.key)}
+                        className={`inline-flex items-center gap-2 border-b-2 pb-3 text-sm font-semibold transition ${
+                          activeTab === tab.key
+                            ? 'border-indigo-500 text-indigo-600'
+                            : 'border-transparent text-slate-600 hover:text-slate-900'
+                        }`}
+                      >
+                        <Icon size={15} />
+                        {tab.label}
+                      </button>
+                    );
+                  })}
+                </div>
 
-              <div className="mt-6">
-                {activeTab === 'personal' && (
-                  <div className="grid grid-cols-2 gap-5">
-                    {[
-                      { label: 'First Name', value: intern.firstName },
-                      { label: 'Last Name', value: intern.lastName },
-                      { label: 'Mobile Number', value: intern.mobileNumber },
-                      { label: 'Email Address', value: intern.emailAddress },
-                      { label: 'Date of Birth', value: intern.dateOfBirth },
-                      { label: 'Gender', value: intern.gender },
-                      { label: 'University', value: intern.university },
-                      { label: 'Program', value: intern.program },
-                      { label: 'OJT Hours', value: intern.ojtHours },
-                      { label: 'Address', value: intern.address },
-                      { label: 'City', value: intern.city },
-                      { label: 'Zip Code', value: intern.zipCode },
-                    ].map((field) => (
-                      <div key={field.label}>
-                        <label className="block text-sm text-gray-600 mb-1">{field.label}</label>
-                        <p className="text-gray-900">{field.value || '-'}</p>
+                {activeTab === 'personal' ? (
+                  <div className="grid gap-x-10 gap-y-5 sm:grid-cols-2">
+                    {personalFields.map((field) => (
+                      <div key={field.label} className="border-b border-slate-100 pb-3">
+                        <p className="mb-1 text-xs text-slate-400">{field.label}</p>
+                        <p className="text-sm font-medium text-slate-800">{field.value}</p>
                       </div>
                     ))}
                   </div>
-                )}
-
-                {activeTab === 'documents' && (
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-2">
-                    {documents && documents.length > 0 ? (
+                ) : (
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {documents.length > 0 ? (
                       documents.map((doc) => (
-                        <div key={doc.id} className="border border-gray-200 rounded-lg p-3 flex justify-between items-center bg-white">
-                          <div>
-                            <p className="font-medium text-gray-900">{doc.title}</p>
-                            <p className="text-xs text-gray-500">Uploaded: {doc.uploaded}</p>
+                        <div key={doc.id} className="flex items-center justify-between rounded-xl border border-slate-200 p-3">
+                          <div className="min-w-0">
+                            <p className="truncate text-sm font-medium text-slate-900">{doc.title}</p>
+                            <p className="text-xs text-slate-500">Uploaded: {doc.uploaded}</p>
                           </div>
                           <div className="flex items-center gap-2">
-                            <button className="p-1 rounded hover:bg-gray-100" title="Preview">
-                              <Eye size={16} className="text-gray-600" />
+                            <button type="button" className="rounded-lg p-2 transition hover:bg-slate-100" title="Preview">
+                              <Eye size={16} className="text-slate-600" />
                             </button>
-                            <button className="p-1 rounded hover:bg-gray-100" title="Download">
-                              <Download size={16} className="text-gray-600" />
+                            <button type="button" className="rounded-lg p-2 transition hover:bg-slate-100" title="Download">
+                              <Download size={16} className="text-slate-600" />
                             </button>
                           </div>
                         </div>
                       ))
                     ) : (
-                      <p className="text-gray-500">No documents available</p>
+                      <p className="text-sm text-slate-500">No documents available.</p>
                     )}
                   </div>
                 )}
-              </div>
-            </section>
-          )}
+              </>
+            )}
 
-          {activePanel === 'attendance' && (
-            <section className="flex-1 p-6">
-              <h2 className="text-lg font-semibold mb-4">Attendance Record</h2>
-              <div className="overflow-x-auto rounded-lg border border-gray-200">
-                <table className="min-w-full text-left text-sm">
-                  <thead className="bg-gray-50 border-b border-gray-200">
-                    <tr>
-                      <th className="px-4 py-3 font-semibold text-gray-700">Date</th>
-                      <th className="px-4 py-3 font-semibold text-gray-700">Check In</th>
-                      <th className="px-4 py-3 font-semibold text-gray-700">Check Out</th>
-                      <th className="px-4 py-3 font-semibold text-gray-700">Break</th>
-                      <th className="px-4 py-3 font-semibold text-gray-700">Working Hours</th>
-                      <th className="px-4 py-3 font-semibold text-gray-700">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {attendanceData && attendanceData.length > 0 ? (
-                      attendanceData.map((row, idx) => (
-                        <tr key={idx} className="border-t border-gray-100 hover:bg-gray-50">
-                          <td className="px-4 py-3 text-gray-800">{row.date}</td>
-                          <td className="px-4 py-3 text-gray-800">{row.checkIn}</td>
-                          <td className="px-4 py-3 text-gray-800">{row.checkOut}</td>
-                          <td className="px-4 py-3 text-gray-800">{row.break}</td>
-                          <td className="px-4 py-3 text-gray-800">{row.total}</td>
+            {activePanel === 'attendance' && (
+              <div>
+                <h3 className="mb-4 text-lg font-semibold text-slate-900">Attendance</h3>
+                <div className="overflow-x-auto rounded-2xl border border-slate-200">
+                  <table className="min-w-full text-left text-sm">
+                    <thead className="bg-slate-50 text-slate-500">
+                      <tr>
+                        <th className="border-b border-slate-200 px-4 py-3 font-medium">Date</th>
+                        <th className="border-b border-slate-200 px-4 py-3 font-medium">Check In</th>
+                        <th className="border-b border-slate-200 px-4 py-3 font-medium">Check Out</th>
+                        <th className="border-b border-slate-200 px-4 py-3 font-medium">Break</th>
+                        <th className="border-b border-slate-200 px-4 py-3 font-medium">Working Hours</th>
+                        <th className="border-b border-slate-200 px-4 py-3 font-medium">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {attendanceData.map((row, index) => (
+                        <tr key={index} className="border-b border-slate-100 text-slate-700">
+                          <td className="px-4 py-3">{row.date}</td>
+                          <td className="px-4 py-3">{row.checkIn}</td>
+                          <td className="px-4 py-3">{row.checkOut}</td>
+                          <td className="px-4 py-3">{row.break}</td>
+                          <td className="px-4 py-3">{row.total}</td>
                           <td className="px-4 py-3">
-                            <span className={`inline-block px-2 py-1 rounded text-xs font-medium ${
-                              row.status === 'On Time' ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800'
-                            }`}>
+                            <span className="rounded-md bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-500">
                               {row.status}
                             </span>
                           </td>
                         </tr>
-                      ))
-                    ) : (
-                      <tr><td colSpan="6" className="px-4 py-3 text-center text-gray-500">No attendance data available</td></tr>
-                    )}
-                  </tbody>
-                </table>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
-              <button className="mt-4 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
-                View Monthly DTR
-              </button>
-            </section>
-          )}
+            )}
 
-          {activePanel === 'tasks' && (
-            <section className="flex-1 p-6">
-              <h2 className="text-lg font-semibold mb-4">Tasks</h2>
-              <p className="text-gray-600">Tasks section - Coming soon</p>
-            </section>
-          )}
+            {activePanel === 'tasks' && (
+              <div>
+                <h3 className="mb-2 text-lg font-semibold text-slate-900">Tasks</h3>
+                <p className="text-sm text-slate-500">Tasks section - Coming soon</p>
+              </div>
+            )}
 
-          {activePanel === 'evaluation' && (
-            <section className="flex-1 p-6">
-              <h2 className="text-lg font-semibold mb-4">Evaluation</h2>
-              <p className="text-gray-600">Evaluation section - Coming soon</p>
-            </section>
-          )}
+            {activePanel === 'evaluation' && (
+              <div>
+                <h3 className="mb-2 text-lg font-semibold text-slate-900">Evaluation</h3>
+                <p className="text-sm text-slate-500">Evaluation section - Coming soon</p>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
