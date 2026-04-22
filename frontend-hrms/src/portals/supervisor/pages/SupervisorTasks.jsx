@@ -1,7 +1,9 @@
-import { PencilLine, Trash2, SlidersHorizontal, Search, CirclePlus } from "lucide-react"
+import { SlidersHorizontal, Search, CirclePlus } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import CreateTaskForm from "../components/CreateTaskForm";
+import TaskActionsCell from "../components/ui/TaskActionsCell"
+
 
 export default function SupervisorTasks() {
   const [isOpen, setIsOpen] = useState(false);
@@ -105,11 +107,7 @@ export default function SupervisorTasks() {
                 </div>
                 )}
               </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
+              <TaskActionsCell rowData={tableData} />
             </tr>
             ))}
           </tbody>
