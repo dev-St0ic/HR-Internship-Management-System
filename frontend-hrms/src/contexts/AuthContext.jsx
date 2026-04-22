@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
+import { authAPI } from '../services/api';
 
 // 1. Create the Context
 const AuthContext = createContext();
@@ -7,37 +8,74 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     // Check for a logged-in user when the app first loads
     useEffect(() => {
-        const userId = localStorage.getItem("current_logged_in_user");
-        const db = JSON.parse(localStorage.getItem("hrims_users_db") || "{}");
-        
-        if (userId && db[userId]) {
-            setCurrentUser(db[userId]);
-        }
-        setLoading(false); // Finished checking
+        const checkAuth = async () => {
+            const token = localStorage.getItem('auth_token');
+            if (token) {
+                try {
+                    const response = await authAPI.getCurrentUser();
+                    setCurrentUser(response.data.user);
+                } catch (err) {
+                    console.error('Auth check failed:', err);
+                    localStorage.removeItem('auth_token');
+                }
+            }
+            setLoading(false);
+        };
+
+        checkAuth();
     }, []);
 
     // Global Login Function
-    const login = (userId) => {
-        const db = JSON.parse(localStorage.getItem("hrims_users_db") || "{}");
-        if (db[userId]) {
-            localStorage.setItem("current_logged_in_user", userId);
-            setCurrentUser(db[userId]); // Update global state
-            return db[userId]; // Return the user so the form can route them
+    const login = async (email, password) => {
+        try {
+            setError(null);
+            const response = await authAPI.login(email, password);
+            const { token, user } = response.data;
+            
+            localStorage.setItem('auth_token', token);
+            setCurrentUser(user);
+            return user;
+        } catch (err) {
+            const errorMsg = err.response?.data?.message || 'Login failed';
+            setError(errorMsg);
+            throw err;
         }
-        return null;
+    };
+
+    // Global Register Function
+    const register = async (userData) => {
+        try {
+            setError(null);
+            const response = await authAPI.register(userData);
+            const { token, user } = response.data;
+            
+            localStorage.setItem('auth_token', token);
+            setCurrentUser(user);
+            return user;
+        } catch (err) {
+            const errorMsg = err.response?.data?.message || 'Registration failed';
+            setError(errorMsg);
+            throw err;
+        }
     };
 
     // Global Logout Function
-    const logout = () => {
-        localStorage.removeItem("current_logged_in_user");
-        setCurrentUser(null); // Clear global state
+    const logout = async () => {
+        try {
+            await authAPI.logout();
+        } catch (err) {
+            console.error('Logout error:', err);
+        }
+        localStorage.removeItem('auth_token');
+        setCurrentUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ currentUser, login, logout }}>
+        <AuthContext.Provider value={{ currentUser, login, register, logout, loading, error }}>
             {!loading && children}
         </AuthContext.Provider>
     );
