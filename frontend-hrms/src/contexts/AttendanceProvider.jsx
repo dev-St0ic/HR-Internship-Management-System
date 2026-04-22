@@ -1,9 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { AttendanceContext } from "./AttendanceContext";
+import { useAuth } from "../contexts/AuthContext";
 
 export const AttendanceProvider = ({ children }) => {
-  const [records, setRecords] = useState([]);
+  const { currentUser } = useAuth();
+
+  const [attendanceDB, setAttendanceDB] = useState({});
+
+  //This will load from local storage
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("attendance_db") || "{}");
+    setAttendanceDB(stored);
+  }, []);
+
+  //This will save to local storage
+  // TODO: Replace localStorage attendance_db with backend API
+  // Suggested endpoints:
+  // GET /attendance/:userId
+  // POST /attendance/time-in
+  // POST /attendance/time-out
+  const updateDB = (newDB) => {
+    setAttendanceDB(newDB);
+    localStorage.setItem("attendance_db", JSON.stringify(newDB));
+  };
+
+  //This will get the records of the current user
+  const records = attendanceDB[currentUser?.id] || [];
 
   const WORK_START = 9; // 9 AM
   const LATE_LIMIT = 9 * 60 + 20; // 9:20 AM in minutes
@@ -19,6 +42,8 @@ export const AttendanceProvider = ({ children }) => {
   const getTodayRecord = () => records.find((rec) => rec.date === getToday());
 
   const timeIn = () => {
+    if (!currentUser) return;
+
     const now = dayjs();
     const minutesNow = now.hour() * 60 + now.minute();
 
@@ -35,54 +60,67 @@ export const AttendanceProvider = ({ children }) => {
 
     const isLate = minutesNow > LATE_LIMIT;
 
-    setRecords((prev) => [
-      ...prev,
-      {
-        date: getToday(),
-        timeIn: now.format("hh:mm A"),
-        timeInRaw: now, // Store the raw dayjs object for later calculations
-        timeOut: null,
-        workinghours: null,
-        status: isLate ? "Late" : "On Time",
-      },
-    ]);
+    const newRecord = {
+      date: getToday(),
+      timeIn: now.format("hh:mm A"),
+      timeInRaw: now,
+      timeOut: null,
+      workinghours: null,
+      status: isLate ? "Late" : "On Time",
+    };
+
+    // TODO: Replace with API call
+    // Example:
+    // await fetch("/attendance/time-in", { method: "POST", body: {...} })
+    const update = {
+      ...attendanceDB,
+      [currentUser.id]: [...records, newRecord],
+    };
+
+    updateDB(update);
   };
 
   const timeOut = () => {
+    if (!currentUser) return;
+
     const now = dayjs();
     const minutesNow = now.hour() * 60 + now.minute();
 
     const todayRecord = getTodayRecord();
     if (!todayRecord) {
-      alert("You haven't timed in today!");
-      return;
+      return alert("You haven't timed in today!");
     }
 
     if (todayRecord.timeOut) {
-      alert("You have already timed out today!");
-      return;
+      return alert("You have already timed out today!");
     }
 
     if (minutesNow > MAX_TIME_OUT) {
-      alert("Too late to clock out!");
-      return;
+      return alert("Too late to clock out!");
     }
 
-    setRecords((prev) =>
-      prev.map((rec) => {
-        if (rec.date === getToday()) {
-          const workedHours =
-            now.diff(rec.timeInRaw, "hour", true) - BREAK_TIME;
+    // TODO: Replace with API call
+    // Example:
+    // await fetch("/attendance/time-out", { method: "POST", body: {...} })
+    const updateRecords = records.map((rec) => {
+      if (rec.date === getToday()) {
+        const workedHours = now.diff(rec.timeInRaw, "hour", true) - BREAK_TIME;
 
-          return {
-            ...rec,
-            timeOut: now.format("hh:mm A"),
-            workinghours: workedHours > 0 ? workedHours.toFixed(2) : 0,
-          };
-        }
-        return rec;
-      }),
-    );
+        return {
+          ...rec,
+          timeOut: now.format("hh:mm A"),
+          workinghours: workedHours > 0 ? workedHours.toFixed(2) : 0,
+        };
+      }
+      return rec;
+    });
+
+    const updated = {
+      ...attendanceDB,
+      [currentUser.id]: updateRecords,
+    };
+
+    updateDB(updated);
   };
 
   // To check if Absent
@@ -91,8 +129,15 @@ export const AttendanceProvider = ({ children }) => {
     return rec.status;
   };
 
+  //This will get the records for HR view
+  const getRecordsByUser = (userId) => {
+    return attendanceDB[userId] || [];
+  };
+
   return (
-    <AttendanceContext.Provider value={{ records, timeIn, timeOut, getStatus }}>
+    <AttendanceContext.Provider
+      value={{ records, timeIn, timeOut, getStatus, getRecordsByUser }}
+    >
       {children}
     </AttendanceContext.Provider>
   );
