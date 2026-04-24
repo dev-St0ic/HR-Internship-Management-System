@@ -26,8 +26,10 @@ export default function AttendanceTableOnly({ records = [], getStatus }) {
                 <td className="px-4 py-3">{rec.timeIn}</td>
                 <td className="px-4 py-3">{rec.timeOut || "-"}</td>
                 <td className="px-4 py-3">1 hr</td>
-                <td className="px-4 py-3">
-                  {rec.workingHours ? `${rec.workingHours}hrs` : "-"}
+                <td className="px-4 py-3 text-left">
+                  {rec.workinghours !== null && rec.workinghours !== undefined
+                    ? `${rec.workinghours} hrs`
+                    : "-"}
                 </td>
                 <td className="px-4 py-3">
                   <span

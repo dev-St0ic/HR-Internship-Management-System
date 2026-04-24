@@ -8,7 +8,7 @@ export default function PersonalInformation({
   const canEdit = mode === "intern";
 
   return (
-    <div>
+    <div className="mt-6">
       <div className="grid grid-cols-2 gap-6 text-sm">
         {Object.entries(user?.personal || {}).map(([key, value]) => {
           const isEditable = editableFields.includes(key);
