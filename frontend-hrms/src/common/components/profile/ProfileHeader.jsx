@@ -33,7 +33,7 @@ export default function ProfileHeader({
       {isIntern && activeTab === "personal" ? (
         <button
           onClick={onEditClick}
-          className="flex items-center gap-2 px-4 py-2 text-sm bg-purple-500 text-white rounded-lg hover:text-purple-500 hover:bg-white transition"
+          className="flex items-center gap-2 px-4 py-2 text-sm bg-primary text-white rounded-lg hover:text-purple-500 hover:bg-primary-hover transition"
         >
           <PenLine size={14} />
           {isEditing ? "Save changes" : "Edit Profile"}
@@ -41,7 +41,7 @@ export default function ProfileHeader({
       ) : (
         <button
           onClick={onBackClick}
-          className="flex items-center gap-2 px-4 py-2 text-sm bg-[#120071] text-white font-semibold border border-gray-200 rounded-lg hover:bg-gray-100 transition"
+          className="flex items-center gap-2 px-4 py-2 text-sm bg-primary text-white font-semibold border border-gray-200 rounded-lg hover:bg-primary-hover transition"
         >
           <CornerDownLeft size={16} />
           Return

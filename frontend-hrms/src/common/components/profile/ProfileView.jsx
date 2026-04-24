@@ -7,6 +7,7 @@ import SchoolInformation from "./SchoolInformation";
 import Documents from "./Documents";
 import AttendanceSection from "./sections/AttendanceSection";
 import EvaluationSection from "./sections/EvaluationSection";
+import TasksSection from "./sections/TasksSection";
 import { useNavigate } from "react-router-dom";
 
 export default function ProfileView({ user, mode }) {
@@ -161,17 +162,19 @@ export default function ProfileView({ user, mode }) {
           )}
 
           {activeSection === "attendance" && (
-            <div className="p-4 bg-gray-50 rounded-lg">
+            <div className="p-4">
               <AttendanceSection user={user} mode={mode} />
             </div>
           )}
 
           {activeSection === "tasks" && (
-            <div className="p-4 bg-gray-50 rounded-lg">Task Content</div>
+            <div className="p-4">
+              <TasksSection user={displayUser} />
+            </div>
           )}
 
           {activeSection === "evaluation" && (
-            <div className="p-4 bg-gray-50 rounded-lg">
+            <div className="p-4">
               <EvaluationSection user={displayUser} />
             </div>
           )}

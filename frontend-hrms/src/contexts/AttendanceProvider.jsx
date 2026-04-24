@@ -44,7 +44,7 @@ export const AttendanceProvider = ({ children }) => {
   const timeIn = () => {
     if (!currentUser) return;
 
-    const now = dayjs();
+    const now = dayjs().startOf("minute");
     const minutesNow = now.hour() * 60 + now.minute();
 
     const existing = getTodayRecord();
@@ -63,7 +63,7 @@ export const AttendanceProvider = ({ children }) => {
     const newRecord = {
       date: getToday(),
       timeIn: now.format("hh:mm A"),
-      timeInRaw: now,
+      timeInRaw: now.toISOString(),
       timeOut: null,
       workinghours: null,
       status: isLate ? "Late" : "On Time",
@@ -83,7 +83,7 @@ export const AttendanceProvider = ({ children }) => {
   const timeOut = () => {
     if (!currentUser) return;
 
-    const now = dayjs();
+    const now = dayjs().startOf("minute");
     const minutesNow = now.hour() * 60 + now.minute();
 
     const todayRecord = getTodayRecord();
@@ -104,17 +104,26 @@ export const AttendanceProvider = ({ children }) => {
     // await fetch("/attendance/time-out", { method: "POST", body: {...} })
     const updateRecords = records.map((rec) => {
       if (rec.date === getToday()) {
-        const workedHours = now.diff(rec.timeInRaw, "hour", true) - BREAK_TIME;
+        const parsedTimeIn = dayjs(rec.timeInRaw).startOf("minute");
+
+        //Work in minutes
+        const workedMinutes =
+          now.diff(parsedTimeIn, "minute") - BREAK_TIME * 60;
+
+        //Convert to Hours
+        const workedHours = workedMinutes / 60;
 
         return {
           ...rec,
           timeOut: now.format("hh:mm A"),
-          workinghours: workedHours > 0 ? workedHours.toFixed(2) : 0,
+          workinghours: workedHours > 0 ? workedHours.toFixed(2) : "0.00",
         };
       }
       return rec;
     });
 
+    // TODO: Replace local update with backend API call
+    // POST /attendance/time-out
     const updated = {
       ...attendanceDB,
       [currentUser.id]: updateRecords,
