@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
-import { Eye, Trash } from "lucide-react";
+import { Trash } from "lucide-react";
 
 import SearchInput from "../ui/SearchInput";
 
@@ -28,10 +28,17 @@ export default function MyInternsPage() {
   useEffect(() => {
     const db = JSON.parse(localStorage.getItem("hrims_users_db") || "{}");
 
-    const interns = Object.values(db).filter((user) => user.role === "INTERN");
+    let interns = Object.values(db).filter((user) => user.role === "INTERN");
+
+    //For supervisor only. To see the interns under this supervisor
+    if (currentUser?.role === "SUPERVISOR") {
+      interns = interns.filter(
+        (intern) => intern.supervisorId === currentUser.id,
+      );
+    }
 
     setInternList(interns);
-  }, []);
+  }, [currentUser]);
 
   //For filter function
   const filteredInterns = internList.filter(

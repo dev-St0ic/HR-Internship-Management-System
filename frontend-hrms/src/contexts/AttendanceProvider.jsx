@@ -95,9 +95,9 @@ export const AttendanceProvider = ({ children }) => {
       return alert("You have already timed out today!");
     }
 
-    if (minutesNow > MAX_TIME_OUT) {
-      return alert("Too late to clock out!");
-    }
+    //if (minutesNow > MAX_TIME_OUT) {
+    // return alert("Too late to clock out!");
+    //}
 
     // TODO: Replace with API call
     // Example:
