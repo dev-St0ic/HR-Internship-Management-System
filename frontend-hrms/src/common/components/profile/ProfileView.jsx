@@ -151,8 +151,8 @@ export default function ProfileView({ user, mode }) {
                     onChange={handleChange}
                   />
                 )}
-                {activeTab === "school" && mode === "intern" && (
-                  <SchoolInformation user={displayUser} />
+                {activeTab === "school" && normalizedMode === "intern" && (
+                  <SchoolInformation user={displayUser} mode={mode} />
                 )}
                 {activeTab === "documents" && (
                   <Documents user={displayUser} mode={mode} />
