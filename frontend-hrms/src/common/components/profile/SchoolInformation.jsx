@@ -14,9 +14,9 @@ export default function SchoolInformation({ user }) {
   return (
     <div className="grid grid-cols-2 gap-x-12 gap-y-6 text-sm">
       {fields.map((field) => (
-        <div key={field}>
+        <div key={field.key}>
           <p className="text-gray-400 mb-1">{field.label}</p>
-          <p className="border-b border-gray-200 pb-1">
+          <p className="text-base border-b border-gray-200 pb-1">
             {school[field.key] || "-"}
           </p>
         </div>

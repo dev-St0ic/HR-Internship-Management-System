@@ -15,7 +15,7 @@ export default function Documents({ user, mode }) {
               key={index}
               className="flex justify-between items-center border border-gray-200 px-4 py-3 rounded-lg"
             >
-              <span className="text-sm truncate max-w-30">{file}</span>
+              <span className="text-base truncate max-w-30">{file}</span>
 
               <div className="flex gap-2">
                 <button className="p-1 hover:bg-gray-100 rounded">
