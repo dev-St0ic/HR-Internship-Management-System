@@ -1,3 +1,5 @@
+import Myrecruitmentpage from "../../../common/components/my-recruitment/Myrecruitmentpage";
+
 export default function AdminRecruitmentPage() {
-  return <h1>Recruitment Page</h1>;
+  return <Myrecruitmentpage />;
 }

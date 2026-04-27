@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "../../../contexts/AuthContext";
 import {
   Search, SlidersHorizontal, User, FileText,
-  Briefcase, X, Building2, GraduationCap
+  Briefcase, X, Building2, GraduationCap, Eye
 } from "lucide-react";
 
 export default function Myrecruitmentpage() {
+  const { currentUser } = useAuth();
+  const isAdmin = currentUser?.role === "ADMIN";
+
   const [tab, setTab] = useState("Application");
+  const [sideTab, setSideTab] = useState("Information");
   const [selId, setSelId] = useState(null);
   const [search, setSearch] = useState("");
   const [f, setF] = useState({ 
@@ -18,6 +23,7 @@ export default function Myrecruitmentpage() {
     setApps(Object.values(db).filter(u => u.role === "INTERN").map(u => ({
       ...u, prog: u.course || "Program", uni: u.university || "University",
       date: u.duration?.split(" - ")[0] || "Date", hrs: u.hours || "200 hrs",
+      year: u.year || "4th Year", dept: u.department || "Department",
       status: "Pending",
     })));
   }, []);
@@ -121,7 +127,11 @@ export default function Myrecruitmentpage() {
 
           {/* Tabs */}
           <div className="flex border-b border-gray-100 mb-4">
-            {[{ id: "Application", i: <User size={16} /> }, { id: "For Admin Approval", i: <FileText size={16} /> }, { id: "Partner University", i: <Briefcase size={16} /> }].map(t => (
+            {[{ id: "Application", i: <User size={16} /> }, 
+              { id: "For Admin Approval", i: <FileText size={16} /> }, 
+              { id: "Partner University", i: <Briefcase size={16} /> }]
+              .filter(t => !isAdmin || t.id !== "For Admin Approval")
+              .map(t => (
               <button key={t.id} onClick={() => { setTab(t.id); setSelId(null); setSearch(""); }}
                 className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 
                            ${tab === t.id ? "border-violet-600 text-violet-600" : "border-transparent text-gray-500 hover:text-gray-800"}`}>
@@ -203,67 +213,135 @@ export default function Myrecruitmentpage() {
         {/* Details Right Sidebar */}
         {selApp && tab !== "Partner University" && (
           <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 w-[340px] shrink-0">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-lg font-bold text-gray-900">{selApp.name}</h2>
-              <button onClick={() => setSelId(null)} 
-                        className="p-1.5 text-gray-400 hover:bg-gray-100 rounded-lg"><X size={18} />
-            </button>
-            </div>
             
-            <div className="grid grid-cols-2 gap-y-6 gap-x-4 mb-8">
-              {[
-                { l: "First Name", v: selApp.firstName || "-" }, 
-                { l: "Last Name", v: selApp.lastName || "-" }, 
-                { l: "Program", v: selApp.prog }, 
-                { l: "OJT Hours", v: selApp.hrs }, 
-                { l: "Email", v: selApp.email }, 
-                { l: "Phone", v: selApp.phone }
-            ].map(d => (
-                <div key={d.l} className="min-w-0">
-                    <p className={lbl}>{d.l}</p>
-                    <p className="text-sm font-semibold text-gray-900 truncate" title={d.v}>{d.v}</p>
+            {isAdmin ? (
+              /* HR Admin Right SIdebar */
+              <div className="flex flex-col">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="flex gap-3 items-center">
+                    <div className="w-11 h-11 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">
+                      <User size={24} />
+                    </div>
+                    <div className="flex flex-col">
+                      <h2 className="text-[15px] font-bold text-gray-900">{selApp.name}</h2>
+                      <p className="text-[11px] text-gray-500 mb-1.5 truncate w-40">{selApp.email}</p>
+                      <div className="flex"><span className={getBadge(selApp.status)}>{selApp.status}</span></div>
+                    </div>
+                  </div>
+                  <button onClick={() => setSelId(null)} className="p-1.5 text-gray-400 hover:bg-gray-100 rounded-lg">
+                    <X size={18} />
+                  </button>
                 </div>
-              ))}
-              
-              {tab === "For Admin Approval" && (
-                <>
-                  <div className="col-span-2">
-                    <p className={lbl}>Department</p>
-                    <select className={selCls}>
-                        <option>IT</option>
-                        <option>HR</option>
-                    </select>
-                  </div>
-                  <div className="col-span-2">
-                    <p className={lbl}>Supervisor</p>
-                    <select className={selCls}>
-                        <option>Sarah (Supervisor)</option>
-                    </select>
-                  </div>
-                </>
-              )}
-            </div>
 
-            <div className="flex gap-3 justify-end pt-5 border-t border-gray-100">
-              {tab === "For Admin Approval" ? (
-                <>
-                  {selApp.status !== "Deploy" && 
-                  <button onClick={() => setStat("Deploy")} 
-                            className={`${btn} bg-violet-600 hover:bg-violet-700 text-white`}>
-                                Deploy</button>} 
-                  <button onClick={() => (selApp.status === "Deploy" ? setStat("Approved") : setSelId(null))}
-                            className={`${btn} bg-gray-100 hover:bg-gray-200 text-gray-700`}>
-                                Cancel</button>
-                </>
-              ) : (
-                <>
-                  <button onClick={() => setStat("Approved")} 
-                        className={`${btn} bg-violet-600 hover:bg-violet-700 text-white`}>Approve</button> 
+                <div className="flex border-b border-gray-100 mb-6">
+                  {["Information", "Documents"].map(t => (
+                    <button key={t} onClick={() => setSideTab(t)}
+                      className={`flex-1 pb-2.5 text-[13px] font-bold border-b-2 transition-colors 
+                                  ${sideTab === t ? "border-violet-600 text-violet-600" : "border-transparent text-gray-400 hover:text-gray-700"}`}>
+                      {t}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="mb-6">
+                  {sideTab === "Information" ? (
+                    <div className="flex flex-col gap-4">
+                      {[
+                        { l: "University", v: selApp.uni }, { l: "Program", v: selApp.prog }, 
+                        { l: "Year Level", v: selApp.year }, { l: "Required Hours", v: selApp.hrs }, 
+                        { l: "Preferred Department", v: selApp.dept }
+                      ].map(d => (
+                        <div key={d.l}>
+                          <p className={lbl}>{d.l}</p>
+                          <p className="text-[13px] font-semibold text-gray-900">{d.v}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col gap-3">
+                      {["Resume.pdf", "Endorsement Letter.pdf", "MOA.pdf"].map(d => (
+                        <div key={d} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg bg-white">
+                          <span className="text-[13px] font-semibold text-gray-700">{d}</span>
+                          <Eye size={16} className="text-gray-400 cursor-pointer hover:text-violet-600" />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex gap-3 justify-end pt-5 border-t border-gray-100">
                   <button onClick={() => setStat("Rejected")} 
-                        className={`${btn} bg-red-500 hover:bg-red-600 text-white`}>Reject</button>
-                </>
-              )}
-            </div>
+                          className={`${btn} bg-gray-50 hover:bg-red-50 text-gray-600 hover:text-red-600`}>Reject</button>
+                  <button onClick={() => setStat("Approved")} 
+                          className={`${btn} bg-violet-600 text-white hover:bg-violet-700`}>Approve</button>
+                </div>
+              </div>
+            ) : (
+              /*  HR Staff right sidebar */
+              <div className="flex flex-col">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-lg font-bold text-gray-900">{selApp.name}</h2>
+                  <button onClick={() => setSelId(null)} 
+                            className="p-1.5 text-gray-400 hover:bg-gray-100 rounded-lg"><X size={18} />
+                </button>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-y-6 gap-x-4 mb-8">
+                  {[
+                    { l: "First Name", v: selApp.firstName || "-" }, 
+                    { l: "Last Name", v: selApp.lastName || "-" }, 
+                    { l: "Program", v: selApp.prog }, 
+                    { l: "OJT Hours", v: selApp.hrs }, 
+                    { l: "Email", v: selApp.email }, 
+                    { l: "Phone", v: selApp.phone }
+                ].map(d => (
+                    <div key={d.l} className="min-w-0">
+                        <p className={lbl}>{d.l}</p>
+                        <p className="text-sm font-semibold text-gray-900 truncate" title={d.v}>{d.v}</p>
+                    </div>
+                  ))}
+                  
+                  {tab === "For Admin Approval" && (
+                    <>
+                      <div className="col-span-2">
+                        <p className={lbl}>Department</p>
+                        <select className={selCls}>
+                            <option>IT</option>
+                            <option>HR</option>
+                        </select>
+                      </div>
+                      <div className="col-span-2">
+                        <p className={lbl}>Supervisor</p>
+                        <select className={selCls}>
+                            <option>Sarah (Supervisor)</option>
+                        </select>
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                <div className="flex gap-3 justify-end pt-5 border-t border-gray-100">
+                  {tab === "For Admin Approval" ? (
+                    <>
+                      {selApp.status !== "Deploy" && 
+                      <button onClick={() => setStat("Deploy")} 
+                                className={`${btn} bg-violet-600 hover:bg-violet-700 text-white`}>
+                                    Deploy</button>} 
+                      <button onClick={() => (selApp.status === "Deploy" ? setStat("Approved") : setSelId(null))}
+                                className={`${btn} bg-gray-100 hover:bg-gray-200 text-gray-700`}>
+                                    Cancel</button>
+                    </>
+                  ) : (
+                    <>
+                      <button onClick={() => setStat("Approved")} 
+                            className={`${btn} bg-violet-600 hover:bg-violet-700 text-white`}>Approve</button> 
+                      <button onClick={() => setStat("Rejected")} 
+                            className={`${btn} bg-red-500 hover:bg-red-600 text-white`}>Reject</button>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         )}
         
