@@ -3,7 +3,7 @@ import { LogOut, ChevronUp, ChevronDown } from "lucide-react";
 import { useAuth } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-export default function SidebarProfile() {
+export default function SidebarProfile({ isCollapsed }) {
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -43,34 +43,47 @@ export default function SidebarProfile() {
             className={logoutBtnStyle}
           >
             <LogOut size={18} />
-            <span>Logout</span>
+            {!isCollapsed && <span>Logout</span>}
           </button>
         </div>
       )}
 
-      <div className="flex items-center justify-between w-full p-3 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors shadow-sm">
-        <div className="flex items-center gap-3 min-w-0 flex-1">
+      <div
+        className={`flex items-center w-full p-3 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors shadow-sm ${
+          isCollapsed ? "justify-center" : "justify-between"
+        }`}
+      >
+        <div
+          className={`flex items-center min-w-0 ${
+            isCollapsed ? "justify-center" : "gap-3 flex-1"
+          }`}
+        >
           <img
             src={displayAvatar}
             alt="Avatar"
-            className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+            onClick={() => setIsOpen(!isOpen)}
+            className="w-10 h-10 rounded-full object-cover flex-shrink-0 cursor-pointer"
           />
-          <div className="flex flex-col items-start min-w-0 flex-1">
-            <span className="text-sm font-semibold text-gray-900 truncate w-full">
-              {userName}
-            </span>
-            <span className="text-xs font-medium text-gray-500 mt-0.5 truncate w-full">
-              {role}
-            </span>
-          </div>
+          {!isCollapsed && (
+            <div className="flex flex-col items-start min-w-0 flex-1">
+              <span className="text-sm font-semibold text-gray-900 truncate w-full">
+                {userName}
+              </span>
+              <span className="text-xs font-medium text-gray-500 mt-0.5 truncate w-full">
+                {role}
+              </span>
+            </div>
+          )}
         </div>
 
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="p-1.5 rounded-md hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-[#7C3EFF]/50 flex-shrink-0 ml-1"
-        >
-          <ChevronIcon size={18} className="text-gray-500" />
-        </button>
+        {!isCollapsed && (
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-1.5 rounded-md hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-[#7C3EFF]/50 flex-shrink-0 ml-1"
+          >
+            <ChevronIcon size={18} className="text-gray-500" />
+          </button>
+        )}
       </div>
     </div>
   );

@@ -3,10 +3,13 @@ import Sidebar from "../layout/Sidebar";
 import Header from "../layout/Header";
 import { navigation } from "../../config/navigation";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useState } from "react";
 
 export default function LayoutTemplate({ headerConfig }) {
   const { currentUser } = useAuth();
   const location = useLocation();
+
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   if (!currentUser) {
     return <Navigate to="/login" />;
@@ -32,9 +35,15 @@ export default function LayoutTemplate({ headerConfig }) {
         links={navigation[userRole]}
         role={currentUser.role}
         userName={currentUser.name}
+        isCollapsed={isCollapsed}
+        setIsCollapsed={setIsCollapsed}
       />
 
-      <div className="ml-60 flex-1">
+      <div
+        className={`flex-1 transition-all duration-300 ${
+          isCollapsed ? "ml-24" : "ml-60"
+        }`}
+      >
         <div className="px-6 pt-3">
           <Header
             title={currentHeader.title}
