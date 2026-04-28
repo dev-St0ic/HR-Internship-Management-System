@@ -41,17 +41,16 @@ export default function LayoutTemplate({ headerConfig }) {
 
       <div
         className={`flex-1 transition-all duration-300 ${
-          isCollapsed ? "ml-24" : "ml-60"
+          isCollapsed ? "ml-32" : "ml-72"
         }`}
       >
-        <div className="px-6 pt-3">
+        <div className="px-10 pt-8"> 
           <Header
             title={currentHeader.title}
             subtitle={currentHeader.subtitle}
-            userRole={userRole}
           />
         </div>
-        <div className="px-6 py-2">
+        <div className="px-10 py-6">
           <Outlet />
         </div>
       </div>

@@ -12,24 +12,29 @@ const Sidebar = ({
   isCollapsed,
   setIsCollapsed,
 }) => {
-  const baseClass = `w-full p-3 mt-1 rounded-r-lg transition-colors duration-300 flex items-center gap-3 ${
-    isCollapsed ? "justify-center" : "gap-3"
+  const baseClass = `relative flex items-center transition-all duration-300 rounded-xl px-4 py-3 group ${
+    isCollapsed ? "justify-center" : "gap-4"
   }`;
 
   const getNavClass = ({ isActive }) =>
-    `${baseClass} ${isActive ? activeClass : inactiveClass}`;
+    `${baseClass} ${
+      isActive 
+        ? "bg-[#F3F0FF] text-[#7C3EFF] font-semibold" 
+        : "text-gray-500 hover:bg-gray-50"
+    }`;
 
   return (
-    <nav
-      className={`fixed top-0 left-0 h-screen bg-white overflow-y-auto rounded-2xl text-gray-700 shadow-lg flex flex-col justify-between transition-all duration-300
-    ${isCollapsed ? "w-24 p-4" : "w-60 p-7"}`}
-    >
-      <div>
-        {/* LOGO */}
+    <aside className={`fixed top-0 left-0 h-screen transition-all duration-300 bg-[#F8F9FA] p-4 z-40 ${
+      isCollapsed ? "w-32" : "w-72" 
+    }`}>
+      
+      <div className="bg-white h-full w-full rounded-[1.5rem] p-4 flex flex-col shadow-sm border border-gray-100 overflow-hidden">
+        
+        {/* LOGO SECTION */}
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className={`flex items-center text-4xl font-medium mb-6 w-full ${
-            isCollapsed ? "justify-center" : ""
+          className={`flex items-center mb-10 transition-all duration-300 ${
+            isCollapsed ? "justify-center" : "px-2"
           }`}
         >
           <img
@@ -37,43 +42,41 @@ const Sidebar = ({
             alt="logo"
             className="w-12 h-12 rounded-full bg-violet-500"
           />
-          {!isCollapsed && <h1 className="ml-2">HRIMS</h1>}
+          {!isCollapsed && (
+            <h1 className="ml-3 text-2xl font-bold tracking-tight text-gray-900">
+              HRIMS
+            </h1>
+          )}
         </button>
 
-        {/* NAVIGATION */}
-        <ul>
-          {links.length > 0
-            ? links.map((link) => {
-                const Icon = link.icon;
-
-                return (
-                  <li key={link.to}>
-                    <NavLink
-                      to={link.to}
-                      end={link.end}
-                      className={getNavClass}
-                    >
-                      {Icon && <Icon size={18} />}
-                      {!isCollapsed && (
-                        <span className="truncate">{link.label}</span>
+        <ul className="flex-1 space-y-1">
+          {links.map((link) => {
+            const Icon = link.icon;
+            return (
+              <li key={link.to}>
+                <NavLink to={link.to} end={link.end} className={getNavClass}>
+                  {({ isActive }) => (
+                    <>
+                      {isActive && !isCollapsed && (
+                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[4px] h-8 bg-[#7C3EFF] rounded-r-md" />
                       )}
-                    </NavLink>
-                  </li>
-                );
-              })
-            : !isCollapsed && (
-                <p className="text-sm text-gray-400">No navigation available</p>
-              )}
+                      <span className={`${isActive ? "text-[#7C3EFF]" : "text-gray-400 group-hover:text-gray-600"}`}>
+                        {Icon && <Icon size={22} />}
+                      </span>
+                      {!isCollapsed && <span className="text-[15px] whitespace-nowrap">{link.label}</span>}
+                    </>
+                  )}
+                </NavLink>
+              </li>
+            );
+          })}
         </ul>
-      </div>
 
-      {/* PROFILE ROLE */}
-      <SidebarProfile
-        userName={userName}
-        role={role}
-        isCollapsed={isCollapsed}
-      />
-    </nav>
+        <div className="mt-auto">
+          <SidebarProfile userName={userName} role={role} isCollapsed={isCollapsed} />
+        </div>
+      </div>
+    </aside>
   );
 };
 

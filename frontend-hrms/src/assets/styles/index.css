@@ -24,7 +24,7 @@
         scroll-behavior: smooth;
     }
     body {
-        @apply font-lexend bg-background text-gray-900;
+        @apply font-lexend bg-white text-gray-900;
     }
     }
 

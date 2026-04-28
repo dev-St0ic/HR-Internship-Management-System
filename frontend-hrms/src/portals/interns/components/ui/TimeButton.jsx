@@ -6,7 +6,7 @@ export default function TimeButton({
   icon: Icon,
 }) {
   const base =
-    "flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition";
+    "flex items-center justify-center gap-2 px-6 py-2 rounded-lg text-sm font-medium transition";
 
   const styles = {
     primary: "bg-purple-500 text-white hover:bg-purple-600",

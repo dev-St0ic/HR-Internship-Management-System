@@ -48,28 +48,25 @@ export default function SidebarProfile({ isCollapsed }) {
         </div>
       )}
 
-      <div
-        className={`flex items-center w-full p-3 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-colors shadow-sm ${
+<div
+        className={`flex items-center w-full p-2 rounded-2xl border border-gray-100 bg-[#F9FAFB] hover:bg-gray-50 transition-all shadow-sm ${
           isCollapsed ? "justify-center" : "justify-between"
         }`}
       >
-        <div
-          className={`flex items-center min-w-0 ${
-            isCollapsed ? "justify-center" : "gap-3 flex-1"
-          }`}
-        >
+        <div className={`flex items-center min-w-0 ${isCollapsed ? "" : "gap-3 flex-1"}`}>
           <img
             src={displayAvatar}
             alt="Avatar"
             onClick={() => setIsOpen(!isOpen)}
-            className="w-10 h-10 rounded-full object-cover flex-shrink-0 cursor-pointer"
+            className="w-10 h-10 min-w-[40px] rounded-xl object-cover flex-shrink-0 cursor-pointer border border-white shadow-sm"
           />
+          
           {!isCollapsed && (
             <div className="flex flex-col items-start min-w-0 flex-1">
-              <span className="text-sm font-semibold text-gray-900 truncate w-full">
+              <span className="text-sm font-bold text-gray-900 truncate w-full">
                 {userName}
               </span>
-              <span className="text-xs font-medium text-gray-500 mt-0.5 truncate w-full">
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider truncate w-full">
                 {role}
               </span>
             </div>
@@ -79,9 +76,9 @@ export default function SidebarProfile({ isCollapsed }) {
         {!isCollapsed && (
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-1.5 rounded-md hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-[#7C3EFF]/50 flex-shrink-0 ml-1"
+            className="p-1 rounded-md hover:bg-gray-200 transition-colors mr-1"
           >
-            <ChevronIcon size={18} className="text-gray-500" />
+            <ChevronIcon size={16} className="text-gray-400" />
           </button>
         )}
       </div>

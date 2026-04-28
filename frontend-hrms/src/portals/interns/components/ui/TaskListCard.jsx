@@ -10,22 +10,22 @@ export default function TaskListCard({ tasks }) {
   };
 
   return (
-    <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
-      {/*title*/}
-      <h3 className="font-bold mb-3">Your Tasks for Today</h3>
+    <div className="bg-white border border-slate-200 rounded-2xl p-6 transition-all">
+      <h3 className="text-lg font-bold text-slate-800 mb-6">Your tasks for today</h3>
 
-      {/* Scrollable List */}
-      <div className="space-y-3 max-h-50 overflow-y-auto">
+      <div className="space-y-3 max-h-72 overflow-y-auto pr-1">
         {tasks.map((task) => (
           <div
             key={task.id}
             onClick={() => handleClick(task.id)}
-            className="flex items-center gap-3 pl-3 justify-start bg-[#E7E5F5] p-3 font-medium rounded-lg cursor-pointer hover:bg-purple-200 transition"
+            className="flex items-center gap-4 p-4 bg-slate-50 border border-slate-100 rounded-xl cursor-pointer hover:bg-white hover:border-violet-300 transition-all group"
           >
-            <div className="flex items-center justify-center w-6 h-6 bg-purple-200 rounded-full">
-              <Folder size={14} className=" text-[#7152F3]" />
+            <div className="flex items-center justify-center w-9 h-9 bg-white border border-slate-200 rounded-lg shadow-sm group-hover:bg-violet-50 transition-colors">
+              <Folder size={16} className="text-[#7152F3]" />
             </div>
-            {task.title}
+            <span className="text-[15px] font-bold text-slate-700 group-hover:text-violet-700 transition-colors">
+              {task.title}
+            </span>
           </div>
         ))}
       </div>

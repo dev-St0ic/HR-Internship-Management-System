@@ -15,13 +15,13 @@ export default function NotificationBell({ userRole = "intern" }) {
   return (
     <Link
       to={path}
-      className="relative p-3 rounded-xl bg-gray-100 hover:bg-gray-300 transition-colors"
+      className="relative p-4 rounded-xl bg-gray-100 hover:bg-gray-300 transition-colors"
     >
       <Bell size={18} />
 
       {/* Notification Indicator */}
       {hasNotifications && (
-        <span className="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-600"></span>
+        <span className="absolute -top-1 -right-1 block h-4 w-4 rounded-full bg-red-600 border-2 border-white"></span>
       )}
     </Link>
   );
