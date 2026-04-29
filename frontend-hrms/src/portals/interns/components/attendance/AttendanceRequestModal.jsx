@@ -1,14 +1,17 @@
 import { useState } from "react";
+import { X } from "lucide-react";
+import FileDropzone from "../../../../common/components/ui/FileDropZone";
 
 export default function AttendanceRequestModal({ currentUser, onClose }) {
   const [form, setForm] = useState({
     date: "",
-    requestType: "Missed Time Out",
+    requestType: "",
     timeIn: "",
     timeOut: "",
     reason: "",
-    supportingDocument: "",
   });
+
+  const [supportingDocument, setSupportingDocument] = useState("");
 
   const handleChange = (key, value) => {
     setForm((prev) => ({
@@ -32,7 +35,7 @@ export default function AttendanceRequestModal({ currentUser, onClose }) {
       timeIn: form.timeIn,
       timeOut: form.timeOut,
       reason: form.reason,
-      supportingDocument: form.supportingDocument,
+      supportingDocument: supportingDocument || null,
       status: "Pending",
       submittedAt: new Date().toISOString(),
     };
@@ -46,92 +49,98 @@ export default function AttendanceRequestModal({ currentUser, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm">
       <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl">
-        <h2 className="text-lg font-semibold mb-6">
-          Request Attendance Adjustment
-        </h2>
+        {/* Header */}
+        <div className="mb-5 flex items-start justify-between">
+          <div>
+            <h2 className="text-base font-semibold text-gray-900">
+              Request Attendance Adjustment
+            </h2>
+          </div>
+          <button
+            onClick={onClose}
+            className="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+          >
+            <X size={18} />
+          </button>
+        </div>
 
+        {/* Form */}
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
-            <label className="font-medium">Date</label>
+            <label className="mb-1 block text-xs font-semibold text-gray-700">
+              Date
+            </label>
             <input
               type="date"
               value={form.date}
               onChange={(e) => handleChange("date", e.target.value)}
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </div>
 
           <div>
-            <label className="font-medium">Request Type</label>
+            <label className="mb-1 block text-xs font-semibold text-gray-700">
+              Request Type
+            </label>
             <select
               value={form.requestType}
               onChange={(e) => handleChange("requestType", e.target.value)}
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             >
-              <option>Missed Time In</option>
-              <option>School Activity</option>
-              <option>Technical Issues</option>
+              <option value="">Select request type</option>
+              <option value="Missed Time In">Missed Time In</option>
+              <option value="School Activity">School Activity</option>
+              <option value="Technical Issues">Technical Issues</option>
             </select>
           </div>
 
           <div>
-            <label className="font-medium">Revised Time In</label>
+            <label className="mb-1 block text-xs font-semibold text-gray-700">
+              Revised Time In
+            </label>
             <input
               type="time"
               value={form.timeIn}
               onChange={(e) => handleChange("timeIn", e.target.value)}
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </div>
 
           <div>
-            <label className="font-medium">Time Out</label>
+            <label className="mb-1 block text-xs font-semibold text-gray-700">
+              Time Out
+            </label>
             <input
               type="time"
               value={form.timeOut}
               onChange={(e) => handleChange("timeOut", e.target.value)}
-              className="mt-1 w-full rounded-lg border px-3 py-2"
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </div>
 
           <div className="col-span-2">
-            <label className="font-medium">Reason for Request</label>
-            <textarea
-              value={form.reason}
-              onChange={(e) => handleChange("reason", e.target.value)}
-              rows="3"
-              className="mt-1 w-full rounded-lg border px-3 py-2 resize-none"
-              placeholder="Enter your reason..."
-            />
-          </div>
-
-          <div className="col-span-2">
-            <label className="font-medium">Supporting Document</label>
-            <input
-              type="text"
-              value={form.supportingDocument}
-              onChange={(e) =>
-                handleChange("supportingDocument", e.target.value)
-              }
-              className="mt-1 w-full rounded-lg border px-3 py-2"
-              placeholder="Example: endorsement.pdf"
+            <FileDropzone
+              label="Supporting Document"
+              fileName={supportingDocument}
+              setFileName={setSupportingDocument}
+              accept=".pdf, .doc, .docx, .png, .jpg"
             />
           </div>
         </div>
 
-        <div className="mt-6 flex justify-end gap-3">
+        <div className="flex justify-end gap-3 mt-5">
           <button
             onClick={onClose}
-            className="rounded-lg border px-5 py-2 text-sm hover:bg-gray-50"
+            className="px-4 py-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100"
           >
             Cancel
           </button>
 
           <button
             onClick={handleSubmit}
-            className="rounded-lg bg-primary px-5 py-2 text-sm text-white hover:bg-[#6b32df]"
+            className="px-4 py-2 bg-primary text-white rounded-lg cursor-pointer hover:bg-primary-hover"
           >
             Submit Request
           </button>
