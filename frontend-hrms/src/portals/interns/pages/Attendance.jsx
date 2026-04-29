@@ -1,6 +1,8 @@
 import { useAttendance } from "../../../contexts/useAttendance";
 import { useState } from "react";
-import { LogIn, LogOut } from "lucide-react";
+import { LogIn, LogOut, CalendarRange } from "lucide-react";
+import AttendanceRequestModal from "../components/attendance/AttendanceRequestModal";
+import { useAuth } from "../../../contexts/AuthContext";
 
 export default function Attendance({
   readOnly = false,
@@ -8,6 +10,8 @@ export default function Attendance({
 }) {
   const { records, timeIn, timeOut, getStatus } = useAttendance();
   const [activeAction, setActiveAction] = useState(null); // "timeIn" or "timeOut"
+  const [showRequestModal, setShowRequestModal] = useState(false);
+  const { currentUser } = useAuth();
 
   //This will use external records if provided (for hr view only)
   const data = externalRecords || records;
@@ -89,6 +93,19 @@ export default function Attendance({
                 <LogOut size={20} className="inline-block mr-2" />
                 Time Out
               </button>
+              <button
+                onClick={() => setShowRequestModal(true)}
+                className="p-3 rounded-lg transition hover:bg-gray-100"
+              >
+                <CalendarRange size={20} className="inline-block mr-2" />
+                Attendance Request
+              </button>
+              {showRequestModal && (
+                <AttendanceRequestModal
+                  currentUser={currentUser}
+                  onClose={() => setShowRequestModal(false)}
+                />
+              )}
             </div>
           )}
 
