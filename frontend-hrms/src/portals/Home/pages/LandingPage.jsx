@@ -9,7 +9,6 @@ import HowItWorksSection from "../components/HowItWorksSection";
 export default function LandingPage() {
     return (
         <div className="min-h-screen flex flex-col bg-white overflow-x-hidden">
-            {/* Assuming your <LandingPageHeader /> is handling the top nav bar via AppRouter */}
             
             <main className="grow">
                 <HeroSection />

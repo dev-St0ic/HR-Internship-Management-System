@@ -1,14 +1,11 @@
 import { useState } from "react";
 import CreateAccountStep1 from "../components/auth/CreateAccountStep1";
 import CreateAccountStep2 from "../components/auth/CreateAccountStep2";
-import Step1Img from "../../../assets/images/ForgotPassImg.png";
-import Step2Img from "../../../assets/images/OtpImg.png";
-
+import Step1Img from "../../../assets/images/ForgotPassImg.png"; 
 
 export default function CreateAccountPage() {
     const [currentView, setCurrentView] = useState("step1");
 
-    // We hold the form data at the Page level so it persists between views
     const [formData, setFormData] = useState({
         firstName: '',
         middleName: '',
@@ -20,45 +17,48 @@ export default function CreateAccountPage() {
     });
 
     return (
-        <div className="h-screen w-full bg-white font-lexend flex items-center justify-center p-[10px] md:p-3">
+        <div className="h-screen w-full bg-white font-lexend flex items-center justify-center p-[10px] md:p-3 overflow-hidden">
             <div className="flex w-full h-full max-w-[5000px]">
                 
-                {/* --- Left Side: Illustration Panel --- */}
-                <div className="hidden md:flex md:w-1/2 lg:w-[55%] bg-[#F8F8FC] rounded-[2rem] items-center justify-center">
-                    {currentView === "step1" && (
-                        <img 
-                            src={Step1Img} 
-                            alt="Step 1 Illustration" 
-                            className="w-full max-w-[500px] h-auto object-contain animate-fade-in" 
-                        />
-                    )}
-                    {currentView === "step2" && (
-                        <img 
-                            src={Step2Img} 
-                            alt="Step 2 Illustration" 
-                            className="w-full max-w-[500px] h-auto object-contain animate-fade-in" 
-                        />
-                    )}
+                {/* --- Left Side: Static Illustration Panel --- */}
+                {/* Now it just holds one solid image, acting as a clean visual anchor */}
+                <div className="hidden md:flex md:w-1/2 lg:w-[55%] bg-[#F8F8FC] rounded-[2rem] items-center justify-center relative overflow-hidden">
+                    <img 
+                        src={Step1Img} 
+                        alt="Create Account Illustration" 
+                        className="w-full max-w-[500px] h-auto object-contain" 
+                    />
                 </div>
                 
                 {/* --- Right Side: Form Panel --- */}
-                <div className="w-full md:w-1/2 lg:w-[45%] flex flex-col justify-center px-8 md:px-12 lg:px-20 xl:px-24 overflow-y-auto">
+                <div className="w-full md:w-1/2 lg:w-[45%] relative overflow-hidden">
                     
-                    {currentView === "step1" && (
-                        <CreateAccountStep1
-                            formData={formData} 
-                            setFormData={setFormData}
-                            onNext={() => setCurrentView("step2")} 
-                        />
-                    )}
+                    {/* The sliding "track" for the forms remains buttery smooth! */}
+                    <div 
+                        className={`flex w-full h-full transition-transform duration-500 ease-in-out ${
+                            currentView === "step1" ? "translate-x-0" : "-translate-x-full"
+                        }`}
+                    >
+                        
+                        {/* Step 1 Container */}
+                        <div className="w-full h-full flex-shrink-0 flex flex-col justify-center px-8 md:px-12 lg:px-20 xl:px-24 overflow-y-auto">
+                            <CreateAccountStep1
+                                formData={formData} 
+                                setFormData={setFormData}
+                                onNext={() => setCurrentView("step2")} 
+                            />
+                        </div>
 
-                    {currentView === "step2" && (
-                        <CreateAccountStep2
-                            formData={formData} 
-                            setFormData={setFormData}
-                            onBack={() => setCurrentView("step1")} 
-                        />
-                    )}
+                        {/* Step 2 Container */}
+                        <div className="w-full h-full flex-shrink-0 flex flex-col justify-center px-8 md:px-12 lg:px-20 xl:px-24 overflow-y-auto">
+                            <CreateAccountStep2
+                                formData={formData} 
+                                setFormData={setFormData}
+                                onBack={() => setCurrentView("step1")} 
+                            />
+                        </div>
+
+                    </div>
 
                 </div>
             </div>

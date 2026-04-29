@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import faqImg from "../../../assets/images/FaqImg.jpg";
+import Reveal from "../../../common/components/ui/Reveal";
 
 export default function FaqSection() {
-    // State to track which FAQ is open. '0' means the first one is open by default!
     const [openIndex, setOpenIndex] = useState(0);
 
     const faqs = [
@@ -18,7 +18,6 @@ export default function FaqSection() {
     ];
 
     const toggleFaq = (index) => {
-        // If clicking the already open one, close it (set to null). Otherwise, open the new one.
         setOpenIndex(openIndex === index ? null : index);
     };
 
@@ -28,20 +27,23 @@ export default function FaqSection() {
                 
                 {/* LEFT SIDE: Title & Image */}
                 <div className="w-full lg:w-[45%]">
-                    {/* Pill Tag */}
-                    <span className="inline-block px-5 py-1.5 rounded-full border border-gray-300 text-[13px] font-bold text-[#130E49] mb-6">
-                        FAQs
-                    </span>
+                    <Reveal delay={0}>
+                        <span className="inline-block px-5 py-1.5 rounded-full border border-gray-300 text-[13px] font-bold text-[#130E49] mb-6">
+                            FAQs
+                        </span>
+                    </Reveal>
                     
-                    {/* Heading */}
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#130E49] mb-10 leading-[1.2]">
-                        Got Questions?<br/>We've Got You Covered.
-                    </h2>
+                    <Reveal delay={150}>
+                        <h2 className="text-3xl md:text-4xl font-bold text-[#130E49] mb-10 leading-[1.2]">
+                            Got Questions?<br/>We've Got You Covered.
+                        </h2>
+                    </Reveal>
                     
-                    {/* Image Container */}
-                    <div className="rounded-[2.5rem] overflow-hidden bg-gray-200 aspect-[4/3] shadow-md border border-gray-100">
-                        <img src={faqImg} alt="Interns working on couch" className="w-full h-full object-cover" />
-                    </div>
+                    <Reveal delay={300}>
+                        <div className="rounded-[2.5rem] overflow-hidden bg-gray-200 aspect-[4/3] shadow-md border border-gray-100">
+                            <img src={faqImg} alt="Interns working on couch" className="w-full h-full object-cover" />
+                        </div>
+                    </Reveal>
                 </div>
 
                 {/* RIGHT SIDE: Accordion */}
@@ -50,28 +52,37 @@ export default function FaqSection() {
                         const isOpen = openIndex === index;
                         
                         return (
-                            <div 
-                                key={index} 
-                                className={`rounded-2xl overflow-hidden transition-all duration-300 ${isOpen ? 'bg-[#DCD8F3]' : 'bg-[#EAE8F5]'}`}
-                            >
-                                <button 
-                                    onClick={() => toggleFaq(index)}
-                                    className="w-full flex justify-between items-center p-6 text-left focus:outline-none"
+                            <Reveal key={index} delay={200 + (index * 150)}>
+                                <div 
+                                    className={`rounded-2xl overflow-hidden transition-colors duration-300 ${isOpen ? 'bg-[#DCD8F3]' : 'bg-[#EAE8F5]'}`}
                                 >
-                                    <span className="font-bold text-lg text-[#130E49] pr-8">
-                                        {faq.question}
-                                    </span>
+                                    <button 
+                                        onClick={() => toggleFaq(index)}
+                                        className="w-full flex justify-between items-center p-6 text-left focus:outline-none"
+                                    >
+                                        <span className="font-bold text-lg text-[#130E49] pr-8">
+                                            {faq.question}
+                                        </span>
 
-                                    <div className="text-[#130E49] shrink-0">
-                                        {isOpen ? <ChevronUp size={20} strokeWidth={2.5} /> : <ChevronDown size={20} strokeWidth={2.5} />}
+                                        <div className={`text-[#130E49] shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
+                                            <ChevronDown size={20} strokeWidth={2.5} />
+                                        </div>
+                                    </button>
+                                    
+                                    <div 
+                                        className={`grid transition-all duration-300 ease-in-out ${
+                                            isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                                        }`}
+                                    >
+                                        <div className="overflow-hidden">
+                                            <div className="px-6 pb-6 text-md text-gray-700 leading-relaxed font-medium pr-12">
+                                                {faq.answer}
+                                            </div>
+                                        </div>
                                     </div>
-                                </button>
-                                {isOpen && (
-                                    <div className="px-6 pb-6 text-md text-gray-700 leading-relaxed font-medium pr-12">
-                                        {faq.answer}
-                                    </div>
-                                )}
-                            </div>
+
+                                </div>
+                            </Reveal>
                         );
                     })}
                 </div>
