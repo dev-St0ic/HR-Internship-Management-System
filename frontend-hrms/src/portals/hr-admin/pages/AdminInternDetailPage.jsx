@@ -26,6 +26,8 @@ export default function InternDetailPage() {
   const [attendanceData] = useState(dummyAttendanceData);
   const [intern, setIntern] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedIntern, setEditedIntern] = useState(null);
 
   useEffect(() => {
     if (internId) {
@@ -37,6 +39,28 @@ export default function InternDetailPage() {
 
   const handleBackToInternManagement = () => {
     navigate('/hr-admin/internmanagement');
+  };
+
+  // Handle edit toggle
+  const handleEditToggle = () => {
+    if (!isEditing) {
+      setEditedIntern(intern);
+      setIsEditing(true);
+    } else {
+      // Save edited data
+      console.log('Saved Data: ', editedIntern);
+      // Connect to backend: PUT /users/:id
+      setIntern(editedIntern);
+      setIsEditing(false);
+    }
+  };
+
+  // Handle input changes
+  const handleChange = (field, value) => {
+    setEditedIntern((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
 
   if (loading) {
@@ -59,18 +83,18 @@ export default function InternDetailPage() {
   }
 
   const personalFields = [
-    { label: 'First Name', value: intern.firstName || intern.name?.split(' ')[0] || '-' },
-    { label: 'Last Name', value: intern.lastName || intern.name?.split(' ').slice(1).join(' ') || '-' },
-    { label: 'Mobile Number', value: intern.mobileNumber || '-' },
-    { label: 'Email Address', value: intern.emailAddress || intern.email || '-' },
-    { label: 'Date of Birth', value: intern.dateOfBirth || '-' },
-    { label: 'Marital Status', value: intern.maritalStatus || 'Single' },
-    { label: 'Gender', value: intern.gender || '-' },
-    { label: 'Nationality', value: intern.nationality || 'Filipino' },
-    { label: 'Address', value: intern.address || '-' },
-    { label: 'City', value: intern.city || '-' },
-    { label: 'Zip Code', value: intern.zipCode || '-' },
-    { label: 'University', value: intern.university || '-' },
+    { key: 'firstName', label: 'First Name', value: editedIntern?.firstName || intern?.firstName || intern?.name?.split(' ')[0] || '-' },
+    { key: 'lastName', label: 'Last Name', value: editedIntern?.lastName || intern?.lastName || intern?.name?.split(' ').slice(1).join(' ') || '-' },
+    { key: 'mobileNumber', label: 'Mobile Number', value: editedIntern?.mobileNumber || intern?.mobileNumber || '-' },
+    { key: 'emailAddress', label: 'Email Address', value: editedIntern?.emailAddress || intern?.emailAddress || intern?.email || '-' },
+    { key: 'dateOfBirth', label: 'Date of Birth', value: editedIntern?.dateOfBirth || intern?.dateOfBirth || '-' },
+    { key: 'maritalStatus', label: 'Marital Status', value: editedIntern?.maritalStatus || intern?.maritalStatus || 'Single' },
+    { key: 'gender', label: 'Gender', value: editedIntern?.gender || intern?.gender || '-' },
+    { key: 'nationality', label: 'Nationality', value: editedIntern?.nationality || intern?.nationality || 'Filipino' },
+    { key: 'address', label: 'Address', value: editedIntern?.address || intern?.address || '-' },
+    { key: 'city', label: 'City', value: editedIntern?.city || intern?.city || '-' },
+    { key: 'zipCode', label: 'Zip Code', value: editedIntern?.zipCode || intern?.zipCode || '-' },
+    { key: 'university', label: 'University', value: editedIntern?.university || intern?.university || '-' },
   ];
 
   return (
@@ -100,9 +124,11 @@ export default function InternDetailPage() {
             </div>
           </div>
 
-          <button className="inline-flex h-11 items-center gap-2 rounded-2xl bg-indigo-600 px-5 text-sm font-medium text-white transition hover:bg-indigo-700">
+          <button 
+            onClick={handleEditToggle}
+            className="inline-flex h-11 items-center gap-2 rounded-2xl bg-indigo-600 px-5 text-sm font-medium text-white transition hover:bg-indigo-700">
             <Pencil size={15} />
-            Edit Profile
+            {isEditing ? 'Save Profile' : 'Edit Profile'}
           </button>
         </div>
 
@@ -159,7 +185,16 @@ export default function InternDetailPage() {
                     {personalFields.map((field) => (
                       <div key={field.label} className="border-b border-slate-100 pb-3">
                         <p className="mb-1 text-xs text-slate-400">{field.label}</p>
-                        <p className="text-sm font-medium text-slate-800">{field.value}</p>
+                        {isEditing ? (
+                          <input
+                            type="text"
+                            value={field.value}
+                            onChange={(e) => handleChange(field.key, e.target.value)}
+                            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-800 transition focus:border-indigo-500 focus:outline-none"
+                          />
+                        ) : (
+                          <p className="text-sm font-medium text-slate-800">{field.value}</p>
+                        )}
                       </div>
                     ))}
                   </div>
