@@ -83,7 +83,7 @@ export default function OtpForm({ onBack, email = "companyemail@gmail.com", onSu
                         className={`w-full font-medium py-3.5 rounded-lg transition-colors ${
                             isComplete 
                                 ? "bg-[#7C3EFF] hover:bg-[#5b2ebd] text-white" 
-                                : "bg-[#b3b3b3] text-white cursor-not-allowed"
+                                : "bg-[#c6b2f0] text-white cursor-not-allowed"
                         }`}
                     >
                         Verify
