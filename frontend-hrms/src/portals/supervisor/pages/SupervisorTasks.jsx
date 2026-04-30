@@ -1,305 +1,223 @@
-import { PencilLine, Trash2 } from "lucide-react"
-import { useState } from "react";
+import {
+  PencilLine,
+  Trash2,
+  Search,
+  SlidersHorizontal,
+  PlusCircle,
+} from "lucide-react";
+import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/AuthContext";
+import AssignTaskModal from "../components/ui/AssignTaskModal";
 
 export default function SupervisorTasks() {
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+
   const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const [usersDb, setUsersDb] = useState(() => {
+    try {
+      const storedUsers = localStorage.getItem("hrims_users_db");
+      return storedUsers ? JSON.parse(storedUsers) : {};
+    } catch (error) {
+      console.log("Failed to load users DB:", error);
+      return {};
+    }
+  });
+
+  // this will get the interns under this supervisor
+  const interns = useMemo(() => {
+    if (!usersDb || typeof usersDb !== "object") return [];
+
+    return Object.values(usersDb).filter(
+      (user) =>
+        user?.role === "INTERN" && user?.supervisorId === currentUser?.id,
+    );
+  }, [usersDb, currentUser]);
+
+  //Builds tasks rows
+  const taskRows = useMemo(() => {
+    return interns.flatMap((intern) => {
+      const tasks = intern.tasks || [];
+
+      return tasks.map((task) => ({
+        ...task,
+        internId: intern.id,
+        internName: intern.name,
+      }));
+    });
+  }, [interns]);
+
+  // Search filter
+  const filteredTasks = taskRows.filter((task) => {
+    const search = searchTerm.toLowerCase();
+
+    return (
+      task.taskName.toLowerCase().includes(search) ||
+      task.internName.toLowerCase().includes(search) ||
+      task.status.toLowerCase().includes(search)
+    );
+  });
+
+  //Assign task logic
+  const handleAssignTask = (selectedInternsIds, newTask) => {
+    const usersDb = JSON.parse(localStorage.getItem("hrims_users_db")) || {};
+
+    selectedInternsIds.forEach((internId) => {
+      const intern = usersDb[internId];
+
+      if (intern) {
+        usersDb[internId] = {
+          ...intern,
+          tasks: [...(intern.tasks || []), newTask],
+        };
+      }
+    });
+
+    localStorage.setItem("hrims_users_db", JSON.stringify(usersDb));
+
+    window.location.reload();
+  };
+
+  const getStatusClass = (status) => {
+    if (status === "Completed") return "bg-green-100 text-green-600";
+    if (status === "Pending") return "bg-yellow-100 text-yellow-600";
+    if (status === "Overdue") return "bg-red-100 text-red-600";
+
+    return "bg-gray-100 text-gray-600";
+  };
+
   return (
     <>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          <div className="search-bar">
-            <input type="search" name="search" id="" placeholder="Search interns..." className="border border-gray-500/20 rounded-lg py-2 px-3 w-70 focus:outline-none focus:ring-2 focus:ring-[#7C3EFF]" />
+      <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+        {/* Top Controls */}
+        <div className="mb-6 flex items-center justify-between">
+          {/* Search */}
+          <div className="relative w-80">
+            <Search
+              size={18}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+            />
+
+            <input
+              type="search"
+              placeholder="Search interns..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full rounded-lg border-gray-200 py-2 pl-10 pr-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
           </div>
-          <div className="filter-options flex items-center space-x-4">  
-            <select id="" className="border border-gray-500/20 w-23 rounded-lg ms-3 py-2 px-3 focus:outline-none hover:border-gray-500/40 cursor-pointer">
-              <option disabled selected>Filter</option>
-              <option value="2023-10-01">by Intern Name</option>
-              <option value="2023-10-02">by Date</option>
-              <option value="2023-10-03">by Status</option>
-            </select>
+
+          {/* Buttons */}
+          <div className="flex items-center gap-3">
+            {/* Create task button */}
+            <button
+              onClick={() => {
+                const storedUsers = localStorage.getItem("hrims_users_db");
+
+                if (storedUsers) {
+                  setUsersDb(JSON.parse(storedUsers));
+                }
+
+                setIsOpen(true);
+              }}
+              className="flex items-center gap-2 rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white hover:bg-primary-hover"
+            >
+              <PlusCircle size={16} />
+              Create New Task
+            </button>
+
+            {/* Filter Button */}
+            <button className="flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+              <SlidersHorizontal size={16} />
+              Filter
+            </button>
           </div>
         </div>
-        <div className="button">
-          <button onClick={() => setIsOpen(true)} className="bg-[#7C3EFF] text-white px-4 py-2 rounded-lg hover:bg-[#6B2ECC] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#7C3EFF]">
-            + Create New Task
-          </button>
 
-          {/* modals for create new task */}
-          {isOpen && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-              <div className="bg-white rounded-lg shadow-lg w-[400px] p-6">
-                <div className="flex justify-between border-b border-gray-500/10 pb-4 items-center mb-4">
-                  <h2 className="text-lg font-semibold">Create New Task</h2>
-                </div>
-                <div className="space-y-3 mb-6">
-                  <h1 className="font-medium">Select Interns</h1>
-                  <select className="w-full border border-gray-500/30 p-2 rounded cursor-pointer appearance-none">
-                    <option value="" selected disabled>Select Interns...</option>
-                    <option value="cara">Cara Lim</option>
-                    <option value="john">John Doe</option>
-                    <option value="anna">Anna Cruz</option>
-                  </select>
-                  <h1 className="font-medium">Task Title</h1>
-                  <input
-                    type="text"
-                    placeholder="Enter Task title"
-                    className="w-full border border-gray-500/30 p-2 rounded"
-                  />
-                  <h1 className="font-medium">Deliverable</h1>
-                  <input
-                    type="file"
-                    className="w-full border border-gray-500/30 p-2 rounded"
-                  />
-                  <h1 className="font-medium">Deadline</h1>
-                  <input
-                    type="Date"
-                    placeholder="Enter Task title"
-                    className="w-full border border-gray-500/30 p-2 rounded"
-                  />
-                </div>
+        {/* Table */}
+        <div className="overflow-hidden rounded-xl border border-gray-100">
+          <table className="w-full text-left text-sm">
+            <thead className="border-b border-gray-100 text-xs text-gray-400">
+              <tr>
+                <th className="px-4 py-3 font-medium">Tasks</th>
+                <th className="px-4 py-3 font-medium">Intern Name</th>
+                <th className="px-4 py-3 font-medium">Deadline</th>
+                <th className="px-4 py-3 font-medium">Deliverable</th>
+                <th className="px-4 py-3 font-medium">Status</th>
+                <th className="px-4 py-3 font-medium">Action</th>
+              </tr>
+            </thead>
 
-                <div className="flex justify-end mt-4 gap-2">
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="px-4 py-2 cursor-pointer rounded bg-gray-200 hover:bg-gray-300"
+            <tbody className="divide-y divide-gray-100 text-gray-700">
+              {filteredTasks.map((task) => (
+                <tr
+                  onClick={() => navigate(`/supervisor/tasks/${task.internId}`)}
+                  key={`${task.internId}-${task.id}`}
+                  className="hover:bg-gray-50 cursor-pointer transition"
+                >
+                  <td className="px-4 py-3">{task.taskName}</td>
+                  <td className="px-4 py-3">{task.internName}</td>
+                  <td className="px-4 py-3">{task.deadline}</td>
+                  <td className="px-4 py-3">{task.deliverable}</td>
+                  <td className="px-4 py-3">
+                    <span
+                      className={`rounded-md px-2 py-1 text-xs ${getStatusClass(
+                        task.status,
+                      )}`}
+                    >
+                      {task.status}
+                    </span>
+                  </td>
+
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/supervisor/tasks/${task.internId}`);
+                        }}
+                        className="text-gray-700 hover:text-primary"
+                      >
+                        <PencilLine size={18} />
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                        className="text-gray-700 hover:text-red-500"
+                      >
+                        <Trash2 size={18} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+              {filteredTasks.length === 0 && (
+                <tr>
+                  <td
+                    colSpan="6"
+                    className="px-4 py-8 text-center text-sm text-gray-400"
                   >
-                    Cancel
-                  </button>
-                  <button className="px-4 py-2 cursor-pointer rounded bg-[#7C3EFF] text-white hover:bg-[#6B2ECC]">
-                    Assign Tasks
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
+                    No tasks found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <div className="border border-gray-500/20 rounded mt-4 px-3 py-1 mb-4">
-        <table className="table-auto w-full text-left">
-
-          <thead className="border-b border-gray-500/10 text-sm">
-            <tr className="text-gray-500">
-              <td className="p-2">Task</td>
-              <td className="p-2">Intern Name</td>
-              <td className="p-2">Deadline</td>
-              <td className="p-2">Deliverable</td>
-              <td className="p-2">Status</td>
-              <td className="p-2">Actions</td>
-            </tr>
-          </thead>
-
-          <tbody className="divide-y divide-gray-500/10 text-md text-gray-700">
-
-            <tr className="hover:bg-gray-100">
-              <td className="p-2">Data Entry Projects</td>
-              <td className="p-2">Cara Lim</td>
-              <td className="p-2">April 01, 2026</td>
-              <td className="p-2">Report.pdf</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Approved</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">Marketing or Development Tasks</td>
-              <td className="p-2">Ethan Lee</td>
-              <td className="p-2">April 15, 2026</td>
-              <td className="p-2">Presentation.pptx</td>
-              <td className="p-2">
-                <div className="bg-yellow-500 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Pending</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">HR Documentation Support</td>
-              <td className="p-2">Mia Chen</td>
-              <td className="p-2">April 30, 2026</td>
-              <td className="p-2">CampaignPlan.docx</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Completed</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr className="hover:bg-gray-100">
-              <td className="p-2">Data Entry Projects</td>
-              <td className="p-2">Cara Lim</td>
-              <td className="p-2">April 01, 2026</td>
-              <td className="p-2">Report.pdf</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Approved</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">Marketing or Development Tasks</td>
-              <td className="p-2">Ethan Lee</td>
-              <td className="p-2">April 15, 2026</td>
-              <td className="p-2">Presentation.pptx</td>
-              <td className="p-2">
-                <div className="bg-yellow-500 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Pending</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">HR Documentation Support</td>
-              <td className="p-2">Mia Chen</td>
-              <td className="p-2">April 30, 2026</td>
-              <td className="p-2">CampaignPlan.docx</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Completed</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr className="hover:bg-gray-100">
-              <td className="p-2">Data Entry Projects</td>
-              <td className="p-2">Cara Lim</td>
-              <td className="p-2">April 01, 2026</td>
-              <td className="p-2">Report.pdf</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Approved</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">Marketing or Development Tasks</td>
-              <td className="p-2">Ethan Lee</td>
-              <td className="p-2">April 15, 2026</td>
-              <td className="p-2">Presentation.pptx</td>
-              <td className="p-2">
-                <div className="bg-yellow-500 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Pending</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">HR Documentation Support</td>
-              <td className="p-2">Mia Chen</td>
-              <td className="p-2">April 30, 2026</td>
-              <td className="p-2">CampaignPlan.docx</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Completed</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr className="hover:bg-gray-100">
-              <td className="p-2">Data Entry Projects</td>
-              <td className="p-2">Cara Lim</td>
-              <td className="p-2">April 01, 2026</td>
-              <td className="p-2">Report.pdf</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Approved</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">Marketing or Development Tasks</td>
-              <td className="p-2">Ethan Lee</td>
-              <td className="p-2">April 15, 2026</td>
-              <td className="p-2">Presentation.pptx</td>
-              <td className="p-2">
-                <div className="bg-yellow-500 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Pending</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td className="p-2">HR Documentation Support</td>
-              <td className="p-2">Mia Chen</td>
-              <td className="p-2">April 30, 2026</td>
-              <td className="p-2">CampaignPlan.docx</td>
-              <td className="p-2">
-                <div className="bg-green-700 px-2 py-1 rounded text-white text-xs inline-block">
-                  <p>Completed</p>
-                </div>
-              </td>
-              <td className="p-2">
-                <div className="flex justify-around mx-5">
-                  <PencilLine width={20} height={20} /> <Trash2 width={20} height={20} />
-                </div>
-              </td>
-            </tr>
-            
-            
-          </tbody>
-
-        </table>  
-      </div>
+      {/* Task Modal */}
+      {isOpen && (
+        <AssignTaskModal
+          interns={interns}
+          onClose={() => setIsOpen(false)}
+          onAssign={handleAssignTask}
+        />
+      )}
     </>
   );
 }
