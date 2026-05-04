@@ -83,10 +83,29 @@ export default function SupervisorTasks() {
 
   const getStatusClass = (status) => {
     if (status === "Completed") return "bg-green-100 text-green-600";
-    if (status === "Pending") return "bg-yellow-100 text-yellow-600";
+    if (status === "In Progress") return "bg-yellow-100 text-yellow-600";
     if (status === "Overdue") return "bg-red-100 text-red-600";
 
     return "bg-gray-100 text-gray-600";
+  };
+
+  //Helper to check the status
+  const getTaskStatus = (task) => {
+    if (task.status === "Completed") return "Completed";
+
+    if (task.deadline) {
+      const today = new Date();
+      const deadlineDate = new Date(task.deadline);
+
+      today.setHours(0, 0, 0, 0);
+      deadlineDate.setHours(0, 0, 0, 0);
+
+      if (deadlineDate < today && !task.submitted) {
+        return "Overdue";
+      }
+    }
+
+    return task.status || "In Progress";
   };
 
   return (
@@ -163,13 +182,17 @@ export default function SupervisorTasks() {
                   <td className="px-4 py-3">{task.deadline}</td>
                   <td className="px-4 py-3">{task.deliverable}</td>
                   <td className="px-4 py-3">
-                    <span
-                      className={`rounded-md px-2 py-1 text-xs ${getStatusClass(
-                        task.status,
-                      )}`}
-                    >
-                      {task.status}
-                    </span>
+                    {(() => {
+                      const displayStatus = getTaskStatus(task);
+
+                      return (
+                        <span
+                          className={`rounded-md px-2 py-1 text-xs ${getStatusClass(displayStatus)}`}
+                        >
+                          {displayStatus}
+                        </span>
+                      );
+                    })()}
                   </td>
 
                   <td className="px-4 py-3">

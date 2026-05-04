@@ -1,11 +1,13 @@
 import { useState } from "react";
 import FileDropZone from "../../../../common/components/ui/FileDropZone";
+import { getTodayISO } from "../../../../common/utils/dateHelper";
 
 export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
   const [selectedInterns, setSelectedInterns] = useState([]);
   const [taskTitle, setTaskTitle] = useState("");
   const [deadline, setDeadline] = useState("");
   const [deliverable, setDeliverable] = useState("");
+  const [description, setDescription] = useState("");
 
   const toggleIntern = (internId) => {
     setSelectedInterns((prev) =>
@@ -26,10 +28,11 @@ export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
     const newTask = {
       id: crypto.randomUUID(),
       taskName: taskTitle,
+      description: description || "No descriptions given",
       deadline: deadline || "Date",
       deliverable: deliverable || "Not uploaded",
-      status: "Pending",
-      startDate: new Date().toLocaleDateString(),
+      status: "In Progress",
+      startDate: getTodayISO(),
       finishDate: "-",
     };
 
@@ -88,6 +91,19 @@ export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
               onChange={(e) => setTaskTitle(e.target.value)}
               placeholder="Enter task title..."
               className="w-full rounded-lg border border-gray-200 px-3 py-2 text-xs outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-xs font-semibold text-gray-900">
+              Task Description
+            </label>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Enter task description..."
+              rows="3"
+              className="w-full resize-none rounded-lg border border-gray-200 px-3 py-2 text-xs outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </div>
 

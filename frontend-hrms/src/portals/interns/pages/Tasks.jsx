@@ -3,6 +3,10 @@ import { useLocation } from "react-router-dom";
 import { Folder, ChevronLeft } from "lucide-react";
 import { useAuth } from "../../../contexts/AuthContext";
 import FileDropzone from "../../../common/components/ui/FileDropZone";
+import {
+  getTodayISO,
+  formatDateForDisplay,
+} from "../../../common/utils/dateHelper";
 
 export default function Tasks() {
   const location = useLocation();
@@ -21,16 +25,16 @@ export default function Tasks() {
   const intern = usersDb[currentUser?.id];
   const tasks = intern?.tasks || [];
 
-  // Selected task (initialized once safely)
   const [selectedTaskId, setSelectedTaskId] = useState(
-    location.state?.selectedTaskId ?? tasks[0]?.id,
+    location.state?.selectedTaskId || null,
   );
 
-  const [viewMode, setViewMode] = useState("list");
-  const [uploadedFile, setUploadedFile] = useState(null);
-  const [commentText, setCommentText] = useState("");
+  const selectedTask =
+    tasks.find((task) => task.id === selectedTaskId) || tasks[0];
 
-  const selectedTask = tasks.find((task) => task.id === selectedTaskId);
+  const [viewMode, setViewMode] = useState("list");
+  const [uploadedFile, setUploadedFile] = useState("");
+  const [commentText, setCommentText] = useState("");
 
   const updateTask = (taskId, updatedFields) => {
     const updatedUsersDb = { ...usersDb };
@@ -46,12 +50,11 @@ export default function Tasks() {
     localStorage.setItem("hrims_users_db", JSON.stringify(updatedUsersDb));
   };
 
-  // Handle comment post
   const handlePostComment = () => {
     if (!commentText.trim() || !selectedTask) return;
 
     const newComment = {
-      id: crypto.randomUUID,
+      id: crypto.randomUUID(),
       author: currentUser?.name || "You",
       message: commentText,
     };
@@ -59,6 +62,7 @@ export default function Tasks() {
     updateTask(selectedTask.id, {
       comments: [...(selectedTask.comments || []), newComment],
     });
+
     setCommentText("");
   };
 
@@ -68,18 +72,15 @@ export default function Tasks() {
     updateTask(selectedTask.id, {
       deliverable: uploadedFile,
       status: "Completed",
-      submitted: new Date().toLocaleDateString(),
-      finishDate: new Date().toLocaleDateString(),
+      submitted: getTodayISO(),
+      finishDate: getTodayISO(),
     });
 
     setUploadedFile("");
   };
 
-  const getStatusClass = (status) => {
-    if (status === "Completed") return "bg-green-100 text-green-600";
-    if (status === "Pending") return "bg-yellow-100 text-yellow-600";
-    if (status === "Overdue") return "bg-red-100 text-red-600";
-    return "bg-gray-100 text-gray-600";
+  const getProgress = () => {
+    return selectedTask?.status === "Completed" ? 100 : 0;
   };
 
   if (!currentUser) return null;
@@ -93,21 +94,15 @@ export default function Tasks() {
     );
   }
 
-  if (!selectedTask) {
-    setSelectedTaskId(tasks[0]?.id);
-    return null;
-  }
-
-  const comments = selectedTask.comments || [];
+  const comments = selectedTask?.comments || [];
 
   return (
     <>
-      {/* Previous Button will only show at Detailed mode */}
       {viewMode === "detail" && (
         <div className="mt-4">
           <button
             onClick={() => setViewMode("list")}
-            className="flex items-center justify-center mb-4 bg-purple-500 text-white px-4 py-2 rounded-lg"
+            className="mb-4 flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-white"
           >
             <ChevronLeft size={16} />
             Previous
@@ -115,80 +110,57 @@ export default function Tasks() {
         </div>
       )}
 
-      <div className="grid grid-cols-3 gap-6 mt-4">
-        {/* Center Area */}
+      <div className="mt-4 grid grid-cols-3 gap-6">
+        {/* LEFT / CENTER AREA */}
         {viewMode === "list" ? (
-          <div className="col-span-2 bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-            <h3 className="font-bold mb-4">Your Tasks</h3>
+          <div className="col-span-2 min-h-130 rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+            <h3 className="mb-4 font-bold">Your Tasks</h3>
 
             <div className="space-y-3">
-              {tasks.map((task) => (
-                <div
-                  key={task.id}
-                  onClick={() => setSelectedTaskId(task.id)}
-                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition ${
-                    selectedTaskId === task.id
-                      ? "bg-purple-500 text-white"
-                      : "bg-purple-100/60 hover:bg-purple-200"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <Folder size={16} />
-                    {task.taskName}
-                  </div>
+              {tasks.map((task) => {
+                const isSelected = selectedTask?.id === task.id;
 
-                  <span
-                    className={`rounded-md px-2 py-1 text-xs ${
-                      selectedTask.id === task.id
-                        ? "bg-white/20 text-white"
-                        : getStatusClass(task.status)
+                return (
+                  <div
+                    key={task.id}
+                    onClick={() => setSelectedTaskId(task.id)}
+                    className={`flex cursor-pointer items-center gap-3 rounded-lg p-4 text-sm font-medium transition ${
+                      isSelected
+                        ? "bg-[#A855F7] text-white"
+                        : "bg-purple-100/50 text-gray-900 hover:bg-purple-100"
                     }`}
                   >
-                    {task.status}
-                  </span>
-                </div>
-              ))}
+                    <Folder size={18} />
+                    {task.taskName}
+                  </div>
+                );
+              })}
             </div>
           </div>
         ) : (
-          /* Detailed Center Area */
-          <div className="col-span-2 space-y-5">
-            {/* Task Information Area */}
-            <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+          <div className="col-span-2">
+            <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
               <h2 className="text-xl font-bold">{selectedTask.taskName}</h2>
-              <p className="text-gray-500 mt-2">
-                Deadline: {selectedTask.deadline || "-"}
+
+              <p className="mt-3 text-gray-500">
+                {selectedTask.description || "No description provided."}
               </p>
 
-              {/* Upload */}
-              <div className="mt-5">
-                <h3 className="font-semibold mb-3">Upload Report</h3>
+              <div className="mt-6">
+                <h3 className="mb-4 font-semibold">Upload Report</h3>
 
                 <FileDropzone
-                  label="Task Deliverable"
+                  label="Upload File"
                   fileName={uploadedFile}
                   setFileName={setUploadedFile}
                   accept=".pdf,.doc,.docx,.png,.jpg"
                   required={false}
-                  supportedText="Supported formats: PDF, DOC, DOCX, PNG, JPG"
+                  supportedText="Supported formats: All files"
                 />
-
-                {/* File Preview */}
-                {uploadedFile && (
-                  <div className="mt-3 flex justify-between items-center bg-gray-200 p-2 rounded">
-                    <span>{uploadedFile.name}</span>
-                    <button
-                      onClick={() => setUploadedFile(null)}
-                      className="text-red-500"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                )}
 
                 <button
                   onClick={handleSubmitWork}
-                  className="mt-4 bg-purple-500 text-white px-4 py-2 rounded-lg"
+                  className="mt-5 rounded-lg bg-[#A855F7] px-5 py-2 text-white hover:bg-[#9333EA]"
                 >
                   Submit Work
                 </button>
@@ -197,87 +169,89 @@ export default function Tasks() {
           </div>
         )}
 
-        {/* Right Panel*/}
+        {/* RIGHT PANEL */}
         <div className="space-y-5">
-          {/* Task Details Card */}
+          {/* TASK DETAILS */}
           <div
             onClick={() => setViewMode("detail")}
-            className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm cursor-pointer"
+            className="cursor-pointer rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
           >
-            <h3 className="font-semibold mb-3">Task Details</h3>
+            <h3 className="mb-4 text-lg font-bold">Task Details</h3>
 
             {viewMode === "list" ? (
               <>
                 <p className="font-bold">{selectedTask.taskName}</p>
 
-                <p className="text-sm text-gray-500 mt-2">
-                  Deliverable: {selectedTask.deliverable || "Not Uploaded"}
+                <p className="mt-3 text-sm text-gray-500">
+                  {selectedTask.description || "No description provided."}
                 </p>
 
-                <p className="text-xs mt-3">
-                  Start: {selectedTask.startDate || "-"}
+                <p className="mt-4 text-xs">
+                  Start: {formatDateForDisplay(selectedTask.startDate)}
                 </p>
-                <p className="text-xs">Due: {selectedTask.deadline || "-"}</p>
+                <p className="text-xs">
+                  Due: {formatDateForDisplay(selectedTask.deadline)}
+                </p>
               </>
             ) : (
               <>
+                <p className="text-sm">Type: {selectedTask.taskName || "-"}</p>
                 <p className="text-sm">
-                  Start: {selectedTask.startDate || "-"}
-                </p>
-                <p className="text-sm">Due: {selectedTask.deadline || "-"}</p>
-                <p className="text-sm">
-                  Submitted: {selectedTask.submitted || "None"}
+                  Start: {formatDateForDisplay(selectedTask.startDate)}
                 </p>
                 <p className="text-sm">
-                  Status: {selectedTask.status || "Pending"}
+                  Due: {formatDateForDisplay(selectedTask.deadline)}
+                </p>
+                <p className="text-sm">
+                  Submitted:{" "}
+                  {selectedTask.submitted
+                    ? formatDateForDisplay(selectedTask.submitted)
+                    : "None"}
                 </p>
               </>
             )}
           </div>
 
-          {/* Comments (Will alsways show on the right panel) */}
-          <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-            <h3 className="font-semibold mb-3">Comments</h3>
+          {/* COMMENTS */}
+          <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+            <h3 className="mb-4 text-lg font-bold">Comments</h3>
 
             {comments.length > 0 ? (
               comments.map((comment) => (
                 <div key={comment.id} className="mb-3">
-                  <p className="text-sm font-medium">{comment.author}</p>
+                  <p className="text-sm font-semibold">{comment.author}</p>
                   <p className="text-sm text-gray-500">{comment.message}</p>
                 </div>
               ))
             ) : (
-              <p className="text-gray-400 text-sm">No comments</p>
+              <p className="text-sm text-gray-400">No comments</p>
             )}
 
             <textarea
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              className="w-full border border-gray-300 rounded p-2 mt-3"
+              className="mt-4 w-full rounded-lg border border-gray-300 p-3 text-sm"
               placeholder="Write a comment..."
+              rows="3"
             />
 
             <button
               onClick={handlePostComment}
-              className="mt-2 bg-purple-500 text-white px-3 py-1 rounded"
+              className="mt-3 rounded bg-[#A855F7] px-4 py-2 text-white"
             >
               Post
             </button>
           </div>
 
-          {/* Progress will show only on list mode */}
+          {/* PROGRESS */}
           {viewMode === "list" && (
-            <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-              <h3 className="font-semibold mb-2">
-                {selectedTask.status === "Completed" ? "100" : "0"}% Completed
-              </h3>
+            <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+              <h3 className="mb-3 font-semibold">{getProgress()}% Completed</h3>
 
-              <div className="w-full bg-gray-200 h-2 rounded">
+              <div className="h-2 w-full rounded bg-gray-200">
                 <div
-                  className="bg-purple-500 h-2 rounded"
-                  style={{
-                    width: selectedTask.status === "Completed" ? "100%" : "0%",
-                  }}
+                  className="h-2 rounded bg-[#A855F7]"
+                  style={{ width: `${getProgress()}%` }}
                 />
               </div>
             </div>
