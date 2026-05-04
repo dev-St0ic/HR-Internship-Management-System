@@ -15,6 +15,18 @@ export const supervisorHeaderConfig = {
     title: "Tasks",
     subtitle: "Assign and monitor intern tasks",
   },
+  "/supervisor/tasks/:internId": {
+    getTitle: ({ params, usersDb }) => {
+      return usersDb[params.internId]?.name || "Intern Name";
+    },
+    getSubtitle: ({ params, usersDb }) => {
+      const internName = usersDb[params.internId]?.name || "Intern Name";
+      return `Task Management > ${internName} > Tasks`;
+    },
+    showBack: true,
+    backTo: "/supervisor/tasks",
+  },
+
   "/supervisor/documents": {
     title: "Documents",
     subtitle: "View and comply with intern requests",
