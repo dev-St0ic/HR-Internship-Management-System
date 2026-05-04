@@ -169,7 +169,7 @@ export default function ProfileView({ user, mode }) {
 
           {activeSection === "tasks" && (
             <div className="p-4">
-              <TasksSection user={displayUser} />
+              <TasksSection user={user} />
             </div>
           )}
 

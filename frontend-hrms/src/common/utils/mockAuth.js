@@ -263,7 +263,12 @@ const mockUsers = {
 
 // It writes the data above into the browser so the app can use it.
 export const initializeMockDatabase = () => {
-  localStorage.setItem("hrims_users_db", JSON.stringify(mockUsers));
+  if (!localStorage.getItem("hrims_users_db")) {
+    localStorage.setItem("hrims_users_db", JSON.stringify(mockUsers));
+    console.log("✅ Mock Database Initialized!");
+  } else {
+    console.log("ℹ️ Mock Database already exists.");
+  }
 
   if (!localStorage.getItem("hrims_evaluations_db")) {
     localStorage.setItem("hrims_evaluations_db", JSON.stringify([]));
