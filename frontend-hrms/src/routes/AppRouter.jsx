@@ -13,6 +13,7 @@ import {
   SupervisorDocuments,
 } from "../portals/supervisor/Index";
 import SupervisorLayout from "../portals/supervisor/layouts/SupervisorLayout";
+import SupervisorTaskDetails from "../portals/supervisor/pages/SupervisorTaskDetails";
 
 //HR-ADMIN
 import HrAdminLayout from "../portals/hr-admin/layouts/HrAdminLayout";
@@ -109,6 +110,7 @@ export const AppRouter = () => {
           <Route path="myinterns" element={<SupervisorMyInterns />} />
           <Route path="attendance" element={<SupervisorAttendance />} />
           <Route path="tasks" element={<SupervisorTasks />} />
+          <Route path="tasks/:internId" element={<SupervisorTaskDetails />} />
           <Route path="documents" element={<SupervisorDocuments />} />
           <Route path="evaluations" element={<SupervisorEvaluations />} />
           <Route path="settings" element={<SettingsPage />} />

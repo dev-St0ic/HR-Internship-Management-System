@@ -1,4 +1,10 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import {
+  Navigate,
+  Outlet,
+  useLocation,
+  matchPath,
+  useNavigate,
+} from "react-router-dom";
 import Sidebar from "../layout/Sidebar";
 import Header from "../layout/Header";
 import { navigation } from "../../config/navigation";
@@ -8,6 +14,7 @@ import { useState } from "react";
 export default function LayoutTemplate({ headerConfig }) {
   const { currentUser } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -24,10 +31,38 @@ export default function LayoutTemplate({ headerConfig }) {
 
   const userRole = roleMap[currentUser.role];
 
-  const currentHeader = headerConfig[location.pathname] || {
-    title: "Dashboard",
-    subtitle: "",
-  };
+  const matchedHeaderKey = Object.keys(headerConfig).find((path) =>
+    matchPath({ path, end: true }, location.pathname),
+  );
+
+  const match = matchedHeaderKey
+    ? matchPath({ path: matchedHeaderKey, end: true }, location.pathname)
+    : null;
+
+  const usersDb = JSON.parse(localStorage.getItem("hrims_users_db") || "{}");
+
+  const currentHeader = matchedHeaderKey
+    ? headerConfig[matchedHeaderKey]
+    : {
+        title: "Dashboard",
+        subtitle: "",
+      };
+
+  const headerTitle = currentHeader.getTitle
+    ? currentHeader.getTitle({
+        currentUser,
+        params: match?.params || {},
+        usersDb,
+      })
+    : currentHeader.title;
+
+  const headerSubtitle = currentHeader.getSubtitle
+    ? currentHeader.getSubtitle({
+        currentUser,
+        params: match?.params,
+        usersDb,
+      })
+    : currentHeader.subtitle;
 
   return (
     <div className="flex">
@@ -46,9 +81,11 @@ export default function LayoutTemplate({ headerConfig }) {
       >
         <div className="px-6 pt-3">
           <Header
-            title={currentHeader.title}
-            subtitle={currentHeader.subtitle}
+            title={headerTitle}
+            subtitle={headerSubtitle}
             userRole={userRole}
+            showBack={currentHeader.showBack}
+            onBackClick={() => navigate(currentHeader.backTo || -1)}
           />
         </div>
         <div className="px-6 py-2">

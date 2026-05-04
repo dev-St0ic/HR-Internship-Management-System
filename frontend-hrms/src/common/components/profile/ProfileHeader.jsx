@@ -7,6 +7,7 @@ export default function ProfileHeader({
   isEditing,
   onEditClick,
   onBackClick,
+  hideAction,
 }) {
   const isIntern = mode === "INTERN";
 
@@ -30,22 +31,26 @@ export default function ProfileHeader({
       </div>
 
       {/* This is only for intern and when the personal tab is active */}
-      {isIntern && activeTab === "personal" ? (
-        <button
-          onClick={onEditClick}
-          className="flex items-center gap-2 px-4 py-2 text-sm bg-primary text-white rounded-lg hover:text-purple-500 hover:bg-primary-hover transition"
-        >
-          <PenLine size={14} />
-          {isEditing ? "Save changes" : "Edit Profile"}
-        </button>
-      ) : (
-        <button
-          onClick={onBackClick}
-          className="flex items-center gap-2 px-4 py-2 text-sm bg-primary text-white font-semibold border border-gray-200 rounded-lg hover:bg-primary-hover transition"
-        >
-          <CornerDownLeft size={16} />
-          Return
-        </button>
+      {!hideAction && (
+        <>
+          {isIntern && activeTab === "personal" ? (
+            <button
+              onClick={onEditClick}
+              className="flex items-center gap-2 px-4 py-2 text-sm bg-primary text-white rounded-lg hover:text-purple-500 hover:bg-primary-hover transition"
+            >
+              <PenLine size={14} />
+              {isEditing ? "Save changes" : "Edit Profile"}
+            </button>
+          ) : (
+            <button
+              onClick={onBackClick}
+              className="flex items-center gap-2 px-4 py-2 text-sm bg-primary text-white font-semibold border border-gray-200 rounded-lg hover:bg-primary-hover transition"
+            >
+              <CornerDownLeft size={16} />
+              Return
+            </button>
+          )}
+        </>
       )}
     </div>
   );
