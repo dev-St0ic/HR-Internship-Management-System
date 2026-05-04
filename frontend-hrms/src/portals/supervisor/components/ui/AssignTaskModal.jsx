@@ -23,6 +23,7 @@ export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
     .join(", ");
 
   const handleSubmit = () => {
+    console.log("Clicked assign");
     if (!taskTitle || selectedInterns.length === 0) return;
 
     const newTask = {
@@ -35,8 +36,9 @@ export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
       startDate: getTodayISO(),
       finishDate: "-",
     };
+    console.log("NEW TASK:", newTask);
 
-    onAssign(selectedInterns, newTask);
+    onAssign?.(selectedInterns, newTask);
     onClose();
   };
 

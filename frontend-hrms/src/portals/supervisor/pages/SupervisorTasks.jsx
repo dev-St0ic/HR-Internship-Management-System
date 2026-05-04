@@ -9,6 +9,7 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 import AssignTaskModal from "../components/ui/AssignTaskModal";
+import FilterButton from "../../../common/components/ui/FilterButton";
 
 export default function SupervisorTasks() {
   const navigate = useNavigate();
@@ -16,6 +17,9 @@ export default function SupervisorTasks() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [selectedFilterInterns, setSelectedFilterInterns] = useState([]);
+  const [selectedStatuses, setSelectedStatuses] = useState([]);
 
   const [usersDb, setUsersDb] = useState(() => {
     try {
@@ -54,14 +58,22 @@ export default function SupervisorTasks() {
   const filteredTasks = taskRows.filter((task) => {
     const search = searchTerm.toLowerCase();
 
-    return (
-      task.taskName.toLowerCase().includes(search) ||
-      task.internName.toLowerCase().includes(search) ||
-      task.status.toLowerCase().includes(search)
-    );
+    const matchesSearch =
+      task.taskName?.toLowerCase().includes(search) ||
+      task.internName?.toLowerCase().includes(search) ||
+      task.status?.toLowerCase().includes(search);
+
+    const matchesIntern =
+      selectedFilterInterns.length === 0 ||
+      selectedFilterInterns.includes(task.internId);
+
+    const matchesStatus =
+      selectedStatuses.length === 0 || selectedStatuses.includes(task.status);
+
+    return matchesSearch && matchesIntern && matchesStatus;
   });
 
-  //Assign task logic
+  // Assign task logic
   const handleAssignTask = (selectedInternsIds, newTask) => {
     const usersDb = JSON.parse(localStorage.getItem("hrims_users_db")) || {};
 
@@ -76,9 +88,14 @@ export default function SupervisorTasks() {
       }
     });
 
+    // IMPORTANT: save updated data
     localStorage.setItem("hrims_users_db", JSON.stringify(usersDb));
 
-    window.location.reload();
+    // IMPORTANT: update page state if you have setUsersDb
+    setUsersDb(usersDb);
+
+    // close modal
+    setIsOpen(false);
   };
 
   const getStatusClass = (status) => {
@@ -106,6 +123,24 @@ export default function SupervisorTasks() {
     }
 
     return task.status || "In Progress";
+  };
+
+  //helper to filter the interns
+  const toggleFilterInterns = (internId) => {
+    setSelectedFilterInterns((prev) =>
+      prev.includes(internId)
+        ? prev.filter((id) => id !== internId)
+        : [...prev, internId],
+    );
+  };
+
+  // helper to filter the status
+  const toggleStatus = (status) => {
+    setSelectedStatuses((prev) =>
+      prev.includes(status)
+        ? prev.filter((item) => item !== status)
+        : [...prev, status],
+    );
   };
 
   return (
@@ -149,10 +184,72 @@ export default function SupervisorTasks() {
             </button>
 
             {/* Filter Button */}
-            <button className="flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
-              <SlidersHorizontal size={16} />
-              Filter
-            </button>
+            <FilterButton
+              title="Filter Tasks"
+              onCancel={() => {
+                setSelectedFilterInterns([]);
+                setSelectedStatuses([]);
+              }}
+            >
+              {/* Select Interns */}
+              <div>
+                <label className="mb-2 block text-sm font-semibold text-gray-900">
+                  Select Interns
+                </label>
+
+                <input
+                  readOnly
+                  value={interns
+                    .filter((intern) =>
+                      selectedFilterInterns.includes(intern.id),
+                    )
+                    .map((intern) => intern.name)
+                    .join(", ")}
+                  placeholder="Select interns... "
+                  className="mb-3 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none"
+                />
+
+                <div className="max-h-32 space-y-2 overflow-y-auto pr-1">
+                  {interns.map((intern) => (
+                    <label
+                      key={intern.id}
+                      className="flex cursor-pointer items-center gap-2 text-sm text-gray-700"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedFilterInterns.includes(intern.id)}
+                        onChange={() => toggleFilterInterns(intern.id)}
+                        className="h-4 w-4 accent-primary"
+                      />
+                      {intern.name}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-2 block text-sm font-semibold text-gray-900">
+                  Status
+                </label>
+
+                <div className="space-y-2">
+                  {["In Progress", "Completed", "Overdue"].map((status) => (
+                    <label
+                      key={status}
+                      className="flex items-center gap-2 text-sm"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedStatuses.includes(status)}
+                        onChange={() => toggleStatus(status)}
+                        className="h-4 w-4 accent-primary"
+                      />
+                      {status}
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </FilterButton>
           </div>
         </div>
 
