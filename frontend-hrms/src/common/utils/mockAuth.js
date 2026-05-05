@@ -261,6 +261,43 @@ const mockUsers = {
   },
 };
 
+export const dummyDepartments = [
+  {
+    title: 'IT Department',
+    count: 3,
+    members: [
+      { name: 'John Doe', role: 'IT Intern' },
+      { name: 'Jane Doe', role: 'HR Intern' },
+      { name: 'Jonathan Doe', role: 'IT Intern' },
+    ],
+  },
+  {
+    title: 'Sales Department',
+    count: 3,
+    members: [
+      { name: 'Darrell Steward', role: 'Sr. Sales Manager' },
+      { name: 'Courtney Henry', role: 'BDM' },
+      { name: 'Kathryn Murphy', role: 'BDE' },
+    ],
+  },
+  {
+    title: 'Project Manager Department',
+    count: 2,
+    members: [
+      { name: 'Ronald Richards', role: 'Sr. Project Manager' },
+      { name: 'Savannah Nguyen', role: 'Project Manager' },
+    ],
+  },
+  {
+    title: 'Marketing Department',
+    count: 2,
+    members: [
+      { name: 'Brooklyn Simmons', role: 'Sr. Marketing Manager' },
+      { name: 'Kristin Watson', role: 'Marketing Coordinator' },
+    ],
+  },
+];
+
 // It writes the data above into the browser so the app can use it.
 export const initializeMockDatabase = () => {
   if (!localStorage.getItem("hrims_users_db")) {
