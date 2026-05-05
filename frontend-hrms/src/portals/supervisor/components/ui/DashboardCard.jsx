@@ -1,90 +1,73 @@
-import { UsersRound, CalendarCheck, ScrollText } from 'lucide-react'
+import {
+  UsersRound,
+  CalendarCheck,
+  ScrollText,
+  BriefcaseBusiness,
+} from "lucide-react";
 
-export default function DashboardCard() {
+const cards = [
+  {
+    key: "totalInterns",
+    title: "Total Interns",
+    subtitle: "Under your Supervision",
+    icon: UsersRound,
+  },
+  {
+    key: "dtrToTeview",
+    title: "DTR to Review",
+    subtitle: "DTR Submissions",
+    icon: CalendarCheck,
+  },
+  {
+    key: "overdueTasks",
+    title: "Overdue Tasks",
+    subtitle: "Across All Interns",
+    icon: ScrollText,
+  },
+  {
+    key: "avgPerformance",
+    title: "Avg. Performance",
+    subtitle: "Based on Evaluations",
+    icon: BriefcaseBusiness,
+  },
+];
+
+export default function DashboardCard({ stats }) {
   return (
     <>
-      <div className="border border-gray-500/20 rounded shadow sm:col-span-2 row-span-2 mt-2 flex flex-col justify-between">
-          <div className="p-3">
-            <div className="flex items-center mb-2">
-              <div className="bg-gray-500/10 rounded-lg w-10 h-10 mr-2 flex items-center justify-center">
-                <UsersRound className="text-[#7C3EFF]" size={20} />
+      {cards.map((card) => {
+        const Icon = card.icon;
+
+        return (
+          <div
+            key={card.key}
+            className="rounded-xl border border-gray-200 bg-white shadow-sm flex flex-col justify-between"
+          >
+            <div className="p-4">
+              {/* Card Header */}
+              <div className="mb-3 flex items-center gap-2">
+                {/* Icon */}
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
+                  <Icon className="text-primary" size={18} />
+                </div>
+
+                {/* Title */}
+                <h1 className="text-sm text-gray-700">{card.title}</h1>
               </div>
-              <h1 className="text-sm sm:text-base">
-                Total Interns
+
+              {/* Card Content */}
+              <h1 className="text-3xl font-bold text-gray-900">
+                {stats?.[card.key] ?? 0}
               </h1>
             </div>
 
-            <h1 className="font-bold text-2xl sm:text-3xl">12</h1>
-          </div>
-
-          <div className="border-t border-gray-500/20 px-3">
-            <span className="text-xs text-gray-500">
-              Under your supervision
-            </span>
-          </div>
-        </div>
-
-        <div className="border border-gray-500/20 rounded shadow sm:col-span-2 row-span-2 mt-2 flex flex-col justify-between col-start-3">
-          <div className="p-3">
-            <div className="flex items-center mb-2">
-              <div className="bg-gray-500/10 rounded-lg w-10 h-10 mr-2 flex items-center justify-center">
-                <CalendarCheck className="text-[#7C3EFF]" size={20} />
-              </div>
-              <h1 className="text-sm sm:text-base">
-                DTR To Review
-              </h1>
+            {/* Card Footer */}
+            <div className="border-t border-gray-100 px-4 py-2">
+              <span className="text-xs text-gray-400">{card.subtitle}</span>
             </div>
-
-            <h1 className="font-bold text-2xl sm:text-3xl">3</h1>
           </div>
-
-          <div className="border-t border-gray-500/20 px-3">
-            <span className="text-xs text-gray-500">
-              DTR Submissions
-            </span>
-          </div>
-        </div>
-
-        <div className="border border-gray-500/20 rounded shadow sm col-span-2 row-span-2 mt-2 flex flex-col justify-between col-start-5">
-          <div className="p-3">
-            <div className="flex items-center mb-2">
-              <div className="bg-gray-500/10 rounded-lg w-10 h-10 mr-2 flex items-center justify-center">
-                <ScrollText className="text-[#7C3EFF]" size={20} />
-              </div>
-              <h1 className="text-sm sm:text-base">
-                Overdue Tasks
-              </h1>
-            </div>
-
-            <h1 className="font-bold text-2xl sm:text-3xl">2</h1>
-          </div>
-
-          <div className="border-t border-gray-500/20 px-3">
-            <span className="text-xs text-gray-500">
-              Across All Interns
-            </span>
-          </div>
-        </div>
-        <div className="border border-gray-500/20 rounded shadow sm col-span-2 row-span-2 mt-2 flex flex-col justify-between col-start-7">
-          <div className="p-3">
-            <div className="flex items-center mb-2">
-              <div className="bg-gray-500/10 rounded-lg w-10 h-10 mr-2 flex items-center justify-center">
-                <ScrollText className="text-[#7C3EFF]" size={20} />
-              </div>
-              <h1 className="text-sm sm:text-base">
-                Avg. Performance
-              </h1>
-            </div>
-
-            <h1 className="font-bold text-2xl sm:text-3xl">4.5</h1>
-          </div>
-
-          <div className="border-t border-gray-500/20 px-3">
-            <span className="text-xs text-gray-500">
-              Based on Evaluations
-            </span>
-          </div>
-        </div>
+        );
+      })}
     </>
-  )
+  );
 }
