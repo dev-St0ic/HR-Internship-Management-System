@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import dayjs from "dayjs";
 import { AttendanceContext } from "./AttendanceContext";
 import { useAuth } from "../contexts/AuthContext";
@@ -6,13 +6,10 @@ import { useAuth } from "../contexts/AuthContext";
 export const AttendanceProvider = ({ children }) => {
   const { currentUser } = useAuth();
 
-  const [attendanceDB, setAttendanceDB] = useState({});
-
-  //This will load from local storage
-  useEffect(() => {
+  const [attendanceDB, setAttendanceDB] = useState(() => {
     const stored = JSON.parse(localStorage.getItem("attendance_db") || "{}");
-    setAttendanceDB(stored);
-  }, []);
+    return stored;
+  });
 
   //This will save to local storage
   // TODO: Replace localStorage attendance_db with backend API
@@ -84,8 +81,6 @@ export const AttendanceProvider = ({ children }) => {
     if (!currentUser) return;
 
     const now = dayjs().startOf("minute");
-    const minutesNow = now.hour() * 60 + now.minute();
-
     const todayRecord = getTodayRecord();
     if (!todayRecord) {
       return alert("You haven't timed in today!");
@@ -143,9 +138,28 @@ export const AttendanceProvider = ({ children }) => {
     return attendanceDB[userId] || [];
   };
 
+  const updateAttendanceRecord = (userId, recordIndex, updatedRecord) => {
+    const userRecords = attendanceDB[userId] || [];
+    const updatedRecords = userRecords.map((record, index) =>
+      index === recordIndex ? { ...record, ...updatedRecord } : record,
+    );
+
+    updateDB({
+      ...attendanceDB,
+      [userId]: updatedRecords,
+    });
+  };
+
   return (
     <AttendanceContext.Provider
-      value={{ records, timeIn, timeOut, getStatus, getRecordsByUser }}
+      value={{
+        records,
+        timeIn,
+        timeOut,
+        getStatus,
+        getRecordsByUser,
+        updateAttendanceRecord,
+      }}
     >
       {children}
     </AttendanceContext.Provider>
