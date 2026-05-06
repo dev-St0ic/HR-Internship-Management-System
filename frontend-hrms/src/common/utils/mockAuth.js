@@ -312,3 +312,79 @@ export const initializeMockDatabase = () => {
   }
   console.log("✅ Mock Database Updated with Profile Data!");
 };
+
+
+// --- SYSTEM LOGS ---
+export const dummyLogs = [
+  {
+    timestamp: '2026-04-06 | 09:12:34',
+    user: 'Supervisor 1',
+    role: 'Supervisor',
+    action: 'Login',
+    description: 'Supervisor 1 logged into the system.',
+    details: 'View',
+  },
+  {
+    timestamp: '2026-04-06 | 09:18:02',
+    user: 'Intern 1',
+    role: 'Intern',
+    action: 'Submit Application',
+    description: 'Intern 1 submitted an application.',
+    details: 'View',
+  },
+  {
+    timestamp: '2026-04-06 | 09:25:47',
+    user: 'HR Staff 1',
+    role: 'HR Staff',
+    action: 'Update Record',
+    description: 'HR Staff 1 updated intern record.',
+    details: 'View',
+  },
+  {
+    timestamp: '2026-04-06 | 09:34:21',
+    user: 'Supervisor 2',
+    role: 'Supervisor',
+    action: 'Approve Request',
+    description: 'Supervisor 2 approved a request.',
+    details: 'View',
+  },
+];
+
+
+
+export const hrAdminDashboardData = {
+  greeting: {
+    name: '[Name]',
+    message: 'Good Morning',
+    dateLabel: 'Today:',
+    dateValue: '28th March 2023',
+  },
+  quickActions: [
+    { id: 'add_intern', label: 'Add Intern' },
+    { id: 'generate_report', label: 'Generate Report' },
+  ],
+  metrics: [
+    { title: 'Total Interns', value: '470', trend: '12%', trendType: 'up' },
+    { title: 'Completed Interns', value: '1050', trend: '3%', trendType: 'up' },
+    { title: 'Active Interns', value: '470', trend: '8%', trendType: 'down' },
+    { title: 'Partner Universities', value: '12', trend: '12%', trendType: 'up' },
+  ],
+  recentActivity: [
+    { label: 'New application submitted', description: 'Description', color: 'bg-sky-300' },
+    { label: 'Supervisor evaluation completed', description: 'Description', color: 'bg-emerald-400' },
+    { label: 'New DTR submitted', description: 'Description', color: 'bg-sky-300' },
+    { label: 'MOA uploaded', description: 'Description', color: 'bg-sky-300' },
+  ],
+  attendanceOverview: {
+    filterLabel: 'Today',
+    days: [
+      { day: 'Mon', levels: [58, 88, 98] },
+      { day: 'Tue', levels: [58, 78, 98] },
+      { day: 'Web', levels: [45, 74, 98] },
+      { day: 'Thu', levels: [58, 88, 98] },
+      { day: 'Fri', levels: [75, 82, 98] },
+      { day: 'Sat', levels: [42, 75, 98] },
+      { day: 'Sun', levels: [42, 85, 98] },
+    ],
+  },
+};
