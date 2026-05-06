@@ -261,6 +261,43 @@ const mockUsers = {
   },
 };
 
+export const dummyDepartments = [
+  {
+    title: 'IT Department',
+    count: 3,
+    members: [
+      { name: 'John Doe', role: 'IT Intern' },
+      { name: 'Jane Doe', role: 'HR Intern' },
+      { name: 'Jonathan Doe', role: 'IT Intern' },
+    ],
+  },
+  {
+    title: 'Sales Department',
+    count: 3,
+    members: [
+      { name: 'Darrell Steward', role: 'Sr. Sales Manager' },
+      { name: 'Courtney Henry', role: 'BDM' },
+      { name: 'Kathryn Murphy', role: 'BDE' },
+    ],
+  },
+  {
+    title: 'Project Manager Department',
+    count: 2,
+    members: [
+      { name: 'Ronald Richards', role: 'Sr. Project Manager' },
+      { name: 'Savannah Nguyen', role: 'Project Manager' },
+    ],
+  },
+  {
+    title: 'Marketing Department',
+    count: 2,
+    members: [
+      { name: 'Brooklyn Simmons', role: 'Sr. Marketing Manager' },
+      { name: 'Kristin Watson', role: 'Marketing Coordinator' },
+    ],
+  },
+];
+
 // It writes the data above into the browser so the app can use it.
 export const initializeMockDatabase = () => {
   if (!localStorage.getItem("hrims_users_db")) {
@@ -275,39 +312,3 @@ export const initializeMockDatabase = () => {
   }
   console.log("✅ Mock Database Updated with Profile Data!");
 };
-
-// --- SYSTEM LOGS ---
-export const dummyLogs = [
-  {
-    timestamp: '2026-04-06 | 09:12:34',
-    user: 'Supervisor 1',
-    role: 'Supervisor',
-    action: 'Login',
-    description: 'Supervisor 1 logged into the system.',
-    details: 'View',
-  },
-  {
-    timestamp: '2026-04-06 | 09:18:02',
-    user: 'Intern 1',
-    role: 'Intern',
-    action: 'Submit Application',
-    description: 'Intern 1 submitted an application.',
-    details: 'View',
-  },
-  {
-    timestamp: '2026-04-06 | 09:25:47',
-    user: 'HR Staff 1',
-    role: 'HR Staff',
-    action: 'Update Record',
-    description: 'HR Staff 1 updated intern record.',
-    details: 'View',
-  },
-  {
-    timestamp: '2026-04-06 | 09:34:21',
-    user: 'Supervisor 2',
-    role: 'Supervisor',
-    action: 'Approve Request',
-    description: 'Supervisor 2 approved a request.',
-    details: 'View',
-  },
-];
