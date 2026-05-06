@@ -16,7 +16,7 @@ export default function SystemLogs() {
     <div className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900">System Logs</h1>
+          <h1 className="text-2xl font-semibold text-slate-900">System Logs </h1>
           <p className="text-sm text-slate-500">User Activity Logs</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
