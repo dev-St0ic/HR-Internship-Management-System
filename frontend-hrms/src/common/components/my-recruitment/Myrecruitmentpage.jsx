@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../../contexts/AuthContext";
 import {
   Search, SlidersHorizontal, User, FileText,
-  Briefcase, X, Building2, GraduationCap, Eye
+  Briefcase, X, Eye,
+  ChevronLeft, ChevronRight, Mail, ClipboardList
 } from "lucide-react";
+import MyPartnerUnivirsity from "./MyPartnerUnivirsity";
 
 export default function Myrecruitmentpage() {
   const { currentUser } = useAuth();
@@ -30,9 +32,20 @@ export default function Myrecruitmentpage() {
 
   const progs = [...new Set(apps.map(a => a.prog))];
   const stats = ["Pending", "Approved", "Rejected", "Deploy"];
-  const unis = [...new Set(apps.map(a => a.uni))].map((name, id) => ({
-    id, name, status: "Active Partner"
-  }));
+  const unis = [...new Set(apps.map(a => a.uni))].map((name, id) => {
+    const uniInterns = apps.filter(a => a.uni === name);
+    return {
+      id,
+      name,
+      status: "Active Partner",
+      branch: "Branch/Campus",
+      contactPerson: "Name",
+      address: "Address",
+      phone: "Number",
+      email: "email@gmail.com",
+      internCount: uniInterns.length,
+    };
+  });
   const selApp = apps.find(a => a.id === selId);
 
   const filtered = apps.filter(a => {
@@ -43,6 +56,7 @@ export default function Myrecruitmentpage() {
     return sMatch && (!f.progs.length || f.progs.includes(a.prog)) &&
            (!f.stats.length || f.stats.includes(a.status)) && tMatch;
   });
+  const selectedIndex = filtered.findIndex(a => a.id === selId);
 
   const toggle = (l, v) => setF(p => ({
     ...p, [l]: p[l].includes(v) ? p[l].filter(i => i !== v) : [...p[l], v]
@@ -50,6 +64,16 @@ export default function Myrecruitmentpage() {
   
   const setStat = s => {
     if (selId) setApps(c => c.map(a => a.id === selId ? { ...a, status: s } : a));
+  };
+
+  const moveSelection = dir => {
+    if (!filtered.length) return;
+    const fallback = dir > 0 ? 0 : filtered.length - 1;
+    const nextIndex = selectedIndex === -1
+      ? fallback
+      : (selectedIndex + dir + filtered.length) % filtered.length;
+    setSelId(filtered[nextIndex].id);
+    setSideTab("Information");
   };
 
   const getBadge = s => {
@@ -65,13 +89,26 @@ export default function Myrecruitmentpage() {
   const lbl = "text-[11px] uppercase tracking-wider font-semibold text-gray-400 mb-1";
   const selCls = "w-full text-sm font-semibold outline-none border-b " + 
                  "border-gray-200 pb-1.5 cursor-pointer";
+  const detailLbl = "text-[11px] font-medium text-gray-400 mb-1";
+  const detailValue = "text-[13px] font-medium text-gray-800 truncate";
+  const sidebarTabs = [
+    { id: "Information", icon: <User size={16} /> },
+    { id: "Documents", icon: <ClipboardList size={16} /> },
+  ];
+  const documents = ["Resume.pdf", "Endorsement Letter.pdf", "MOA.pdf"];
+  const getInitials = name => (name || "SN")
+    .split(" ")
+    .map(part => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
   return (
     <div className="p-6 relative">
-      <div className="flex gap-6 items-start">
+      <div>
         
         {/* Main Content */}
-        <div className="bg-white rounded-xl shadow-md p-6 flex-1 min-w-0">
+        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 min-w-0">
           <div className="flex justify-between items-center mb-4">
 
             <div className="relative w-80">
@@ -143,207 +180,194 @@ export default function Myrecruitmentpage() {
           {/* Content Area */}
           <div className="mt-4">
             {tab === "Partner University" ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 pt-2">
-                {unis.filter(u => u.name.toLowerCase().includes(search.toLowerCase())).map(u => (
-                  <div key={u.id} className="group flex flex-col cursor-pointer">
-                    <div className="aspect-video bg-gray-50 rounded-xl flex items-center justify-center 
-                                    relative overflow-hidden mb-3 border border-gray-100">
-                      <GraduationCap size={48} className="text-gray-300 group-hover:scale-110 group-hover:text-violet-200 transition-all duration-500" />
-                      <div className="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/75 text-white text-[9px] font-bold rounded">{u.status.toUpperCase()}</div>
+              <MyPartnerUnivirsity
+                universities={unis}
+                interns={apps}
+                search={search}
+              />
+            ) : (
+              <div className="flex items-start gap-4 min-h-[520px]">
+                <div className="flex-1 min-w-0 overflow-x-auto">
+                  <table className="w-full table-fixed border-collapse">
+                    <thead>
+                      <tr className="text-left text-gray-800 border-b border-gray-100">
+                        {[{ l: "Intern Name", w: "18%" }, 
+                          { l: "University", w: "28%" }, 
+                          { l: "Program", w: "24%" }, 
+                          { l: "Date", w: "10%" }, 
+                          { l: "Hours", w: "10%" }, 
+                          { l: "Status", w: "10%" }
+                      ].map(h => (
+                          <th key={h.l} className={`px-3 pb-3 font-semibold text-sm w-[${h.w}]`}>{h.l}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filtered.length ? filtered.map(r => (
+                        <tr key={r.id} onClick={() => setSelId(r.id)} 
+                            className={`cursor-pointer transition-colors 
+                            ${selId === r.id ? 
+                            "bg-violet-50/60" : 
+                            "hover:bg-gray-50"}`}
+                      >
+                          <td className="px-3 py-4 border-b border-gray-50 
+                                  text-sm font-medium text-gray-900 
+                                  truncate" title={r.name}>{r.name}
+                          </td>
+                          {['uni', 'prog', 'date', 'hrs'].map(k => 
+                          <td key={k} className={td} title={r[k]}>{r[k]}</td>)}
+
+                          <td className="px-3 py-4 border-b border-gray-50">
+                              <span className={getBadge(r.status)}>{r.status}</span>
+                          </td>
+
+                        </tr>
+                      )) : <tr><td colSpan="6" className="text-center py-12 text-gray-500">No applicants found!</td></tr>}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Details Right Sidebar */}
+                {selApp && (
+                  <aside className="bg-white rounded-lg border border-gray-100 w-[350px] shrink-0 p-4 self-stretch">
+            <div className="flex items-center justify-between mb-4">
+              <button
+                onClick={() => moveSelection(-1)}
+                className="p-1.5 rounded-md text-gray-700 hover:bg-gray-50"
+                aria-label="Previous applicant"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                onClick={() => moveSelection(1)}
+                className="p-1.5 rounded-md text-gray-700 hover:bg-gray-50"
+                aria-label="Next applicant"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+
+            <div className="flex gap-4 pb-4">
+              <div className="w-[84px] h-[84px] rounded-lg bg-violet-100 text-violet-600 shrink-0 flex items-center justify-center text-xl font-bold overflow-hidden">
+                {getInitials(selApp.name)}
+              </div>
+
+              <div className="min-w-0 pt-1">
+                <h2 className="text-xl font-bold leading-tight text-gray-950 truncate" title={selApp.name}>
+                  {selApp.name}
+                </h2>
+                <div className="flex items-center gap-1.5 mt-2 text-[13px] text-gray-600 min-w-0">
+                  <Mail size={15} className="shrink-0" />
+                  <span className="truncate" title={selApp.email}>{selApp.email}</span>
+                </div>
+                <div className="mt-2">
+                  <span className={getBadge(selApp.status)}>{selApp.status}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex border-b border-gray-100">
+              {sidebarTabs.map(({ id, icon }) => (
+                <button
+                  key={id}
+                  onClick={() => setSideTab(id)}
+                  className={`flex items-center justify-center gap-2 px-3 pb-2.5 text-[13px] font-bold border-b-2 transition-colors
+                    ${sideTab === id
+                      ? "border-violet-600 text-violet-600"
+                      : "border-transparent text-gray-700 hover:text-violet-600"}`}
+                >
+                  {icon}
+                  {id}
+                </button>
+              ))}
+            </div>
+
+            {sideTab === "Information" ? (
+              <div className="divide-y divide-gray-50">
+                {[
+                  { l: "University", v: selApp.uni },
+                  { l: "Program", v: selApp.prog },
+                  { l: "Year Level", v: selApp.year },
+                  { l: "Required Hours", v: selApp.hrs },
+                  { l: "Preferred Department", v: selApp.dept },
+                  ...(!isAdmin ? [
+                    { l: "Phone", v: selApp.phone || "-" },
+                    { l: "Start Date", v: selApp.date },
+                  ] : []),
+                ].map(d => (
+                  <div key={d.l} className="py-3">
+                    <p className={detailLbl}>{d.l}</p>
+                    <p className={detailValue} title={d.v}>{d.v}</p>
+                  </div>
+                ))}
+
+                {tab === "For Admin Approval" && (
+                  <div className="py-3 space-y-4">
+                    <div>
+                      <p className={detailLbl}>Department</p>
+                      <select className={selCls}>
+                        <option>IT</option>
+                        <option>HR</option>
+                      </select>
                     </div>
-                    <div className="flex gap-3 px-1">
-                      <div className="w-9 h-9 rounded-full bg-violet-50 
-                                text-violet-600 flex items-center 
-                                justify-center shrink-0 mt-0.5 border 
-                                border-violet-100">
-                        <Building2 size={18} />
+                    <div>
+                      <p className={detailLbl}>Supervisor</p>
+                      <select className={selCls}>
+                        <option>Sarah (Supervisor)</option>
+                      </select>
                     </div>
-                      <div className="flex flex-col overflow-hidden">
-                            <h4 className="text-gray-900 font-bold text-sm truncate group-hover:text-violet-600">{u.name}</h4>
-                            <p className="text-xs text-gray-500 mt-1 truncate">Educational Institution</p>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="divide-y divide-gray-50">
+                {documents.map(d => (
+                  <div key={d} className="flex items-center justify-between py-3">
+                    <div className="min-w-0">
+                      <p className="text-[13px] font-medium text-gray-800 truncate">{d}</p>
+                      <p className="text-[11px] text-gray-400">Applicant document</p>
                     </div>
-                    </div>
+                    <button className="p-2 text-gray-400 hover:text-violet-600 hover:bg-violet-50 rounded-md" aria-label={`View ${d}`}>
+                      <Eye size={16} />
+                    </button>
                   </div>
                 ))}
               </div>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full table-fixed border-collapse">
-                  <thead>
-                    <tr className="text-left text-gray-800 border-b border-gray-100">
-                      {[{ l: "Intern Name", w: "18%" }, 
-                        { l: "University", w: "28%" }, 
-                        { l: "Program", w: "24%" }, 
-                        { l: "Date", w: "10%" }, 
-                        { l: "Hours", w: "10%" }, 
-                        { l: "Status", w: "10%" }
-                    ].map(h => (
-                        <th key={h.l} className={`px-3 pb-3 font-semibold text-sm w-[${h.w}]`}>{h.l}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filtered.length ? filtered.map(r => (
-                      <tr key={r.id} onClick={() => setSelId(r.id)} 
-                          className={`cursor-pointer transition-colors 
-                          ${selId === r.id ? 
-                          "bg-violet-50/60" : 
-                          "hover:bg-gray-50"}`}
-                    >
-                        <td className="px-3 py-4 border-b border-gray-50 
-                                text-sm font-medium text-gray-900 
-                                truncate" title={r.name}>{r.name}
-                        </td>
-                        {['uni', 'prog', 'date', 'hrs'].map(k => 
-                        <td key={k} className={td} title={r[k]}>{r[k]}</td>)}
+            )}
 
-                        <td className="px-3 py-4 border-b border-gray-50">
-                            <span className={getBadge(r.status)}>{r.status}</span>
-                        </td>
-
-                      </tr>
-                    )) : <tr><td colSpan="6" className="text-center py-12 text-gray-500">No applicants found!</td></tr>}
-                  </tbody>
-                </table>
+            <div className="flex gap-3 pt-4 mt-2 border-t border-gray-100">
+              {tab === "For Admin Approval" ? (
+                <>
+                  {selApp.status !== "Deploy" && (
+                    <button onClick={() => setStat("Deploy")}
+                      className={`${btn} bg-violet-600 hover:bg-violet-700 text-white`}>
+                      Deploy
+                    </button>
+                  )}
+                  <button onClick={() => (selApp.status === "Deploy" ? setStat("Approved") : setSelId(null))}
+                    className={`${btn} bg-gray-100 hover:bg-gray-200 text-gray-700`}>
+                    Cancel
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button onClick={() => setStat("Approved")}
+                    className={`${btn} bg-violet-600 hover:bg-violet-700 text-white`}>
+                    Approve
+                  </button>
+                  <button onClick={() => setStat("Rejected")}
+                    className={`${btn} bg-gray-50 hover:bg-red-50 text-gray-600 hover:text-red-600`}>
+                    Reject
+                  </button>
+                </>
+              )}
+            </div>
+                  </aside>
+                )}
               </div>
             )}
           </div>
         </div>
-
-        {/* Details Right Sidebar */}
-        {selApp && tab !== "Partner University" && (
-          <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 w-[340px] shrink-0">
-            
-            {isAdmin ? (
-              /* HR Admin Right SIdebar */
-              <div className="flex flex-col">
-                <div className="flex justify-between items-start mb-6">
-                  <div className="flex gap-3 items-center">
-                    <div className="w-11 h-11 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">
-                      <User size={24} />
-                    </div>
-                    <div className="flex flex-col">
-                      <h2 className="text-[15px] font-bold text-gray-900">{selApp.name}</h2>
-                      <p className="text-[11px] text-gray-500 mb-1.5 truncate w-40">{selApp.email}</p>
-                      <div className="flex"><span className={getBadge(selApp.status)}>{selApp.status}</span></div>
-                    </div>
-                  </div>
-                  <button onClick={() => setSelId(null)} className="p-1.5 text-gray-400 hover:bg-gray-100 rounded-lg">
-                    <X size={18} />
-                  </button>
-                </div>
-
-                <div className="flex border-b border-gray-100 mb-6">
-                  {["Information", "Documents"].map(t => (
-                    <button key={t} onClick={() => setSideTab(t)}
-                      className={`flex-1 pb-2.5 text-[13px] font-bold border-b-2 transition-colors 
-                                  ${sideTab === t ? "border-violet-600 text-violet-600" : "border-transparent text-gray-400 hover:text-gray-700"}`}>
-                      {t}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="mb-6">
-                  {sideTab === "Information" ? (
-                    <div className="flex flex-col gap-4">
-                      {[
-                        { l: "University", v: selApp.uni }, { l: "Program", v: selApp.prog }, 
-                        { l: "Year Level", v: selApp.year }, { l: "Required Hours", v: selApp.hrs }, 
-                        { l: "Preferred Department", v: selApp.dept }
-                      ].map(d => (
-                        <div key={d.l}>
-                          <p className={lbl}>{d.l}</p>
-                          <p className="text-[13px] font-semibold text-gray-900">{d.v}</p>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="flex flex-col gap-3">
-                      {["Resume.pdf", "Endorsement Letter.pdf", "MOA.pdf"].map(d => (
-                        <div key={d} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg bg-white">
-                          <span className="text-[13px] font-semibold text-gray-700">{d}</span>
-                          <Eye size={16} className="text-gray-400 cursor-pointer hover:text-violet-600" />
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                <div className="flex gap-3 justify-end pt-5 border-t border-gray-100">
-                  <button onClick={() => setStat("Rejected")} 
-                          className={`${btn} bg-gray-50 hover:bg-red-50 text-gray-600 hover:text-red-600`}>Reject</button>
-                  <button onClick={() => setStat("Approved")} 
-                          className={`${btn} bg-violet-600 text-white hover:bg-violet-700`}>Approve</button>
-                </div>
-              </div>
-            ) : (
-              /*  HR Staff right sidebar */
-              <div className="flex flex-col">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-lg font-bold text-gray-900">{selApp.name}</h2>
-                  <button onClick={() => setSelId(null)} 
-                            className="p-1.5 text-gray-400 hover:bg-gray-100 rounded-lg"><X size={18} />
-                </button>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-y-6 gap-x-4 mb-8">
-                  {[
-                    { l: "First Name", v: selApp.firstName || "-" }, 
-                    { l: "Last Name", v: selApp.lastName || "-" }, 
-                    { l: "Program", v: selApp.prog }, 
-                    { l: "OJT Hours", v: selApp.hrs }, 
-                    { l: "Email", v: selApp.email }, 
-                    { l: "Phone", v: selApp.phone }
-                ].map(d => (
-                    <div key={d.l} className="min-w-0">
-                        <p className={lbl}>{d.l}</p>
-                        <p className="text-sm font-semibold text-gray-900 truncate" title={d.v}>{d.v}</p>
-                    </div>
-                  ))}
-                  
-                  {tab === "For Admin Approval" && (
-                    <>
-                      <div className="col-span-2">
-                        <p className={lbl}>Department</p>
-                        <select className={selCls}>
-                            <option>IT</option>
-                            <option>HR</option>
-                        </select>
-                      </div>
-                      <div className="col-span-2">
-                        <p className={lbl}>Supervisor</p>
-                        <select className={selCls}>
-                            <option>Sarah (Supervisor)</option>
-                        </select>
-                      </div>
-                    </>
-                  )}
-                </div>
-
-                <div className="flex gap-3 justify-end pt-5 border-t border-gray-100">
-                  {tab === "For Admin Approval" ? (
-                    <>
-                      {selApp.status !== "Deploy" && 
-                      <button onClick={() => setStat("Deploy")} 
-                                className={`${btn} bg-violet-600 hover:bg-violet-700 text-white`}>
-                                    Deploy</button>} 
-                      <button onClick={() => (selApp.status === "Deploy" ? setStat("Approved") : setSelId(null))}
-                                className={`${btn} bg-gray-100 hover:bg-gray-200 text-gray-700`}>
-                                    Cancel</button>
-                    </>
-                  ) : (
-                    <>
-                      <button onClick={() => setStat("Approved")} 
-                            className={`${btn} bg-violet-600 hover:bg-violet-700 text-white`}>Approve</button> 
-                      <button onClick={() => setStat("Rejected")} 
-                            className={`${btn} bg-red-500 hover:bg-red-600 text-white`}>Reject</button>
-                    </>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
         
       </div>
     </div>
