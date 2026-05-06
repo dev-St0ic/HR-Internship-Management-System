@@ -10,7 +10,7 @@ export default function FilterButton({
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleCancel = () => {
+  const handleClose = () => {
     onCancel?.();
     setIsOpen(false);
   };
@@ -40,7 +40,8 @@ export default function FilterButton({
               <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
 
               <button
-                onClick={handleCancel}
+                type="button"
+                onClick={handleClose}
                 className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
               >
                 <X size={16} />
@@ -53,7 +54,7 @@ export default function FilterButton({
             {/* Footer Buttons */}
             <div className="mt-6 flex gap-3">
               <button
-                onClick={handleCancel}
+                onClick={handleClose}
                 className="flex-1 rounded-lg border-gray-200 bg-white px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
               >
                 Cancel

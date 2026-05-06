@@ -4,6 +4,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import { Trash } from "lucide-react";
 
 import SearchInput from "../ui/SearchInput";
+import FilterButton from "../ui/FilterButton";
 
 export default function MyInternsPage() {
   const navigate = useNavigate();
@@ -23,6 +24,11 @@ export default function MyInternsPage() {
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState("interns");
   const [internList, setInternList] = useState([]);
+  const [selectedDepartments, setSelectedDepartments] = useState([]);
+  const [selectedUniversity, setSelectedUniversity] = useState([]);
+  const [selectedInterns, setSelectedInterns] = useState([]);
+  const [universitySearch, setUniversitySearch] = useState("");
+  const [internSearch, setInternSearch] = useState("");
 
   // Load interns from mock DB
   useEffect(() => {
@@ -41,11 +47,26 @@ export default function MyInternsPage() {
   }, [currentUser]);
 
   //For filter function
-  const filteredInterns = internList.filter(
-    (intern) =>
+  const filteredInterns = internList.filter((intern) => {
+    const matchesSearch =
       (intern.name || "").toLowerCase().includes(search.toLowerCase()) ||
-      (intern.id || "").toLowerCase().includes(search.toLowerCase()),
-  );
+      (intern.id || "").toLowerCase().includes(search.toLowerCase());
+
+    const matchesDepartment =
+      selectedDepartments.length === 0 ||
+      selectedDepartments.includes(intern.department);
+
+    const matchesUniversity =
+      selectedUniversity.length === 0 ||
+      selectedUniversity.includes(intern.university);
+
+    const matchesIntern =
+      selectedInterns.length === 0 || selectedInterns.includes(intern.id);
+
+    return (
+      matchesSearch && matchesDepartment && matchesUniversity && matchesIntern
+    );
+  });
 
   //View Row
   const handleView = (intern) => {
@@ -57,6 +78,37 @@ export default function MyInternsPage() {
     const updated = internList.filter((intern) => intern.id !== id);
     setInternList(updated);
   };
+
+  const toggleDepartment = (department) => {
+    setSelectedDepartments((prev) =>
+      prev.includes(department)
+        ? prev.filter((item) => item !== department)
+        : [...prev, department],
+    );
+  };
+
+  const toggleUniversity = (university) => {
+    setSelectedUniversity((prev) =>
+      prev.includes(university)
+        ? prev.filter((item) => item !== university)
+        : [...prev, university],
+    );
+  };
+
+  const toggleIntern = (internId) => {
+    setSelectedInterns((prev) =>
+      prev.includes(internId)
+        ? prev.filter((id) => id !== internId)
+        : [...prev, internId],
+    );
+  };
+
+  const departments = [
+    ...new Set(internList.map((intern) => intern.department)),
+  ];
+  const universities = [
+    ...new Set(internList.map((intern) => intern.university)),
+  ];
 
   return (
     <div className="p-6">
@@ -77,9 +129,139 @@ export default function MyInternsPage() {
               </button>
             )}
 
-            <button className="px-4 py-2 bg-white border border-gray-200 rounded-md">
-              Filter
-            </button>
+            <FilterButton
+              title="Filter Button"
+              onCancel={() => {
+                setSelectedDepartments([]);
+                setSelectedUniversity([]);
+                setSelectedInterns([]);
+                setUniversitySearch("");
+                setInternSearch("");
+              }}
+            >
+              <div>
+                <label className="mb-2 block text-sm font-semibold text-gray-900">
+                  Interns
+                </label>
+
+                {/* Search Input */}
+                <input
+                  type="text"
+                  value={internSearch}
+                  onChange={(e) => setInternSearch(e.target.value)}
+                  placeholder="Search intern..."
+                  className="mb-3 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none"
+                />
+
+                {/* Selected Interns */}
+                <input
+                  readOnly
+                  value={internList
+                    .filter((intern) => selectedInterns.includes(intern.id))
+                    .map((intern) => intern.name)
+                    .join(", ")}
+                  placeholder="Selected interns..."
+                  className="mb-3 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-xs outline-none"
+                />
+
+                {/* Results only appear while typing */}
+                {internSearch.trim() && (
+                  <div className="max-h-32 space-y-2 overflow-y-auto no-scrollbar pr-1">
+                    {internList
+                      .filter((intern) =>
+                        intern.name
+                          .toLowerCase()
+                          .includes(internSearch.toLowerCase()),
+                      )
+                      .map((intern) => (
+                        <label
+                          key={intern.id}
+                          className="flex cursor-pointer items-center gap-2 text-sm text-gray-700"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedInterns.includes(intern.id)}
+                            onChange={() => toggleIntern(intern.id)}
+                            className="h-4 w-4 accent-primary"
+                          />
+                          {intern.name}
+                        </label>
+                      ))}
+                  </div>
+                )}
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-semibold text-gray-900">
+                  Department
+                </label>
+
+                <div className="max-h-32 space-y-2 overflow-y-auto no-scrollbar pr-1">
+                  {departments.map((department) => (
+                    <label
+                      key={department}
+                      className="flex cursor-pointer items-center gap-2 text-sm text-gray-700"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedDepartments.includes(department)}
+                        onChange={() => toggleDepartment(department)}
+                        className="h-4 w-4 accent-primary"
+                      />
+                      {department}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-2 block text-sm font-semibold text-gray-900">
+                  University
+                </label>
+
+                {/* Search Input */}
+                <input
+                  type="text"
+                  value={universitySearch}
+                  onChange={(e) => setUniversitySearch(e.target.value)}
+                  placeholder="Search university..."
+                  className="mb-3 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none"
+                />
+
+                {/* Selected Universities */}
+                <input
+                  readOnly
+                  value={selectedUniversity.join(", ")}
+                  placeholder="Selected universities..."
+                  className="mb-3 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-xs outline-none"
+                />
+
+                {/* Results only appear when typing */}
+                {universitySearch.trim() && (
+                  <div className="max-h-32 space-y-2 overflow-y-auto no-scrollbar pr-1">
+                    {universities
+                      .filter((university) =>
+                        university
+                          .toLowerCase()
+                          .includes(universitySearch.toLowerCase()),
+                      )
+                      .map((university) => (
+                        <label
+                          key={university}
+                          className="flex cursor-pointer items-center gap-2 text-sm text-gray-700"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedUniversity.includes(university)}
+                            onChange={() => toggleUniversity(university)}
+                            className="h-4 w-4 accent-primary"
+                          />
+                          {university}
+                        </label>
+                      ))}
+                  </div>
+                )}
+              </div>
+            </FilterButton>
           </div>
         </div>
 
@@ -112,7 +294,7 @@ export default function MyInternsPage() {
 
         {/* Table */}
         <div className="overflow-x-auto">
-          <table className="w-full border-separate border-spacing-y-2">
+          <table className="w-full text-sm border-separate border-spacing-y-2">
             <thead>
               <tr className="text-left text-gray-600 border-b border-gray-200 shadow-sm">
                 <th className="px-3">Intern Name</th>
