@@ -1,5 +1,5 @@
 import Attendance from "../../../../portals/interns/pages/Attendance";
-import AttendanceTableOnly from "./AttendanceTableOnly";
+import AdminEditAttendance from "./AdminEditAttendance";
 import { useAttendance } from "../../../../contexts/useAttendance";
 
 export default function AttendanceSection({ user, mode }) {
@@ -15,7 +15,7 @@ export default function AttendanceSection({ user, mode }) {
     const records = getRecordsByUser(user.id);
 
     return (
-      <AttendanceTableOnly
+      <AdminEditAttendance
         records={records}
         getStatus={getStatus}
         canEdit={canEditAttendance}
