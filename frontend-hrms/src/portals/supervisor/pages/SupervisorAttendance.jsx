@@ -233,7 +233,7 @@ export default function SupervisorAttendance() {
               <label className="mb-2 block text-sm font-semibold text-gray-900">
                 Attendance Status
               </label>
-              <div className="space-y-2">
+              <div className="space-y-2 grid grid-cols-2">
                 {["On Time", "Late", "Absent", "Missing TimeOut"].map(
                   (status) => (
                     <label
@@ -244,7 +244,7 @@ export default function SupervisorAttendance() {
                         type="checkbox"
                         checked={selectedAttendanceStatus.includes(status)}
                         onChange={() => toggleAttendanceStatus(status)}
-                        className="ww-4 h-4 accent-primary"
+                        className="w-4 h-4 accent-primary"
                       />
                       {status}
                     </label>
@@ -258,7 +258,7 @@ export default function SupervisorAttendance() {
                 Concern Status
               </label>
 
-              <div className="space-y-2">
+              <div className="space-y-2 grid grid-cols-2">
                 {["None", "Pending", "Approved", "Rejected"].map((status) => (
                   <label
                     key={status}

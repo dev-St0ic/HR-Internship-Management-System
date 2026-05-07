@@ -3,6 +3,7 @@ import DashboardQuickActions from "../components/ui/DashboardQuickActions";
 import DashboardRecentActivity from "../components/ui/DashboardRecentActivity";
 import DashboardTopPerformers from "../components/ui/DashboardTopPerformers";
 import GreetingHeader from "../../../common/components/ui/GreetingHeader";
+import RecentActivityCard from "../../../common/components/ui/RecentActivityCard";
 import { useAuth } from "../../../contexts/AuthContext";
 
 export default function SupervisorDashboard() {
@@ -82,7 +83,11 @@ export default function SupervisorDashboard() {
         {/* Left side */}
         <div className="col-span-2 space-y-5">
           <DashboardQuickActions />
-          <DashboardRecentActivity />
+          <RecentActivityCard
+            role="supervisor"
+            userId={currentUser?.id}
+            limit={8}
+          />
         </div>
 
         {/* Right Side */}
