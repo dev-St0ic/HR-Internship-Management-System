@@ -9,12 +9,18 @@ import {
 import { useAuth } from "../../../contexts/AuthContext";
 import SearchInput from "../../../common/components/ui/SearchInput";
 import StatCard from "../../../common/components/ui/StatCard";
+import FilterButton from "../../../common/components/ui/FilterButton";
 
 export default function SupervisorAttendance() {
   const { currentUser } = useAuth();
 
   const [search, setSearch] = useState("");
   const [attendanceRows, setAttendanceRows] = useState([]);
+
+  const [selectedFilterInterns, setSelectedFilterInterns] = useState([]);
+  const [selectedAttendanceStatus, setSelectedAttendanceStatus] = useState([]);
+  const [selectedConcernStatus, setSelectedConcernStatus] = useState([]);
+  const [internSearch, setInternSearch] = useState("");
 
   useEffect(() => {
     const userDB = JSON.parse(localStorage.getItem("hrims_users_db") || "{}");
@@ -36,7 +42,7 @@ export default function SupervisorAttendance() {
       const attendanceStatus = latestRecord
         ? latestRecord.timeOut
           ? latestRecord.status
-          : "Missing TimeOut"
+          : "Missing Time Out"
         : "Absent";
 
       const concern = requestDB.find(
@@ -60,9 +66,30 @@ export default function SupervisorAttendance() {
     setAttendanceRows(rows);
   }, [currentUser]);
 
-  const filteredRows = attendanceRows.filter((row) =>
-    row.internName.toLowerCase().includes(search.toLowerCase()),
-  );
+  const filteredRows = attendanceRows.filter((row) => {
+    const matchedSearch = row.internName
+      ?.toLowerCase()
+      .includes(search.toLowerCase());
+
+    const matchesAttendanceStatus =
+      selectedAttendanceStatus.length === 0 ||
+      selectedAttendanceStatus.includes(row.attendanceStatus);
+
+    const matchesConcernStatus =
+      selectedConcernStatus.length === 0 ||
+      selectedConcernStatus.includes(row.concernStatus);
+
+    const matchesIntern =
+      selectedFilterInterns.length === 0 ||
+      selectedFilterInterns.includes(row.internId);
+
+    return (
+      matchedSearch &&
+      matchesAttendanceStatus &&
+      matchesConcernStatus &&
+      matchesIntern
+    );
+  });
 
   const presentToday = attendanceRows.filter(
     (row) => row.timeIn !== "-",
@@ -77,6 +104,30 @@ export default function SupervisorAttendance() {
     (sum, row) => sum + (parseFloat(row.hours) || 0),
     0,
   );
+
+  const toggleFilterInterns = (internId) => {
+    setSelectedFilterInterns((prev) =>
+      prev.includes(internId)
+        ? prev.filter((id) => id !== internId)
+        : [...prev, internId],
+    );
+  };
+
+  const toggleAttendanceStatus = (status) => {
+    setSelectedAttendanceStatus((prev) =>
+      prev.includes(status)
+        ? prev.filter((item) => item !== status)
+        : [...prev, status],
+    );
+  };
+
+  const toggleConcernStatus = (status) => {
+    setSelectedConcernStatus((prev) =>
+      prev.includes(status)
+        ? prev.filter((item) => item !== status)
+        : [...prev, status],
+    );
+  };
 
   return (
     <>
@@ -116,10 +167,115 @@ export default function SupervisorAttendance() {
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search interns..."
           />
-          <button className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 transition">
-            <SlidersHorizontal size={16} />
-            Filter
-          </button>
+
+          <FilterButton
+            title="Filter Button"
+            onCancel={() => {
+              setSelectedAttendanceStatus([]);
+              setSelectedConcernStatus([]);
+              setSelectedFilterInterns([]);
+              setInternSearch("");
+            }}
+          >
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-gray-900">
+                Interns
+              </label>
+
+              {/* Search Input */}
+              <input
+                type="text"
+                value={internSearch}
+                onChange={(e) => setInternSearch(e.target.value)}
+                placeholder="Search intern..."
+                className="mb-3 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none"
+              />
+
+              {/* Selected Interns */}
+              <input
+                readOnly
+                value={attendanceRows
+                  .filter((row) => selectedFilterInterns.includes(row.internId))
+                  .map((row) => row.internName)
+                  .join(", ")}
+                placeholder="Selected interns..."
+                className="mb-3 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-xs outline-none"
+              />
+
+              {/* Results only appear when typing */}
+              {internSearch.trim() && (
+                <div className="max-h-32 space-y-2 overflow-y-auto no-scrollbar pr-1">
+                  {attendanceRows
+                    .filter((row) =>
+                      row.internName
+                        .toLowerCase()
+                        .includes(internSearch.toLowerCase()),
+                    )
+                    .map((row) => (
+                      <label
+                        key={row.internId}
+                        className="flex cursor-pointer items-center gap-2 text-sm text-gray-700"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedFilterInterns.includes(row.internId)}
+                          onChange={() => toggleFilterInterns(row.internId)}
+                          className="h-4 w-4 accent-primary"
+                        />
+                        {row.internName}
+                      </label>
+                    ))}
+                </div>
+              )}
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-gray-900">
+                Attendance Status
+              </label>
+              <div className="space-y-2">
+                {["On Time", "Late", "Absent", "Missing TimeOut"].map(
+                  (status) => (
+                    <label
+                      key={status}
+                      className="flex cursor-pointer items-center gap-2 text-sm text-gray-700"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedAttendanceStatus.includes(status)}
+                        onChange={() => toggleAttendanceStatus(status)}
+                        className="ww-4 h-4 accent-primary"
+                      />
+                      {status}
+                    </label>
+                  ),
+                )}
+              </div>
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-gray-900">
+                Concern Status
+              </label>
+
+              <div className="space-y-2">
+                {["None", "Pending", "Approved", "Rejected"].map((status) => (
+                  <label
+                    key={status}
+                    className="flex cursor-pointer items-center gap-2 text-sm text-gray-700"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedConcernStatus.includes(status)}
+                      onChange={() => toggleConcernStatus(status)}
+                      className="h-4 w-4 accent-primary"
+                    />
+                    {status}
+                  </label>
+                ))}
+              </div>
+            </div>
+          </FilterButton>
         </div>
 
         <table className="w-full text-sm">

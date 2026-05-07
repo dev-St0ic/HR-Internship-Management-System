@@ -18,8 +18,9 @@ export default function SupervisorTasks() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [selectedFilterInterns, setSelectedFilterInterns] = useState([]);
+  const [selectedInterns, setSelectedInterns] = useState([]);
   const [selectedStatuses, setSelectedStatuses] = useState([]);
+  const [internSearch, setInternSearch] = useState("");
 
   const [usersDb, setUsersDb] = useState(() => {
     try {
@@ -64,8 +65,7 @@ export default function SupervisorTasks() {
       task.status?.toLowerCase().includes(search);
 
     const matchesIntern =
-      selectedFilterInterns.length === 0 ||
-      selectedFilterInterns.includes(task.internId);
+      selectedInterns.length === 0 || selectedInterns.includes(task.internId);
 
     const matchesStatus =
       selectedStatuses.length === 0 || selectedStatuses.includes(task.status);
@@ -126,8 +126,8 @@ export default function SupervisorTasks() {
   };
 
   //helper to filter the interns
-  const toggleFilterInterns = (internId) => {
-    setSelectedFilterInterns((prev) =>
+  const toggleInterns = (internId) => {
+    setSelectedInterns((prev) =>
       prev.includes(internId)
         ? prev.filter((id) => id !== internId)
         : [...prev, internId],
@@ -187,46 +187,71 @@ export default function SupervisorTasks() {
             <FilterButton
               title="Filter Tasks"
               onCancel={() => {
-                setSelectedFilterInterns([]);
+                setSelectedInterns([]);
                 setSelectedStatuses([]);
+                setInternSearch("");
               }}
             >
               {/* Select Interns */}
               <div>
                 <label className="mb-2 block text-sm font-semibold text-gray-900">
-                  Select Interns
+                  Interns
                 </label>
 
+                {/* Search Input */}
                 <input
-                  readOnly
-                  value={interns
-                    .filter((intern) =>
-                      selectedFilterInterns.includes(intern.id),
-                    )
-                    .map((intern) => intern.name)
-                    .join(", ")}
-                  placeholder="Select interns... "
+                  type="text"
+                  value={internSearch}
+                  onChange={(e) => setInternSearch(e.target.value)}
+                  placeholder="Search intern..."
                   className="mb-3 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none"
                 />
 
-                <div className="max-h-32 space-y-2 overflow-y-auto pr-1">
-                  {interns.map((intern) => (
-                    <label
-                      key={intern.id}
-                      className="flex cursor-pointer items-center gap-2 text-sm text-gray-700"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedFilterInterns.includes(intern.id)}
-                        onChange={() => toggleFilterInterns(intern.id)}
-                        className="h-4 w-4 accent-primary"
-                      />
-                      {intern.name}
-                    </label>
-                  ))}
-                </div>
-              </div>
+                {/* Selected Interns */}
+                <input
+                  readOnly
+                  value={interns
+                    .filter((intern) => selectedInterns.includes(intern.id))
+                    .map((intern) => intern.name)
+                    .join(", ")}
+                  placeholder="Selected interns..."
+                  className="mb-3 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-xs outline-none"
+                />
 
+                {/* Results only appear while typing */}
+                {internSearch.trim() && (
+                  <div className="max-h-32 space-y-2 overflow-y-auto no-scrollbar pr-1">
+                    {interns.filter((intern) =>
+                      intern.name
+                        .toLowerCase()
+                        .includes(internSearch.toLowerCase()),
+                    ).length > 0 ? (
+                      interns
+                        .filter((intern) =>
+                          intern.name
+                            .toLowerCase()
+                            .includes(internSearch.toLowerCase()),
+                        )
+                        .map((intern) => (
+                          <label
+                            key={intern.id}
+                            className="flex cursor-pointer items-center gap-2 text-sm text-gray-700"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={selectedInterns.includes(intern.id)}
+                              onChange={() => toggleInterns(intern.id)}
+                              className="h-4 w-4 accent-primary"
+                            />
+                            {intern.name}
+                          </label>
+                        ))
+                    ) : (
+                      <p className="text-xs text-gray-400">No interns found.</p>
+                    )}
+                  </div>
+                )}
+              </div>
               <div>
                 <label className="mb-2 block text-sm font-semibold text-gray-900">
                   Status
