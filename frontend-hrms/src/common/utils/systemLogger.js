@@ -42,3 +42,7 @@ export const addSystemLog = (log) => {
     JSON.stringify([newLog, ...existingLogs]),
   );
 };
+
+export const getSystemLogs = () => {
+  return JSON.parse(localStorage.getItem("hrims_system_logs")) || [];
+};
