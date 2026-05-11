@@ -9,16 +9,17 @@ export default function TeamInternList({
 }) {
   return (
     <div>
-      <button
-        onClick={onBack}
-        className="mb-4 flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-600 hover:bg-gray-100"
-      >
-        <ChevronLeft size={16} />
-        Back to Teams
-      </button>
-
       <div className="mb-4">
-        <h2 className="text-lg font-bold text-gray-900">{teamName}</h2>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onBack}
+            className="rounded-lg p-2 text-gray-600 hover:bg-gray-100"
+            aria-label="Back to teams"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <h2 className="text-lg font-bold text-gray-900">{teamName}</h2>
+        </div>
         <p className="text-sm text-gray-400">{members.length} Members</p>
       </div>
 
