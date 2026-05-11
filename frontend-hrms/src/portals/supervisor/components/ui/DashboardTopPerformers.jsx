@@ -1,59 +1,89 @@
-export default function DashboardTopPerformers() {
+import { useAuth } from "../../../../contexts/AuthContext";
+
+export default function DashboardTopPerformers({ limit = 8 }) {
+  const { currentUser } = useAuth();
+
+  const usersDb = JSON.parse(localStorage.getItem("hrims_users_db") || "{}");
+
+  const evaluationDb = JSON.parse(
+    localStorage.getItem("hrims_evaluations_db") || "[]",
+  );
+
+  //Will only get this supervisors evaluation
+  const supervisorEvaluations = evaluationDb.filter(
+    (evaluation) => evaluation.supervisorId === currentUser?.id,
+  );
+
+  //Will get the highest/latest score per intern
+  const performersMap = supervisorEvaluations.reduce((acc, evaluation) => {
+    const intern = usersDb[evaluation.internId];
+
+    if (!intern) return acc;
+
+    const existing = acc[evaluation.internId];
+
+    //Will keep the highest score
+    if (!existing || evaluation.totalScore > existing.totalScore) {
+      acc[evaluation.internId] = {
+        internId: evaluation.internId,
+        name: intern.name || evaluation.internName,
+        course: intern.department || "No course",
+        totalScore: evaluation.totalScore || 0,
+        avatar: intern.avatar || "",
+      };
+    }
+
+    return acc;
+  }, {});
+
+  //Will sort into descending
+  const topPerformer = Object.values(performersMap)
+    .sort((a, b) => b.totalScore - a.totalScore)
+    .slice(0, limit);
+
   return (
-    <div className="border border-gray-500/20 rounded shadow sm col-span-3 row-span-8 col-start-6 row-start-3 p-5">
-          <div className="header border-b border-gray-500/20 mb-5 pb-3">
-            <h1 className="font-medium text-xl">Top Performers</h1>
-          </div>
-          <div className="row flex flex-col gap-3">
-            <div className="item flex items-center gap-3">
-              <img src="./image.png" className="avatar w-10 h-10 rounded-full bg-[#7C3EFF]"></img>
-              <div className="content">
-                <h1 className="font-medium text-sm">John Doe</h1>
-                <span className="text-sm text-gray-500">IT Department</span>
-              </div>
-            </div>
+    <div className="card-panel">
+      {/* Header */}
+      <h2 className="mb-4 border-b border-gray-200 pb-4 text-lg font-semibold text-gray-900">
+        Top Performers
+      </h2>
 
-            <div className="item flex items-center gap-3">    
-              <img src="./image.png" className="avatar w-10 h-10 rounded-full bg-[#7C3EFF]"></img>
-              <div className="content">
-                <h1 className="font-medium text-sm">Jane Smith</h1>
-                <span className="text-sm text-gray-500">AI Department</span>
-              </div>
-            </div>
+      {/* Performer list */}
+      <div className="space-y-4">
+        {topPerformer.length > 0 ? (
+          topPerformer.map((performer) => {
+            const displayAvatar =
+              performer.avatar ||
+              `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                performer.name,
+              )}&background=f3f4f6&color=374151`;
 
-            <div className="item flex items-center gap-3">    
-              <img src="./image.png" className="avatar w-10 h-10 rounded-full bg-[#7C3EFF]"></img>
-              <div className="content">
-                <h1 className="font-medium text-sm">Jane Doe</h1>
-                <span className="text-sm text-gray-500">HR Department</span>
+            return (
+              <div
+                key={performer.internId}
+                className="flex items-center justify-between"
+              >
+                {/* Left Side */}
+                <div className="flex items-center gap-3">
+                  <img
+                    src={displayAvatar}
+                    alt={performer.name}
+                    className="h-11 w-11 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">
+                      {performer.name}
+                    </p>
+                    <p className="text-xs text-gray-400">{performer.course}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <div className="item flex items-center gap-3">    
-              <img src="./image.png" className="avatar w-10 h-10 rounded-full bg-[#7C3EFF]"></img>
-              <div className="content">
-                <h1 className="font-medium text-sm">Jane Doe</h1>
-                <span className="text-sm text-gray-500">HR Department</span>
-              </div>
-            </div>
-
-            <div className="item flex items-center gap-3">    
-              <img src="./image.png" className="avatar w-10 h-10 rounded-full bg-[#7C3EFF]"></img>
-              <div className="content">
-                <h1 className="font-medium text-sm">Jane Doe</h1>
-                <span className="text-sm text-gray-500">Marketing Manager</span>
-              </div>
-            </div>
-
-            <div className="item flex items-center gap-3">    
-              <img src="./image.png" className="avatar w-10 h-10 rounded-full bg-[#7C3EFF]"></img>
-              <div className="content">
-                <h1 className="font-medium text-sm">Jane Doe</h1>
-                <span className="text-sm text-gray-500">Special Project</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
+            );
+          })
+        ) : (
+          <p className="text-sm text-gray-400">No evaluated interns yet</p>
+        )}
+      </div>
+    </div>
   );
 }
