@@ -20,7 +20,6 @@ export default function SupervisorAttendance() {
   const [selectedFilterInterns, setSelectedFilterInterns] = useState([]);
   const [selectedAttendanceStatus, setSelectedAttendanceStatus] = useState([]);
   const [selectedConcernStatus, setSelectedConcernStatus] = useState([]);
-  const [internSearch, setInternSearch] = useState("");
 
   useEffect(() => {
     const userDB = JSON.parse(localStorage.getItem("hrims_users_db") || "{}");
@@ -105,14 +104,6 @@ export default function SupervisorAttendance() {
     0,
   );
 
-  const toggleFilterInterns = (internId) => {
-    setSelectedFilterInterns((prev) =>
-      prev.includes(internId)
-        ? prev.filter((id) => id !== internId)
-        : [...prev, internId],
-    );
-  };
-
   const toggleAttendanceStatus = (status) => {
     setSelectedAttendanceStatus((prev) =>
       prev.includes(status)
@@ -174,61 +165,8 @@ export default function SupervisorAttendance() {
               setSelectedAttendanceStatus([]);
               setSelectedConcernStatus([]);
               setSelectedFilterInterns([]);
-              setInternSearch("");
             }}
           >
-            <div>
-              <label className="mb-2 block text-sm font-semibold text-gray-900">
-                Interns
-              </label>
-
-              {/* Search Input */}
-              <input
-                type="text"
-                value={internSearch}
-                onChange={(e) => setInternSearch(e.target.value)}
-                placeholder="Search intern..."
-                className="mb-3 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none"
-              />
-
-              {/* Selected Interns */}
-              <input
-                readOnly
-                value={attendanceRows
-                  .filter((row) => selectedFilterInterns.includes(row.internId))
-                  .map((row) => row.internName)
-                  .join(", ")}
-                placeholder="Selected interns..."
-                className="mb-3 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-xs outline-none"
-              />
-
-              {/* Results only appear when typing */}
-              {internSearch.trim() && (
-                <div className="max-h-32 space-y-2 overflow-y-auto no-scrollbar pr-1">
-                  {attendanceRows
-                    .filter((row) =>
-                      row.internName
-                        .toLowerCase()
-                        .includes(internSearch.toLowerCase()),
-                    )
-                    .map((row) => (
-                      <label
-                        key={row.internId}
-                        className="flex cursor-pointer items-center gap-2 text-sm text-gray-700"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={selectedFilterInterns.includes(row.internId)}
-                          onChange={() => toggleFilterInterns(row.internId)}
-                          className="h-4 w-4 accent-primary"
-                        />
-                        {row.internName}
-                      </label>
-                    ))}
-                </div>
-              )}
-            </div>
-
             <div>
               <label className="mb-2 block text-sm font-semibold text-gray-900">
                 Attendance Status
