@@ -298,13 +298,110 @@ export const dummyDepartments = [
   },
 ];
 
+const USERS_DB_KEY = "hrims_users_db";
+const DEPARTMENTS_DB_KEY = "hrims_departments_db";
+
+const canUseLocalStorage = () => typeof window !== "undefined" && window.localStorage;
+
+export const getStoredDepartments = () => {
+  if (!canUseLocalStorage()) {
+    return dummyDepartments;
+  }
+
+  const storedDepartments = localStorage.getItem(DEPARTMENTS_DB_KEY);
+
+  if (!storedDepartments) {
+    localStorage.setItem(DEPARTMENTS_DB_KEY, JSON.stringify(dummyDepartments));
+    return dummyDepartments;
+  }
+
+  try {
+    return JSON.parse(storedDepartments);
+  } catch {
+    localStorage.setItem(DEPARTMENTS_DB_KEY, JSON.stringify(dummyDepartments));
+    return dummyDepartments;
+  }
+};
+
+export const addEmployeeToTemporaryDatabase = (departmentTitle, employeeData) => {
+  const departments = getStoredDepartments();
+  const now = Date.now();
+  const employeeId = String(now);
+  const fullName = `${employeeData.firstName} ${employeeData.lastName}`.trim();
+  const designation = employeeData.designation || "Employee";
+
+  const nextDepartments = departments.map((department) => {
+    if (department.title !== departmentTitle) {
+      return department;
+    }
+
+    return {
+      ...department,
+      count: department.count + 1,
+      members: [
+        ...department.members,
+        {
+          id: employeeId,
+          name: fullName,
+          role: designation,
+          email: employeeData.email,
+          phone: employeeData.phone,
+          type: employeeData.type || "Office",
+          status: employeeData.status || "Permanent",
+        },
+      ],
+    };
+  });
+
+  if (!canUseLocalStorage()) {
+    return { employeeId, departments: nextDepartments };
+  }
+
+  const users = JSON.parse(localStorage.getItem(USERS_DB_KEY) || JSON.stringify(mockUsers));
+
+  localStorage.setItem(DEPARTMENTS_DB_KEY, JSON.stringify(nextDepartments));
+  localStorage.setItem(
+    USERS_DB_KEY,
+    JSON.stringify({
+      ...users,
+      [employeeId]: {
+        id: employeeId,
+        role: "EMPLOYEE",
+        department: departmentTitle,
+        name: fullName,
+        firstName: employeeData.firstName,
+        lastName: employeeData.lastName,
+        phone: employeeData.phone,
+        email: employeeData.email,
+        dob: employeeData.dob,
+        maritalStatus: employeeData.maritalStatus,
+        gender: employeeData.gender,
+        nationality: employeeData.nationality,
+        address: employeeData.address,
+        city: employeeData.city,
+        zipCode: employeeData.zipCode,
+        designation,
+        type: employeeData.type || "Office",
+        status: employeeData.status || "Permanent",
+        createdAt: new Date(now).toISOString(),
+      },
+    }),
+  );
+
+  return { employeeId, departments: nextDepartments };
+};
+
 // It writes the data above into the browser so the app can use it.
 export const initializeMockDatabase = () => {
-  if (!localStorage.getItem("hrims_users_db")) {
-    localStorage.setItem("hrims_users_db", JSON.stringify(mockUsers));
+  if (!localStorage.getItem(USERS_DB_KEY)) {
+    localStorage.setItem(USERS_DB_KEY, JSON.stringify(mockUsers));
     console.log("✅ Mock Database Initialized!");
   } else {
     console.log("ℹ️ Mock Database already exists.");
+  }
+
+  if (!localStorage.getItem(DEPARTMENTS_DB_KEY)) {
+    localStorage.setItem(DEPARTMENTS_DB_KEY, JSON.stringify(dummyDepartments));
   }
 
   if (!localStorage.getItem("hrims_evaluations_db")) {

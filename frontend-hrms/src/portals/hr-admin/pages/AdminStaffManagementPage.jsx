@@ -8,9 +8,11 @@ import {
   Plus,
   Search,
   Trash2,
+  Upload,
+  X,
 } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { dummyDepartments } from '../../../common/utils/mockAuth.js';
+import { addEmployeeToTemporaryDatabase, getStoredDepartments } from '../../../common/utils/mockAuth.js';
 
 const PAGE_SIZE_OPTIONS = [10, 15, 20];
 const AVATAR_COLORS = [
@@ -22,13 +24,51 @@ const AVATAR_COLORS = [
   'bg-orange-100 text-orange-700',
 ];
 const TYPE_SEQUENCE = ['Office', 'Remote'];
+const EMPTY_EMPLOYEE_FORM = {
+  firstName: '',
+  lastName: '',
+  phone: '',
+  email: '',
+  dob: '',
+  maritalStatus: '',
+  gender: '',
+  nationality: '',
+  address: '',
+  city: '',
+  zipCode: '',
+  type: 'Office',
+  status: 'Permanent',
+};
+const MARITAL_STATUS_OPTIONS = ['Single', 'Married', 'Widowed', 'Separated'];
+const GENDER_OPTIONS = ['Female', 'Male', 'Non-binary', 'Prefer not to say'];
+const TYPE_OPTIONS = ['Office', 'Remote'];
+const STATUS_OPTIONS = ['Permanent', 'Probationary', 'Contractual'];
+const ADD_EMPLOYEE_TABS = {
+  MANUAL: 'manual',
+  BULK: 'bulk',
+};
+const EMPLOYEE_TEXT_FIELDS = [
+  { name: 'firstName', label: 'First Name', required: true },
+  { name: 'lastName', label: 'Last Name', required: true },
+  { name: 'phone', label: 'Mobile Number', required: true },
+  { name: 'email', label: 'Email Address', type: 'email', required: true },
+  { name: 'dob', label: 'Date of Birth', type: 'date' },
+  { name: 'nationality', label: 'Nationality' },
+  { name: 'address', label: 'Address', wide: true },
+  { name: 'city', label: 'City' },
+  { name: 'zipCode', label: 'ZIP Code' },
+];
 
 export default function StaffManagement() {
-  const [departments] = useState(dummyDepartments);
+  const [departments, setDepartments] = useState(() => getStoredDepartments());
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState(false);
+  const [activeAddTab, setActiveAddTab] = useState(ADD_EMPLOYEE_TABS.MANUAL);
+  const [employeeForm, setEmployeeForm] = useState(EMPTY_EMPLOYEE_FORM);
+  const [formError, setFormError] = useState('');
 
   const activeDepartment = useMemo(
     () => departments.find((department) => department.title === selectedDepartment) ?? null,
@@ -41,13 +81,14 @@ export default function StaffManagement() {
     }
 
     return activeDepartment.members.map((member, index) => ({
-      id: `${(index + 1).toString().padStart(3, '0')}${String(member.name.length).padStart(3, '0')}${String(
-        activeDepartment.title.length,
-      ).padStart(3, '0')}`,
+      id:
+        member.id?.replace(/^employee_/, '') ||
+        `${(index + 1).toString().padStart(3, '0')}${String(member.name.length).padStart(3, '0')}${String(
+          activeDepartment.title.length,
+        ).padStart(3, '0')}`,
       name: member.name,
-      designation: member.role,
-      type: TYPE_SEQUENCE[index % TYPE_SEQUENCE.length],
-      status: 'Permanent',
+      type: member.type || TYPE_SEQUENCE[index % TYPE_SEQUENCE.length],
+      status: member.status || 'Permanent',
       initials: member.name
         .split(' ')
         .map((part) => part[0])
@@ -66,7 +107,7 @@ export default function StaffManagement() {
     }
 
     return employeeRows.filter((employee) =>
-      [employee.id, employee.name, employee.designation, employee.type, employee.status]
+      [employee.id, employee.name, employee.type, employee.status]
         .join(' ')
         .toLowerCase()
         .includes(normalized),
@@ -97,6 +138,53 @@ export default function StaffManagement() {
   const handlePageSizeChange = (event) => {
     setPageSize(Number(event.target.value));
     setCurrentPage(1);
+  };
+
+  const handleOpenAddEmployee = () => {
+    setEmployeeForm(EMPTY_EMPLOYEE_FORM);
+    setActiveAddTab(ADD_EMPLOYEE_TABS.MANUAL);
+    setFormError('');
+    setIsAddEmployeeOpen(true);
+  };
+
+  const handleCloseAddEmployee = () => {
+    setIsAddEmployeeOpen(false);
+    setFormError('');
+  };
+
+  const handleEmployeeFormChange = (event) => {
+    const { name, value } = event.target;
+    setEmployeeForm((currentForm) => ({
+      ...currentForm,
+      [name]: value,
+    }));
+  };
+
+  const handleAddEmployee = (event) => {
+    event.preventDefault();
+
+    if (!activeDepartment) {
+      return;
+    }
+
+    const requiredFields = ['firstName', 'lastName', 'phone', 'email'];
+    const hasMissingRequiredField = requiredFields.some((field) => !employeeForm[field].trim());
+
+    if (hasMissingRequiredField) {
+      setFormError('Please complete the required employee information.');
+      return;
+    }
+
+    const { departments: nextDepartments } = addEmployeeToTemporaryDatabase(activeDepartment.title, employeeForm);
+    const activeMemberCount =
+      nextDepartments.find((department) => department.title === activeDepartment.title)?.members.length || 0;
+
+    setDepartments(nextDepartments);
+    setSearchTerm('');
+    setCurrentPage(Math.max(1, Math.ceil(activeMemberCount / pageSize)));
+    setEmployeeForm(EMPTY_EMPLOYEE_FORM);
+    setFormError('');
+    setIsAddEmployeeOpen(false);
   };
 
   return (
@@ -186,7 +274,11 @@ export default function StaffManagement() {
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
-                <button className="inline-flex h-11 items-center gap-2 rounded-2xl bg-indigo-600 px-5 text-sm font-semibold text-white transition hover:bg-indigo-700">
+                <button
+                  type="button"
+                  onClick={handleOpenAddEmployee}
+                  className="inline-flex h-11 items-center gap-2 rounded-2xl bg-indigo-600 px-5 text-sm font-semibold text-white transition hover:bg-indigo-700"
+                >
                   <Plus size={16} />
                   Add New Employee
                 </button>
@@ -203,7 +295,6 @@ export default function StaffManagement() {
                   <tr className="text-left text-sm text-slate-400">
                     <th className="border-b border-slate-100 px-3 py-3 font-medium">Employee ID</th>
                     <th className="border-b border-slate-100 px-3 py-3 font-medium">Employee Name</th>
-                    <th className="border-b border-slate-100 px-3 py-3 font-medium">Designation</th>
                     <th className="border-b border-slate-100 px-3 py-3 font-medium">Type</th>
                     <th className="border-b border-slate-100 px-3 py-3 font-medium">Status</th>
                     <th className="border-b border-slate-100 px-3 py-3 font-medium text-center">Action</th>
@@ -221,7 +312,6 @@ export default function StaffManagement() {
                           <span className="font-medium text-slate-800">{employee.name}</span>
                         </div>
                       </td>
-                      <td className="border-b border-slate-100 px-3 py-3">{employee.designation}</td>
                       <td className="border-b border-slate-100 px-3 py-3">{employee.type}</td>
                       <td className="border-b border-slate-100 px-3 py-3">
                         <span className="rounded-md bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-500">
@@ -310,6 +400,191 @@ export default function StaffManagement() {
             </div>
           </section>
         </>
+      )}
+
+      {isAddEmployeeOpen && activeDepartment && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/30 px-4 py-6 backdrop-blur-sm">
+          <div className="max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl">
+            <div className="flex items-start justify-between gap-4 border-b border-slate-100 pb-4">
+              <div>
+                <h2 className="text-base font-semibold text-slate-900">Add New Employee</h2>
+              </div>
+              <button
+                type="button"
+                onClick={handleCloseAddEmployee}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+                aria-label="Close add employee form"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="mt-4 flex items-center gap-6">
+              <button
+                type="button"
+                onClick={() => setActiveAddTab(ADD_EMPLOYEE_TABS.MANUAL)}
+                className={`border-b-2 pb-2 text-sm font-semibold transition ${
+                  activeAddTab === ADD_EMPLOYEE_TABS.MANUAL
+                    ? 'border-slate-950 text-slate-950'
+                    : 'border-transparent text-slate-300 hover:text-slate-500'
+                }`}
+              >
+                Add New Employee
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveAddTab(ADD_EMPLOYEE_TABS.BULK)}
+                className={`border-b-2 pb-2 text-sm font-semibold transition ${
+                  activeAddTab === ADD_EMPLOYEE_TABS.BULK
+                    ? 'border-slate-950 text-slate-950'
+                    : 'border-transparent text-slate-300 hover:text-slate-500'
+                }`}
+              >
+                Bulk Upload
+              </button>
+            </div>
+
+            {activeAddTab === ADD_EMPLOYEE_TABS.MANUAL ? (
+              <form onSubmit={handleAddEmployee} className="mt-5">
+                <div className="grid gap-4 md:grid-cols-2">
+                  {EMPLOYEE_TEXT_FIELDS.map((field) => (
+                    <label key={field.name} className={field.wide ? 'md:col-span-2' : ''}>
+                      <span className="mb-1 block text-xs font-medium text-slate-500">
+                        {field.label}
+                        {field.required ? ' *' : ''}
+                      </span>
+                      <input
+                        type={field.type || 'text'}
+                        name={field.name}
+                        value={employeeForm[field.name]}
+                        onChange={handleEmployeeFormChange}
+                        required={field.required}
+                        placeholder={field.type === 'date' ? undefined : field.label}
+                        className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                      />
+                    </label>
+                  ))}
+
+                  <label>
+                    <span className="mb-1 block text-xs font-medium text-slate-500">Marital Status</span>
+                    <select
+                      name="maritalStatus"
+                      value={employeeForm.maritalStatus}
+                      onChange={handleEmployeeFormChange}
+                      className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                    >
+                      <option value="">Select marital status</option>
+                      {MARITAL_STATUS_OPTIONS.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label>
+                    <span className="mb-1 block text-xs font-medium text-slate-500">Gender</span>
+                    <select
+                      name="gender"
+                      value={employeeForm.gender}
+                      onChange={handleEmployeeFormChange}
+                      className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                    >
+                      <option value="">Select gender</option>
+                      {GENDER_OPTIONS.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label>
+                    <span className="mb-1 block text-xs font-medium text-slate-500">Type</span>
+                    <select
+                      name="type"
+                      value={employeeForm.type}
+                      onChange={handleEmployeeFormChange}
+                      className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                    >
+                      {TYPE_OPTIONS.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label>
+                    <span className="mb-1 block text-xs font-medium text-slate-500">Status</span>
+                    <select
+                      name="status"
+                      value={employeeForm.status}
+                      onChange={handleEmployeeFormChange}
+                      className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                    >
+                      {STATUS_OPTIONS.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+
+                {formError && <p className="mt-4 text-sm font-medium text-rose-500">{formError}</p>}
+
+                <div className="mt-6 flex justify-end gap-3">
+                  <button
+                    type="button"
+                    onClick={handleCloseAddEmployee}
+                    className="inline-flex h-11 min-w-28 items-center justify-center rounded-xl border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="inline-flex h-11 min-w-36 items-center justify-center rounded-xl bg-slate-950 px-5 text-sm font-semibold text-white transition hover:bg-slate-800"
+                  >
+                    Add Employee
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div className="mt-5">
+                <p className="text-xs font-medium text-slate-900">Required Information</p>
+                <div className="mt-3 h-32 rounded-xl bg-slate-100 md:h-40" />
+
+                <p className="mt-5 text-xs font-medium text-slate-900">Download Template here</p>
+                <div className="mt-3 h-14 rounded-xl bg-slate-100 md:h-16" />
+
+                <div className="mt-5 flex min-h-28 flex-col items-center justify-center rounded-xl border border-dashed border-slate-950 px-4 py-6 text-center">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-slate-950 text-white">
+                    <Upload size={17} />
+                  </span>
+                  <p className="mt-3 text-sm text-slate-900">Drag & Drop or choose file to upload</p>
+                  <p className="mt-1 text-xs text-slate-300">Supported formats : Jpeg, pdf</p>
+                </div>
+
+                <div className="mt-7 flex justify-end gap-3">
+                  <button
+                    type="button"
+                    onClick={handleCloseAddEmployee}
+                    className="inline-flex h-11 min-w-28 items-center justify-center rounded-xl border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="inline-flex h-11 min-w-36 items-center justify-center rounded-xl bg-slate-950 px-5 text-sm font-semibold text-white transition hover:bg-slate-800"
+                  >
+                    Add Employee
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );
