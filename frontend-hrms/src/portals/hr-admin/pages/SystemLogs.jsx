@@ -1,33 +1,27 @@
 import { Search, Download, Filter } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { dummyLogs } from '../../../common/utils/mockAuth.js';
+import { getSystemLogs } from '../../../common/utils/systemLogger.js';
 
 export default function SystemLogs() {
-  const [logs, setLogs] = useState(dummyLogs);
+  const [logs, setLogs] = useState([]);
 
-  // Commented out API call for logs
-  // useEffect(() => {
-  //   fetch('/api/system-logs')
-  //     .then(res => res.json())
-  //     .then(data => setLogs(data))
-  //     .catch(err => console.error('Error fetching logs:', err));
-  // }, []);
+  useEffect(() => {
+    const systemLogs = getSystemLogs();
+    setLogs(systemLogs);
+  }, []);
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-slate-900">System Logs </h1>
-          <p className="text-sm text-slate-500">User Activity Logs</p>
+        <div className="relative w-full max-w-[320px]">
+          <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <input
+            type="text"
+            placeholder="Search"
+            className="w-full rounded-3xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+          />
         </div>
+
         <div className="flex flex-wrap items-center gap-3">
-          <div className="relative w-full max-w-[320px]">
-            <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-full rounded-3xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-            />
-          </div>
           <button className="inline-flex items-center gap-2 rounded-3xl bg-violet-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-violet-700">
             <Download size={16} />
             Export

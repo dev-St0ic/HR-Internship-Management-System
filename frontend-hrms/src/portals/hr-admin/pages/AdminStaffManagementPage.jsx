@@ -158,18 +158,18 @@ export default function StaffManagement() {
       ) : (
         <>
           <div className="flex flex-col gap-2">
-            <button
-              type="button"
-              onClick={handleBackToDepartments}
-              className="inline-flex w-fit items-center gap-2 text-sm font-medium text-slate-500 transition hover:text-slate-700"
-            >
-              <ChevronLeft size={16} />
-              Back to Departments
-            </button>
-            <div>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleBackToDepartments}
+                className="inline-flex items-center justify-center rounded-lg p-1 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
+                aria-label="Back to departments"
+              >
+                <ChevronLeft size={20} />
+              </button>
               <h1 className="text-2xl font-semibold text-slate-900">{activeDepartment.title}</h1>
-              <p className="text-sm text-slate-500">Staff Management &gt; {activeDepartment.title}</p>
             </div>
+            <p className="text-sm text-slate-500">Staff Management &gt; {activeDepartment.title}</p>
           </div>
 
           <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">

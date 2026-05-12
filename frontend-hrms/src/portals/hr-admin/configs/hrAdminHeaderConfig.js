@@ -31,8 +31,4 @@ export const hrAdminHeaderConfig = {
     title: "Settings",
     subtitle: "All system settings",
   },
-  "/hr-admin/notifications": {
-    title: "Notifications",
-    subtitle: "All notifications",
-  },
 };
