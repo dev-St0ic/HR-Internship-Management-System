@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import FileDropZone from "../../../../common/components/ui/FileDropZone";
 import { getTodayISO } from "../../../../common/utils/dateHelper";
 
@@ -8,6 +9,7 @@ export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
   const [deadline, setDeadline] = useState("");
   const [deliverable, setDeliverable] = useState("");
   const [description, setDescription] = useState("");
+  const [showInternList, setShowInternList] = useState(false);
 
   const toggleIntern = (internId) => {
     setSelectedInterns((prev) =>
@@ -23,7 +25,6 @@ export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
     .join(", ");
 
   const handleSubmit = () => {
-    console.log("Clicked assign");
     if (!taskTitle || selectedInterns.length === 0) return;
 
     const newTask = {
@@ -36,7 +37,6 @@ export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
       startDate: getTodayISO(),
       finishDate: "-",
     };
-    console.log("NEW TASK:", newTask);
 
     onAssign?.(selectedInterns, newTask);
     onClose();
@@ -45,48 +45,59 @@ export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm">
       <div className="flex max-h-[85vh] w-full max-w-md flex-col rounded-2xl bg-white shadow-xl">
-        {/* Header Fixed on top */}
+        {/* Header */}
         <div className="border-b border-gray-100 p-6">
           <h2 className="text-base font-semibold text-gray-900">
             Create New Task
           </h2>
         </div>
 
+        {/* Scrollable body */}
         <div className="h-full overflow-y-auto no-scrollbar px-6 py-5 pb-12">
           <div className="space-y-4">
+            {/* Select Interns */}
             <div>
               <label className="mb-2 block text-xs font-semibold text-gray-900">
                 Select Interns
               </label>
 
+              {/* Input field */}
               <input
                 readOnly
+                onClick={() => setShowInternList((prev) => !prev)}
                 value={selectedNames}
                 placeholder="Select interns..."
-                className="mb-3 w-full rounded-lg border border-gray-200 px-3 py-2 text-xs outline-none"
+                className="w-full cursor-pointer rounded-lg border border-gray-200 px-3 py-2 text-xs outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
               />
-              <div className="max-h-32 space-y-2 overflow-y-auto pr-1">
-                {interns.length > 0 ? (
-                  interns.map((intern) => (
-                    <label
-                      key={intern.id}
-                      className="flex cursor-pointer items-center gap-2 text-xs text-gray-700"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedInterns.includes(intern.id)}
-                        onChange={() => toggleIntern(intern.id)}
-                        className="h-4 w-4 accent-primary"
-                      />{" "}
-                      {intern.name}
-                    </label>
-                  ))
-                ) : (
-                  <p className="text-xs text-gray-400">No interns available.</p>
-                )}
-              </div>
+
+              {/* Checklist appears ONLY after clicking the input */}
+              {showInternList && (
+                <div className="mt-3 space-y-2">
+                  {interns.length > 0 ? (
+                    interns.map((intern) => (
+                      <label
+                        key={intern.id}
+                        className="flex cursor-pointer items-center gap-2 text-xs text-gray-700"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedInterns.includes(intern.id)}
+                          onChange={() => toggleIntern(intern.id)}
+                          className="h-4 w-4 accent-primary"
+                        />
+                        {intern.name}
+                      </label>
+                    ))
+                  ) : (
+                    <p className="text-xs text-gray-400">
+                      No interns available.
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
 
+            {/* Task Title */}
             <div>
               <label className="mb-2 block text-xs font-semibold text-gray-900">
                 Task Title
@@ -100,6 +111,7 @@ export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
               />
             </div>
 
+            {/* Task Description */}
             <div>
               <label className="mb-2 block text-xs font-semibold text-gray-900">
                 Task Description
@@ -113,6 +125,7 @@ export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
               />
             </div>
 
+            {/* Deliverable */}
             <FileDropZone
               label="Deliverable"
               fileName={deliverable}
@@ -122,6 +135,7 @@ export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
               supportedText="Supported formats: docs, pdf"
             />
 
+            {/* Deadline */}
             <div>
               <label className="mb-2 block text-xs font-semibold text-gray-900">
                 Deadline
@@ -135,7 +149,9 @@ export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
             </div>
           </div>
         </div>
-        <div className="border-t border-gray-100 bg-white p-6 rounded-b-2xl">
+
+        {/* Fixed footer */}
+        <div className="rounded-b-2xl border-t border-gray-100 bg-white p-6">
           <div className="flex justify-end gap-3">
             <button
               onClick={onClose}
@@ -143,6 +159,7 @@ export default function AssignTaskModal({ interns = [], onClose, onAssign }) {
             >
               Cancel
             </button>
+
             <button
               onClick={handleSubmit}
               className="w-32 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-hover"
