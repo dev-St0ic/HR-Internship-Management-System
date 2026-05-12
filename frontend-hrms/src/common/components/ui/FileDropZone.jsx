@@ -1,3 +1,5 @@
+import { X } from "lucide-react";
+
 export default function FileDropzone({
   label = "Upload File",
   fileName,
@@ -23,6 +25,20 @@ export default function FileDropzone({
       </span>
 
       <label className="relative flex h-32 w-full cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-gray-200 bg-white transition-colors hover:bg-gray-50">
+        {fileName && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setFileName("");
+            }}
+            className="absolute right-3 top-3 z-30 flex h-6 w-6 items-center justify-center rounded-full bg-gray-900 text-xs font-bold text-white hover:bg-gray-700"
+          >
+            <X size={12} />
+          </button>
+        )}
+
         {fileName ? (
           <div className="z-10 flex flex-col items-center justify-center p-4 text-center">
             <svg
@@ -39,7 +55,7 @@ export default function FileDropzone({
               />
             </svg>
 
-            <span className="max-w-[200px] truncate px-2 text-sm font-medium text-gray-900">
+            <span className="max-w-50 px-2 text-sm font-medium text-gray-900">
               {fileName}
             </span>
 
