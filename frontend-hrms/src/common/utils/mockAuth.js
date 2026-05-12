@@ -485,3 +485,44 @@ export const hrAdminDashboardData = {
     ],
   },
 };
+
+
+// --- CHART DATA ---
+export const dummyChartDays = [
+  { week: 'Week 1', values: [32, 46, 22, 40, 28, 56, 50, 74, 64, 84, 76, 99] },
+  { week: 'Week 2', values: [22, 36, 52, 56, 44, 48, 62, 84, 82, 92, 90, 96] },
+  { week: 'Week 3', values: [38, 60, 34, 52, 66, 76, 72, 94, 88, 80, 96, 90] },
+];
+
+export const dummyUniversities = [
+  { name: 'CIT-U', value: 23, color: '#22c55e' },
+  { name: 'PUP iTech', value: 30, color: '#a855f7' },
+  { name: 'De La Salle University', value: 34, color: '#38bdf8' },
+  { name: 'University of Santo Tomas', value: 19, color: '#f59e0b' },
+  { name: 'Far Eastern University', value: 26, color: '#ef4444' },
+  { name: 'University of Makati', value: 15, color: '#06b6d4' },
+  { name: 'AMA Online University', value: 21, color: '#ec4899' },
+  { name: 'Technological University of the Philippines', value: 24, color: '#8b5cf6' },
+  { name: 'Polytechnic University of the Philippines', value: 32, color: '#14b8a6' },
+  { name: 'USJR', value: 15, color: '#f97316' },
+];
+
+export const dummyInternshipOverview = [
+  { label: 'CIT-U', incoming: 12, active: 8, finalizing: 3 },
+  { label: 'PUP iTech', incoming: 15, active: 10, finalizing: 5 },
+  { label: 'De La Salle University', incoming: 18, active: 12, finalizing: 4 },
+  { label: 'University of Santo Tomas', incoming: 10, active: 7, finalizing: 2 },
+  { label: 'Far Eastern University', incoming: 14, active: 9, finalizing: 3 },
+  { label: 'University of Makati', incoming: 8, active: 5, finalizing: 2 },
+  { label: 'AMA Online University', incoming: 11, active: 6, finalizing: 4 },
+  { label: 'Technological University of the Philippines', incoming: 13, active: 8, finalizing: 3 },
+  { label: 'Polytechnic University of the Philippines', incoming: 16, active: 11, finalizing: 5 },
+  { label: 'USJR', incoming: 9, active: 4, finalizing: 2 },
+];
+
+// --- METRICS ---
+export const dummyMetrics = [
+  { label: 'Active Interns', value: '28', accent: 'bg-emerald-500', text: 'text-emerald-700' },
+  { label: 'Incoming Interns', value: '15', accent: 'bg-amber-400', text: 'text-amber-700' },
+  { label: 'Finalizing Internship', value: '5', accent: 'bg-rose-400', text: 'text-rose-700' },
+];

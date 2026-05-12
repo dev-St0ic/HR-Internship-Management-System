@@ -1,28 +1,52 @@
 import { Bell } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import AdminNotifications from "../../../portals/hr-admin/pages/AdminNotifications";
+import { getSystemLogs } from "../../utils/systemLogger";
 
-// 1. Accept userRole as a prop here
 export default function NotificationBell({ userRole = "intern" }) {
-  // TEMP This should come from notifications state or API call
-  const notifications = [
-    { id: 1, message: "New task assigned", action: "View tasks" },
-  ];
-  const hasNotifications = notifications.length > 0;
+  const [isOpen, setIsOpen] = useState(false);
 
-  // 2. The path is now dynamic based on the prop!
-  const path = `/${userRole}/notifications`;
+  // Get unread notifications count from system logs
+  const systemLogs = getSystemLogs();
+  const unreadCount = systemLogs.filter((log, index) => index < 3).length; // First 3 are unread
+  const hasNotifications = unreadCount > 0;
 
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  // Show notification modal for HR Admin only
+  if (userRole === "hr-admin") {
+    return (
+      <>
+        <button
+          onClick={handleOpen}
+          className="relative p-3 rounded-xl bg-gray-100 hover:bg-gray-300 transition-colors"
+        >
+          <Bell size={18} />
+
+          {/* Notification Indicator */}
+          {hasNotifications && (
+            <span className="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-600"></span>
+          )}
+        </button>
+
+        <AdminNotifications isOpen={isOpen} onClose={handleClose} />
+      </>
+    );
+  }
+
+  // For other roles, return a simple bell icon placeholder
   return (
-    <Link
-      to={path}
-      className="relative p-3 rounded-xl bg-gray-100 hover:bg-gray-300 transition-colors"
-    >
+    <button className="relative p-3 rounded-xl bg-gray-100 hover:bg-gray-300 transition-colors">
       <Bell size={18} />
-
-      {/* Notification Indicator */}
       {hasNotifications && (
         <span className="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-600"></span>
       )}
-    </Link>
+    </button>
   );
 }
