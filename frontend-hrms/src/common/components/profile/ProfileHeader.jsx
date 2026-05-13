@@ -12,7 +12,7 @@ export default function ProfileHeader({
   const isIntern = mode === "INTERN";
 
   return (
-    <div className="flex justify-between items-center pb-5 border-b border-gray-200 ">
+    <div className="flex justify-between items-center pb-5  ">
       {/* Left Side */}
       <div className="flex items-center gap-4">
         <div className="w-20 h-20 bg-gray-400 rounded-md"></div>
