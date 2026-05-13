@@ -55,9 +55,7 @@ export default function Dashboard() {
 
         {/* Right Side */}
         <div className="col-span-1">
-          <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm h-full">
-            <CalendarPanel />
-          </div>
+          <CalendarPanel tasks={tasks} />
         </div>
       </div>
     </>
