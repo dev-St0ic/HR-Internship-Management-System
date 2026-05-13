@@ -1,9 +1,25 @@
 import { useState } from "react";
 import dayjs from "dayjs";
-import { calendarEvents } from "../../../../common/config/mockCalendarData";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import CalendarTaskCard from "../calendar/CalendarTaskCard";
 
-export default function BigCalendar() {
+export default function BigCalendar({
+  tasks = [],
+  selectedDate,
+  onSelectDate,
+}) {
   const [currentMonth, setCurrentMonth] = useState(dayjs());
+
+  const groupedTasks = tasks.reduce((acc, task) => {
+    if (!task.deadline) return acc;
+
+    if (!acc[task.deadline]) {
+      acc[task.deadline] = [];
+    }
+
+    acc[task.deadline].push(task);
+    return acc;
+  }, {});
 
   const startOfMonth = currentMonth.startOf("month");
   const startDay = startOfMonth.day(); // This starts on Sunday
@@ -20,15 +36,15 @@ export default function BigCalendar() {
   }
 
   //This is for the current month days
-  for (let i = 1; i < daysInMonth; i++) {
+  for (let i = 1; i <= daysInMonth; i++) {
     const date = currentMonth.date(i).format("YYYY-MM-DD");
 
-    const hasEvent = calendarEvents.some((e) => e.date === date);
+    const tasksForDate = groupedTasks[date] || [];
 
     days.push({
       day: i,
       fullDate: date,
-      hasEvent,
+      tasks: tasksForDate,
       isToday: date === today,
     });
   }
@@ -48,14 +64,14 @@ export default function BigCalendar() {
           onClick={() => setCurrentMonth(currentMonth.subtract(1, "month"))}
           className="bg-purple-500 text-white px-3 py-1 rounded-md"
         >
-          {"<"}
+          <ChevronLeft size={18} />
         </button>
 
         <button
           onClick={() => setCurrentMonth(currentMonth.add(1, "month"))}
           className="bg-purple-500 text-white px-3 py-1 rounded-md"
         >
-          {">"}
+          <ChevronRight size={18} />
         </button>
       </div>
 
@@ -72,12 +88,22 @@ export default function BigCalendar() {
       </div>
 
       {/*This is the Calendar Grid */}
-      <div className="grid grid-cols-7 gap-y-6 text-sm">
+      <div className="grid grid-cols-7 gap-2 text-sm">
         {days.map((item, index) => {
-          if (!item) return <div key={index}></div>;
+          if (!item) return <div key={index} className="min-h-24"></div>;
+
+          const isSelected =
+            selectedDate?.format("YYYY-MM-DD") === item.fullDate;
 
           return (
-            <div key={index} className="h-12 relative">
+            <div
+              key={index}
+              onClick={() => onSelectDate(dayjs(item.fullDate))}
+              className={`
+        min-h-24 rounded-lg p-2 flex flex-col cursor-pointer transition
+        ${isSelected ? "bg-purple-50 ring-1 ring-purple-300" : "hover:bg-gray-50"}
+      `}
+            >
               {/*This is the date Number */}
               <span
                 className={`
@@ -89,9 +115,17 @@ export default function BigCalendar() {
               </span>
 
               {/* Event indicator */}
-              {item.hasEvent && (
-                <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-purple-500 rounded-full"></div>
-              )}
+              <div className="mt-1 space-y-1">
+                {item.tasks.slice(0, 2).map((task) => (
+                  <CalendarTaskCard key={task.id} task={task} />
+                ))}
+
+                {item.tasks.length > 2 && (
+                  <p className="text-[10px] text-gray-400">
+                    +{item.tasks.length - 2} more
+                  </p>
+                )}
+              </div>
             </div>
           );
         })}

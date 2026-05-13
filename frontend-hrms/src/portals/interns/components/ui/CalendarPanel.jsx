@@ -1,4 +1,3 @@
-import { useState } from "react";
 import dayjs from "dayjs";
 import {
   LocalizationProvider,
@@ -6,62 +5,87 @@ import {
   PickersDay,
 } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { calendarEvents } from "../../../../common/config/mockCalendarData";
 import { useNavigate } from "react-router-dom";
 import { CalendarDays } from "lucide-react";
 
-export default function CalendarPanel() {
-  const [selectedDate, setSelectedDate] = useState(dayjs());
+export default function CalendarPanel({
+  tasks = [],
+  selectedDate = dayjs(),
+  onSelectDate = () => {},
+}) {
   const navigate = useNavigate();
 
-  //For converting event dates into a quick lookup
-  const eventDates = calendarEvents.map((e) => e.date);
-
   //This is the function for highlighting the event
-  const renderDay = (day, _value, DayComponentProps) => {
+  const renderDay = (day, selectedDate, props) => {
     if (!day) return null;
 
     const dateStr = dayjs(day).format("YYYY-MM-DD");
+    const selectedStr = selectedDate?.format("YYYY-MM-DD");
     const todayStr = dayjs().format("YYYY-MM-DD");
 
-    const hasEvent = eventDates.includes(dateStr);
+    const hasTask = tasks.some((t) => t.deadline === dateStr);
+    const isSelected = dateStr === selectedStr;
     const isToday = dateStr === todayStr;
 
     return (
       <PickersDay
-        {...DayComponentProps}
+        {...props}
         day={day}
-        selected={false} //disables MUI blue
+        selected={false} // disable MUI default
         sx={{
-          "& .MuiPickersDay-root.Mui-selected": {
-            backgroundColor: "transparent !important",
-            color: "inherit !important",
-          },
-
           borderRadius: "50%",
           transition: "all 0.2s ease",
 
-          ...(hasEvent && {
+          // Selected date (strong purple)
+          ...(isSelected && {
             backgroundColor: "#7C3EFF",
             color: "white",
           }),
 
-          ...(isToday && {
-            backgroundColor: "#C4B5FD",
-          }),
+          // Task dates (light purple)
+          ...(hasTask &&
+            !isSelected && {
+              backgroundColor: "#E9D5FF",
+              color: "#6B21A8",
+            }),
+
+          // Today (soft highlight)
+          ...(isToday &&
+            !isSelected && {
+              border: "1px solid #7C3EFF",
+            }),
+
+          "&:hover": {
+            backgroundColor: "#DDD6FE",
+          },
         }}
       />
     );
   };
 
-  const events = [...calendarEvents].sort(
-    (a, b) => new Date(a.date) - new Date(b.date),
+  const selectedDateStr = selectedDate.format("YYYY-MM-DD");
+
+  // 1. Tasks for selected date
+  const selectedTasks = tasks.filter(
+    (task) => task.deadline === selectedDateStr,
   );
+
+  // 2. Upcoming tasks (excluding selected date)
+  const upcomingTasks = tasks
+    .filter((task) => task.deadline && task.deadline !== selectedDateStr)
+    .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
+    .reduce((acc, task) => {
+      if (!acc[task.deadline]) {
+        acc[task.deadline] = [];
+      }
+      acc[task.deadline].push(task);
+      return acc;
+    }, {});
 
   return (
     <>
       {/* Mini Calendar on the right side */}
-      <div>
+      <div className="card-panel">
         {/* Header */}
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-xl font-bold">My Schedule</h2>
@@ -78,7 +102,7 @@ export default function CalendarPanel() {
           <DateCalendar
             value={selectedDate}
             onChange={(newValue) => {
-              if (newValue) setSelectedDate(dayjs(newValue));
+              if (newValue) onSelectDate(dayjs(newValue));
             }}
             slots={{
               day: (props) => renderDay(props.day, selectedDate, props),
@@ -87,40 +111,120 @@ export default function CalendarPanel() {
         </LocalizationProvider>
 
         {/* Events */}
-        <div className=" border-t pt-2 max-h-60 overflow-y-auto">
-          <h3 className="text-sm font-semibold mb-3">
-            {selectedDate.format("dddd, DD MMMM YYYY")}
-          </h3>
+        <div className="border-t pt-4 max-h-72 overflow-y-auto pr-2 space-y-6">
+          {/* 🔹 Selected Date Section */}
+          <div>
+            <h3 className="text-sm font-semibold mb-3">
+              {selectedDate.format("dddd, DD MMMM YYYY")}
+            </h3>
 
-          {events.length > 0 ? (
-            events.map((event) => {
-              const eventDate = dayjs(event.date);
+            {selectedTasks.length > 0 ? (
+              <div className="space-y-4">
+                {selectedTasks.map((task) => {
+                  const today = dayjs().format("YYYY-MM-DD");
 
-              return (
-                <div key={event.id} className="flex flex-col gap-3 mb-3">
-                  {/* Day & Date */}
-                  <div className="text-sm font-semibold">
-                    {eventDate.format("dddd, MMMM D YYYY")}
-                  </div>
+                  const isCompleted = task.status === "Completed";
+                  const isOverdue =
+                    task.status === "Overdue" ||
+                    (task.status !== "Completed" && task.deadline < today);
 
-                  <div className="flex gap-3 mb-3">
-                    {/* Time */}
-                    <div className="text-lg font-bold w-12">{event.time}</div>
+                  const styles = isCompleted
+                    ? { text: "text-green-600" }
+                    : isOverdue
+                      ? { text: "text-red-600" }
+                      : { text: "text-yellow-600" };
 
-                    {/* Line separator */}
-                    <div className="w-0.5 bg-purple-400"></div>
+                  return (
+                    <div
+                      key={task.id}
+                      onClick={() =>
+                        navigate("/intern/tasks", {
+                          state: { selectedTaskId: task.id },
+                        })
+                      }
+                      className="flex gap-4 cursor-pointer hover:bg-gray-50 hover:shadow-sm p-2 rounded-md transition"
+                    >
+                      <div className="w-14 text-sm font-bold">Due</div>
+                      <div className="w-0.5 rounded-full bg-primary"></div>
 
-                    {/* Details */}
-                    <div>
-                      <p className="text-xs text-gray-400">{event.category}</p>
-                      <p className="text-sm font-medium">{event.title}</p>
+                      <div>
+                        <p className={`text-xs font-medium ${styles.text}`}>
+                          {task.status}
+                        </p>
+                        <p className="text-sm font-bold text-gray-800">
+                          {task.taskName}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="text-sm text-gray-400">No tasks for this date.</p>
+            )}
+          </div>
+
+          {/* Upcoming Section */}
+          {Object.keys(upcomingTasks).length > 0 && (
+            <div>
+              <h3 className="text-base font-semibold mb-3">Other Tasks:</h3>
+
+              <div className="space-y-5">
+                {Object.entries(upcomingTasks).map(([date, dateTasks]) => (
+                  <div key={date}>
+                    <h4 className="text-sm font-medium mb-3">
+                      {dayjs(date).format("dddd, DD MMMM YYYY")}
+                    </h4>
+
+                    <div className="space-y-4">
+                      {dateTasks.map((task) => {
+                        const today = dayjs().format("YYYY-MM-DD");
+
+                        const isCompleted = task.status === "Completed";
+                        const isOverdue =
+                          task.status === "Overdue" ||
+                          (task.status !== "Completed" &&
+                            task.deadline < today);
+
+                        const styles = isCompleted
+                          ? { text: "text-green-600" }
+                          : isOverdue
+                            ? { text: "text-red-600" }
+                            : {
+                                text: "text-yellow-600",
+                              };
+
+                        return (
+                          <div
+                            key={task.id}
+                            onClick={() =>
+                              navigate("/intern/tasks", {
+                                state: { selectedTaskId: task.id },
+                              })
+                            }
+                            className="flex gap-4 cursor-pointer hover:bg-gray-50 hover:shadow-sm p-2 rounded-md transition"
+                          >
+                            <div className="w-14 text-sm font-bold">Due</div>
+                            <div className="w-0.5 rounded-full bg-primary"></div>
+
+                            <div>
+                              <p
+                                className={`text-xs font-medium ${styles.text}`}
+                              >
+                                {task.status}
+                              </p>
+                              <p className="text-sm font-bold text-gray-800">
+                                {task.taskName}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
-                </div>
-              );
-            })
-          ) : (
-            <p className="text-gray-400 text-sm">No event</p>
+                ))}
+              </div>
+            </div>
           )}
         </div>
       </div>
