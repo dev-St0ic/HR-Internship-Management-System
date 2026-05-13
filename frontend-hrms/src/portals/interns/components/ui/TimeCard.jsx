@@ -7,8 +7,17 @@ export default function TimeCard() {
   const { records, timeIn, timeOut } = useAttendance();
   const [today, setToday] = useState(new Date());
 
-  //This will get the latest record for today
-  const latestRecord = records[records.length - 1];
+  const todayDate = today.toLocaleDateString("en-US", {
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+  });
+
+  //This will get only today's record
+  const todayRecords = records.filter((record) => record.date === todayDate);
+
+  //Get latest record for today only
+  const latestRecord = todayRecords[todayRecords.length - 1];
 
   useEffect(() => {
     const interval = setInterval(() => {

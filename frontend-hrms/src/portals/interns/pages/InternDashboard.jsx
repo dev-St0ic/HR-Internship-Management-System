@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { dashboardStats } from "../../../common/config/mockData";
+import { useState, useEffect } from "react";
 import { iconMap } from "../../../common/config/iconMap";
 import StatCard from "../../../common/components/ui/StatCard";
 import GreetingHeader from "../../../common/components/ui/GreetingHeader";
@@ -7,10 +6,13 @@ import CalendarPanel from "../components/ui/CalendarPanel";
 import TimeCard from "../components/ui/TimeCard";
 import TaskListCard from "../components/ui/TaskListCard";
 import { useAuth } from "../../../contexts/AuthContext";
+import useAttendanceSummary from "../hooks/useAttendanceSummary";
 
 export default function Dashboard() {
   const { currentUser } = useAuth();
-  const stats = dashboardStats.intern;
+  const { totalLogged, remaining } = useAttendanceSummary();
+
+  const [today, setToday] = useState(new Date());
 
   const [usersDb] = useState(() => {
     try {
@@ -22,8 +24,43 @@ export default function Dashboard() {
     }
   });
 
+  useEffect(() => {
+    const now = new Date();
+
+    // Time until next midnight
+    const msUntilMidnight =
+      new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1) - now;
+
+    const timeout = setTimeout(() => {
+      setToday(new Date());
+    }, msUntilMidnight);
+
+    return () => clearTimeout(timeout);
+  }, [today]);
+
   const intern = usersDb[currentUser?.id];
   const tasks = intern?.tasks || [];
+
+  const todayFormatted = today.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  const stats = [
+    {
+      title: "Logged",
+      value: `${totalLogged.toFixed(0)}h`,
+      icon: "Clock",
+      date: todayFormatted,
+    },
+    {
+      title: "Remaining",
+      value: `${remaining.toFixed(0)}h`,
+      icon: "Clock",
+      date: todayFormatted,
+    },
+  ];
 
   return (
     <>
