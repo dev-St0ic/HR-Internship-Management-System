@@ -1,17 +1,30 @@
-import Header from "../../../common/components/layout/Header";
+import { useState } from "react";
 import { dashboardStats } from "../../../common/config/mockData";
 import { iconMap } from "../../../common/config/iconMap";
 import StatCard from "../../../common/components/ui/StatCard";
 import GreetingHeader from "../../../common/components/ui/GreetingHeader";
 import CalendarPanel from "../components/ui/CalendarPanel";
 import TimeCard from "../components/ui/TimeCard";
-import { mockTasks } from "../components/mockTasks";
 import TaskListCard from "../components/ui/TaskListCard";
 import { useAuth } from "../../../contexts/AuthContext";
 
 export default function Dashboard() {
   const { currentUser } = useAuth();
   const stats = dashboardStats.intern;
+
+  const [usersDb] = useState(() => {
+    try {
+      const storedUsers = localStorage.getItem("hrims_users_db");
+      return storedUsers ? JSON.parse(storedUsers) : {};
+    } catch (error) {
+      console.log("Failed to load users DB: ", error);
+      return {};
+    }
+  });
+
+  const intern = usersDb[currentUser?.id];
+  const tasks = intern?.tasks || [];
+
   return (
     <>
       <GreetingHeader name={currentUser?.name} />
@@ -37,7 +50,7 @@ export default function Dashboard() {
 
           {/* Other Component */}
           <TimeCard />
-          <TaskListCard tasks={mockTasks} />
+          <TaskListCard tasks={tasks} />
         </div>
 
         {/* Right Side */}
