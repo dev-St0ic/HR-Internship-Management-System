@@ -17,6 +17,7 @@ export default function LayoutTemplate({ headerConfig }) {
   const navigate = useNavigate();
 
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [pageHeader, setPageHeader] = useState(null);
 
   if (!currentUser) {
     return <Navigate to="/login" />;
@@ -48,7 +49,7 @@ export default function LayoutTemplate({ headerConfig }) {
         subtitle: "",
       };
 
-  const headerTitle = currentHeader.getTitle
+  const defaultTitle = currentHeader.getTitle
     ? currentHeader.getTitle({
         currentUser,
         params: match?.params || {},
@@ -56,13 +57,18 @@ export default function LayoutTemplate({ headerConfig }) {
       })
     : currentHeader.title;
 
-  const headerSubtitle = currentHeader.getSubtitle
+  const defaultSubtitle = currentHeader.getSubtitle
     ? currentHeader.getSubtitle({
         currentUser,
-        params: match?.params,
+        params: match?.params || {},
         usersDb,
       })
     : currentHeader.subtitle;
+
+  const headerTitle = pageHeader?.title ?? defaultTitle;
+  const headerSubtitle = pageHeader?.subtitle ?? defaultSubtitle;
+  const showBack = pageHeader?.showBack ?? currentHeader.showBack;
+  const backTo = pageHeader?.backTo ?? currentHeader.backTo;
 
   return (
     <div className="flex">
@@ -84,12 +90,19 @@ export default function LayoutTemplate({ headerConfig }) {
             title={headerTitle}
             subtitle={headerSubtitle}
             userRole={userRole}
-            showBack={currentHeader.showBack}
-            onBackClick={() => navigate(currentHeader.backTo || -1)}
+            showBack={showBack}
+            onBackClick={() => {
+              if (pageHeader?.onBackClick) {
+                pageHeader.onBackClick();
+              } else {
+                navigate(backTo || -1);
+              }
+            }}
           />
         </div>
+
         <div className="px-6 py-2">
-          <Outlet />
+          <Outlet context={{ setPageHeader }} />
         </div>
       </div>
     </div>

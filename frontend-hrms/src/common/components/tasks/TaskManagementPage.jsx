@@ -8,22 +8,24 @@ export default function TaskManagementPage({
   currentUser,
   mode = "intern",
   onUpdateTask,
+  showBackButton = true,
 }) {
   const [activeStatus, setActiveStatus] = useState("All");
   const [selectedTask, setSelectedTask] = useState(null);
   const [search, setSearch] = useState("");
 
-  const filteredTask = tasks.filter((task) => {
+  const filteredTasks = tasks.filter((task) => {
     const matchesStatus =
       activeStatus === "All" || task.status === activeStatus;
 
-    const matchesSearch = (task.name || task.title || "")
+    const matchesSearch = (task.taskName || task.title || "")
       .toLowerCase()
       .includes(search.toLowerCase());
 
     return matchesStatus && matchesSearch;
   });
 
+  // DETAIL VIEW
   if (selectedTask) {
     return (
       <TaskDetailView
@@ -34,14 +36,17 @@ export default function TaskManagementPage({
         onUpdateTask={(taskId, updatedFields) => {
           onUpdateTask(taskId, updatedFields);
 
+          // Keep selected task updated visually
           setSelectedTask((prev) =>
             prev?.id === taskId ? { ...prev, ...updatedFields } : prev,
           );
         }}
+        showBackButton={showBackButton}
       />
     );
   }
 
+  // LIST VIEW
   return (
     <div className="space-y-5">
       <TaskStatsCards
@@ -51,7 +56,7 @@ export default function TaskManagementPage({
       />
 
       <TaskTable
-        tasks={filteredTask}
+        tasks={filteredTasks}
         search={search}
         setSearch={setSearch}
         onRowClick={setSelectedTask}
