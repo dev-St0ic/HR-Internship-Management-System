@@ -526,3 +526,9 @@ export const dummyMetrics = [
   { label: 'Incoming Interns', value: '15', accent: 'bg-amber-400', text: 'text-amber-700' },
   { label: 'Finalizing Internship', value: '5', accent: 'bg-rose-400', text: 'text-rose-700' },
 ];
+
+export const dummyFolders = [
+  { title: 'MOA', files: 25, color: 'bg-amber-100', icon: 'briefcase' },
+  { title: 'NDA', files: 25, color: 'bg-emerald-100', icon: 'shield' },
+  { title: 'Endorsement Letter', files: 25, color: 'bg-rose-100', icon: 'file-text' },
+];

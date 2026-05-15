@@ -24,6 +24,7 @@ import AdminStaffManagementPage from "../portals/hr-admin/pages/AdminStaffManage
 import AdminDocumentVault from "../portals/hr-admin/pages/AdminDocumentVault";
 import ReportAnalyticsPage from "../portals/hr-admin/pages/ReportAnalyticsPage";
 import SystemLogs from "../portals/hr-admin/pages/SystemLogs";
+import documentVault from "../common/components/layout/documentVault";
 
 //HR-STAFF
 import HrStaffLayout from "../portals/hr-staff/layouts/HrStaffLayout";
@@ -146,6 +147,7 @@ export const AppRouter = () => {
           />
           <Route path="system-logs" element={<SystemLogs />} />
           <Route path="settings" element={<SettingsPage />} />
+          <Route path="document-vault" element={<documentVault />} />
         </Route>
       </Routes>
     </BrowserRouter>
