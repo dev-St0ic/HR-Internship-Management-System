@@ -1,3 +1,5 @@
-export default function AdminDocumentVault() {
-  return <h1>Dovument Vault Page</h1>;
+import DocumentVault from "../../../common/components/layout/documentVault.jsx";
+
+export default function AdminInternManagementPage() {
+  return <DocumentVault />;
 }
